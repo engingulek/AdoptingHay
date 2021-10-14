@@ -16,6 +16,8 @@
 		7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */; };
 		7D4674FC2718468700632CE6 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FB2718468700632CE6 /* HomePageVC.swift */; };
 		7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */; };
+		7D46750227186C3100632CE6 /* AnimalTypesCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D46750127186C3100632CE6 /* AnimalTypesCVC.swift */; };
+		7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInwithEmailVC.swift; sourceTree = "<group>"; };
 		7D4674FB2718468700632CE6 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
 		7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationPageVC.swift; sourceTree = "<group>"; };
+		7D46750127186C3100632CE6 /* AnimalTypesCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalTypesCVC.swift; sourceTree = "<group>"; };
+		7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKindsCVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */,
 				7D4674FB2718468700632CE6 /* HomePageVC.swift */,
 				7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */,
+				7D46750127186C3100632CE6 /* AnimalTypesCVC.swift */,
+				7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */,
 			);
 			path = AdoptingHay;
 			sourceTree = "<group>";
@@ -151,6 +157,8 @@
 				7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */,
 				7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
+				7D46750227186C3100632CE6 /* AnimalTypesCVC.swift in Sources */,
+				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
 				7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
