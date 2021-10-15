@@ -172,15 +172,24 @@
                                     <string>Title</string>
                                 </scopeButtonTitles>
                             </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sahiplene Bileceğiniz Hayvanlar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-NP-L7q">
+                                <rect key="frame" x="16" y="288" width="268" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yiE-8a-ST4"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="FxP-Lo-UZL" firstAttribute="top" secondItem="8IW-0M-C4h" secondAttribute="bottom" constant="10" id="FUL-L6-BJ4"/>
+                            <constraint firstItem="9g3-NP-L7q" firstAttribute="top" secondItem="FxP-Lo-UZL" secondAttribute="bottom" constant="132" id="QNZ-UH-gje"/>
                             <constraint firstItem="FxP-Lo-UZL" firstAttribute="trailing" secondItem="yiE-8a-ST4" secondAttribute="trailing" id="Ra9-Iw-mGO"/>
                             <constraint firstItem="EuN-vi-e5e" firstAttribute="leading" secondItem="yiE-8a-ST4" secondAttribute="leading" constant="16" id="ars-m6-xYN"/>
                             <constraint firstItem="yiE-8a-ST4" firstAttribute="trailing" secondItem="8IW-0M-C4h" secondAttribute="trailing" constant="16" id="dbW-h0-7lU"/>
+                            <constraint firstItem="9g3-NP-L7q" firstAttribute="leading" secondItem="yiE-8a-ST4" secondAttribute="leading" constant="16" id="jBl-bp-c82"/>
                             <constraint firstItem="FxP-Lo-UZL" firstAttribute="leading" secondItem="yiE-8a-ST4" secondAttribute="leading" id="pYh-iW-Msh"/>
+                            <constraint firstItem="yiE-8a-ST4" firstAttribute="trailing" secondItem="9g3-NP-L7q" secondAttribute="trailing" constant="91" id="qHD-NJ-NFn"/>
                             <constraint firstItem="8IW-0M-C4h" firstAttribute="top" secondItem="yiE-8a-ST4" secondAttribute="top" constant="16" id="tr8-nf-SvM"/>
                             <constraint firstItem="EuN-vi-e5e" firstAttribute="top" secondItem="yiE-8a-ST4" secondAttribute="top" constant="21" id="xIi-tG-3kx"/>
                         </constraints>

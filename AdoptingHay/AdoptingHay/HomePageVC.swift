@@ -22,15 +22,10 @@ class HomePageVC: UIViewController {
         accountButton.layer.cornerRadius = 10
         searchBar.delegate = self
         
-        
-        
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         layout.itemSize = CGSize(width: 72, height: 72)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        
-    
         
         
         
@@ -52,10 +47,7 @@ class HomePageVC: UIViewController {
         
         
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        animalKindsCollectionView?.frame = CGRect(x: 0, y: 140, width: view.frame.size.width, height: 150).integral
-    }
+    
     
 
   
@@ -70,6 +62,13 @@ extension HomePageVC:UISearchBarDelegate {
 
 
 extension HomePageVC:UICollectionViewDelegate,UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        animalKindsCollectionView?.frame = CGRect()
+        animalKindsCollectionView?.frame = CGRect(x: 0, y: view.frame.maxY/5.5, width: view.frame.size.width, height: 130).integral
+    }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
