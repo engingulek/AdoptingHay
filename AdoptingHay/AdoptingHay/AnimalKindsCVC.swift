@@ -11,5 +11,6 @@ class AnimalKindsCVC: UICollectionViewCell {
     
   
     @IBOutlet weak var animaKindsIcon: UIImageView!
+    @IBOutlet weak var animalKindsTitle: UILabel!
     
 }
