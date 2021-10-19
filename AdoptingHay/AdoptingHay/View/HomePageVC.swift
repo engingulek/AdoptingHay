@@ -37,6 +37,7 @@ class HomePageVC: UIViewController{
         animalAdvertCollectionView.dataSource = self
         
         
+        
         getAnimalAdcertInfo()
     
        

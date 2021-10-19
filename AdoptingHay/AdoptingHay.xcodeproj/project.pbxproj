@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292606271F0B9A00EBD22F /* NotficationTVC.swift */; };
 		7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E127182F2300632CE6 /* AppDelegate.swift */; };
 		7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E327182F2300632CE6 /* SceneDelegate.swift */; };
 		7D4674E627182F2300632CE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E527182F2300632CE6 /* ViewController.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7D292606271F0B9A00EBD22F /* NotficationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationTVC.swift; sourceTree = "<group>"; };
 		7D4674DE27182F2200632CE6 /* AdoptingHay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdoptingHay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4674E127182F2300632CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D4674E327182F2300632CE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +51,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D292603271F070D00EBD22F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D4674E527182F2300632CE6 /* ViewController.swift */,
+				7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */,
+				7D4674FB2718468700632CE6 /* HomePageVC.swift */,
+				7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */,
+				7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */,
+				7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */,
+				7D292606271F0B9A00EBD22F /* NotficationTVC.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		7D4674D527182F2200632CE6 = {
 			isa = PBXGroup;
 			children = (
@@ -68,19 +84,14 @@
 		7D4674E027182F2200632CE6 /* AdoptingHay */ = {
 			isa = PBXGroup;
 			children = (
+				7D292603271F070D00EBD22F /* View */,
 				7DD7F225271D94E5003E611D /* Model */,
 				7D4674E127182F2300632CE6 /* AppDelegate.swift */,
 				7D4674E327182F2300632CE6 /* SceneDelegate.swift */,
-				7D4674E527182F2300632CE6 /* ViewController.swift */,
 				7D4674E727182F2300632CE6 /* Main.storyboard */,
 				7D4674EA27182F2600632CE6 /* Assets.xcassets */,
 				7D4674EC27182F2600632CE6 /* LaunchScreen.storyboard */,
 				7D4674EF27182F2600632CE6 /* Info.plist */,
-				7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */,
-				7D4674FB2718468700632CE6 /* HomePageVC.swift */,
-				7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */,
-				7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */,
-				7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */,
 			);
 			path = AdoptingHay;
 			sourceTree = "<group>";
@@ -167,6 +178,7 @@
 				7D4674E627182F2300632CE6 /* ViewController.swift in Sources */,
 				7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */,
 				7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */,
+				7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */,
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
 				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
