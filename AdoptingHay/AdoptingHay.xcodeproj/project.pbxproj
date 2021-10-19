@@ -19,6 +19,7 @@
 		7D4674FC2718468700632CE6 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FB2718468700632CE6 /* HomePageVC.swift */; };
 		7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */; };
 		7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */; };
+		7DD373B7271F646400505E95 /* AddAdvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD373B6271F646400505E95 /* AddAdvertVC.swift */; };
 		7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */; };
 		7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD7F226271D94FA003E611D /* AnimalAdvert.swift */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		7D4674FB2718468700632CE6 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
 		7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationPageVC.swift; sourceTree = "<group>"; };
 		7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKindsCVC.swift; sourceTree = "<group>"; };
+		7DD373B6271F646400505E95 /* AddAdvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdvertVC.swift; sourceTree = "<group>"; };
 		7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertCVC.swift; sourceTree = "<group>"; };
 		7DD7F226271D94FA003E611D /* AnimalAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,6 +65,7 @@
 				7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */,
 				7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */,
 				7D292606271F0B9A00EBD22F /* NotficationTVC.swift */,
+				7DD373B6271F646400505E95 /* AddAdvertVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
 				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
+				7DD373B7271F646400505E95 /* AddAdvertVC.swift in Sources */,
 				7D29260A271F168E00EBD22F /* Notification.swift in Sources */,
 				7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */,
 				7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */,
