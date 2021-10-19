@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292606271F0B9A00EBD22F /* NotficationTVC.swift */; };
+		7D29260A271F168E00EBD22F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292609271F168E00EBD22F /* Notification.swift */; };
 		7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E127182F2300632CE6 /* AppDelegate.swift */; };
 		7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E327182F2300632CE6 /* SceneDelegate.swift */; };
 		7D4674E627182F2300632CE6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E527182F2300632CE6 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		7D292606271F0B9A00EBD22F /* NotficationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationTVC.swift; sourceTree = "<group>"; };
+		7D292609271F168E00EBD22F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7D4674DE27182F2200632CE6 /* AdoptingHay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdoptingHay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D4674E127182F2300632CE6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7D4674E327182F2300632CE6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				7DD7F226271D94FA003E611D /* AnimalAdvert.swift */,
+				7D292609271F168E00EBD22F /* Notification.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -182,6 +185,7 @@
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
 				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
+				7D29260A271F168E00EBD22F /* Notification.swift in Sources */,
 				7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */,
 				7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */,
 			);
