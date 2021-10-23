@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import GoogleSignIn
 
 class ViewController: UIViewController {
 
@@ -16,7 +18,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var mottoLabel: UILabel!
     
     @IBOutlet weak var goGoogleButton: UIButton!
-    
+    let singInConfig = GIDConfiguration.init(clientID: (FirebaseApp.app()?.options.clientID)!)
     @IBOutlet weak var goEmailButton: UIButton!
     override func viewDidLoad() {
         
@@ -26,6 +28,13 @@ class ViewController: UIViewController {
         
         goGoogleButton.layer.cornerRadius = 15
         goEmailButton.layer.cornerRadius = 15
+        
+        
+        
+        
+        
+        
+        
     
     }
 
@@ -34,7 +43,15 @@ class ViewController: UIViewController {
     }
     
     @IBAction func goGoogleButtonActions(_ sender: Any) {
-        print("Google ile devam et")
+        
+        GIDSignIn.sharedInstance.signIn(with: self.singInConfig, presenting: self) { user, error in
+          guard error == nil else { return }
+
+          // If sign in succeeded, display the app's main content View.
+        }
+        
+        
+        
     }
     
     
