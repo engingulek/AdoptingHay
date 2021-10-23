@@ -662,7 +662,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="UDn-dn-V8n">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Phy-W2-cjD" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="tabBar" automaticallyAdjustsScrollViewInsets="NO" id="Phy-W2-cjD" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="XvI-Gh-amf"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="gDh-fA-J8p">
@@ -752,7 +752,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Üye Ol"/>
                                 <connections>
-                                    <segue destination="Phy-W2-cjD" kind="presentation" modalPresentationStyle="fullScreen" id="lNf-Je-H30"/>
+                                    <action selector="singUpButtonAction:" destination="6Ij-96-MbW" eventType="touchUpInside" id="C5O-GV-JVc"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWJ-CJ-hos">
@@ -763,6 +763,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="pXe-4X-fRc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SU0-ge-Egy" firstAttribute="top" secondItem="iuP-Wt-oRq" secondAttribute="bottom" constant="52" id="1WE-ul-8DI"/>
@@ -788,6 +789,11 @@
                     </view>
                     <connections>
                         <outlet property="singUpButton" destination="XMH-OA-NPV" id="90f-QX-upQ"/>
+                        <outlet property="textFieldEmail" destination="iuP-Wt-oRq" id="yDH-xP-yv7"/>
+                        <outlet property="textFieldName" destination="2Z7-ym-P7b" id="JPG-TY-a5R"/>
+                        <outlet property="textFieldPassword" destination="SU0-ge-Egy" id="3Y5-Y9-7Xu"/>
+                        <outlet property="textFieldSurname" destination="vuu-OF-rMk" id="6rF-lq-1W9"/>
+                        <segue destination="Phy-W2-cjD" kind="presentation" identifier="singUptoHomePage" modalPresentationStyle="fullScreen" id="oEm-go-vQY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CEW-1A-CXK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -833,10 +839,11 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Giriş Yap"/>
                                 <connections>
-                                    <segue destination="Phy-W2-cjD" kind="presentation" modalPresentationStyle="fullScreen" id="Isf-6e-JbU"/>
+                                    <action selector="singInButtonAction:" destination="OYL-v2-Mgg" eventType="touchUpInside" id="fAn-eI-eXt"/>
                                 </connections>
                             </button>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="9n1-5k-ocP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="xlX-iH-zjE" firstAttribute="top" secondItem="Z1W-4T-ZrP" secondAttribute="bottom" constant="52" id="CSE-HU-g1c"/>
@@ -858,6 +865,9 @@
                     </view>
                     <connections>
                         <outlet property="singInButton" destination="gpW-Eg-6PY" id="p2d-3E-MqM"/>
+                        <outlet property="textFieldEmail" destination="Z1W-4T-ZrP" id="mkN-SL-qN6"/>
+                        <outlet property="textFiledPassword" destination="xlX-iH-zjE" id="QsA-GI-PCL"/>
+                        <segue destination="Phy-W2-cjD" kind="presentation" identifier="singInToHomePage" modalPresentationStyle="fullScreen" id="tbU-zq-jI7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xU3-PD-aNW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -866,7 +876,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Isf-6e-JbU"/>
+        <segue reference="tbU-zq-jI7"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="addImage" width="240" height="240"/>

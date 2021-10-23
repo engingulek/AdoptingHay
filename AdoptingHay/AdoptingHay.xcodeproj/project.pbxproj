@@ -19,6 +19,7 @@
 		7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */; };
 		7D4674FC2718468700632CE6 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FB2718468700632CE6 /* HomePageVC.swift */; };
 		7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */; };
+		7D46CB1B2724B0B70073E0B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D46CB1A2724B0B70073E0B9 /* GoogleService-Info.plist */; };
 		7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */; };
 		7D69C088272453DC00BB10C2 /* SingInEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */; };
 		7D69C08B272453FE00BB10C2 /* SingUpEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */; };
@@ -42,6 +43,7 @@
 		7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInwithEmailVC.swift; sourceTree = "<group>"; };
 		7D4674FB2718468700632CE6 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
 		7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationPageVC.swift; sourceTree = "<group>"; };
+		7D46CB1A2724B0B70073E0B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKindsCVC.swift; sourceTree = "<group>"; };
 		7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInEmailVC.swift; sourceTree = "<group>"; };
 		7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpEmailVC.swift; sourceTree = "<group>"; };
@@ -110,6 +112,7 @@
 				7D4674EA27182F2600632CE6 /* Assets.xcassets */,
 				7D4674EC27182F2600632CE6 /* LaunchScreen.storyboard */,
 				7D4674EF27182F2600632CE6 /* Info.plist */,
+				7D46CB1A2724B0B70073E0B9 /* GoogleService-Info.plist */,
 			);
 			path = AdoptingHay;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D4674EE27182F2600632CE6 /* LaunchScreen.storyboard in Resources */,
+				7D46CB1B2724B0B70073E0B9 /* GoogleService-Info.plist in Resources */,
 				7D4674EB27182F2600632CE6 /* Assets.xcassets in Resources */,
 				7D4674E927182F2300632CE6 /* Main.storyboard in Resources */,
 			);

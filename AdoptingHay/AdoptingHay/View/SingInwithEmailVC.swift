@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 
 
@@ -22,6 +23,8 @@ class SingInwithEmailVC: UIViewController {
         
         let font = UIFont.systemFont(ofSize: 16)
         segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font], for: .normal)
+        
+     
         
        
        
