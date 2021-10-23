@@ -55,7 +55,7 @@
                                 <state key="normal" title="Eposta ile devam et"/>
                                 <connections>
                                     <action selector="goEmailButtonActions:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JlJ-sD-dOg"/>
-                                    <segue destination="Zeq-KZ-ZHv" kind="presentation" modalPresentationStyle="fullScreen" id="ifu-jg-gCi"/>
+                                    <segue destination="omB-Zm-gId" kind="showDetail" id="ifu-jg-gCi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zje-F5-pcn">
@@ -102,44 +102,21 @@
             </objects>
             <point key="canvasLocation" x="-197.59999999999999" y="93.103448275862078"/>
         </scene>
-        <!--Sing Inwith EmailVC-->
+        <!--E-posta ile devam et-->
         <scene sceneID="94B-gM-bvq">
             <objects>
                 <viewController id="Zeq-KZ-ZHv" customClass="SingInwithEmailVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XXX-KA-12h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="758"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Eposta ile girlş" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jkU-r6-46E">
-                                <rect key="frame" x="60" y="207" width="229" height="59"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VFn-jj-pUI">
-                                <rect key="frame" x="98" y="443" width="163" height="30"/>
-                                <state key="normal" title="Giriş Yap"/>
-                                <connections>
-                                    <segue destination="Phy-W2-cjD" kind="presentation" modalPresentationStyle="fullScreen" id="L0T-Ar-P1G"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="vbu-Ri-arP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="vbu-Ri-arP" firstAttribute="bottom" secondItem="VFn-jj-pUI" secondAttribute="bottom" constant="305" id="1i4-33-ZEV"/>
-                            <constraint firstItem="jkU-r6-46E" firstAttribute="leading" secondItem="vbu-Ri-arP" secondAttribute="leading" constant="60" id="2Xm-nz-AcF"/>
-                            <constraint firstItem="jkU-r6-46E" firstAttribute="top" secondItem="vbu-Ri-arP" secondAttribute="top" constant="163" id="8CF-yK-Zjg"/>
-                            <constraint firstItem="vbu-Ri-arP" firstAttribute="trailing" secondItem="VFn-jj-pUI" secondAttribute="trailing" constant="114" id="Jrm-LK-fsC"/>
-                            <constraint firstItem="VFn-jj-pUI" firstAttribute="leading" secondItem="vbu-Ri-arP" secondAttribute="leading" constant="98" id="WGP-98-Y1m"/>
-                            <constraint firstItem="vbu-Ri-arP" firstAttribute="trailing" secondItem="jkU-r6-46E" secondAttribute="trailing" constant="86" id="tse-ca-JrC"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="EYb-je-f6f"/>
+                    <navigationItem key="navigationItem" title="E-posta ile devam et" id="EYb-je-f6f"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kda-ns-amR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="660" y="93"/>
+            <point key="canvasLocation" x="1602.4000000000001" y="92.364532019704441"/>
         </scene>
         <!--Ana Sayfa-->
         <scene sceneID="se1-lt-abY">
@@ -358,7 +335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YWC-Yv-Gzh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2327" y="92"/>
+            <point key="canvasLocation" x="3268" y="91.625615763546804"/>
         </scene>
         <!--Bildirimler-->
         <scene sceneID="JLj-Gn-Bo2">
@@ -459,7 +436,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOG-9K-Bok">
-                                <rect key="frame" x="0.0" y="88" width="375" height="641"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="589"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="sug-A5-eIq">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="999"/>
@@ -635,7 +612,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SEp-MP-0eD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2445.5999999999999" y="-879.31034482758628"/>
+            <point key="canvasLocation" x="2393" y="-658"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="UDn-dn-V8n">
@@ -655,7 +632,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="suN-vT-T6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1506" y="92"/>
+            <point key="canvasLocation" x="2447.1999999999998" y="91.625615763546804"/>
         </scene>
         <!--İlan Ekle-->
         <scene sceneID="v8l-KL-oDu">
@@ -675,6 +652,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GxU-YH-kPk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1504.8" y="-658.37438423645324"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gQi-TA-gU3">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="omB-Zm-gId" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="L9s-eh-xuR">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                            <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Zeq-KZ-ZHv" kind="relationship" relationship="rootViewController" id="woj-fQ-qfb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4tN-f4-drh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="660" y="92.364532019704441"/>
         </scene>
     </scenes>
     <resources>
