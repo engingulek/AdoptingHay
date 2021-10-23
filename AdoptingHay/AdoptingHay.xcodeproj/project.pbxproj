@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1890916FCAC506B2C10AB1C4 /* Pods_AdoptingHay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB37284F92E0F77E6309D259 /* Pods_AdoptingHay.framework */; };
 		7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292606271F0B9A00EBD22F /* NotficationTVC.swift */; };
 		7D29260A271F168E00EBD22F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292609271F168E00EBD22F /* Notification.swift */; };
 		7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674E127182F2300632CE6 /* AppDelegate.swift */; };
@@ -19,12 +20,15 @@
 		7D4674FC2718468700632CE6 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FB2718468700632CE6 /* HomePageVC.swift */; };
 		7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */; };
 		7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */; };
+		7D69C088272453DC00BB10C2 /* SingInEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */; };
+		7D69C08B272453FE00BB10C2 /* SingUpEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */; };
 		7DD373B7271F646400505E95 /* AddAdvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD373B6271F646400505E95 /* AddAdvertVC.swift */; };
 		7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */; };
 		7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD7F226271D94FA003E611D /* AnimalAdvert.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		259F43B0FDC4DC1E4CDF8B7B /* Pods-AdoptingHay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoptingHay.debug.xcconfig"; path = "Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay.debug.xcconfig"; sourceTree = "<group>"; };
 		7D292606271F0B9A00EBD22F /* NotficationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationTVC.swift; sourceTree = "<group>"; };
 		7D292609271F168E00EBD22F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7D4674DE27182F2200632CE6 /* AdoptingHay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AdoptingHay.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,9 +43,13 @@
 		7D4674FB2718468700632CE6 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
 		7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationPageVC.swift; sourceTree = "<group>"; };
 		7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKindsCVC.swift; sourceTree = "<group>"; };
+		7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInEmailVC.swift; sourceTree = "<group>"; };
+		7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpEmailVC.swift; sourceTree = "<group>"; };
 		7DD373B6271F646400505E95 /* AddAdvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdvertVC.swift; sourceTree = "<group>"; };
 		7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertCVC.swift; sourceTree = "<group>"; };
 		7DD7F226271D94FA003E611D /* AnimalAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvert.swift; sourceTree = "<group>"; };
+		A6EF73076862743BC27CD1D8 /* Pods-AdoptingHay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoptingHay.release.xcconfig"; path = "Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay.release.xcconfig"; sourceTree = "<group>"; };
+		FB37284F92E0F77E6309D259 /* Pods_AdoptingHay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdoptingHay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1890916FCAC506B2C10AB1C4 /* Pods_AdoptingHay.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -66,6 +75,8 @@
 				7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */,
 				7D292606271F0B9A00EBD22F /* NotficationTVC.swift */,
 				7DD373B6271F646400505E95 /* AddAdvertVC.swift */,
+				7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */,
+				7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -75,6 +86,8 @@
 			children = (
 				7D4674E027182F2200632CE6 /* AdoptingHay */,
 				7D4674DF27182F2200632CE6 /* Products */,
+				94382236E8829998E05A1B3F /* Pods */,
+				F4AAD265944E04EEAF364521 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +123,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		94382236E8829998E05A1B3F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				259F43B0FDC4DC1E4CDF8B7B /* Pods-AdoptingHay.debug.xcconfig */,
+				A6EF73076862743BC27CD1D8 /* Pods-AdoptingHay.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F4AAD265944E04EEAF364521 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FB37284F92E0F77E6309D259 /* Pods_AdoptingHay.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,9 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D4674F227182F2600632CE6 /* Build configuration list for PBXNativeTarget "AdoptingHay" */;
 			buildPhases = (
+				0C9D4D997E49E0E7664E62ED /* [CP] Check Pods Manifest.lock */,
 				7D4674DA27182F2200632CE6 /* Sources */,
 				7D4674DB27182F2200632CE6 /* Frameworks */,
 				7D4674DC27182F2200632CE6 /* Resources */,
+				543AC97902300245677129F4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -175,6 +207,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0C9D4D997E49E0E7664E62ED /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AdoptingHay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		543AC97902300245677129F4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		7D4674DA27182F2200632CE6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -184,10 +258,12 @@
 				7D4674E627182F2300632CE6 /* ViewController.swift in Sources */,
 				7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */,
 				7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */,
+				7D69C088272453DC00BB10C2 /* SingInEmailVC.swift in Sources */,
 				7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */,
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
 				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
+				7D69C08B272453FE00BB10C2 /* SingUpEmailVC.swift in Sources */,
 				7DD373B7271F646400505E95 /* AddAdvertVC.swift in Sources */,
 				7D29260A271F168E00EBD22F /* Notification.swift in Sources */,
 				7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */,
@@ -335,6 +411,7 @@
 		};
 		7D4674F327182F2600632CE6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 259F43B0FDC4DC1E4CDF8B7B /* Pods-AdoptingHay.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -354,6 +431,7 @@
 		};
 		7D4674F427182F2600632CE6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A6EF73076862743BC27CD1D8 /* Pods-AdoptingHay.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
