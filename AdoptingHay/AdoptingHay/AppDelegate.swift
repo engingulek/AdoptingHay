@@ -14,14 +14,22 @@ import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate  {
+    
+    
 
-
+   
 // uygulama ilk açılcığında vc gitmeden çalışa bir fonksiyon
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
        
-      
+        GIDSignIn.sharedInstance.restorePreviousSignIn { user, error in
+          if error != nil || user == nil {
+            // Show the app's signed-out state.
+          } else {
+            // Show the app's signed-in state.
+          }
+        }
         
      
         
@@ -36,16 +44,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     
     
     
-    func application(
-      _ app: UIApplication,
-      open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]
-    ) -> Bool {
-      var handled: Bool
-
-      handled = GIDSignIn.sharedInstance.handle(url)
-        
-        return handled
-    
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any])
+      -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
     }
     
     

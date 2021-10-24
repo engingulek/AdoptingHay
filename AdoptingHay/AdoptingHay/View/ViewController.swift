@@ -20,8 +20,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var goGoogleButton: UIButton!
     
     @IBOutlet weak var goEmailButton: UIButton!
-    let signInConfig = GIDConfiguration.init(clientID: "765162810048-vekuds3fj6p66tkeij2p38cip6tv40gm.apps.googleusercontent.com")
+
+
     override func viewDidLoad() {
+        
         
         super.viewDidLoad()
         appTitleLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -29,6 +31,10 @@ class ViewController: UIViewController {
         
         goGoogleButton.layer.cornerRadius = 15
         goEmailButton.layer.cornerRadius = 15
+        
+        
+        
+        
         
         
         
@@ -49,20 +55,44 @@ class ViewController: UIViewController {
     
     @IBAction func goGoogleButtonActions(_ sender: Any) {
         
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            if error != nil {
-                print(error?.localizedDescription ?? "Hata")
-            }
-            else {
-                self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
-                print("Kullanıcı email \(user?.profile?.email)")
-               
-            }
-  
         
+        let config = GIDConfiguration(clientID: "765162810048-vekuds3fj6p66tkeij2p38cip6tv40gm.apps.googleusercontent.com")
+        
+        
+        
+        GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
+                 if error != nil {
+                     print(error?.localizedDescription ?? "Hata")
+                 }
+                 else {
+                    
+                    let authentication = user?.authentication
+                    let idToken = authentication?.idToken
+                    
+                    
+                    let credential = GoogleAuthProvider.credential(withIDToken: idToken!,
+                                                                   accessToken: authentication!.accessToken)
+                    
+                    
+                    Auth.auth().signIn(with: credential) { (result, error) in
+                        print("Kulllanıcı id \(result?.user.uid) ")
+                    }
+                    
+                    
+                    
+                    
+                    
+                     self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
+                     print("Kullanıcı email \(user?.profile?.email)")
+                    
+                 }
+       
+             
 
-          
-        }
+               
+             }
+        
+       
 }
         
         
