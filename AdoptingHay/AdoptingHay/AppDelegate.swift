@@ -20,12 +20,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
         
+       
       
         
+     
+        
+      
 
         
         return true
     }
+    
+   
+    
+    
+    
     
     func application(
       _ app: UIApplication,
@@ -34,15 +43,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate  {
       var handled: Bool
 
       handled = GIDSignIn.sharedInstance.handle(url)
-      if handled {
-        return true
-      }
-
-      // Handle other custom URL types.
-
-      // If not handled by this app, return false.
-      return false
+        
+        return handled
+    
     }
+    
+    
+    
    
 
     // MARK: UISceneSession Lifecycle

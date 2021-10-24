@@ -18,8 +18,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var mottoLabel: UILabel!
     
     @IBOutlet weak var goGoogleButton: UIButton!
-    let singInConfig = GIDConfiguration.init(clientID: (FirebaseApp.app()?.options.clientID)!)
+    
     @IBOutlet weak var goEmailButton: UIButton!
+    let signInConfig = GIDConfiguration.init(clientID: "765162810048-vekuds3fj6p66tkeij2p38cip6tv40gm.apps.googleusercontent.com")
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -28,6 +29,10 @@ class ViewController: UIViewController {
         
         goGoogleButton.layer.cornerRadius = 15
         goEmailButton.layer.cornerRadius = 15
+        
+        
+        
+        
         
         
         
@@ -44,16 +49,25 @@ class ViewController: UIViewController {
     
     @IBAction func goGoogleButtonActions(_ sender: Any) {
         
-        GIDSignIn.sharedInstance.signIn(with: self.singInConfig, presenting: self) { user, error in
-          guard error == nil else { return }
+        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "Hata")
+            }
+            else {
+                self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
+                print("Kullanıcı email \(user?.profile?.email)")
+               
+            }
+  
+        
 
-          // If sign in succeeded, display the app's main content View.
+          
         }
+}
         
         
-        
-    }
-    
     
 }
+    
+
 
