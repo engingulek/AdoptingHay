@@ -33,12 +33,13 @@ class ViewController: UIViewController {
         goEmailButton.layer.cornerRadius = 15
         
         
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "b")
+        backgroundImage.contentMode = .scaleToFill
+        view.insertSubview(backgroundImage, at:0 )
+
         
-        
-        
-        
-        
-        
+      
         
         
         
@@ -55,44 +56,21 @@ class ViewController: UIViewController {
     
     @IBAction func goGoogleButtonActions(_ sender: Any) {
         
-        
         let config = GIDConfiguration(clientID: "765162810048-vekuds3fj6p66tkeij2p38cip6tv40gm.apps.googleusercontent.com")
-        
-        
-        
         GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { user, error in
                  if error != nil {
                      print(error?.localizedDescription ?? "Hata")
                  }
                  else {
+         let authentication = user?.authentication
+          let idToken = authentication?.idToken
+          let credential = GoogleAuthProvider
+            .credential(withIDToken: idToken!,
+                        accessToken: authentication!.accessToken)
                     
-                    let authentication = user?.authentication
-                    let idToken = authentication?.idToken
-                    
-                    
-                    let credential = GoogleAuthProvider.credential(withIDToken: idToken!,
-                                                                   accessToken: authentication!.accessToken)
-                    
-                    
-                    Auth.auth().signIn(with: credential) { (result, error) in
-                        print("Kulllanıcı id \(result?.user.uid) ")
-                    }
-                    
-                    
-                    
-                    
-                    
-                     self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
-                     print("Kullanıcı email \(user?.profile?.email)")
-                    
-                 }
-       
-             
-
-               
-             }
-        
-       
+          Auth.auth().signIn(with: credential) { (result, error) in}
+           self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
+                 }}
 }
         
         

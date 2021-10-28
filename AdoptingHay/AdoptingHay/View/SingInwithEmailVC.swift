@@ -33,23 +33,17 @@ class SingInwithEmailVC: UIViewController {
 
     
  
-    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
-        
+    @IBAction func segmentedControlAction
+    (_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            print("Giriş Yap")
             singInContainer.isHidden = true
             singUpContainer.isHidden = false
-            
             break
-            
         case 1:
-            print("Üye Ol")
             singInContainer.isHidden = false
             singUpContainer.isHidden = true
             break
-        
-        
         default:
             break
         }

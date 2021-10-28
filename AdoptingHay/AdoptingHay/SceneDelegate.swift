@@ -15,14 +15,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
        
-       /* let currentUser =   Auth.auth().currentUser
+      
+        let currentUser =   Auth.auth().currentUser
           
           if currentUser != nil {
             let board = UIStoryboard(name: "Main", bundle: nil)
             let tabBar = board.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
             window?.rootViewController = tabBar
              
-          }*/
+          }
         
         
         

@@ -27,20 +27,14 @@ class SingUpEmailVC: UIViewController {
     }
     
     @IBAction func singUpButtonAction(_ sender: Any) {
-        
-        Auth.auth().createUser(withEmail: textFieldEmail.text!, password: textFieldPassword.text!) { (authData, error) in
-            
+        Auth.auth().createUser(withEmail: textFieldEmail.text!,
+        password: textFieldPassword.text!)
+        { (authData, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Hata")
             }else
             {
                 self.performSegue(withIdentifier: "singUptoHomePage", sender: nil)
-            }
-        }
-
-        
-        
-        
-    }
+            }}}
     
 }

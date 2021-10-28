@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HomePageVC: UIViewController{
+class HomePageVC: UIViewController {
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -23,11 +23,12 @@ class HomePageVC: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        accountButton.layer.cornerRadius = 10
+       
         searchBar.delegate = self
         //  animalKindsCollectionView
         animalKindsCollectionView.delegate = self
         animalKindsCollectionView.dataSource = self
+        
         animalKindsCollectionView.showsHorizontalScrollIndicator = false
         animalKinds = ["dog","cat","bird","hamster"]
         animalKindsTitle = ["Köpek","Kedi","Kuş","Hamster"]
@@ -36,7 +37,7 @@ class HomePageVC: UIViewController{
         animalAdvertCollectionView.delegate = self
         animalAdvertCollectionView.dataSource = self
         
-        
+       
         
         getAnimalAdcertInfo()
     
@@ -65,12 +66,16 @@ class HomePageVC: UIViewController{
 }
 
 extension HomePageVC:UISearchBarDelegate {
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
     }
 }
 
+
+
 extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.animalAdvertCollectionView {
@@ -80,37 +85,32 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        
+
         if collectionView == self.animalAdvertCollectionView {
-            let animalAdvertCell = animalAdvertCollectionView.dequeueReusableCell(withReuseIdentifier: "animalAdvertCell", for: indexPath) as! AnimalAdvertCVC
+            let cell = animalAdvertCollectionView.dequeueReusableCell(withReuseIdentifier: "animalAdvertCell", for: indexPath) as! AnimalAdvertCVC
             
-            animalAdvertCell.animalAdvertImage.image = UIImage(named: animalAdvertLists[indexPath.row].animalImage!)
+            cell.animalAdvertImage.image = UIImage(named: animalAdvertLists[indexPath.row].animalImage!)
             
-            animalAdvertCell.animalAdvertNameLabel.text = "Adı: \(animalAdvertLists[indexPath.row].animalName ?? "")"
-            animalAdvertCell.animalAdvertKindsLabel.text = "Cins: \(animalAdvertLists[indexPath.row].animalKinds ?? "")"
-            animalAdvertCell.animalAdvertAgeLabel.text = "Yaş: \(String(animalAdvertLists[indexPath.row].animalAge!))"
-            animalAdvertCell.animalAdvertSickLabel.text = "Hastalık: \(animalAdvertLists[indexPath.row].animalSick ?? "")"
-            
-            
-            
-            return animalAdvertCell
+            cell.animalAdvertNameLabel.text = "Adı: \(animalAdvertLists[indexPath.row].animalName ?? "")"
+            cell.animalAdvertKindsLabel.text = "Cins: \(animalAdvertLists[indexPath.row].animalKinds ?? "")"
+            cell.animalAdvertAgeLabel.text = "Yaş: \(String(animalAdvertLists[indexPath.row].animalAge!))"
+            cell.animalAdvertSickLabel.text = "Hastalık: \(animalAdvertLists[indexPath.row].animalSick ?? "")"
+            cell.layer.cornerRadius = 25
+     
+            cell.layer.borderWidth = 2
+         
+            return cell
         }
         
         else {
             let cell = animalKindsCollectionView.dequeueReusableCell(withReuseIdentifier: "animalKindsCell", for: indexPath) as! AnimalKindsCVC
             cell.animaKindsIcon.image = UIImage(named: "\(animalKinds[indexPath.row])")
             cell.animalKindsTitle.text = animalKindsTitle[indexPath.row]
-         
-          
-          
+            cell.layer.cornerRadius = 25
+            cell.layer.borderColor = UIColor.red.cgColor
+            cell.layer.borderWidth = 2
             return cell
-            
-        }
-        
-     
-        
-        
+            }
     }
     
     

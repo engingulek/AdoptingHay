@@ -26,7 +26,6 @@ class SingInEmailVC: UIViewController {
     }
     
     @IBAction func singInButtonAction(_ sender: Any) {
-        
         Auth.auth().signIn(withEmail: textFieldEmail.text!, password: textFiledPassword.text!) { (authResult, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Hata")
@@ -34,15 +33,7 @@ class SingInEmailVC: UIViewController {
             else {
                 self.performSegue(withIdentifier: "singInToHomePage", sender: nil)
             }
-            
-            
         }
-        
-        
-        
-       
-        
-        
     }
     
 
