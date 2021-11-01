@@ -30,6 +30,7 @@
 		7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD7F226271D94FA003E611D /* AnimalAdvert.swift */; };
 		7DE5EF8B27301D2500B84596 /* AnimalAdvertDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */; };
 		7DF7343A2730693800983A8C /* AnimalAdvertDetailsImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */; };
+		7DF7343C27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		7DD7F226271D94FA003E611D /* AnimalAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvert.swift; sourceTree = "<group>"; };
 		7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsVC.swift; sourceTree = "<group>"; };
 		7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsImageCVC.swift; sourceTree = "<group>"; };
+		7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsMesajCVC.swift; sourceTree = "<group>"; };
 		A6EF73076862743BC27CD1D8 /* Pods-AdoptingHay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoptingHay.release.xcconfig"; path = "Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay.release.xcconfig"; sourceTree = "<group>"; };
 		FB37284F92E0F77E6309D259 /* Pods_AdoptingHay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdoptingHay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -91,6 +93,7 @@
 				7DB22F3E272C56BE00C2CDB8 /* AccountTVC.swift */,
 				7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */,
 				7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */,
+				7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -276,6 +279,7 @@
 				7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */,
 				7D69C088272453DC00BB10C2 /* SingInEmailVC.swift in Sources */,
 				7DB22F3F272C56BE00C2CDB8 /* AccountTVC.swift in Sources */,
+				7DF7343C27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift in Sources */,
 				7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */,
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,

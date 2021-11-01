@@ -489,10 +489,68 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9Q-4m-FLU">
-                                <rect key="frame" x="87" y="616" width="239" height="31"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="gfQ-eM-ATi">
+                                <rect key="frame" x="11" y="558.5" width="392" height="43.5"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="392" id="XpD-Gd-fcX"/>
+                                    <constraint firstAttribute="height" constant="43.5" id="bCa-zD-gyg"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fAM-cM-WzO">
+                                    <size key="itemSize" width="172" height="37"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="mesajcell" id="2Zi-ou-QLK" customClass="AnimalAdvertDetailsMesajCVC" customModule="AdoptingHay" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="3.5" width="172" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ahP-CE-u4c">
+                                            <rect key="frame" x="0.0" y="0.0" width="172" height="37"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Merhaba" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sGG-Ta-tY1">
+                                                    <rect key="frame" x="23" y="8" width="132" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="sGG-Ta-tY1" secondAttribute="bottom" constant="8" id="5RB-ft-uat"/>
+                                                <constraint firstItem="sGG-Ta-tY1" firstAttribute="top" secondItem="ahP-CE-u4c" secondAttribute="top" constant="8" id="Mlq-i4-eaj"/>
+                                                <constraint firstAttribute="trailing" secondItem="sGG-Ta-tY1" secondAttribute="trailing" constant="17" id="VcJ-C3-AqI"/>
+                                                <constraint firstItem="sGG-Ta-tY1" firstAttribute="leading" secondItem="ahP-CE-u4c" secondAttribute="leading" constant="23" id="rsB-ui-dWR"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="172" height="37"/>
+                                        <connections>
+                                            <outlet property="mesajLabel" destination="sGG-Ta-tY1" id="zA5-Fa-Wb7"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mesaj Gönder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="K1T-uq-HIK">
+                                <rect key="frame" x="20" y="612" width="260" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="260" id="iYk-tM-lST"/>
+                                    <constraint firstAttribute="height" constant="34" id="ogp-7F-OIf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w62-mO-XuK">
+                                <rect key="frame" x="297" y="616" width="97" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="31" id="BGR-I2-bKw"/>
+                                    <constraint firstAttribute="width" constant="97" id="CxY-bF-xOo"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Mesaj At"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Gönder"/>
+                                <connections>
+                                    <action selector="messageSend:" destination="JuA-wo-wlm" eventType="touchUpInside" id="Zlo-19-6kX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bt0-sa-cTe"/>
@@ -507,20 +565,25 @@
                             <constraint firstItem="Bfu-sj-GBa" firstAttribute="top" secondItem="luz-Jk-mD3" secondAttribute="bottom" constant="7.5" id="HP0-0K-XFG"/>
                             <constraint firstItem="luz-Jk-mD3" firstAttribute="top" secondItem="uR7-2I-YYI" secondAttribute="top" constant="306.5" id="IBl-c6-eXm"/>
                             <constraint firstItem="luz-Jk-mD3" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="145" id="IYs-ay-7Zl"/>
+                            <constraint firstItem="K1T-uq-HIK" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="20" id="Iva-bs-a66"/>
                             <constraint firstItem="aqp-Wl-pSC" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="20" id="QIH-NV-80H"/>
                             <constraint firstItem="8WA-xk-K2Z" firstAttribute="trailing" secondItem="wDz-1l-T4J" secondAttribute="trailing" id="Qaw-hl-dBA"/>
+                            <constraint firstItem="bt0-sa-cTe" firstAttribute="trailing" secondItem="w62-mO-XuK" secondAttribute="trailing" constant="20" id="RbU-hz-EbX"/>
+                            <constraint firstItem="gfQ-eM-ATi" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="11" id="S7g-9i-RXV"/>
                             <constraint firstItem="BHO-35-wnq" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="18" id="SHQ-8Q-j47"/>
-                            <constraint firstItem="bt0-sa-cTe" firstAttribute="bottom" secondItem="a9Q-4m-FLU" secondAttribute="bottom" constant="20" id="dsQ-Mt-N5C"/>
+                            <constraint firstItem="w62-mO-XuK" firstAttribute="leading" secondItem="K1T-uq-HIK" secondAttribute="trailing" constant="17" id="UgR-5z-sBC"/>
+                            <constraint firstItem="K1T-uq-HIK" firstAttribute="top" secondItem="gfQ-eM-ATi" secondAttribute="bottom" constant="10" id="VTd-Ts-In5"/>
+                            <constraint firstItem="bt0-sa-cTe" firstAttribute="trailing" secondItem="gfQ-eM-ATi" secondAttribute="trailing" constant="11" id="WFH-eq-FOg"/>
+                            <constraint firstItem="bt0-sa-cTe" firstAttribute="bottom" secondItem="gfQ-eM-ATi" secondAttribute="bottom" constant="65" id="Xhu-EI-061"/>
                             <constraint firstItem="wDz-1l-T4J" firstAttribute="top" secondItem="8WA-xk-K2Z" secondAttribute="bottom" constant="8" symbolic="YES" id="eEa-Dd-NEM"/>
                             <constraint firstItem="bt0-sa-cTe" firstAttribute="trailing" secondItem="OH4-Sc-FA9" secondAttribute="trailing" constant="134" id="efI-80-BRZ"/>
+                            <constraint firstItem="bt0-sa-cTe" firstAttribute="bottom" secondItem="w62-mO-XuK" secondAttribute="bottom" constant="24" id="etM-hh-hNg"/>
                             <constraint firstItem="Bfu-sj-GBa" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="107" id="gIM-Ji-ccw"/>
                             <constraint firstItem="V3U-EU-oTz" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="142" id="gne-HX-e3z"/>
-                            <constraint firstItem="a9Q-4m-FLU" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="87" id="iHg-Yk-G0g"/>
                             <constraint firstItem="8WA-xk-K2Z" firstAttribute="centerX" secondItem="BHO-35-wnq" secondAttribute="centerX" id="l4P-Fa-O7K"/>
                             <constraint firstItem="wDz-1l-T4J" firstAttribute="leading" secondItem="OH4-Sc-FA9" secondAttribute="leading" id="pCH-CY-sJ1"/>
                             <constraint firstItem="bt0-sa-cTe" firstAttribute="trailing" secondItem="BHO-35-wnq" secondAttribute="trailing" constant="18" id="qCl-SI-i1D"/>
                             <constraint firstItem="V3U-EU-oTz" firstAttribute="trailing" secondItem="8WA-xk-K2Z" secondAttribute="trailing" id="scL-Ew-JAD"/>
-                            <constraint firstItem="bt0-sa-cTe" firstAttribute="trailing" secondItem="a9Q-4m-FLU" secondAttribute="trailing" constant="88" id="se1-gJ-p3b"/>
                             <constraint firstItem="V3U-EU-oTz" firstAttribute="top" secondItem="Bfu-sj-GBa" secondAttribute="bottom" constant="8" symbolic="YES" id="uny-U3-d7w"/>
                             <constraint firstItem="OH4-Sc-FA9" firstAttribute="top" secondItem="bt0-sa-cTe" secondAttribute="top" constant="20" id="wpq-fw-Mj3"/>
                             <constraint firstItem="OH4-Sc-FA9" firstAttribute="leading" secondItem="bt0-sa-cTe" secondAttribute="leading" constant="134" id="xmP-ne-wVb"/>
@@ -528,7 +591,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="dx5-TN-GMS"/>
                     <connections>
+                        <outlet property="animalAdvertDetailMesajCollectionView" destination="gfQ-eM-ATi" id="QPV-bT-efz"/>
                         <outlet property="animalDetailsImagesCollectionView" destination="BHO-35-wnq" id="lAa-Ad-9TV"/>
+                        <outlet property="mesajText" destination="K1T-uq-HIK" id="FLy-Vm-luR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SuO-2t-Lpe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
