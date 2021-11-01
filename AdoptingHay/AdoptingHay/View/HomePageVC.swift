@@ -115,7 +115,12 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(animalKindsTitle[indexPath.row])
+        
+        if collectionView == self.animalAdvertCollectionView {
+            performSegue(withIdentifier: "homePageToAdvertDetails", sender: nil)
+            
+        }
+       
     }
     
 }
