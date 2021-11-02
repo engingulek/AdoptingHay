@@ -26,14 +26,36 @@ class SingInEmailVC: UIViewController {
     }
     
     @IBAction func singInButtonAction(_ sender: Any) {
-        Auth.auth().signIn(withEmail: textFieldEmail.text!, password: textFiledPassword.text!) { (authResult, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "Hata")
-            }
-            else {
-                self.performSegue(withIdentifier: "singInToHomePage", sender: nil)
-            }
+        
+        if textFieldEmail.text == "" || textFiledPassword.text == "" {
+            self.alertMessage(title: "Hata", text: "Boş kalan yerleri doldurunuz")
         }
+        
+        else {
+            Auth.auth().signIn(withEmail: textFieldEmail.text!, password: textFiledPassword.text!) { (authResult, error) in
+                if error != nil {
+                   
+                
+                    self.alertMessage(title: "Hata", text: error!.localizedDescription)
+                   
+                    
+                  
+                }
+                else {
+                    self.performSegue(withIdentifier: "singInToHomePage", sender: nil)
+                }
+            }
+            
+        }
+        
+  
+    }
+    
+    func alertMessage(title:String,text:String){
+        let alertMessage = UIAlertController(title: title, message: text, preferredStyle: .alert)
+        let alertButton = UIAlertAction(title: "Okey", style: .cancel)
+        alertMessage.addAction(alertButton)
+        self.present(alertMessage, animated: true)
     }
     
 
