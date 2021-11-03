@@ -6,11 +6,23 @@
 //
 
 import UIKit
+import Firebase
 
 class AnimalAdvertDetailsVC: UIViewController {
  
     
-   
+    @IBOutlet weak var animalName: UILabel!
+    
+    @IBOutlet weak var animalGenus: UILabel!
+    
+    @IBOutlet weak var animalAge: UILabel!
+    
+    
+    @IBOutlet weak var animalSick: UILabel!
+    
+    
+    @IBOutlet weak var animalOwnerNote: UILabel!
+    
     
     @IBOutlet weak var animalDetailsImagesCollectionView: UICollectionView!
     
@@ -21,14 +33,16 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     var animalImages:[String] = [String]()
     var autoMesaj:[String] = [String]()
+    var getAnimalAdvertUid:String?
+    
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getAnimalAdvertDetailNot()
         animalDetailsImagesCollectionView.delegate = self
         animalDetailsImagesCollectionView.dataSource = self
-        
+      
         
         
         animalAdvertDetailMesajCollectionView.delegate = self
@@ -39,7 +53,7 @@ class AnimalAdvertDetailsVC: UIViewController {
         animalAdvertDetailMesajCollectionView.showsHorizontalScrollIndicator = false
         
         animalImages = ["pamukkopek","tarcinkedi","sarikus"]
-        autoMesaj = ["Merhaba","İlan Akifmi","Durumu nasıl","Sahiplencem"]
+        autoMesaj = ["Merhaba","İlan Akifmi","Hastalığı önemlimi","Sahiplencem"]
         
         
         
@@ -65,6 +79,49 @@ class AnimalAdvertDetailsVC: UIViewController {
       
 
       
+    }
+    
+    
+    func getAnimalAdvertDetailNot(){
+        let db = Firestore.firestore()
+        if let documentId = getAnimalAdvertUid {
+            db.collection("animalAdvert").document(documentId).getDocument{ snapshot, error in
+            
+                if error != nil {
+                    print(error?.localizedDescription ?? "Bir hata oluştu")
+                }
+                
+                else {
+                    if let getAnimalName = snapshot?.get("animalName") as? String {
+                        self.animalName.text = "Adı: \(getAnimalName)"
+                    }
+                    
+                    if let getAnimalGenus = snapshot?.get("animalGenus") as? String {
+                        if let getAnimalKinds = snapshot?.get("animalKinds") as? String {
+                            self.animalGenus.text = "Cinsi: \(getAnimalGenus)-\(getAnimalKinds)"
+                        }
+                    }
+                    
+                    if let getAnimalAge = snapshot?.get("animalAge") as? Int {
+                        self.animalAge.text = "Yaş: \(getAnimalAge) aylık"
+                    }
+                    
+                    if let getAnimalSick = snapshot?.get("animalSick") as? String {
+                        self.animalSick.text = "Hastalık: \(getAnimalSick)"
+                    }
+                     
+                    if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
+                        self.animalOwnerNote.text = getAnimalOwnerNote
+                    }
+                    
+                    
+                }
+            
+            }
+            
+        }
+      
+        
     }
     
 

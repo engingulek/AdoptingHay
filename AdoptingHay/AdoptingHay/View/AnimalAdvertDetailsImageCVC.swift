@@ -10,4 +10,8 @@ import UIKit
 class AnimalAdvertDetailsImageCVC: UICollectionViewCell {
     @IBOutlet weak var animalmageDetails: UIImageView!
     
+    
+    
+    
+    
 }

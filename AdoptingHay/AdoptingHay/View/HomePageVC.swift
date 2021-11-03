@@ -100,34 +100,41 @@ class HomePageVC: UIViewController {
             }
             else {
                 for document in (snapshot?.documents)! {
-                    if let animalImage =  document.get("animalImage") as? String {
-                        
-                        let imageUrl = URL(string: "\(animalImage)")!
-                        if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                    if let animalAdvertUid = document.documentID as? String {
+                        if let animalImage =  document.get("animalImage") as? String {
                             
-                            if let animalName = document.get("animalName") as? String {
-                                if let animalAge = document.get("animalAge") as? Int {
-                                    if let animalGenus = document.get("animalGenus") as? String {
-                                        if let animalSick = document.get("animalSick") as? String {
-                                            if let animalKinds = document.get("animalKinds") as? String {
-                                                let animal = AnimalAdvert(animalImage: animalImageData, animalName: animalName, animalKinds: "\(animalGenus)", animalAge: animalAge, animalSick: animalSick)
-                                                self.animalAdvertLists.append(animal)
+                            let imageUrl = URL(string: "\(animalImage)")!
+                            if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                
+                                if let animalName = document.get("animalName") as? String {
+                                    if let animalAge = document.get("animalAge") as? Int {
+                                        if let animalGenus = document.get("animalGenus") as? String {
+                                            if let animalSick = document.get("animalSick") as? String {
+                                                if let animalKinds = document.get("animalKinds") as? String {
+                                                    let animal = AnimalAdvert(animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: "\(animalGenus)", animalAge: animalAge, animalSick: animalSick)
+                                                    self.animalAdvertLists.append(animal)
+                                                    
+                                                    
+                                               
+                                                    
+                                                }
+                                                
+                                                
                                                 
                                             }
-                                            
-                                            
-                                            
                                         }
                                     }
                                 }
+                               
+                                
                             }
-                           
+                            
+                            
                             
                         }
                         
-                        
-                        
                     }
+                   
                     
                 }
             }
@@ -206,10 +213,23 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == self.animalAdvertCollectionView {
-            performSegue(withIdentifier: "homePageToAdvertDetails", sender: nil)
+            let animalAdvertUid = animalAdvertLists[indexPath.row].animalUid
+            performSegue(withIdentifier: "homePageToAdvertDetails", sender: animalAdvertUid)
             
         }
        
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "homePageToAdvertDetails" {
+            
+            if let dataUid = sender as? String {
+                let toAnimalAdvertDetailVC = segue.destination as! AnimalAdvertDetailsVC
+                toAnimalAdvertDetailVC.getAnimalAdvertUid = dataUid
+            }
+            
+        }
     }
     
 }
