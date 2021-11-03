@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomePageVC: UIViewController {
     @IBOutlet weak var accountButton: UIButton!
@@ -17,21 +18,22 @@ class HomePageVC: UIViewController {
     @IBOutlet weak var animalAdvertCollectionView: UICollectionView!
     
 
-    var animalKinds:[String] = [String]()
+    var animalKindsImage:[Data] = [Data]()
     var animalKindsTitle:[String] = [String]()
     var animalAdvertLists = [AnimalAdvert]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       
+        getAnimalKindsFromFireStore()
+        getAnimalAdvertFromFirebase()
         searchBar.delegate = self
         //  animalKindsCollectionView
         animalKindsCollectionView.delegate = self
         animalKindsCollectionView.dataSource = self
         
         animalKindsCollectionView.showsHorizontalScrollIndicator = false
-        animalKinds = ["dog","cat","bird","hamster"]
-        animalKindsTitle = ["Köpek","Kedi","Kuş","Hamster"]
+       
+        
         
         
         animalAdvertCollectionView.delegate = self
@@ -39,7 +41,10 @@ class HomePageVC: UIViewController {
         
        
         
-        getAnimalAdcertInfo()
+
+        
+       
+       
     
        
         
@@ -48,16 +53,93 @@ class HomePageVC: UIViewController {
     }
     
     
-    func getAnimalAdcertInfo(){
-        let animal1 = AnimalAdvert(animalImage: "pamukkopek", animalName: "Pamuk", animalKinds: "ÇovÇov/Köpek", animalAge: 3, animalSick: "YOK")
+    
+    
+
+    
+    
+    func getAnimalKindsFromFireStore(){
+        let db = Firestore.firestore()
+        db.collection("animalKinds").getDocuments { snapshot, error in
+            if error != nil{
+                print("Hata\(error?.localizedDescription)" ?? "Hata Oluştu")
+            }
+            
+            else {
+                for document in (snapshot?.documents)! {
+                    if let animalKindName =  document.get("animalKindsName") as? String {
+                        self.animalKindsTitle.append(animalKindName)
+                    }
+                    
+                    if let animalKindsImage = document.get("animalKindsImage") as? String {
+                        let imageUrl = URL(string: "\(animalKindsImage)")!
+                        if let imageData = try?  Data(contentsOf: imageUrl) {
+                            self.animalKindsImage.append(imageData)
+                            
+                        }
+                        
+                    }
+                    
+                }
+            }
+            self.animalKindsCollectionView.reloadData()
+        }
         
-        let animal2 = AnimalAdvert(animalImage: "tarcinkedi", animalName: "Tarcin", animalKinds: "Siyam/Kedi", animalAge: 2, animalSick: "Var")
+    }
+    
+    
+    
+    
+    func getAnimalAdvertFromFirebase(){
         
-        let animal3 = AnimalAdvert(animalImage: "sarikus", animalName: "Sari", animalKinds: "Muhabbet/Kus", animalAge: 1, animalSick: "Yok")
         
-        animalAdvertLists.append(animal1)
-        animalAdvertLists.append(animal2)
-        animalAdvertLists.append(animal3)
+        let db = Firestore.firestore()
+        db.collection("animalAdvert").getDocuments { snapshot, error in
+            if error != nil {
+                print(error?.localizedDescription ?? "Bir hata oluştu")
+            }
+            else {
+                for document in (snapshot?.documents)! {
+                    if let animalImage =  document.get("animalImage") as? String {
+                        
+                        let imageUrl = URL(string: "\(animalImage)")!
+                        if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                            
+                            if let animalName = document.get("animalName") as? String {
+                                if let animalAge = document.get("animalAge") as? Int {
+                                    if let animalGenus = document.get("animalGenus") as? String {
+                                        if let animalSick = document.get("animalSick") as? String {
+                                            if let animalKinds = document.get("animalKinds") as? String {
+                                                let animal = AnimalAdvert(animalImage: animalImageData, animalName: animalName, animalKinds: "\(animalGenus)", animalAge: animalAge, animalSick: animalSick)
+                                                self.animalAdvertLists.append(animal)
+                                                
+                                            }
+                                            
+                                            
+                                            
+                                        }
+                                    }
+                                }
+                            }
+                           
+                            
+                        }
+                        
+                        
+                        
+                    }
+                    
+                }
+            }
+            self.animalAdvertCollectionView.reloadData()
+        }
+        
+        
+        
+        
+        
+       
+  
         
         
     }
@@ -81,7 +163,11 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == self.animalAdvertCollectionView {
             return animalAdvertLists.count
         }
-        return animalKinds.count
+        
+        
+            return animalKindsTitle.count
+        
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -89,7 +175,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == self.animalAdvertCollectionView {
             let cell = animalAdvertCollectionView.dequeueReusableCell(withReuseIdentifier: "animalAdvertCell", for: indexPath) as! AnimalAdvertCVC
             
-            cell.animalAdvertImage.image = UIImage(named: animalAdvertLists[indexPath.row].animalImage!)
+            cell.animalAdvertImage.image = UIImage(data: animalAdvertLists[indexPath.row].animalImage!)
             
             cell.animalAdvertNameLabel.text = "Adı: \(animalAdvertLists[indexPath.row].animalName ?? "")"
             cell.animalAdvertKindsLabel.text = "Cins: \(animalAdvertLists[indexPath.row].animalKinds ?? "")"
@@ -104,7 +190,10 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         
         else {
             let cell = animalKindsCollectionView.dequeueReusableCell(withReuseIdentifier: "animalKindsCell", for: indexPath) as! AnimalKindsCVC
-            cell.animaKindsIcon.image = UIImage(named: "\(animalKinds[indexPath.row])")
+           
+            cell.animaKindsIcon.image = UIImage(data: animalKindsImage[indexPath.row])
+            
+        
             cell.animalKindsTitle.text = animalKindsTitle[indexPath.row]
             cell.layer.cornerRadius = 25
             cell.layer.borderColor = UIColor.red.cgColor

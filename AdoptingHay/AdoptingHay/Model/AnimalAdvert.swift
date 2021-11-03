@@ -9,7 +9,7 @@ import Foundation
 
 
 class AnimalAdvert {
-    var animalImage:String?
+    var animalImage:Data?
     var animalName:String?
     var animalKinds:String?
     var animalAge:Int?
@@ -20,7 +20,7 @@ class AnimalAdvert {
     }
 
 
-    init(animalImage:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String){
+    init(animalImage:Data,animalName:String,animalKinds:String,animalAge:Int,animalSick:String){
         self.animalImage = animalImage
         self.animalName = animalName
         self.animalKinds = animalKinds
