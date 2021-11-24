@@ -68,17 +68,7 @@ class AnimalAdvertDetailsVC: UIViewController {
         myNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         myNameLabel.textColor = .red
         self.view.addSubview(myNameLabel)
-        
-        
-        
-      
-   
-     
-        
-       
-      
 
-      
     }
     
     
@@ -88,41 +78,22 @@ class AnimalAdvertDetailsVC: UIViewController {
             db.collection("animalAdvert").document(documentId).getDocument{ snapshot, error in
             
                 if error != nil {
-                    print(error?.localizedDescription ?? "Bir hata oluştu")
-                }
-                
+                    print(error?.localizedDescription ?? "Bir hata oluştu")}
                 else {
                     if let getAnimalName = snapshot?.get("animalName") as? String {
-                        self.animalName.text = "Adı: \(getAnimalName)"
-                    }
+                        self.animalName.text = "Adı: \(getAnimalName)"  }
                     
                     if let getAnimalGenus = snapshot?.get("animalGenus") as? String {
                         if let getAnimalKinds = snapshot?.get("animalKinds") as? String {
                             self.animalGenus.text = "Cinsi: \(getAnimalGenus)-\(getAnimalKinds)"
-                        }
-                    }
-                    
+                        }}
                     if let getAnimalAge = snapshot?.get("animalAge") as? Int {
-                        self.animalAge.text = "Yaş: \(getAnimalAge) aylık"
-                    }
-                    
+                        self.animalAge.text = "Yaş: \(getAnimalAge) aylık"}
                     if let getAnimalSick = snapshot?.get("animalSick") as? String {
-                        self.animalSick.text = "Hastalık: \(getAnimalSick)"
-                    }
-                     
+                        self.animalSick.text = "Hastalık: \(getAnimalSick)"}
                     if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
                         self.animalOwnerNote.text = getAnimalOwnerNote
-                    }
-                    
-                    
-                }
-            
-            }
-            
-        }
-      
-        
-    }
+                    }}}} }
     
 
     @IBAction func messageSend(_ sender: Any) {

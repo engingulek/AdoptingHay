@@ -30,26 +30,16 @@ class SingInEmailVC: UIViewController {
         if textFieldEmail.text == "" || textFiledPassword.text == "" {
             self.alertMessage(title: "Hata", text: "Boş kalan yerleri doldurunuz")
         }
-        
         else {
             Auth.auth().signIn(withEmail: textFieldEmail.text!, password: textFiledPassword.text!) { (authResult, error) in
                 if error != nil {
-                   
-                
                     self.alertMessage(title: "Hata", text: error!.localizedDescription)
-                   
-                    
-                  
+
                 }
                 else {
                     self.performSegue(withIdentifier: "singInToHomePage", sender: nil)
-                }
-            }
-            
-        }
-        
-  
-    }
+                }}
+            }}
     
     func alertMessage(title:String,text:String){
         let alertMessage = UIAlertController(title: title, message: text, preferredStyle: .alert)

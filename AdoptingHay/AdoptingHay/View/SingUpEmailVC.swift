@@ -30,7 +30,6 @@ class SingUpEmailVC: UIViewController {
         
         if textFieldName.text == "" || textFieldSurname.text == "" || textFieldEmail.text == "" || textFieldPassword.text == "" {
             self.alertMessage(title: "Hata", text: "Boş kalan yerleri lütfen doldurunuz")
-            
         }
         
         else {
