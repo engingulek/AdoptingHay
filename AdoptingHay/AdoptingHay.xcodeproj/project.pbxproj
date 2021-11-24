@@ -33,6 +33,8 @@
 		7DE123FA274D07CA0095EDD6 /* AnimalKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE123F9274D07CA0095EDD6 /* AnimalKinds.swift */; };
 		7DE5EF8B27301D2500B84596 /* AnimalAdvertDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */; };
 		7DECFA0C274E4815004E34F3 /* AnimalAdvertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DECFA0B274E4815004E34F3 /* AnimalAdvertViewModel.swift */; };
+		7DECFA0E274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DECFA0D274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift */; };
+		7DECFA10274E6078004E34F3 /* AnimalAdvertDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DECFA0F274E6078004E34F3 /* AnimalAdvertDetails.swift */; };
 		7DF7343A2730693800983A8C /* AnimalAdvertDetailsImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */; };
 		7DF7343C27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */; };
 /* End PBXBuildFile section */
@@ -66,6 +68,8 @@
 		7DE123F9274D07CA0095EDD6 /* AnimalKinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKinds.swift; sourceTree = "<group>"; };
 		7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsVC.swift; sourceTree = "<group>"; };
 		7DECFA0B274E4815004E34F3 /* AnimalAdvertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertViewModel.swift; sourceTree = "<group>"; };
+		7DECFA0D274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsViewModel.swift; sourceTree = "<group>"; };
+		7DECFA0F274E6078004E34F3 /* AnimalAdvertDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetails.swift; sourceTree = "<group>"; };
 		7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsImageCVC.swift; sourceTree = "<group>"; };
 		7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsMesajCVC.swift; sourceTree = "<group>"; };
 		A6EF73076862743BC27CD1D8 /* Pods-AdoptingHay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoptingHay.release.xcconfig"; path = "Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +152,7 @@
 				7DD7F226271D94FA003E611D /* AnimalAdvert.swift */,
 				7D292609271F168E00EBD22F /* Notification.swift */,
 				7DE123F9274D07CA0095EDD6 /* AnimalKinds.swift */,
+				7DECFA0F274E6078004E34F3 /* AnimalAdvertDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 			children = (
 				7D898D1A274D5D1B004E7888 /* AnimalKindsViewModel.swift */,
 				7DECFA0B274E4815004E34F3 /* AnimalAdvertViewModel.swift */,
+				7DECFA0D274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -312,6 +318,7 @@
 				7D898D19274D5393004E7888 /* Service.swift in Sources */,
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
+				7DECFA0E274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift in Sources */,
 				7DE123FA274D07CA0095EDD6 /* AnimalKinds.swift in Sources */,
 				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
 				7D69C08B272453FE00BB10C2 /* SingUpEmailVC.swift in Sources */,
@@ -323,6 +330,7 @@
 				7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */,
 				7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */,
 				7DE5EF8B27301D2500B84596 /* AnimalAdvertDetailsVC.swift in Sources */,
+				7DECFA10274E6078004E34F3 /* AnimalAdvertDetails.swift in Sources */,
 				7DECFA0C274E4815004E34F3 /* AnimalAdvertViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

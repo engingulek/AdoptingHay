@@ -74,18 +74,55 @@ class Service {
                              
                              completion(self.animalAdvertList)
                          }
-                         
-                         
-                      
-                         
-                         
-                  
-                         
-                         
+       
                          completion (self.animalAdvertList)
                   }}}}   } }}}} }
            
         }
+    }
+    
+    
+    
+    
+    func filterAnimalAdvertDetails (uuid:String, completion: @escaping(AnimalAdvertDetails?)->()) {
+        let db = Firestore.firestore()
+        
+            db.collection("animalAdvert").document(uuid).getDocument{ snapshot, error in
+            
+                if error != nil {
+                    print(error?.localizedDescription ?? "Bir hata oluştu")}
+                else {
+                    if let getAnimalName = snapshot?.get("animalName") as? String {
+                        
+                        if let getAnimalGenus = snapshot?.get("animalGenus") as? String {
+                            
+                            if let getAnimalKinds = snapshot?.get("animalKinds") as? String {
+                                if let getAnimalAge = snapshot?.get("animalAge") as? Int {
+                                    if let getAnimalSick = snapshot?.get("animalSick") as? String {
+                                        if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
+                                            
+                                            let animalAdvertDetails = AnimalAdvertDetails(animalUid: uuid, animalName: getAnimalName, animalKinds: getAnimalKinds, animalAge: getAnimalAge, animalSick: getAnimalSick, animalGenus: getAnimalGenus, animalOwnerNot: getAnimalOwnerNote)
+                                            
+                                            
+                                            completion(animalAdvertDetails)
+                                            
+                                            
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                       }
+                                  }
+                            }}
+                        
+                        
+                          }
+                    
+                  
+                    
+                   }}
+        
     }
     
     

@@ -30,7 +30,7 @@ struct AnimalAdvertViewModel {
     
     
     var uuid : String {
-        return self.animalAdvert.animalUid
+        return self.animalAdvert.animalUid!
     }
     
     var name : String {

@@ -36,10 +36,10 @@ class AnimalAdvertDetailsVC: UIViewController {
     var getAnimalAdvertUid:String?
     
 
-    
+    private var animalAdvertViewModel : AnimalAdvertDetailsViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAnimalAdvertDetailNot()
+      //  getAnimalAdvertDetailNot()
         animalDetailsImagesCollectionView.delegate = self
         animalDetailsImagesCollectionView.dataSource = self
       
@@ -55,6 +55,9 @@ class AnimalAdvertDetailsVC: UIViewController {
         animalImages = ["pamukkopek","tarcinkedi","sarikus"]
         autoMesaj = ["Merhaba","İlan Akifmi","Hastalığı önemlimi","Sahiplencem"]
         
+        
+      
+        getAnimalAdvertDetails()
         
         
         // mesajcell
@@ -72,28 +75,30 @@ class AnimalAdvertDetailsVC: UIViewController {
     }
     
     
-    func getAnimalAdvertDetailNot(){
-        let db = Firestore.firestore()
-        if let documentId = getAnimalAdvertUid {
-            db.collection("animalAdvert").document(documentId).getDocument{ snapshot, error in
+    
+    
+    
+    
+    
+    func getAnimalAdvertDetails() {
+        Service().filterAnimalAdvertDetails(uuid: getAnimalAdvertUid!) { animalAD in
             
-                if error != nil {
-                    print(error?.localizedDescription ?? "Bir hata oluştu")}
-                else {
-                    if let getAnimalName = snapshot?.get("animalName") as? String {
-                        self.animalName.text = "Adı: \(getAnimalName)"  }
-                    
-                    if let getAnimalGenus = snapshot?.get("animalGenus") as? String {
-                        if let getAnimalKinds = snapshot?.get("animalKinds") as? String {
-                            self.animalGenus.text = "Cinsi: \(getAnimalGenus)-\(getAnimalKinds)"
-                        }}
-                    if let getAnimalAge = snapshot?.get("animalAge") as? Int {
-                        self.animalAge.text = "Yaş: \(getAnimalAge) aylık"}
-                    if let getAnimalSick = snapshot?.get("animalSick") as? String {
-                        self.animalSick.text = "Hastalık: \(getAnimalSick)"}
-                    if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
-                        self.animalOwnerNote.text = getAnimalOwnerNote
-                    }}}} }
+            if let animalAD = animalAD {
+                self.animalAdvertViewModel = AnimalAdvertDetailsViewModel(animalAdvertDetails: animalAD)
+                self.animalName.text = "Adı : \(self.animalAdvertViewModel.name)"
+                self.animalAge.text = "Yaş : \(String(self.animalAdvertViewModel.age))"
+                self.animalSick.text = "Hastalık : \(self.animalAdvertViewModel.sick)"
+                self.animalOwnerNote.text = self.animalAdvertViewModel.ownerNot
+                self.animalGenus.text = "Cinsi : \(self.animalAdvertViewModel.genus)/ \(self.animalAdvertViewModel.kinds)"
+                
+                
+            }
+            
+        }
+    }
+    
+    
+
     
 
     @IBAction func messageSend(_ sender: Any) {
