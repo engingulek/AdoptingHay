@@ -138,6 +138,38 @@ class Service {
     
     
     
+    func addAdvertToFirebase(uuid:String){
+        
+        let db = Firestore.firestore()
+        let advertId = UUID()
+        
+        
+        let docData : [String:Any] = [
+            "animalGenus" : "genusDemo",
+            "animalImage" : "animalImageDemo",
+            "animalImageDetails" : ["oneImageDemo","secondImageDemo","thirdImageDemo"],
+            "animalKinds" : "kindsDemo",
+            "animalName"  : "animalNameDemo",
+            "animalOwnerNot" : "animalOwnerNotDemo",
+            "animalSick"   :  "animalSickDemo"
+        
+        
+        
+        ]
+        
+        db.collection("userList").document("\(uuid)").collection("advertList").document("\(advertId)").setData(docData) {
+            err in
+            if  err != nil {
+                print("Ekleme Hata var  \(err?.localizedDescription)")
+            }
+            
+            else {
+                print("Ekleme İşlemi başarılı")
+            }
+        }
+        
+    }
+    
     
     
     

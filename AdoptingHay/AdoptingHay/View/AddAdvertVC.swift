@@ -9,18 +9,33 @@ import UIKit
 import Firebase
 class AddAdvertVC: UIViewController {
 
-    @IBOutlet weak var addAdvertImageView: UIImageView!
+    @IBOutlet weak var addAdvertImageOne: UIImageView!
     
-    @IBOutlet weak var addAdvertNameTextField: UITextField!
-    @IBOutlet weak var addAdvertAgeTextField: UITextField!
+    @IBOutlet weak var addAdvertImageTwo: UIImageView!
     
-    @IBOutlet weak var addAdvertKindsTextField: UITextField!
-    
-    @IBOutlet weak var addAdvertSickTextField: UITextField!
-    
-    @IBOutlet weak var addAdvertDescTextView: UITextView!
+   
+    @IBOutlet weak var addAdvrtImageThird: UIImageView!
     
     
+    @IBOutlet weak var addImageAdvert: UIImageView!
+    
+    
+
+    
+    
+  
+    @IBOutlet weak var addAdvertName: UITextField!
+    
+
+    
+    @IBOutlet weak var addAdvertKindsPicker: UIPickerView!
+    
+    @IBOutlet weak var sickSwitch: UISwitch!
+    
+    
+    @IBOutlet weak var addSickInfo: UITextView!
+    
+    @IBOutlet weak var addOwnerNote: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,18 +43,18 @@ class AddAdvertVC: UIViewController {
     }
     
 
-    
+ 
     @IBAction func addAdvert(_ sender: Any) {
-        
         let userId = Auth.auth().currentUser?.uid
         if let userId = userId {
+           
+            
+            Service().addAdvertToFirebase(uuid: userId)
             
             
         }
-        
-        
-       
     }
+    
     
     
     
