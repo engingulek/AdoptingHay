@@ -19,7 +19,7 @@ class HomePageVC: UIViewController {
     
 
     var animalKindsImage:[Data] = [Data]()
-    var animalKindsTitle:[String] = [String]()
+   // var animalKindsTitle:[String] = [String]()
     var animalAdvertLists = [AnimalAdvert]()
     
     

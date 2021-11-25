@@ -29,11 +29,13 @@ class AnimalAdvertDetailsVC: UIViewController {
     @IBOutlet weak var animalAdvertDetailMesajCollectionView: UICollectionView!
     
     @IBOutlet weak var mesajText: UITextField!
+    @IBOutlet weak var animalSickInfoButtonOutlet: UIButton!
     
     
     var animalImages:[Data] = [Data]()
     var autoMesaj:[String] = [String]()
     var getAnimalAdvertUid:String?
+    var sicktoAlert:String?
     
 
     private var animalAdvertDetailsViewModel : AnimalAdvertDetailsViewModel!
@@ -94,6 +96,23 @@ class AnimalAdvertDetailsVC: UIViewController {
                 self.animalGenus.text = "Cinsi : \(self.animalAdvertDetailsViewModel.genus)/ \(self.animalAdvertDetailsViewModel.kinds)"
                 
                 
+               print("daaa \(self.animalAdvertDetailsViewModel.sickInfo)")
+                
+               if  self.animalAdvertDetailsViewModel.sickInfo == "" {
+                   
+                   self.animalSickInfoButtonOutlet.isHidden = true
+                    
+                }
+                
+                else {
+                    
+                    self.sicktoAlert = self.animalAdvertDetailsViewModel.sickInfo
+                    
+                   
+                    
+                    self.animalSickInfoButtonOutlet.isHidden = false
+                    
+                }
         
                 
                 
@@ -151,7 +170,26 @@ class AnimalAdvertDetailsVC: UIViewController {
     }
     
     
-
+    @IBAction func animalSickInfoButton(_ sender: Any) {
+        
+      
+        let alertController = UIAlertController(title: "Hastalık" , message: sicktoAlert, preferredStyle: .actionSheet)
+        
+        let close = UIAlertAction(title: "Kapat", style: .cancel) { action in
+        print("Kapatıldı")
+        }
+        
+        alertController.addAction(close)
+        
+        self.present(alertController, animated: true)
+        
+        print("Hastalık Hakkında Bilgi")
+    }
+    
+    
+    
+   
+    
 
 
 }

@@ -11,14 +11,14 @@ class AddAdvert {
     var uuid:String?
     var animalName:String?
     var animalKinds:String?
-    var animalAge:Int?
+    var animalAge:String?
     var animalSick:String?
     var animalGenus:String?
     var animalOwnerNot: String?
     var animalImage : String?
     var animalImageDetails: [String]?
     
-    init(uuid:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String],animalImage:String){
+    init(uuid:String,animalName:String,animalKinds:String,animalAge:String,animalSick:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String],animalImage:String){
        
         self.uuid = uuid
         self.animalName = animalName

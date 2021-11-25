@@ -70,6 +70,10 @@ struct AnimalAdvertDetailsViewModel {
         
     }
     
+    var sickInfo : String {
+        return self.animalAdvertDetails.animalSickInfo!
+    }
+    
 }
 
 

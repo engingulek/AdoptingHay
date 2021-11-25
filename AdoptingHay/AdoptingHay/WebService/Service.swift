@@ -67,12 +67,30 @@ class Service {
                                             if let animalSick = document.get("animalSick") as? String {
                      if let animalKinds = document.get("animalKinds") as? String {
                          
+                         
+                         
+                         
                          if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
-                             let animalAdvert = AnimalAdvert(animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot)
                              
-                             self.animalAdvertList.append(animalAdvert)
                              
-                             completion(self.animalAdvertList)
+                             if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                 let animalAdvert = AnimalAdvert(animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
+                                 
+                                 self.animalAdvertList.append(animalAdvert)
+                                 
+                                 completion(self.animalAdvertList)
+                                 
+                             }
+                             
+                             
+                           
+                             
+                             
+                             
+                             
+                             
+                             
+                             
                          }
        
                          completion (self.animalAdvertList)
@@ -106,10 +124,15 @@ class Service {
                                                 print("Resim string \(getAnimalImageDetails)")
                                                 
                                                 
-                                                let animalAdvertDetails = AnimalAdvertDetails(animalUid: uuid, animalName: getAnimalName, animalKinds: getAnimalKinds, animalAge: getAnimalAge, animalSick: getAnimalSick, animalGenus: getAnimalGenus, animalOwnerNot: getAnimalOwnerNote, animalImageDetails: getAnimalImageDetails)
+                                                if let getAnimalSickInfo = snapshot?.get("animalSickInfo") as? String {
+                                                    let animalAdvertDetails = AnimalAdvertDetails(animalUid: uuid, animalName: getAnimalName, animalKinds: getAnimalKinds, animalAge: getAnimalAge, animalSick: getAnimalSick, animalGenus: getAnimalGenus, animalOwnerNot: getAnimalOwnerNote, animalImageDetails: getAnimalImageDetails, animalSickInfo: getAnimalSickInfo)
+                                                    
+                                                    
+                                                    completion(animalAdvertDetails)
+                                                    
+                                                }
                                                 
-                                                
-                                                completion(animalAdvertDetails)
+                                               
                                                 
                                             }
                                             
@@ -138,20 +161,21 @@ class Service {
     
     
     
-    func addAdvertToFirebase(uuid:String){
+    func addAdvertToFirebase(uuid:String,advert:AddAdvert){
         
         let db = Firestore.firestore()
         let advertId = UUID()
         
         
         let docData : [String:Any] = [
-            "animalGenus" : "genusDemo",
-            "animalImage" : "animalImageDemo",
-            "animalImageDetails" : ["oneImageDemo","secondImageDemo","thirdImageDemo"],
-            "animalKinds" : "kindsDemo",
-            "animalName"  : "animalNameDemo",
-            "animalOwnerNot" : "animalOwnerNotDemo",
-            "animalSick"   :  "animalSickDemo"
+            "animalGenus" : advert.animalGenus!,
+            "animalAge"   :  advert.animalAge!,
+            "animalImage" : advert.animalImage!,
+            "animalImageDetails" : advert.animalImageDetails!,
+            "animalKinds" : advert.animalKinds!,
+            "animalName"  : advert.animalName!,
+            "animalOwnerNot" : advert.animalOwnerNot!,
+            "animalSick"   :  advert.animalSick!
         
         
         
