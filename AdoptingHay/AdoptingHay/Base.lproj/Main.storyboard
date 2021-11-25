@@ -813,7 +813,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LOG-9K-Bok">
-                                <rect key="frame" x="0.0" y="140" width="414" height="532"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="584"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="sug-A5-eIq">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="999"/>
@@ -908,7 +908,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                                 <state key="normal" title="İlanı Ekle"/>
                                                 <connections>
-                                                    <action selector="addAdvertButton:" destination="xcY-Pj-MUm" eventType="touchUpInside" id="QVk-eJ-UFB"/>
+                                                    <action selector="addAdvert:" destination="xcY-Pj-MUm" eventType="touchUpInside" id="HtK-kg-BzM"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -978,14 +978,6 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="İlan Ekleme" id="DzU-eJ-Vai"/>
-                    <connections>
-                        <outlet property="addAdvertAgeTextField" destination="TDg-st-4CQ" id="ToV-j4-Zbo"/>
-                        <outlet property="addAdvertDescTextView" destination="r8F-TJ-75y" id="lgJ-OL-EIO"/>
-                        <outlet property="addAdvertImageView" destination="k4r-Vk-cog" id="3W8-rA-sf2"/>
-                        <outlet property="addAdvertKindsTextField" destination="Cqi-MZ-hVN" id="H0q-rM-eBY"/>
-                        <outlet property="addAdvertNameTextField" destination="4wc-nh-Scq" id="Osu-yO-jOG"/>
-                        <outlet property="addAdvertSickTextField" destination="bRf-iY-C2I" id="7Rw-A6-BYS"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SEp-MP-0eD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

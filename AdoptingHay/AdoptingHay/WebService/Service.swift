@@ -101,10 +101,20 @@ class Service {
                                     if let getAnimalSick = snapshot?.get("animalSick") as? String {
                                         if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
                                             
-                                            let animalAdvertDetails = AnimalAdvertDetails(animalUid: uuid, animalName: getAnimalName, animalKinds: getAnimalKinds, animalAge: getAnimalAge, animalSick: getAnimalSick, animalGenus: getAnimalGenus, animalOwnerNot: getAnimalOwnerNote)
+                                            if let getAnimalImageDetails = snapshot?.get("animalImageDetails") as? [String] {
+                                                
+                                                print("Resim string \(getAnimalImageDetails)")
+                                                
+                                                
+                                                let animalAdvertDetails = AnimalAdvertDetails(animalUid: uuid, animalName: getAnimalName, animalKinds: getAnimalKinds, animalAge: getAnimalAge, animalSick: getAnimalSick, animalGenus: getAnimalGenus, animalOwnerNot: getAnimalOwnerNote, animalImageDetails: getAnimalImageDetails)
+                                                
+                                                
+                                                completion(animalAdvertDetails)
+                                                
+                                            }
                                             
                                             
-                                            completion(animalAdvertDetails)
+                                         
                                             
                                             
                                             

@@ -31,12 +31,14 @@ class AnimalAdvertDetailsVC: UIViewController {
     @IBOutlet weak var mesajText: UITextField!
     
     
-    var animalImages:[String] = [String]()
+    var animalImages:[Data] = [Data]()
     var autoMesaj:[String] = [String]()
     var getAnimalAdvertUid:String?
     
 
-    private var animalAdvertViewModel : AnimalAdvertDetailsViewModel!
+    private var animalAdvertDetailsViewModel : AnimalAdvertDetailsViewModel!
+    
+   
     override func viewDidLoad() {
         super.viewDidLoad()
       //  getAnimalAdvertDetailNot()
@@ -52,7 +54,7 @@ class AnimalAdvertDetailsVC: UIViewController {
         animalDetailsImagesCollectionView.showsHorizontalScrollIndicator = false
         animalAdvertDetailMesajCollectionView.showsHorizontalScrollIndicator = false
         
-        animalImages = ["pamukkopek","tarcinkedi","sarikus"]
+       // animalImages = ["pamukkopek","tarcinkedi","sarikus"]
         autoMesaj = ["Merhaba","İlan Akifmi","Hastalığı önemlimi","Sahiplencem"]
         
         
@@ -84,12 +86,47 @@ class AnimalAdvertDetailsVC: UIViewController {
         Service().filterAnimalAdvertDetails(uuid: getAnimalAdvertUid!) { animalAD in
             
             if let animalAD = animalAD {
-                self.animalAdvertViewModel = AnimalAdvertDetailsViewModel(animalAdvertDetails: animalAD)
-                self.animalName.text = "Adı : \(self.animalAdvertViewModel.name)"
-                self.animalAge.text = "Yaş : \(String(self.animalAdvertViewModel.age))"
-                self.animalSick.text = "Hastalık : \(self.animalAdvertViewModel.sick)"
-                self.animalOwnerNote.text = self.animalAdvertViewModel.ownerNot
-                self.animalGenus.text = "Cinsi : \(self.animalAdvertViewModel.genus)/ \(self.animalAdvertViewModel.kinds)"
+                self.animalAdvertDetailsViewModel = AnimalAdvertDetailsViewModel(animalAdvertDetails: animalAD)
+                self.animalName.text = "Adı : \(self.animalAdvertDetailsViewModel.name)"
+                self.animalAge.text = "Yaş : \(String(self.animalAdvertDetailsViewModel.age))"
+                self.animalSick.text = "Hastalık : \(self.animalAdvertDetailsViewModel.sick)"
+                self.animalOwnerNote.text = self.animalAdvertDetailsViewModel.ownerNot
+                self.animalGenus.text = "Cinsi : \(self.animalAdvertDetailsViewModel.genus)/ \(self.animalAdvertDetailsViewModel.kinds)"
+                
+                
+        
+                
+                
+        
+                
+              
+                
+                
+                for  a in self.animalAdvertDetailsViewModel.animalImageDetails {
+                    print("VciamgeDetails \(a)")
+                    let imageUrl = URL(string: "\(a)")!
+                    if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                        
+                        print("kalae \(animalImageData)")
+                        
+                        self.animalImages.append(animalImageData)
+                        
+                        
+                        
+                    }
+                    
+                    self.animalDetailsImagesCollectionView.reloadData()
+                    
+                }
+                
+                print("data kısmı \(self.animalImages)")
+                
+              
+               
+               
+                
+                
+                
                 
                 
             }
@@ -124,8 +161,14 @@ extension AnimalAdvertDetailsVC: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.animalDetailsImagesCollectionView {
-            return animalImages.count
+            return   animalImages.count
+
         }
+        
+        print("Sayi2 \(animalImages.count)")
+        
+        
+        
         
         
         return autoMesaj.count
@@ -137,7 +180,14 @@ extension AnimalAdvertDetailsVC: UICollectionViewDelegate, UICollectionViewDataS
         
         if collectionView == self.animalDetailsImagesCollectionView {
             let cell = animalDetailsImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "animalDetailsImageCell", for: indexPath) as! AnimalAdvertDetailsImageCVC
-        cell.animalmageDetails.image = UIImage(named: animalImages[indexPath.row])
+           
+            
+            cell.animalmageDetails.image = UIImage(data: animalImages[indexPath.row])
+            
+            print("cell kısmı13 \(animalImages.count) ")
+            
+        
+        
         
         cell.layer.cornerRadius = 25
  

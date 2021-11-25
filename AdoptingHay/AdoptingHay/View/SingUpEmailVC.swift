@@ -44,7 +44,10 @@ class SingUpEmailVC: UIViewController {
                 }}}
             
         }
-        
+    
+    
+    
+   
         
       
     

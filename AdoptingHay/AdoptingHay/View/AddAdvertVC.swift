@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class AddAdvertVC: UIViewController {
 
     @IBOutlet weak var addAdvertImageView: UIImageView!
@@ -28,8 +28,29 @@ class AddAdvertVC: UIViewController {
     }
     
 
-    @IBAction func addAdvertButton(_ sender: Any) {
+    
+    @IBAction func addAdvert(_ sender: Any) {
+        
+        let userId = Auth.auth().currentUser?.uid
+        if let userId = userId {
+            
+            
+        }
+        
+        
+       
     }
+    
+    
+    
+    
+    /*func userIdAddFirebase() {
+        
+        let db = Firestore.firestore()
+        let advertId = UUID()
+        db.collection("userList").document(userId).collection("advertList").document("\(advertId)")
+        
+    }*/
     
     
 

@@ -20,10 +20,11 @@ class AnimalAdvertDetails  {
     var animalSick:String?
     var animalGenus:String?
     var animalOwnerNot: String?
+    var animalImageDetails: [String]?
     
 
 
-    init(animalUid:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String){
+    init(animalUid:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String]){
         self.animalUid = animalUid
  
         self.animalName = animalName
@@ -32,6 +33,7 @@ class AnimalAdvertDetails  {
         self.animalAge = animalAge
         self.animalGenus = animalGenus
         self.animalOwnerNot = animalOwnerNot
+        self.animalImageDetails = animalImageDetails
         
     }
 

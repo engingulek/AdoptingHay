@@ -7,10 +7,29 @@
 
 import Foundation
 
+
+
+
+
+
+
+
 struct AnimalAdvertDetailsViewModel {
     
     
     let animalAdvertDetails : AnimalAdvertDetails
+    
+    
+    
+    func animalImageDetailsCount () -> Int {
+        if let count = self.animalAdvertDetails.animalImageDetails?.count {
+            print("deea \(count)")
+            
+        }
+        
+       
+        return 3
+    }
     
     
     var uuid : String {
@@ -44,4 +63,22 @@ struct AnimalAdvertDetailsViewModel {
         return self.animalAdvertDetails.animalSick!
     }
     
+    var animalImageDetails : [String] {
+       
+        
+        return self.animalAdvertDetails.animalImageDetails!
+        
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
