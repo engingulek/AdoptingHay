@@ -62,7 +62,7 @@ class Service {
              if let animalImageData = try?  Data(contentsOf: imageUrl) {
                                 
                if let animalName = document.get("animalName") as? String {
-                                    if let animalAge = document.get("animalAge") as? Int {
+                                    if let animalAge = document.get("animalAge") as? String {
               if let animalGenus = document.get("animalGenus") as? String {
                                             if let animalSick = document.get("animalSick") as? String {
                      if let animalKinds = document.get("animalKinds") as? String {
@@ -124,7 +124,7 @@ class Service {
                         if let getAnimalGenus = snapshot?.get("animalGenus") as? String {
                             
                             if let getAnimalKinds = snapshot?.get("animalKinds") as? String {
-                                if let getAnimalAge = snapshot?.get("animalAge") as? Int {
+                                if let getAnimalAge = snapshot?.get("animalAge") as? String {
                                     if let getAnimalSick = snapshot?.get("animalSick") as? String {
                                         if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
                                             
@@ -195,7 +195,7 @@ class Service {
         
         ]
         
-        db.collection("advertList").document("\(uuid)").setData(docData) {
+        db.collection("animalAdvert").document("\(advertId)").setData(docData) {
             err in
             if  err != nil {
                 print("Ekleme Hata var  \(err?.localizedDescription)")

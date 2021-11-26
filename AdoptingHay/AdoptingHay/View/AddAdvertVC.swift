@@ -45,8 +45,13 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var addSickInfo: UITextView!
     
     @IBOutlet weak var addOwnerNote: UITextView!
+    var imageDetaild:[String] = [String]()
     let source = ["iPhone", "iPad", "Mac", "Apple Watch", "Apple TV", "iPod"]
     @IBOutlet weak var sickBool: UILabel!
+    let imagepicker = UIImagePickerController()
+    let imagepickerOne = UIImagePickerController()
+    let imagepickerTwo = UIImagePickerController()
+    let imagepickerThird = UIImagePickerController()
     
     private var animalKindsListViewModel : AnimalKindsListViewModel!
     
@@ -71,15 +76,83 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         addImageAdvert.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseAddAdvertImage))
         addImageAdvert.addGestureRecognizer(gestureRecognizer)
+        
+        
+        
+        
+        addAdvertImageOne.isUserInteractionEnabled = true
+        let gestureRecognizerImageOne = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageOne))
+        addAdvertImageOne.addGestureRecognizer(gestureRecognizerImageOne)
+        
+        
+        
+        addAdvertImageTwo.isUserInteractionEnabled = true
+        let gestureRecognizerImageTwo = UITapGestureRecognizer(target: self, action: #selector( chooseaddAdvertImageTwo))
+        addAdvertImageTwo.addGestureRecognizer(gestureRecognizerImageTwo)
+        
+        
+        
+        
+        addAdvrtImageThird.isUserInteractionEnabled = true
+        let gestureRecognizerImageThird = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageThird))
+        addAdvrtImageThird.addGestureRecognizer(gestureRecognizerImageThird)
+        
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
    
     }
     
+    
+    @objc func chooseaddAdvertImageOne() {
+        
+        
+       
+        imagepickerOne.delegate = self
+        imagepickerOne.sourceType = .photoLibrary
+        self.present(imagepickerOne, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    @objc func chooseaddAdvertImageTwo() {
+        
+        
+       
+        imagepickerTwo.delegate = self
+        imagepickerTwo.sourceType = .photoLibrary
+        self.present(imagepickerTwo, animated: true, completion: nil)
+        
+    }
+    
+    
+    @objc func chooseaddAdvertImageThird() {
+        
+        
+       
+        imagepickerThird.delegate = self
+        imagepickerThird.sourceType = .photoLibrary
+        self.present(imagepickerThird, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+   
     
     
     @objc func chooseAddAdvertImage() {
         
         
-        let imagepicker = UIImagePickerController()
+       
         imagepicker.delegate = self
         imagepicker.sourceType = .photoLibrary
         self.present(imagepicker, animated: true, completion: nil)
@@ -88,7 +161,32 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        addImageAdvert.image = info[.originalImage] as? UIImage
+        
+        if picker == self.imagepicker {
+            addImageAdvert.image = info[.originalImage] as? UIImage
+            
+        }
+        if picker == self.imagepickerOne {
+            addAdvertImageOne.image = info[.originalImage] as? UIImage
+            
+        }
+        
+        if picker == self.imagepickerTwo {
+            addAdvertImageTwo.image = info[.originalImage] as? UIImage
+            
+        }
+        
+        
+        if picker == self.imagepickerThird {
+            addAdvrtImageThird.image = info[.originalImage] as? UIImage
+            
+        }
+        
+        
+      
+    
+       
+     
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -152,10 +250,67 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                             if let AanimalOwnerNot = addOwnerNote.text {
                                 
                                 if let AanimalAge = addAge.text {
-                                    let imageDetails = ["a","b","c"]
                                     
                                     
-                               
+                                    
+                  
+                                   if let imageOneData = addAdvertImageOne.image?.jpegData(compressionQuality: 0.5)
+                                    {
+                                       let imageOneDataUuid = UUID().uuidString
+                                       let imageOneReferance = medinaFolder.child("\(imageOneDataUuid).jpeg")
+                                       imageOneReferance.putData(imageOneData, metadata: nil) { metaData, error in
+                                           if error == nil {
+                                               imageOneReferance.downloadURL { url, error in
+                                                   let imageOneUrl = url?.absoluteString
+                                                   self.imageDetaild.append(imageOneUrl!)
+                                                   
+                                               }
+                                               
+                                           }
+                                       }
+                                   }
+                                
+                                    
+                                    
+                                    
+                                    if let imageTwoData = self.addAdvertImageTwo.image?.jpegData(compressionQuality: 0.5)
+                                     {
+                                        let imageTwoDataUuid = UUID().uuidString
+                                        let imageTwoReferance = medinaFolder.child("\(imageTwoDataUuid).jpeg")
+                                        imageTwoReferance.putData(imageTwoData, metadata: nil) { metaData, error in
+                                            if error == nil {
+                                                imageTwoReferance.downloadURL { url, error in
+                                                    let imageTwoUrl = url?.absoluteString
+                                                    self.imageDetaild.append(imageTwoUrl!)
+                                              
+                                                }
+                                                
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                    
+                                    if let imageThirdData = self.addAdvrtImageThird.image?.jpegData(compressionQuality: 0.5)
+                                     {
+                                        let imageThirdDataUuid = UUID().uuidString
+                                        let imageThirdReferance = medinaFolder.child("\(imageThirdDataUuid).jpeg")
+                                        imageThirdReferance.putData(imageThirdData, metadata: nil) { metaData, error in
+                                            if error == nil {
+                                                imageThirdReferance.downloadURL { url, error in
+                                                    let imageThirdUrl = url?.absoluteString
+                                          
+                                                    self.imageDetaild.append(imageThirdUrl!)
+                                                    
+                                                }
+                                                
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                    
                                     
                                     
                                     
@@ -175,7 +330,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                                                 imagaReferance.downloadURL { url, error  in
                                                     if error == nil {
                                                         let imageUrl = url?.absoluteString
-                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: "kindsPicker", animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addKindsLabel.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: imageDetails, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
+                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: self.addKindsLabel.text!, animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addKindsLabel.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: self.imageDetaild, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
                                                         Service().addAdvertToFirebase(uuid: userId, advert: animalAdvert)
                                                     }
                                                 }

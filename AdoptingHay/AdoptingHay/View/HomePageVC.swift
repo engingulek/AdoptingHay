@@ -50,14 +50,29 @@ class HomePageVC: UIViewController {
         animalAdvertCollectionView.delegate = self
         animalAdvertCollectionView.dataSource = self
 
+        // viewModel içirisine ihityacımız olan tüm listi vermiş olduk()
+        DispatchQueue.main.async {
+            self.getAnimalAdvertData()
+            
+        }
+        
+        
+        
  // viewModel içirisine ihityacımız olan tüm listi vermiş olduk
         getAnimalKindsData()
 
-        // viewModel içirisine ihityacımız olan tüm listi vermiş olduk()
-        getAnimalAdvertData()
+      
+        
+        
+        
+        self.animalAdvertCollectionView.reloadData()
 
     }
     
+    
+ /*   override func viewDidAppear(_ animated: Bool) {
+        <#code#>
+    }*/
     
     
     
@@ -74,9 +89,13 @@ class HomePageVC: UIViewController {
         Service().dowlandAnimalAdvertFromFirestore { (animalA) in
             if let animalA = animalA {
                 self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                print("Sayilasi \( self.animalAdvertListViewModel.animalAdvertList.count)")
                 self.animalAdvertCollectionView.reloadData()
+           
             }
+            
         }
+    
         
     }
     
