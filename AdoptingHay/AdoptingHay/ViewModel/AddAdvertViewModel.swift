@@ -16,6 +16,11 @@ struct AddAdvertViewModel {
         return self.addAdvert.uuid!
     }
     
+    
+    var userName : String {
+        return self.addAdvert.userName!
+    }
+    
     var name : String {
         return self.addAdvert.animalName!
     }
@@ -38,7 +43,7 @@ struct AddAdvertViewModel {
     }
     
     var sick : String {
-        return self.addAdvert.animalSick!
+        return self.addAdvert.animalSickInfo!
     }
     
     var animalImageDetails : [String] {
@@ -51,6 +56,7 @@ struct AddAdvertViewModel {
     var animalImage : String {
         return self.addAdvert.animalImage!
     }
+    
     
     
     

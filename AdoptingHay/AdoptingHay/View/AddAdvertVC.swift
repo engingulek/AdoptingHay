@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-class AddAdvertVC: UIViewController{
+class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     
 
@@ -20,6 +20,9 @@ class AddAdvertVC: UIViewController{
     
     
     @IBOutlet weak var addImageAdvert: UIImageView!
+    
+    
+    
     
     @IBOutlet weak var addKindsLabel: UILabel!
     
@@ -61,9 +64,33 @@ class AddAdvertVC: UIViewController{
         addSickInfo.isUserInteractionEnabled = false
         addSickInfo.text = ""
         sickBool.text = "Yok"
+        
+        
+        
+        
+        addImageAdvert.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseAddAdvertImage))
+        addImageAdvert.addGestureRecognizer(gestureRecognizer)
    
     }
     
+    
+    
+    @objc func chooseAddAdvertImage() {
+        
+        
+        let imagepicker = UIImagePickerController()
+        imagepicker.delegate = self
+        imagepicker.sourceType = .photoLibrary
+        self.present(imagepicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        addImageAdvert.image = info[.originalImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func valueChanged(_ sender: Any) {
         
@@ -80,47 +107,107 @@ class AddAdvertVC: UIViewController{
        
     }
     
+    
+    
+
 
  
     @IBAction func addAdvert(_ sender: Any) {
+        
+        
+        let storage = Storage.storage()
+        let storageReferance = storage.reference()
+        
+        let medinaFolder = storageReferance.child("media")
+        
+   
+        
+        
+        
+        
+        
+        
+        
+        
         let userId = Auth.auth().currentUser?.uid
-        if let userId = userId {
+        let userName = Auth.auth().currentUser?.displayName
+        if let userName = userName {
             
-            
-            if addName.text == "" ||   addOwnerNote.text == "" || addAge.text == "" || addGenus.text == "" || addKindsLabel.text == ""{
-                alertMessage(title: "Hata", text: "Boş Yerleri Doldurnuz")
+            if let userId = userId {
                 
                 
-            }
-            
-            else
-            {
+                if addName.text == "" ||   addOwnerNote.text == "" || addAge.text == "" || addGenus.text == "" || addKindsLabel.text == ""{
+                    alertMessage(title: "Hata", text: "Boş Yerleri Doldurnuz")
+                    
+                    
+                }
                 
-                if let AanimalName = addName.text {
-                    if let AanimalSick = addSickInfo.text {
-                     
-                        
-                        if let AanimalOwnerNot = addOwnerNote.text {
+                else
+                {
+                    
+                    if let AanimalName = addName.text {
+                        if let AanimalSick = addSickInfo.text {
+                         
                             
-                            if let AanimalAge = addAge.text {
-                                let imageDetails = ["a","b","c"]
+                            if let AanimalOwnerNot = addOwnerNote.text {
                                 
-                             
-                            
+                                if let AanimalAge = addAge.text {
+                                    let imageDetails = ["a","b","c"]
+                                    
+                                    
+                               
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    
+                                    if let data = addImageAdvert.image?.jpegData(compressionQuality: 0.5) {
+                                        let uuid = UUID().uuidString
+                                        let imagaReferance = medinaFolder.child("\(uuid).jpeg")
+                                        imagaReferance.putData(data, metadata: nil) { metaData, error in
+                                            if error != nil {
+                                                print("HATA \(error?.localizedDescription)")
+                                            }
+                                            else {
+                                                print("Resim stroge eklendi")
+                                                
+                                                imagaReferance.downloadURL { url, error  in
+                                                    if error == nil {
+                                                        let imageUrl = url?.absoluteString
+                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: "kindsPicker", animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addKindsLabel.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: imageDetails, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
+                                                        Service().addAdvertToFirebase(uuid: userId, advert: animalAdvert)
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    
+                                    
+                                    
+                                  
+                                    
+                                    
+                                    
+                                    
+                                 
                                 
-                                let animalAdvert = AddAdvert(uuid: userId, animalName: AanimalName, animalKinds: "kindsPicker", animalAge: AanimalAge, animalSick: AanimalSick, animalGenus: addKindsLabel.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: imageDetails, animalImage: "advertImage")
-                                Service().addAdvertToFirebase(uuid: userId, advert: animalAdvert)
-                                
+                                    
+                               
+                                    
+
+                                }
 
                             }
 
+                            
                         }
-
-                        
                     }
+                    
                 }
                 
             }
+            
             
         }
         

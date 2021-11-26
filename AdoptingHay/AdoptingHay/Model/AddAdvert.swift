@@ -9,27 +9,30 @@ import Foundation
 
 class AddAdvert {
     var uuid:String?
+    var userName:String?
     var animalName:String?
     var animalKinds:String?
     var animalAge:String?
-    var animalSick:String?
+    var animalSickInfo:String?
     var animalGenus:String?
     var animalOwnerNot: String?
     var animalImage : String?
     var animalImageDetails: [String]?
+    var animalSickBool:String
     
-    init(uuid:String,animalName:String,animalKinds:String,animalAge:String,animalSick:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String],animalImage:String){
+    init(userName:String,uuid:String,animalName:String,animalKinds:String,animalAge:String,animalSickInfo:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String],animalImage:String,animalSickBool:String){
        
         self.uuid = uuid
+        self.userName = userName
         self.animalName = animalName
         self.animalKinds = animalKinds
-        self.animalSick = animalSick
+        self.animalSickInfo = animalSickInfo
         self.animalAge = animalAge
         self.animalGenus = animalGenus
         self.animalOwnerNot = animalOwnerNot
         self.animalImageDetails = animalImageDetails
         self.animalImage = animalImage
-        
+        self.animalSickBool = animalSickBool
     }
 }
 

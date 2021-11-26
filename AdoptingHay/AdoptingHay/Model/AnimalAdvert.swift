@@ -18,10 +18,12 @@ class AnimalAdvert:Decodable  {
     var animalGenus:String?
     var animalOwnerNot: String?
     var animalSickInfo: String?
+    var userId : String?
+    var userName : String?
     
 
 
-    init(animalUid:String,animalImage:Data,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String){
+    init(userId:String,userName : String,animalUid:String,animalImage:Data,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String){
         self.animalUid = animalUid
         self.animalImage = animalImage
         self.animalName = animalName
@@ -30,7 +32,8 @@ class AnimalAdvert:Decodable  {
         self.animalAge = animalAge
         self.animalGenus = animalGenus
         self.animalOwnerNot = animalOwnerNot
-        
+        self.userId = userId
+        self.userName = userName
     }
 
     

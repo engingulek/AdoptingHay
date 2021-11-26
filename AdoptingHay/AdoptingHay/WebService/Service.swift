@@ -74,11 +74,20 @@ class Service {
                              
                              
                              if let animalSickInfo = document.get("animalSickInfo") as? String {
-                                 let animalAdvert = AnimalAdvert(animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
                                  
-                                 self.animalAdvertList.append(animalAdvert)
+                                 if let userName = document.get("userName") as? String {
+                                     if let userId = document.get("userId") as? String {
+                                         
+                                         let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
+                                         
+                                         self.animalAdvertList.append(animalAdvert)
+                                         
+                                         completion(self.animalAdvertList)
+                                         
+                                     }
+                                 }
                                  
-                                 completion(self.animalAdvertList)
+                               
                                  
                              }
                              
@@ -168,6 +177,10 @@ class Service {
         
         
         let docData : [String:Any] = [
+        
+            
+            "userId": uuid,
+            "userName" : advert.userName!,
             "animalGenus" : advert.animalGenus!,
             "animalAge"   :  advert.animalAge!,
             "animalImage" : advert.animalImage!,
@@ -175,11 +188,24 @@ class Service {
             "animalKinds" : advert.animalKinds!,
             "animalName"  : advert.animalName!,
             "animalOwnerNot" : advert.animalOwnerNot!,
-            "animalSick"   :  advert.animalSick!
+            "animalSickInfo"   :  advert.animalSickInfo!,
+            "animalSick" : advert.animalSickBool
         
         
         
         ]
+        
+        db.collection("advertList").document("\(uuid)").setData(docData) {
+            err in
+            if  err != nil {
+                print("Ekleme Hata var  \(err?.localizedDescription)")
+            }
+            
+            else {
+                print("Ekleme İşlemi başarılı advertList")
+            }
+            
+        }
         
         db.collection("userList").document("\(uuid)").collection("advertList").document("\(advertId)").setData(docData) {
             err in
@@ -188,7 +214,7 @@ class Service {
             }
             
             else {
-                print("Ekleme İşlemi başarılı")
+                print("Ekleme İşlemi başarılı user list")
             }
         }
         

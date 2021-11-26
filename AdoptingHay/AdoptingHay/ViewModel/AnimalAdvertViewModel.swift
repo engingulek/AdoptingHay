@@ -62,6 +62,14 @@ struct AnimalAdvertViewModel {
     var sick : String {
         return self.animalAdvert.animalSick!
     }
+    var userName : String {
+        return self.animalAdvert.userName!
+        
+    }
+    
+    var userId : String {
+        return self.animalAdvert.userId!
+    }
     
     
     
