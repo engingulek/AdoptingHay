@@ -13,7 +13,7 @@ class AnimalAdvert:Decodable  {
     var animalImage:Data?
     var animalName:String?
     var animalKinds:String?
-    var animalAge:String?
+    var animalAge:Int?
     var animalSick:String?
     var animalGenus:String?
     var animalOwnerNot: String?
@@ -23,7 +23,7 @@ class AnimalAdvert:Decodable  {
     
 
 
-    init(userId:String,userName : String,animalUid:String,animalImage:Data,animalName:String,animalKinds:String,animalAge:String,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String){
+    init(userId:String,userName : String,animalUid:String,animalImage:Data,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String){
         self.animalUid = animalUid
         self.animalImage = animalImage
         self.animalName = animalName

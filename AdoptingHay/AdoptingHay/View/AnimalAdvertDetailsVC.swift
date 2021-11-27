@@ -90,7 +90,7 @@ class AnimalAdvertDetailsVC: UIViewController {
             if let animalAD = animalAD {
                 self.animalAdvertDetailsViewModel = AnimalAdvertDetailsViewModel(animalAdvertDetails: animalAD)
                 self.animalName.text = "Adı : \(self.animalAdvertDetailsViewModel.name)"
-                self.animalAge.text = "Yaş : \(self.animalAdvertDetailsViewModel.age)"
+                self.animalAge.text = "Yaş : \( String(self.animalAdvertDetailsViewModel.age))"
                 self.animalSick.text = "Hastalık : \(self.animalAdvertDetailsViewModel.sick)"
                 self.animalOwnerNote.text = self.animalAdvertDetailsViewModel.ownerNot
                 self.animalGenus.text = "Cinsi : \(self.animalAdvertDetailsViewModel.genus)/ \(self.animalAdvertDetailsViewModel.kinds)"

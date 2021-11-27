@@ -83,13 +83,39 @@ class HomePageVC: UIViewController {
         
         
         let actionController = UIAlertController(title: "Sıralama ve Filtreleme", message: "Uygu işlemei seçinniz", preferredStyle: .actionSheet)
-        let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) { action in
-            self.maxToMinBool = true
-        
+        let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) {action in
+          
+          
+            
+            
+            
+            Service().dowlandAnimalAdvertMaxtoMinFromFirestore{ (animalA) in
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
+                    self.animalAdvertCollectionView.reloadData()
+               
+                }
+                
+            }
         }
         
         let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
-            print("Küçükten büyüğe")
+            
+           
+            Service().dowlandAnimalAdvertMintoMaxFromFirestore{ (animalA) in
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
+                    self.animalAdvertCollectionView.reloadData()
+               
+                }
+                
+            }
+            
+            
+            
+            
         }
         
         
@@ -201,7 +227,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"
             cell.animalAdvertKindsLabel.text = "Cins: \(advertViewModel.kinds)"
-            cell.animalAdvertAgeLabel.text = "Yaş: \(advertViewModel.age)"
+            cell.animalAdvertAgeLabel.text = "Yaş: \(String(advertViewModel.age) )"
             cell.animalAdvertSickLabel.text = "Hastalık: \(advertViewModel.sick)"
            cell.layer.cornerRadius = 25
      

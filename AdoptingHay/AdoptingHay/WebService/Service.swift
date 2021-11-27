@@ -63,14 +63,11 @@ class Service {
              if let animalImageData = try?  Data(contentsOf: imageUrl) {
                                 
                if let animalName = document.get("animalName") as? String {
-                                    if let animalAge = document.get("animalAge") as? String {
+                                    if let animalAge = document.get("animalAge") as? Int {
               if let animalGenus = document.get("animalGenus") as? String {
                                             if let animalSick = document.get("animalSick") as? String {
                      if let animalKinds = document.get("animalKinds") as? String {
-                         
-                         
-                         
-                         
+
                          if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
                              
                              
@@ -115,7 +112,7 @@ class Service {
                         if let getAnimalGenus = snapshot?.get("animalGenus") as? String {
                             
                             if let getAnimalKinds = snapshot?.get("animalKinds") as? String {
-                                if let getAnimalAge = snapshot?.get("animalAge") as? String {
+                                if let getAnimalAge = snapshot?.get("animalAge") as? Int {
                                     if let getAnimalSick = snapshot?.get("animalSick") as? String {
                                         if let getAnimalOwnerNote = snapshot?.get("animalOwnerNot") as? String {
                                             
@@ -212,6 +209,10 @@ class Service {
     }
     
     
+   
+    
+   
+    
     
     
     
@@ -236,14 +237,11 @@ class Service {
              if let animalImageData = try?  Data(contentsOf: imageUrl) {
                                 
                if let animalName = document.get("animalName") as? String {
-                                    if let animalAge = document.get("animalAge") as? String {
+                                    if let animalAge = document.get("animalAge") as? Int {
               if let animalGenus = document.get("animalGenus") as? String {
                                             if let animalSick = document.get("animalSick") as? String {
                      if let animalKinds = document.get("animalKinds") as? String {
-                         
-                         
-                         
-                         
+
                          if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
                              
                              
@@ -268,6 +266,12 @@ class Service {
                          completion (self.animalAdvertList)
                   }}}}   } }}}}
                 
+                
+                
+                
+                
+               
+                
             }
             
             
@@ -282,6 +286,128 @@ class Service {
         
     }
     
+    
+    
+    
+    
+    
+    func dowlandAnimalAdvertMaxtoMinFromFirestore (completion: @escaping ([AnimalAdvert]?)->()) {
+        
+        let db = Firestore.firestore()
+        animalAdvertList = [AnimalAdvert]()
+        
+        db.collection("animalAdvert").order(by: "animalAge", descending: true).getDocuments { snapshot, error in
+            
+            if error != nil {
+                print("Max to min error ")
+            }
+            
+            else {
+                for document in (snapshot?.documents)! {
+                                   if let animalAdvertUid = document.documentID as? String {
+                                       if let animalImage =  document.get("animalImage") as? String {
+                                           
+                                           let imageUrl = URL(string: "\(animalImage)")!
+                            if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                               
+                              if let animalName = document.get("animalName") as? String {
+                                                   if let animalAge = document.get("animalAge") as? Int {
+                             if let animalGenus = document.get("animalGenus") as? String {
+                                                           if let animalSick = document.get("animalSick") as? String {
+                                    if let animalKinds = document.get("animalKinds") as? String {
+                
+                                        if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                            
+                                            
+                                            if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                
+                                                if let userName = document.get("userName") as? String {
+                                                    if let userId = document.get("userId") as? String {
+                                                        
+                                                        let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
+                                                        
+                                                        self.animalAdvertList.append(animalAdvert)
+                                                        
+                                                        completion(self.animalAdvertList)
+                                                        
+                                                    }
+                                                }
+                
+                                            }
+                                            
+                                        }
+                      
+                                        completion (self.animalAdvertList)
+                                 }}}}   } }}}}
+
+
+                
+            }
+        
+        }
+        
+        
+    }
+    
+    
+    
+    func dowlandAnimalAdvertMintoMaxFromFirestore (completion: @escaping ([AnimalAdvert]?)->()) {
+        
+        let db = Firestore.firestore()
+        animalAdvertList = [AnimalAdvert]()
+        
+        db.collection("animalAdvert").order(by: "animalAge", descending: false).getDocuments { snapshot, error in
+            
+            if error != nil {
+                print("Max to min error ")
+            }
+            
+            else {
+                for document in (snapshot?.documents)! {
+                                   if let animalAdvertUid = document.documentID as? String {
+                                       if let animalImage =  document.get("animalImage") as? String {
+                                           
+                                           let imageUrl = URL(string: "\(animalImage)")!
+                            if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                               
+                              if let animalName = document.get("animalName") as? String {
+                                                   if let animalAge = document.get("animalAge") as? Int {
+                             if let animalGenus = document.get("animalGenus") as? String {
+                                                           if let animalSick = document.get("animalSick") as? String {
+                                    if let animalKinds = document.get("animalKinds") as? String {
+                
+                                        if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                            
+                                            
+                                            if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                
+                                                if let userName = document.get("userName") as? String {
+                                                    if let userId = document.get("userId") as? String {
+                                                        
+                                                        let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
+                                                        
+                                                        self.animalAdvertList.append(animalAdvert)
+                                                        
+                                                        completion(self.animalAdvertList)
+                                                        
+                                                    }
+                                                }
+                
+                                            }
+                                            
+                                        }
+                      
+                                        completion (self.animalAdvertList)
+                                 }}}}   } }}}}
+
+
+                
+            }
+        
+        }
+        
+        
+    }
     
     
     
