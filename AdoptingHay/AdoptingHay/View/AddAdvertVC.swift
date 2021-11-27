@@ -265,7 +265,12 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                                                    self.imageDetaild.append(imageOneUrl!)
                                                    
                                                }
+                                             
                                                
+                                           }
+                                           
+                                           else {
+                                               print("Resim hatası \(error?.localizedDescription)")
                                            }
                                        }
                                    }
@@ -330,7 +335,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                                                 imagaReferance.downloadURL { url, error  in
                                                     if error == nil {
                                                         let imageUrl = url?.absoluteString
-                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: self.addKindsLabel.text!, animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addKindsLabel.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: self.imageDetaild, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
+                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: self.addKindsLabel.text!, animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addGenus.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: self.imageDetaild, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
                                                         Service().addAdvertToFirebase(uuid: userId, advert: animalAdvert)
                                                     }
                                                 }

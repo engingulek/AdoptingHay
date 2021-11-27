@@ -16,7 +16,7 @@ class HomePageVC: UIViewController {
     @IBOutlet weak var animalKindsCollectionView: UICollectionView!
     
     @IBOutlet weak var animalAdvertCollectionView: UICollectionView!
-    
+    var maxToMinBool:Bool = false
 
     var animalKindsImage:[Data] = [Data]()
    // var animalKindsTitle:[String] = [String]()
@@ -51,28 +51,75 @@ class HomePageVC: UIViewController {
         animalAdvertCollectionView.dataSource = self
 
         // viewModel içirisine ihityacımız olan tüm listi vermiş olduk()
-        DispatchQueue.main.async {
-            self.getAnimalAdvertData()
+   
+
             
-        }
+        
         
         
         
  // viewModel içirisine ihityacımız olan tüm listi vermiş olduk
         getAnimalKindsData()
 
-      
         
-        
+      getAnimalAdvertData()
+       
+
         
         self.animalAdvertCollectionView.reloadData()
 
     }
+
+    
+   
+            
+            
+       
+       
     
     
- /*   override func viewDidAppear(_ animated: Bool) {
-        <#code#>
-    }*/
+    
+    @IBAction func advertFilterButton(_ sender: Any) {
+        
+        
+        let actionController = UIAlertController(title: "Sıralama ve Filtreleme", message: "Uygu işlemei seçinniz", preferredStyle: .actionSheet)
+        let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) { action in
+            self.maxToMinBool = true
+        
+        }
+        
+        let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
+            print("Küçükten büyüğe")
+        }
+        
+        
+        let sickBoll = UIAlertAction(title: "Hastalık yok", style: .default) { action in
+            
+            Service().dowlandAnimalAdvertSickBoolFromFirestore { (animalA) in
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
+                    self.animalAdvertCollectionView.reloadData()
+               
+                }
+                
+            }
+        }
+        
+        let cancel = UIAlertAction(title: "İptal", style: .cancel) { action in
+            print("İptal tıklandı")
+        }
+        
+        actionController.addAction(sickBoll)
+        actionController.addAction(cancel)
+        actionController.addAction(ageShortMaxtoMin)
+        actionController.addAction(ageShortMintoMax)
+        
+        
+        
+        self.present(actionController, animated: true, completion: nil)
+        
+    }
     
     
     
@@ -86,6 +133,10 @@ class HomePageVC: UIViewController {
     }
     
     func getAnimalAdvertData() {
+        
+        
+        
+        
         Service().dowlandAnimalAdvertFromFirestore { (animalA) in
             if let animalA = animalA {
                 self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
@@ -95,6 +146,7 @@ class HomePageVC: UIViewController {
             }
             
         }
+    
     
         
     }
@@ -149,7 +201,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"
             cell.animalAdvertKindsLabel.text = "Cins: \(advertViewModel.kinds)"
-            cell.animalAdvertAgeLabel.text = "Yaş: \(String(advertViewModel.age))"
+            cell.animalAdvertAgeLabel.text = "Yaş: \(advertViewModel.age)"
             cell.animalAdvertSickLabel.text = "Hastalık: \(advertViewModel.sick)"
            cell.layer.cornerRadius = 25
      

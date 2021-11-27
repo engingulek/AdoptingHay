@@ -258,6 +258,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tgi-Cg-0M3">
                                 <rect key="frame" x="351" y="303" width="47" height="30"/>
                                 <state key="normal" title="Filtrele"/>
+                                <connections>
+                                    <action selector="advertFilterButton:" destination="YGb-MB-cNs" eventType="touchUpInside" id="cg7-u7-3RH"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="g3e-QY-p9g">
                                 <rect key="frame" x="0.0" y="337" width="414" height="476"/>

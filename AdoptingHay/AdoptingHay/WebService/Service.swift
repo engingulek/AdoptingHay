@@ -54,6 +54,7 @@ class Service {
                 print(error?.localizedDescription ?? "Bir hata oluştu")
             }
             else {
+                
                 for document in (snapshot?.documents)! {
                     if let animalAdvertUid = document.documentID as? String {
                         if let animalImage =  document.get("animalImage") as? String {
@@ -86,24 +87,14 @@ class Service {
                                          
                                      }
                                  }
-                                 
-                               
-                                 
+
                              }
-                             
-                             
-                           
-                             
-                             
-                             
-                             
-                             
-                             
                              
                          }
        
                          completion (self.animalAdvertList)
-                  }}}}   } }}}} }
+                  }}}}   } }}}}
+                }
            
         }
     }
@@ -221,6 +212,75 @@ class Service {
     }
     
     
+    
+    
+    
+    
+    
+    func dowlandAnimalAdvertSickBoolFromFirestore(completion: @escaping ([AnimalAdvert]?)->()) {
+        
+        let db = Firestore.firestore()
+        animalAdvertList = [AnimalAdvert]()
+        
+        db.collection("animalAdvert").whereField("animalSick", isEqualTo:"Yok").getDocuments { snapshot, error in
+            if error != nil {
+                print("Hata var hastalık filtre")
+            }
+            else {
+                
+                for document in (snapshot?.documents)! {
+                    if let animalAdvertUid = document.documentID as? String {
+                        if let animalImage =  document.get("animalImage") as? String {
+                            
+                            let imageUrl = URL(string: "\(animalImage)")!
+             if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                
+               if let animalName = document.get("animalName") as? String {
+                                    if let animalAge = document.get("animalAge") as? String {
+              if let animalGenus = document.get("animalGenus") as? String {
+                                            if let animalSick = document.get("animalSick") as? String {
+                     if let animalKinds = document.get("animalKinds") as? String {
+                         
+                         
+                         
+                         
+                         if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                             
+                             
+                             if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                 
+                                 if let userName = document.get("userName") as? String {
+                                     if let userId = document.get("userId") as? String {
+                                         
+                                         let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
+                                         
+                                         self.animalAdvertList.append(animalAdvert)
+                                         
+                                         completion(self.animalAdvertList)
+                                         
+                                     }
+                                 }
+
+                             }
+                             
+                         }
+       
+                         completion (self.animalAdvertList)
+                  }}}}   } }}}}
+                
+            }
+            
+            
+            
+        }
+        
+        
+        
+        
+        
+        
+        
+    }
     
     
     
