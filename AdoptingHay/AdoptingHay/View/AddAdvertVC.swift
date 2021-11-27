@@ -59,9 +59,10 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         super.viewDidLoad()
         
       
-        
+       
         addAdvertKindsPicker.delegate = self
         addAdvertKindsPicker.dataSource = self
+        
         
         getAnimalKindsData()
         
@@ -108,6 +109,10 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         
    
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.clearObjects()
     }
     
     
@@ -337,6 +342,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
                                                         let imageUrl = url?.absoluteString
                                                         let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: self.addKindsLabel.text!, animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addGenus.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: self.imageDetaild, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
                                                         Service().addAdvertToFirebase(uuid: userId, advert: animalAdvert)
+                                                        self.tabBarController?.selectedIndex = 0
                                                     }
                                                 }
                                             }
@@ -372,6 +378,9 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         }
         
         
+      
+      
+        
         
         
     }
@@ -389,6 +398,36 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
     
+    
+    func clearObjects()
+    {
+        
+        addAdvertImageOne.image = UIImage(systemName: "plus")
+        addAdvertImageOne.backgroundColor = UIColor.systemBlue
+        
+        addAdvertImageTwo.image = UIImage(systemName: "plus")
+        addAdvertImageTwo.backgroundColor = UIColor.systemBlue
+        
+        
+        addAdvrtImageThird.image = UIImage(systemName: "plus")
+        addAdvrtImageThird.backgroundColor = UIColor.systemBlue
+        
+        
+        addImageAdvert.image = UIImage(systemName: "plus")
+        addImageAdvert.backgroundColor = UIColor.systemBlue
+        
+        
+        
+        addKindsLabel.text = ""
+        
+        addAge.text = ""
+    addName.text = ""
+        addGenus.text = ""
+        addKindsLabel.text = ""
+        
+        addSickInfo.text = ""
+        addOwnerNote.text = ""
+    }
     
     /*
      
@@ -443,15 +482,21 @@ extension AddAdvertVC :  UIPickerViewDelegate, UIPickerViewDataSource  {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return self.animalKindsListViewModel == nil ? 0 : 3
+        return self.animalKindsListViewModel == nil ? 0 : 5
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         
         let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(row)
         
+       
+        return kindsViewModel.name != "Hepsi" ? kindsViewModel.name :
+        "Diğer"
         
-        return kindsViewModel.name
+    
+            
+        
+        
        
         
 

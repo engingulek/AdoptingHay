@@ -264,6 +264,24 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             performSegue(withIdentifier: "homePageToAdvertDetails", sender: animalAdvertUid)
             
         }
+        
+        if collectionView == self.animalKindsCollectionView {
+            let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(indexPath.row)
+            let getAnimalKinds = kindsViewModel.name
+            
+            if getAnimalKinds == "Hepsi" {
+                self.getAnimalAdvertData()
+            }
+            
+            Service().dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds: getAnimalKinds) { animalA in
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    print("Sayilasi \( self.animalAdvertListViewModel.animalAdvertList.count)")
+                    self.animalAdvertCollectionView.reloadData()
+                }
+            }
+           
+        }
        
     }
     
