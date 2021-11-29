@@ -83,6 +83,10 @@ class HomePageVC: UIViewController {
         
         
         let actionController = UIAlertController(title: "Sıralama ve Filtreleme", message: "Uygu işlemei seçinniz", preferredStyle: .actionSheet)
+        
+        
+        
+        
         let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) {action in
           
           
@@ -124,7 +128,7 @@ class HomePageVC: UIViewController {
             Service().dowlandAnimalAdvertSickBoolFromFirestore { (animalA) in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                    print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
+                  
                     self.animalAdvertCollectionView.reloadData()
                
                 }
@@ -159,21 +163,10 @@ class HomePageVC: UIViewController {
     }
     
     func getAnimalAdvertData() {
-        
-        
-        
-        
         Service().dowlandAnimalAdvertFromFirestore { (animalA) in
             if let animalA = animalA {
                 self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                print("Sayilasi \( self.animalAdvertListViewModel.animalAdvertList.count)")
-                self.animalAdvertCollectionView.reloadData()
-           
-            }
-            
-        }
-    
-    
+                self.animalAdvertCollectionView.reloadData() }}
         
     }
     
@@ -193,11 +186,22 @@ class HomePageVC: UIViewController {
 }
 
 extension HomePageVC:UISearchBarDelegate {
-    
+
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-    }
-}
+
+        print("Arama \(searchText)")
+        
+        if searchText == "" {
+            getAnimalAdvertData()
+        }
+        else {
+            Service().dowlandAnimalAdvertSearchBarTextFromFirestore(getSeacrhBarText: searchText) { animalA in
+                
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    self.animalAdvertCollectionView.reloadData()
+            }
+        } } }}
 
 
 
@@ -268,21 +272,16 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == self.animalKindsCollectionView {
             let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(indexPath.row)
             let getAnimalKinds = kindsViewModel.name
-            
             if getAnimalKinds == "Hepsi" {
                 self.getAnimalAdvertData()
             }
-            
             Service().dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds: getAnimalKinds) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                    print("Sayilasi \( self.animalAdvertListViewModel.animalAdvertList.count)")
                     self.animalAdvertCollectionView.reloadData()
                 }
             }
-           
         }
-       
     }
     
     

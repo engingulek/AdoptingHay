@@ -8,7 +8,7 @@
 import Foundation
 
 
-class AnimalAdvert:Decodable  {
+class AnimalAdvert  {
     var animalUid:String?
     var animalImage:Data?
     var animalName:String?

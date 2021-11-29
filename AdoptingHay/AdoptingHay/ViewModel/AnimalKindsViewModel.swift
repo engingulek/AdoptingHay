@@ -9,22 +9,14 @@ import Foundation
 
 struct AnimalKindsListViewModel {
     let animalKindsList : [AnimalKinds]
-    
     func numberOfRowsInSection() -> Int {
         return self.animalKindsList.count
-        
     }
-    
-    
     func animalKindsAtIndex(_ index: Int) -> AnimalKindsViewModel {
         let kinds = self.animalKindsList[index]
         return AnimalKindsViewModel(animalKinds: kinds)
         
     }
-    
-    
-
-    
 }
 
 

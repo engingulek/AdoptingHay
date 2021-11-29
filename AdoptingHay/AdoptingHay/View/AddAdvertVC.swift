@@ -73,28 +73,30 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         
         
-        
+        // tıklanılma özelliğinin eklenmesi
         addImageAdvert.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseAddAdvertImage))
         addImageAdvert.addGestureRecognizer(gestureRecognizer)
         
         
-        
-        
+        // tıklanılma özelliğinin eklenmesi
         addAdvertImageOne.isUserInteractionEnabled = true
+        // tıklanınca çalışacak foknsiyon
         let gestureRecognizerImageOne = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageOne))
         addAdvertImageOne.addGestureRecognizer(gestureRecognizerImageOne)
         
         
-        
+        // tıklanılma özelliğinin eklenmesi
         addAdvertImageTwo.isUserInteractionEnabled = true
+        // tıklanınca çalışacak foknsiyon
         let gestureRecognizerImageTwo = UITapGestureRecognizer(target: self, action: #selector( chooseaddAdvertImageTwo))
+     
         addAdvertImageTwo.addGestureRecognizer(gestureRecognizerImageTwo)
         
         
-        
-        
+        // tıklanılma özelliğinin eklenmesi
         addAdvrtImageThird.isUserInteractionEnabled = true
+        // tıklanınca çalışacak foknsiyon
         let gestureRecognizerImageThird = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageThird))
         addAdvrtImageThird.addGestureRecognizer(gestureRecognizerImageThird)
         
@@ -117,9 +119,6 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
     
     @objc func chooseaddAdvertImageOne() {
-        
-        
-       
         imagepickerOne.delegate = self
         imagepickerOne.sourceType = .photoLibrary
         self.present(imagepickerOne, animated: true, completion: nil)
@@ -216,44 +215,19 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
 
  
     @IBAction func addAdvert(_ sender: Any) {
-        
-        
         let storage = Storage.storage()
         let storageReferance = storage.reference()
-        
         let medinaFolder = storageReferance.child("media")
-        
-   
-        
-        
-        
-        
-        
-        
-        
-        
         let userId = Auth.auth().currentUser?.uid
         let userName = Auth.auth().currentUser?.displayName
         if let userName = userName {
-            
             if let userId = userId {
-                
-                
                 if addName.text == "" ||   addOwnerNote.text == "" || addAge.text == "" || addGenus.text == "" || addKindsLabel.text == ""{
-                    alertMessage(title: "Hata", text: "Boş Yerleri Doldurnuz")
-                    
-                    
-                }
-                
-                else
-                {
-                    
-                    if let AanimalName = addName.text {
-                        if let AanimalSick = addSickInfo.text {
-                         
-                            
-                            if let AanimalOwnerNot = addOwnerNote.text {
-                                
+                    alertMessage(title: "Hata", text: "Boş Yerleri Doldurnuz")  }
+                else {
+ if let AanimalName = addName.text {
+if let AanimalSick = addSickInfo.text {
+ if let AanimalOwnerNot = addOwnerNote.text {
                                 if let AanimalAge = addAge.text {
                                     
                                     
