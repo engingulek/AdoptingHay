@@ -25,7 +25,7 @@ struct AddAdvertViewModel {
         return self.addAdvert.animalName!
     }
     
-    var age : String {
+    var age : Int {
         return self.addAdvert.animalAge!
     }
     

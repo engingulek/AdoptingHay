@@ -228,7 +228,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
  if let AanimalName = addName.text {
 if let AanimalSick = addSickInfo.text {
  if let AanimalOwnerNot = addOwnerNote.text {
-                                if let AanimalAge = addAge.text {
+                                if let AanimalAge = addAge.text   {
                                     
                                     
                                     
@@ -314,7 +314,7 @@ if let AanimalSick = addSickInfo.text {
                                                 imagaReferance.downloadURL { url, error  in
                                                     if error == nil {
                                                         let imageUrl = url?.absoluteString
-                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: self.addKindsLabel.text!, animalAge: AanimalAge, animalSickInfo: AanimalSick, animalGenus: self.addGenus.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: self.imageDetaild, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
+                                                        let animalAdvert = AddAdvert(userName: userName, uuid: userId, animalName: AanimalName, animalKinds: self.addKindsLabel.text!, animalAge: Int(AanimalAge)!, animalSickInfo: AanimalSick, animalGenus: self.addGenus.text!, animalOwnerNot: AanimalOwnerNot, animalImageDetails: self.imageDetaild, animalImage: imageUrl!, animalSickBool: self.sickBool.text!)
                                                         Service().addAdvertToFirebase(uuid: userId, advert: animalAdvert)
                                                         self.tabBarController?.selectedIndex = 0
                                                     }

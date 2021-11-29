@@ -22,6 +22,10 @@ struct AnimalAdvertListViewModel {
         let advert = self.animalAdvertList[index]
         return AnimalAdvertViewModel(animalAdvert: advert)
     }
+    
+    func allKinds () -> String {
+        return "Hepsi"
+    }
 }
 
 

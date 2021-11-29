@@ -71,7 +71,11 @@ class HomePageVC: UIViewController {
     }
 
     
-   
+    override func viewDidAppear(_ animated: Bool) {
+        getAnimalAdvertData()
+        self.animalAdvertCollectionView.reloadData()
+        
+    }
             
             
        
@@ -230,7 +234,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             cell.animalAdvertImage.image = UIImage(data: advertViewModel.image)
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"
-            cell.animalAdvertKindsLabel.text = "Cins: \(advertViewModel.kinds)"
+            cell.animalAdvertKindsLabel.text = "Cins: \(advertViewModel.kinds)/\(advertViewModel.genus)"
             cell.animalAdvertAgeLabel.text = "Yaş: \(String(advertViewModel.age) )"
             cell.animalAdvertSickLabel.text = "Hastalık: \(advertViewModel.sick)"
            cell.layer.cornerRadius = 25
@@ -262,7 +266,14 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         
         if collectionView == self.animalAdvertCollectionView {
             
-            let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
+        
+            
+            
+            
+            
+            
+            
+        let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
             
             let animalAdvertUid = advertViewModel.uuid
             performSegue(withIdentifier: "homePageToAdvertDetails", sender: animalAdvertUid)
@@ -276,12 +287,39 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 self.getAnimalAdvertData()
             }
             Service().dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds: getAnimalKinds) { animalA in
-                if let animalA = animalA {
-                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                    self.animalAdvertCollectionView.reloadData()
+                
+                if animalA == nil && getAnimalKinds != "Hepsi" {
+                    self.alertMessage(title: "Uyarı", message: "Şuanda bu türde ilan bulunmamaktadır.")
+                    
+                    
                 }
+                
+                else {
+                    if let animalA = animalA {
+                        
+                       
+                        self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                        self.animalAdvertCollectionView.reloadData()
+                    }
+                    
+                }
+                
+                
+               
+                
+                
+                
             }
         }
+    }
+    
+    
+    
+    func alertMessage (title:String,message:String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Kapat", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     
