@@ -23,7 +23,9 @@ class HomePageVC: UIViewController {
     var animalAdvertLists = [AnimalAdvert]()
     
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    @IBOutlet weak var spinnerKinds: UIActivityIndicatorView!
     private var animalKindsListViewModel : AnimalKindsListViewModel!
     private var animalAdvertListViewModel : AnimalAdvertListViewModel!
     
@@ -64,7 +66,9 @@ class HomePageVC: UIViewController {
         
       getAnimalAdvertData()
        
-
+        spinner.startAnimating()
+        spinnerKinds.startAnimating()
+       
         
         self.animalAdvertCollectionView.reloadData()
 
@@ -161,6 +165,11 @@ class HomePageVC: UIViewController {
         Service().dowlandAnimalKindsFromFirestore { (animalK) in
             if let animalK = animalK {
                 self.animalKindsListViewModel = AnimalKindsListViewModel(animalKindsList: animalK)
+               
+                if self.animalKindsListViewModel.animalKindsList.count > 0 {
+                    self.spinnerKinds.stopAnimating()
+                    self.spinnerKinds.isHidden = true
+                }
                 self.animalKindsCollectionView.reloadData()
             }
         }
@@ -170,7 +179,15 @@ class HomePageVC: UIViewController {
         Service().dowlandAnimalAdvertFromFirestore { (animalA) in
             if let animalA = animalA {
                 self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                self.animalAdvertCollectionView.reloadData() }}
+                if self.animalAdvertListViewModel.animalAdvertList.count > 0 {
+                    self.spinner.stopAnimating()
+                    self.spinner.isHidden = true
+                }
+                
+                self.animalAdvertCollectionView.reloadData()
+                
+                
+            }}
         
     }
     

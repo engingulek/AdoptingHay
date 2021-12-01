@@ -11,19 +11,16 @@ import Firebase
 class AccountVC: UIViewController{
  
   
-    @IBOutlet weak var tableView: UITableView!
+
     
 
-    let accountPageList = ["Hesap Bilgilerim","Favorilerim","Geçmiş Sahiplenme"]
     
-    let accountPageListImage = ["gearshape","suit.heart.fill","link"]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.delegate = self
-        tableView.dataSource = self
+
        
        
      
@@ -121,27 +118,5 @@ self.view.addSubview(myNameLabel)
 
 
 
-extension  AccountVC :  UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return accountPageList.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "accontCell", for: indexPath) as! AccountTVC
-        cell.label.text = accountPageList[indexPath.row]
-        cell.imageIcon.image = UIImage(systemName: "\(accountPageListImage[indexPath.row])")
-        cell.layer.cornerRadius = 15
-        
-    
-        return cell
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(accountPageList[indexPath.row])
-        performSegue(withIdentifier: "accountPagetoS", sender: nil)
-        self.tableView.isHidden = false
-    }
-    
-    
-}
 
 
