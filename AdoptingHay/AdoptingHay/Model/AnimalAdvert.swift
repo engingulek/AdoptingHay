@@ -35,7 +35,7 @@ class AnimalAdvert  {
         self.animalOwnerNot = animalOwnerNot
         self.userId = userId
         self.userName = userName
-
+        self.animalSickInfo = animalSickInfo
     }
 
     

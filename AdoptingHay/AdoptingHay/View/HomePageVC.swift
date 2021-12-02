@@ -302,19 +302,19 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         
         if collectionView == self.animalAdvertCollectionView {
             
-        
-            
-            
-            
-            
-            
-            
         let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
+          
             
-            let animalAdvertUid = advertViewModel.advertid
-            performSegue(withIdentifier: "homePageToAdvertDetails", sender: animalAdvertUid)
+          //  let animalAdvertUid = advertViewModel.advertid
+           performSegue(withIdentifier: "homePageToAdvertDetails", sender: advertViewModel.animalAdvert)
+            
             
         }
+        
+        
+        
+        
+        
         
         if collectionView == self.animalKindsCollectionView {
             let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(indexPath.row)
@@ -351,6 +351,19 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.identifier == "homePageToAdvertDetails" {
+             
+             if let getAnimalAdvert = sender as? AnimalAdvert {
+                 var toAnimalAdvertDetailVC = segue.destination as! AnimalAdvertDetailsVC
+                 toAnimalAdvertDetailVC.getAnimalAdvert = getAnimalAdvert
+             
+                
+             } }
+     }
+    
+    
+    
     func alertMessage (title:String,message:String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "Kapat", style: .cancel, handler: nil)
@@ -359,14 +372,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "homePageToAdvertDetails" {
-            
-            if let dataUid = sender as? String {
-                let toAnimalAdvertDetailVC = segue.destination as! AnimalAdvertDetailsVC
-                toAnimalAdvertDetailVC.getAnimalAdvertUid = dataUid
-            } }
-    }
+ 
     
 }
 

@@ -37,6 +37,8 @@ class AnimalAdvertDetailsVC: UIViewController {
     var getAnimalAdvertUid:String?
     var sicktoAlert:String?
     
+    var getAnimalAdvert : AnimalAdvert?
+    
 
     private var animalAdvertDetailsViewModel : AnimalAdvertDetailsViewModel!
     
@@ -46,8 +48,7 @@ class AnimalAdvertDetailsVC: UIViewController {
       //  getAnimalAdvertDetailNot()
         animalDetailsImagesCollectionView.delegate = self
         animalDetailsImagesCollectionView.dataSource = self
-      
-        
+     
         
         animalAdvertDetailMesajCollectionView.delegate = self
         animalAdvertDetailMesajCollectionView.dataSource = self
@@ -58,10 +59,10 @@ class AnimalAdvertDetailsVC: UIViewController {
         
        // animalImages = ["pamukkopek","tarcinkedi","sarikus"]
         autoMesaj = ["Merhaba","İlan Akifmi","Hastalığı önemlimi","Sahiplencem"]
-        
-        
+       
+      animalDetails()
       
-        getAnimalAdvertDetails()
+        //getAnimalAdvertDetails()
         
         
         // mesajcell
@@ -85,11 +86,51 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     
+    func animalDetails () {
+        if let getAnimalname = getAnimalAdvert?.animalName {
+            if let getAnimalGenus = getAnimalAdvert?.animalGenus {
+                if let getAnimalKinds = getAnimalAdvert?.animalKinds {
+                    if let getAnimalAge = getAnimalAdvert?.animalAge {
+                        if let getAnimakSickBool = getAnimalAdvert?.animalSick{
+                            if let getAnimalAdvertOwner = getAnimalAdvert?.animalOwnerNot {
+                                
+                               
+                                
+                                self.animalName.text = "Adı : \(getAnimalname)"
+                                self.animalGenus.text = "Cinsi : \(getAnimalKinds) / \(getAnimalGenus)  "
+                                self.animalAge.text = "Yaş : \(getAnimalAge)"
+                                self.animalSick.text = "Hastalık : \(getAnimakSickBool)"
+                                self.animalOwnerNote.text = "\(getAnimalAdvertOwner)"
+                                
+                                
+                                if getAnimakSickBool != "Yok" {
+                                    self.animalSickInfoButtonOutlet.isHidden = false
+                                    if let getAnimalSickInfo = getAnimalAdvert?.animalSickInfo {
+                                        self.sicktoAlert = getAnimalSickInfo
+                                    }
+                                    
+                                    
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+    
+       
+    }
     
     
     
     
-    func getAnimalAdvertDetails() {
+    
+    
+    
+   /* func getAnimalAdvertDetails() {
         Service().filterAnimalAdvertDetails(uuid: getAnimalAdvertUid!) { animalAD in
             
             if let animalAD = animalAD {
@@ -156,7 +197,7 @@ class AnimalAdvertDetailsVC: UIViewController {
             }
             
         }
-    }
+    }*/
     
     
 
@@ -176,6 +217,11 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     @IBAction func animalSickInfoButton(_ sender: Any) {
+        
+        if let sickInfo = getAnimalAdvert?.animalSickInfo {
+            self.sicktoAlert = sickInfo
+            
+        }
         
       
         let alertController = UIAlertController(title: "Hastalık" , message: sicktoAlert, preferredStyle: .actionSheet)
