@@ -79,6 +79,11 @@ class AnimalAdvertDetailsVC: UIViewController {
     }
     
     
+    @IBAction func addFavoriteButton(_ sender: Any) {
+        print("Favori Tıklandı")
+    }
+    
+    
     
     
     

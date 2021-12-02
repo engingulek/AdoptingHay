@@ -20,6 +20,7 @@ class AnimalAdvert  {
     var animalSickInfo: String?
     var userId : String?
     var userName : String?
+
     
 
 
@@ -34,6 +35,7 @@ class AnimalAdvert  {
         self.animalOwnerNot = animalOwnerNot
         self.userId = userId
         self.userName = userName
+
     }
 
     

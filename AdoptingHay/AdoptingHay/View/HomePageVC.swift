@@ -23,6 +23,8 @@ class HomePageVC: UIViewController {
     var animalAdvertLists = [AnimalAdvert]()
     
     
+    
+    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     @IBOutlet weak var spinnerKinds: UIActivityIndicatorView!
@@ -112,6 +114,8 @@ class HomePageVC: UIViewController {
             }
         }
         
+    
+        
         let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
             
            
@@ -150,6 +154,7 @@ class HomePageVC: UIViewController {
         
         actionController.addAction(sickBoll)
         actionController.addAction(cancel)
+        
         actionController.addAction(ageShortMaxtoMin)
         actionController.addAction(ageShortMintoMax)
         
@@ -249,14 +254,28 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
             
             cell.animalAdvertImage.image = UIImage(data: advertViewModel.image)
+            cell.advertId.text = "\(advertViewModel.advertid)"
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"
             cell.animalAdvertKindsLabel.text = "Cins: \(advertViewModel.kinds)/\(advertViewModel.genus)"
             cell.animalAdvertAgeLabel.text = "Yaş: \(String(advertViewModel.age) )"
             cell.animalAdvertSickLabel.text = "Hastalık: \(advertViewModel.sick)"
+            cell.advertUserName.text = "\(advertViewModel.userName)"
+            
+            cell.userId.text = "\(advertViewModel.userId)"
+          
+            
+            
+            cell.addFavoriteButton(advertViewModel)
+            
+           
+            
+            
            cell.layer.cornerRadius = 25
      
             cell.layer.borderWidth = 2
+            
+            cell.addFavoriteButton("ali")
          
             return cell
         }
@@ -292,7 +311,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             
         let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
             
-            let animalAdvertUid = advertViewModel.uuid
+            let animalAdvertUid = advertViewModel.advertid
             performSegue(withIdentifier: "homePageToAdvertDetails", sender: animalAdvertUid)
             
         }

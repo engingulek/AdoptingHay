@@ -13,5 +13,12 @@ class AnimalAdvertCVC: UICollectionViewCell {
     @IBOutlet weak var animalAdvertAgeLabel: UILabel!
     @IBOutlet weak var animalAdvertKindsLabel: UILabel!
     @IBOutlet weak var animalAdvertSickLabel: UILabel!
+    @IBOutlet weak var advertId: UILabel!
     
+    @IBOutlet weak var userId: UILabel!
+    @IBOutlet weak var addFavorite: UIButton!
+    @IBOutlet weak var advertUserName: UILabel!
+    @IBAction func addFavoriteButton(_ sender: Any) {
+      
+    }
 }
