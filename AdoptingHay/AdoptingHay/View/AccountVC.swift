@@ -11,7 +11,8 @@ import Firebase
 class AccountVC: UIViewController{
  
   
-
+    @IBOutlet weak var favoriteListButtonOutlet: UIButton!
+    
     
 
     
@@ -22,7 +23,8 @@ class AccountVC: UIViewController{
 
 
        
-       
+        favoriteListButtonOutlet.layer.cornerRadius = 10
+        
      
        /*
         print(Auth.auth().currentUser?.email)
@@ -42,6 +44,15 @@ class AccountVC: UIViewController{
    
     
     }
+
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+   
+ 
     
     func design() {
         // view Design
@@ -113,6 +124,10 @@ self.view.addSubview(myNameLabel)
      }
         
     }
+    
+    
+    
+    
     
 }
 

@@ -17,6 +17,7 @@ class Service {
     
     
     var myAnimalAdvertList = [MyAdvert]()
+    var favoriAdvertList = [FavoritList]()
 
     func dowlandAnimalKindsFromFirestore(completion: @escaping ([AnimalKinds]?)->()) {
         let db = Firestore.firestore()
@@ -693,6 +694,88 @@ class Service {
     
   
     
+    
+    
+    func dowloadFavoriteListAdvert(uuid:String, completion: @escaping ([FavoritList]?)->()) {
+        
+        let db = Firestore.firestore()
+        
+        db.collection("userList").document("\(uuid)").collection("favoriList").getDocuments { snapshot, error in
+            
+            if error != nil {
+                completion(nil)
+            }
+            
+            else {
+                
+               
+                    
+                    
+                    for document in (snapshot?.documents)! {
+                                       if let animalAdvertUid = document.documentID as? String {
+                                           
+                                                                                          
+                            
+                                                   
+                                  if let animalName = document.get("animalName") as? String {
+                              
+                                                       if let animalAge = document.get("animalAge") as? Int {
+                                 if let animalGenus = document.get("animalGenus") as? String {
+                                                               if let animalSick = document.get("animalSick") as? String {
+                                        if let animalKinds = document.get("animalKinds") as? String {
+                    
+                                            if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                                
+                                                
+                                                if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                    
+                                                    if let userName = document.get("userName") as? String {
+                                                        if let userId = document.get("userId") as? String {
+                                                            
+                                                            if let animalImageDetails = document.get("animalImageDetails") as? [String] {
+                                                                
+                                                                
+                                                            let favoriteAdvert = FavoritList(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: "", animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: animalImageDetails)
+                                                                
+                                                                self.favoriAdvertList.append(favoriteAdvert)
+                                                                completion(self.favoriAdvertList)
+                                                                
+                                                                
+                                                                
+                                                            }
+                                                            
+                                                         
+                                                            
+                                                           
+                                                            
+                                                        }
+                                                    }
+                    
+                                                }
+                                                
+                                            }
+                          
+                                  
+                                     }}}}   } }
+                  
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+            }
+            
+        }
+        
+    }
     
     
 

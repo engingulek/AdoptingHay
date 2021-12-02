@@ -39,6 +39,7 @@ class MyAdvertVC: UIViewController {
                 else {
                     if let myAnimal = myAnimal {
                         self.myAnimalAdvertListViewModel = MyAnimalAdvertListViewModel(myAdvertList: myAnimal)
+                        
                         let counst = self.myAnimalAdvertListViewModel == nil ? 0 : self.myAnimalAdvertListViewModel.numberOfRowsInSection()
                         self.myAdvertsCount.text = "İlan Sayısı : \(counst)"
                         self.myAdvertsCollectionView.reloadData()
