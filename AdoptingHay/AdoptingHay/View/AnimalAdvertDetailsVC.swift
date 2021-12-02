@@ -39,7 +39,8 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     var getAnimalAdvert : AnimalAdvert?
     
-
+    @IBOutlet weak var addFavorite: UIButton!
+    
     private var animalAdvertDetailsViewModel : AnimalAdvertDetailsViewModel!
     
    
@@ -81,7 +82,7 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     @IBAction func addFavoriteButton(_ sender: Any) {
-        print("Favori Tıklandı")
+        Service().addAdvertFavoriteToFirebase(advert: getAnimalAdvert!)
     }
     
     
@@ -112,6 +113,36 @@ class AnimalAdvertDetailsVC: UIViewController {
                                     
                                     
                                 }
+                                
+                                if let getAnimalImageDetails = getAnimalAdvert?.imageDetails {
+                                    for  a in getAnimalImageDetails {
+                                        print("VciamgeDetails \(a)")
+                                        let imageUrl = URL(string: "\(a)")!
+                                        if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                            
+                                            print("kalae \(animalImageData)")
+                                            
+                                            self.animalImages.append(animalImageData)
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                        self.animalDetailsImagesCollectionView.reloadData()
+                                        
+                                    }
+                                }
+                                
+                                if let userId = getAnimalAdvert?.userId {
+                                    if let authUserId = Auth.auth().currentUser?.uid {
+                                        if authUserId == userId {
+                                            addFavorite.isHidden = true
+                                        }
+                                    }
+                                    
+                                }
+                                
+                      
                             }
                         }
                     }
@@ -130,79 +161,7 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     
-   /* func getAnimalAdvertDetails() {
-        Service().filterAnimalAdvertDetails(uuid: getAnimalAdvertUid!) { animalAD in
-            
-            if let animalAD = animalAD {
-                self.animalAdvertDetailsViewModel = AnimalAdvertDetailsViewModel(animalAdvertDetails: animalAD)
-                self.animalName.text = "Adı : \(self.animalAdvertDetailsViewModel.name)"
-                self.animalAge.text = "Yaş : \( String(self.animalAdvertDetailsViewModel.age))"
-                self.animalSick.text = "Hastalık : \(self.animalAdvertDetailsViewModel.sick)"
-                self.animalOwnerNote.text = self.animalAdvertDetailsViewModel.ownerNot
-                self.animalGenus.text = "Cinsi : \(self.animalAdvertDetailsViewModel.genus)/ \(self.animalAdvertDetailsViewModel.kinds)"
-                
-                
-               print("daaa \(self.animalAdvertDetailsViewModel.sickInfo)")
-                
-               if  self.animalAdvertDetailsViewModel.sickInfo == "" {
-                   
-                   self.animalSickInfoButtonOutlet.isHidden = true
-                    
-                }
-                
-                else {
-                    
-                    self.sicktoAlert = self.animalAdvertDetailsViewModel.sickInfo
-                    
-                   
-                    
-                    self.animalSickInfoButtonOutlet.isHidden = false
-                    
-                }
-        
-                
-                
-        
-                
-              
-                
-                
-                for  a in self.animalAdvertDetailsViewModel.animalImageDetails {
-                    print("VciamgeDetails \(a)")
-                    let imageUrl = URL(string: "\(a)")!
-                    if let animalImageData = try?  Data(contentsOf: imageUrl) {
-                        
-                        print("kalae \(animalImageData)")
-                        
-                        self.animalImages.append(animalImageData)
-                        
-                        
-                        
-                    }
-                    
-                    self.animalDetailsImagesCollectionView.reloadData()
-                    
-                }
-                
-                print("data kısmı \(self.animalImages)")
-                
-              
-               
-               
-                
-                
-                
-                
-                
-            }
-            
-        }
-    }*/
-    
-    
-
-    
-
+  
     @IBAction func messageSend(_ sender: Any) {
         
         if mesajText.text == "" {

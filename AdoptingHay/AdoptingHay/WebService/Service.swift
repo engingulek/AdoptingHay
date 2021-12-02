@@ -70,11 +70,14 @@ class Service {
                                  if let userName = document.get("userName") as? String {
                                      if let userId = document.get("userId") as? String {
                                          
-                                         let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
-                                         
-                                         self.animalAdvertList.append(animalAdvert)
-                                         
-                                         completion(self.animalAdvertList)
+                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                             
+                                             self.animalAdvertList.append(animalAdvert)
+                                             
+                                             completion(self.animalAdvertList)
+                                             
+                                         }
                                          
                                      }
                                  }
@@ -196,6 +199,46 @@ class Service {
     }
     
     
+    func addAdvertFavoriteToFirebase(advert:AnimalAdvert){
+        let db = Firestore.firestore()
+       
+        let docData : [String:Any] = [
+            "userId": advert.userId!,
+            "userName" : advert.userName!,
+            "animalGenus" : advert.animalGenus!,
+            "animalAge"   :  advert.animalAge!,
+            "animalImage" : advert.animalImage!,
+            "animalImageDetails" : advert.imageDetails,
+            "animalKinds" : advert.animalKinds!,
+            "animalName"  : advert.animalName!,
+            "animalOwnerNot" : advert.animalOwnerNot!,
+            "animalSickInfo"   :  advert.animalSickInfo!,
+            "animalSick" : advert.animalSick!
+        ]
+        
+     
+        let userId = Auth.auth().currentUser?.uid
+        
+        if let userId = userId {
+            
+            db.collection("userList").document("\(userId)").collection("favoriList").document("\(advert.animalUid!)").setData(docData) {
+                err in
+                if  err != nil {
+                    print("Ekleme Hata var  \(err?.localizedDescription)")
+                }
+                
+                else {
+                    print("Ekleme İşlemi başarılı user list")
+                }
+            }
+            
+        }
+        
+     
+        
+    }
+    
+    
    
     
    
@@ -237,11 +280,14 @@ class Service {
                                  if let userName = document.get("userName") as? String {
                                      if let userId = document.get("userId") as? String {
                                          
-                                         let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
-                                         
-                                         self.animalAdvertList.append(animalAdvert)
-                                         
-                                         completion(self.animalAdvertList)
+                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                             
+                                             self.animalAdvertList.append(animalAdvert)
+                                             
+                                             completion(self.animalAdvertList)
+                                             
+                                         }
                                          
                                      }
                                  }
@@ -311,11 +357,14 @@ class Service {
                                                 if let userName = document.get("userName") as? String {
                                                     if let userId = document.get("userId") as? String {
                                                         
-                                                        let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
-                                                        
-                                                        self.animalAdvertList.append(animalAdvert)
-                                                        
-                                                        completion(self.animalAdvertList)
+                                                        if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                            
+                                                            self.animalAdvertList.append(animalAdvert)
+                                                            
+                                                            completion(self.animalAdvertList)
+                                                            
+                                                        }
                                                         
                                                     }
                                                 }
@@ -370,12 +419,14 @@ class Service {
                                                 
                                                 if let userName = document.get("userName") as? String {
                                                     if let userId = document.get("userId") as? String {
-                                                        
-                                                        let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
-                                                        
-                                                        self.animalAdvertList.append(animalAdvert)
-                                                        
-                                                        completion(self.animalAdvertList)
+                                                        if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                            
+                                                            self.animalAdvertList.append(animalAdvert)
+                                                            
+                                                            completion(self.animalAdvertList)
+                                                            
+                                                        }
                                                         
                                                     }
                                                 }
@@ -440,11 +491,14 @@ class Service {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
                                                             
-                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
-                                                            
-                                                            self.animalAdvertList.append(animalAdvert)
-                                                            
-                                                            completion(self.animalAdvertList)
+                                                            if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                                
+                                                                self.animalAdvertList.append(animalAdvert)
+                                                                
+                                                                completion(self.animalAdvertList)
+                                                                
+                                                            }
                                                             
                                                         }
                                                     }
@@ -498,15 +552,39 @@ class Service {
                                  if let userName = document.get("userName") as? String {
                                      if let userId = document.get("userId") as? String {
                                          
-                                         if  animalGenus.lowercased().contains(getSeacrhBarText.lowercased()) {
+                                         
+                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                             if  animalGenus.lowercased().contains(getSeacrhBarText.lowercased()) {
+                                                 
+                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                 
+                                                 self.animalAdvertList.append(animalAdvert)
+                                                 
+                                                 completion(self.animalAdvertList)
+                                                 
+                                               
+                                             }
                                              
-                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo)
                                              
-                                             self.animalAdvertList.append(animalAdvert)
                                              
-                                             completion(self.animalAdvertList)
+                                         
+                                             
+                                             
+                                             
                                              
                                          }
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                         
+                                       
                                          
                                          
                                      

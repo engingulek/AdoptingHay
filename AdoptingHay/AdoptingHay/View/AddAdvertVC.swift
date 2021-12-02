@@ -322,19 +322,7 @@ if let AanimalSick = addSickInfo.text {
                                             }
                                         }
                                     }
-                                    
-                                    
-                                    
-                                  
-                                    
-                                    
-                                    
-                                    
-                                 
-                                
-                                    
-                               
-                                    
+
 
                                 }
 

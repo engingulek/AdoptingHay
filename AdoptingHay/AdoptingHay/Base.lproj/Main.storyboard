@@ -671,6 +671,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="dx5-TN-GMS"/>
                     <connections>
+                        <outlet property="addFavorite" destination="Wn0-Tp-lNY" id="KML-1W-o55"/>
                         <outlet property="animalAdvertDetailMesajCollectionView" destination="gfQ-eM-ATi" id="QPV-bT-efz"/>
                         <outlet property="animalAge" destination="V3U-EU-oTz" id="AHC-ab-od8"/>
                         <outlet property="animalDetailsImagesCollectionView" destination="BHO-35-wnq" id="lAa-Ad-9TV"/>
