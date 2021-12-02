@@ -54,8 +54,7 @@ class Service {
                     if let animalAdvertUid = document.documentID as? String {
                         if let animalImage =  document.get("animalImage") as? String {
                             
-                            let imageUrl = URL(string: "\(animalImage)")!
-             if let animalImageData = try?  Data(contentsOf: imageUrl) {
+               
                                 
                if let animalName = document.get("animalName") as? String {
                                     if let animalAge = document.get("animalAge") as? Int {
@@ -72,7 +71,7 @@ class Service {
                                      if let userId = document.get("userId") as? String {
                                          
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
                                              
                                              self.animalAdvertList.append(animalAdvert)
                                              
@@ -88,7 +87,7 @@ class Service {
                          }
        
                          completion (self.animalAdvertList)
-                  }}}}   } }}}}
+                  }}}}   } }}}
                 }
            
         }
@@ -264,8 +263,7 @@ class Service {
                     if let animalAdvertUid = document.documentID as? String {
                         if let animalImage =  document.get("animalImage") as? String {
                             
-                            let imageUrl = URL(string: "\(animalImage)")!
-             if let animalImageData = try?  Data(contentsOf: imageUrl) {
+         
                                 
                if let animalName = document.get("animalName") as? String {
                                     if let animalAge = document.get("animalAge") as? Int {
@@ -282,7 +280,7 @@ class Service {
                                      if let userId = document.get("userId") as? String {
                                          
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
                                              
                                              self.animalAdvertList.append(animalAdvert)
                                              
@@ -298,7 +296,7 @@ class Service {
                          }
        
                          completion (self.animalAdvertList)
-                  }}}}   } }}}}
+                  }}}}   } }}}
                 
                 
                 
@@ -341,8 +339,7 @@ class Service {
                                    if let animalAdvertUid = document.documentID as? String {
                                        if let animalImage =  document.get("animalImage") as? String {
                                            
-                                           let imageUrl = URL(string: "\(animalImage)")!
-                            if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                   
                                                
                               if let animalName = document.get("animalName") as? String {
                                                    if let animalAge = document.get("animalAge") as? Int {
@@ -359,7 +356,7 @@ class Service {
                                                     if let userId = document.get("userId") as? String {
                                                         
                                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
                                                             
                                                             self.animalAdvertList.append(animalAdvert)
                                                             
@@ -375,7 +372,7 @@ class Service {
                                         }
                       
                                         completion (self.animalAdvertList)
-                                 }}}}   } }}}}
+                                 }}}}   } }}}
 
 
                 
@@ -404,8 +401,7 @@ class Service {
                                    if let animalAdvertUid = document.documentID as? String {
                                        if let animalImage =  document.get("animalImage") as? String {
                                            
-                                           let imageUrl = URL(string: "\(animalImage)")!
-                            if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                          
                                                
                               if let animalName = document.get("animalName") as? String {
                                                    if let animalAge = document.get("animalAge") as? Int {
@@ -421,7 +417,7 @@ class Service {
                                                 if let userName = document.get("userName") as? String {
                                                     if let userId = document.get("userId") as? String {
                                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
                                                             
                                                             self.animalAdvertList.append(animalAdvert)
                                                             
@@ -437,7 +433,7 @@ class Service {
                                         }
                       
                                         completion (self.animalAdvertList)
-                                 }}}}   } }}}}
+                                 }}}}   } }}}
 
 
                 
@@ -475,8 +471,7 @@ class Service {
                                        if let animalAdvertUid = document.documentID as? String {
                                            if let animalImage =  document.get("animalImage") as? String {
                                                
-                                               let imageUrl = URL(string: "\(animalImage)")!
-                                if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                     
                                                    
                                   if let animalName = document.get("animalName") as? String {
                                                        if let animalAge = document.get("animalAge") as? Int {
@@ -493,7 +488,7 @@ class Service {
                                                         if let userId = document.get("userId") as? String {
                                                             
                                                             if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
                                                                 
                                                                 self.animalAdvertList.append(animalAdvert)
                                                                 
@@ -509,7 +504,7 @@ class Service {
                                             }
                           
                                             completion (self.animalAdvertList)
-                                     }}}}   } }}}}
+                                     }}}}   } }}}
                 }
               
 
@@ -536,8 +531,7 @@ class Service {
                     if let animalAdvertUid = document.documentID as? String {
                         if let animalImage =  document.get("animalImage") as? String {
                             
-                            let imageUrl = URL(string: "\(animalImage)")!
-             if let animalImageData = try?  Data(contentsOf: imageUrl) {
+      
                                 
                if let animalName = document.get("animalName") as? String {
                                     if let animalAge = document.get("animalAge") as? Int {
@@ -557,7 +551,7 @@ class Service {
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
                                              if  animalGenus.lowercased().contains(getSeacrhBarText.lowercased()) {
                                                  
-                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImageData, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
                                                  
                                                  self.animalAdvertList.append(animalAdvert)
                                                  
@@ -598,7 +592,7 @@ class Service {
                          }
        
                          completion (self.animalAdvertList)
-                  }}}}   } }}}}
+                  }}}}   } }}}
                 }
            
         }
@@ -715,7 +709,7 @@ class Service {
                                        if let animalAdvertUid = document.documentID as? String {
                                            
                                                                                           
-                            
+                                           if let animalImage = document.get("animalImage") as? String{
                                                    
                                   if let animalName = document.get("animalName") as? String {
                               
@@ -735,7 +729,7 @@ class Service {
                                                             if let animalImageDetails = document.get("animalImageDetails") as? [String] {
                                                                 
                                                                 
-                                                            let favoriteAdvert = FavoritList(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: "", animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: animalImageDetails)
+                                                            let favoriteAdvert = FavoritList(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: animalImageDetails)
                                                                 
                                                                 self.favoriAdvertList.append(favoriteAdvert)
                                                                 completion(self.favoriAdvertList)
@@ -743,6 +737,7 @@ class Service {
                                                                 
                                                                 
                                                             }
+                                                        }
                                                             
                                                          
                                                             

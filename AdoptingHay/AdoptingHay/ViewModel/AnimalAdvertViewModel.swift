@@ -47,7 +47,7 @@ struct AnimalAdvertViewModel {
     }
     
     
-    var image:Data {
+    var image:String {
         return self.animalAdvert.animalImage!
     }
     

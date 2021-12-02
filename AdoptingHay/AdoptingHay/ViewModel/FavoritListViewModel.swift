@@ -22,9 +22,7 @@ struct FavoritListViewModel {
         return FavoritViewModel(favoritList: favorite)
     }
     
-    func allKinds () -> String {
-        return "Hepsi"
-    }
+
 }
 
 
@@ -64,6 +62,7 @@ struct FavoritViewModel {
     
     
     var image:String {
+        print("adsd \(self.favoritList.animalImage)")
         return self.favoritList.animalImage!
     }
     

@@ -10,7 +10,7 @@ import Foundation
 
 class AnimalAdvert  {
     var animalUid:String?
-    var animalImage:Data?
+    var animalImage:String?
     var animalName:String?
     var animalKinds:String?
     var animalAge:Int?
@@ -25,7 +25,7 @@ class AnimalAdvert  {
     
 
 
-    init(userId:String,userName : String,animalUid:String,animalImage:Data,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String,imageDetails:[String]){
+    init(userId:String,userName : String,animalUid:String,animalImage:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String,imageDetails:[String]){
         self.animalUid = animalUid
         self.animalImage = animalImage
         self.animalName = animalName

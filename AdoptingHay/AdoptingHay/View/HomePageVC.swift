@@ -253,7 +253,15 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             
             let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
             
-            cell.animalAdvertImage.image = UIImage(data: advertViewModel.image)
+            
+            let imageUrl = URL(string: "\(advertViewModel.image)")!
+            if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                cell.animalAdvertImage.image = UIImage(data: animalImageData)
+                
+                
+            }
+            
+//
             cell.advertId.text = "\(advertViewModel.advertid)"
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"

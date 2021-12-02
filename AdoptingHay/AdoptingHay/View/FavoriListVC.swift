@@ -76,7 +76,13 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
         
         let favoriAdvert = self.favoritListViewModel.animalAdvertAtIndex(indexPath.row)
     
-    
+        let imageUrl = URL(string: "\(favoriAdvert.image)")
+      
+       if let animalImageData = try?  Data(contentsOf: imageUrl!) {
+            
+            cell.imageView.image =  UIImage(data: animalImageData)
+            
+        }
    
         cell.animalName.text = "Adı : \(favoriAdvert.name)"
         cell.animalAge.text  = "Hastalık : \(favoriAdvert.age)"
@@ -89,6 +95,28 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
         cell.layer.borderColor = UIColor.red.cgColor
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == self.favoriteCollectionView  {
+            let favoriteViewModel = self.favoritListViewModel.animalAdvertAtIndex(indexPath.row)
+            
+            performSegue(withIdentifier: "favoriToDetails", sender: favoriteViewModel.favoritList)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         if segue.identifier == "favoriToDetails" {
+             
+        if let getAnimalAdvert = sender as? FavoritList {
+                 let toFavoriDetailVC = segue.destination as! FavoriDetailsVC
+            toFavoriDetailVC.getAdvert = getAnimalAdvert
+             
+                
+             } }
+     }
+    
+    
+    
     
     
 }
