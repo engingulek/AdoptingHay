@@ -24,14 +24,40 @@ class FavoriListVC: UIViewController {
         
         getFavoriList()
         spinner.startAnimating()
+        self.favoriteCollectionView.reloadData()
+        
+        
+       
+        
+        
+        
+
+        
+     
+
+        
+
+
         
         
 
         
     }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getFavoriList()
+        self.favoriteCollectionView.reloadData()
+    }
+    
+ 
+    
+
+    
+
     func getFavoriList() {
         let userId =  Auth.auth().currentUser?.uid
-        print("kollb")
+      
         if let userId = userId {
             Service().dowloadFavoriteListAdvert(uuid: userId) { myAnimal in
                 if myAnimal == nil {
@@ -41,25 +67,19 @@ class FavoriListVC: UIViewController {
                 else {
                     if let myAnimal = myAnimal {
                         self.favoritListViewModel = FavoritListViewModel(favoritList: myAnimal)
-                        let counst = self.favoritListViewModel == nil ? 0 : self.favoritListViewModel.numberOfRowsInSection()
+                        let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
                         
                         self.favoriCount.text = "Favori Sayısı : \(counst)"
                         self.favoriteCollectionView.reloadData()
                         self.spinner.stopAnimating()
                         self.spinner.isHidden = true
-                     
+                      
                         
                     }
                    
                 }
             }
-            
         }
-        
-       
-   
-       
-        
     }
     
     
@@ -83,6 +103,8 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
             cell.imageView.image =  UIImage(data: animalImageData)
             
         }
+        
+        
    
         cell.animalName.text = "Adı : \(favoriAdvert.name)"
         cell.animalAge.text  = "Hastalık : \(favoriAdvert.age)"

@@ -12,6 +12,7 @@ class MyAdvertVC: UIViewController {
     
     @IBOutlet weak var myAdvertsCount: UILabel!
     private var myAnimalAdvertListViewModel : MyAnimalAdvertListViewModel!
+    var resultCount : Int?
     
  
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -23,8 +24,18 @@ class MyAdvertVC: UIViewController {
         myAdvertsCollectionView.dataSource = self
         getMyAnimalAdvert()
         spinner.startAnimating()
+        
+       
+        
+       
     
     }
+    
+    
+
+     
+    
+    
     
     
     
@@ -41,7 +52,13 @@ class MyAdvertVC: UIViewController {
                         self.myAnimalAdvertListViewModel = MyAnimalAdvertListViewModel(myAdvertList: myAnimal)
                         
                         let counst = self.myAnimalAdvertListViewModel == nil ? 0 : self.myAnimalAdvertListViewModel.numberOfRowsInSection()
+                 
+                     
+                        
                         self.myAdvertsCount.text = "İlan Sayısı : \(counst)"
+                     
+                        
+                     
                         self.myAdvertsCollectionView.reloadData()
                         self.spinner.stopAnimating()
                         self.spinner.isHidden = true

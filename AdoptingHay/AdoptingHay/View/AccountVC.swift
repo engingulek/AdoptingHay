@@ -13,6 +13,12 @@ class AccountVC: UIViewController{
   
     @IBOutlet weak var favoriteListButtonOutlet: UIButton!
     
+    @IBOutlet weak var myAdvertListButtonOutlet: UIButton!
+    
+    private var favoritListViewModel : FavoritListViewModel!
+    private var myAnimalAdvertListViewModel: MyAnimalAdvertListViewModel!
+    var resultFavoriListCount:Int?
+    var resultMyAdvertCount:Int?
     
 
     
@@ -20,10 +26,13 @@ class AccountVC: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        getFavoriList()
+        getMyAnimalAdvert()
+      
 
        
         favoriteListButtonOutlet.layer.cornerRadius = 10
+        myAdvertListButtonOutlet.layer.cornerRadius = 10
         
      
        /*
@@ -44,11 +53,114 @@ class AccountVC: UIViewController{
    
     
     }
+    override func viewDidAppear(_ animated: Bool) {
+        getFavoriList()
+        getMyAnimalAdvert()
+    }
+    
+
 
     
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        
+     
+    }
+    
+    func getFavoriList() {
+        let userId =  Auth.auth().currentUser?.uid
+      
+        if let userId = userId {
+            Service().dowloadFavoriteListAdvert(uuid: userId) { myAnimal in
+                if myAnimal == nil {
+                    print("My advert list hata" )
+                }
+                
+                else {
+                    if let myAnimal = myAnimal {
+                        self.favoritListViewModel = FavoritListViewModel(favoritList: myAnimal)
+                        let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
+                        print("gaga \(counst)")
+                        self.resultFavoriListCount = counst
+                     
+                      
+                        
+                    }
+                   
+                }
+            }
+        }
+    }
+    
+    
+    
+    func getMyAnimalAdvert() {
+        let userId =  Auth.auth().currentUser?.uid
+        if let userId = userId {
+            Service().dowloadMyAnimalAdvert(uuid: userId) { myAnimal in
+                if myAnimal == nil {
+                    print("My advert list hata" )
+                }
+                
+                else {
+                    if let myAnimal = myAnimal {
+                        self.myAnimalAdvertListViewModel = MyAnimalAdvertListViewModel(myAdvertList: myAnimal)
+                        
+                        let counst = self.myAnimalAdvertListViewModel == nil ? 0 : self.myAnimalAdvertListViewModel.numberOfRowsInSection()
+                        self.resultMyAdvertCount = counst
+                 
+                     
+                        
+                      
+                     
+                        
+                     
+                      
+                        
+                    }
+                   
+                }
+            }
+            
+        }
+        
+       
+        
+       
+        
+    }
+    
+    
+    @IBAction func toFavoriListButton(_ sender: Any) {
+        if resultFavoriListCount == nil {
+            let alertController = UIAlertController(title: "UYARI" , message: "Favorli Listenizde İlan Bulunmamaktadır", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true, completion: nil)
+        }
+        
+        else {
+            performSegue(withIdentifier: "toDetailsFav", sender: nil)
+        }
+    }
+    
+    
+    
+    @IBAction func toMyAdvertList(_ sender: Any) {
+        if  resultMyAdvertCount == nil {
+            let alertController = UIAlertController(title: "UYARI" , message: "İlan  İlan Bulunmamaktadır", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
+            alertController.addAction(alertAction)
+            self.present(alertController, animated: true, completion: nil)
+            
+        }
+        
+        else {
+            performSegue(withIdentifier: "toMyAdvert", sender: nil)
+            
+        }
+        
     }
     
    

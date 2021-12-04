@@ -82,6 +82,8 @@ class HomePageVC: UIViewController {
         self.animalAdvertCollectionView.reloadData()
         
     }
+    
+  
             
             
        

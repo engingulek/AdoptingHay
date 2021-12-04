@@ -780,7 +780,7 @@
         <!--AccountVC-->
         <scene sceneID="fVE-Pf-ig4">
             <objects>
-                <viewController id="QTk-m3-Zvn" customClass="AccountVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountVCId" id="QTk-m3-Zvn" customClass="AccountVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hCx-Pj-gAE">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -797,7 +797,7 @@
                                     <color key="baseForegroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
                                 <connections>
-                                    <segue destination="J9T-zQ-cPB" kind="show" id="qlE-2L-tsy"/>
+                                    <action selector="toFavoriListButton:" destination="QTk-m3-Zvn" eventType="touchUpInside" id="PWp-l0-KBH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EQ-mm-1LX">
@@ -812,6 +812,21 @@
                                     <action selector="exitAccountButton:" destination="QTk-m3-Zvn" eventType="touchUpInside" id="Mt4-4c-55u"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oge-Sw-vKU">
+                                <rect key="frame" x="20" y="381" width="374" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="I8g-EM-wwZ"/>
+                                    <constraint firstAttribute="width" constant="374" id="Z30-3w-cV9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="İlanlarım">
+                                    <color key="baseForegroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="toMyAdvertList:" destination="QTk-m3-Zvn" eventType="touchUpInside" id="hlm-F4-JjY"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="K1N-DV-Tps"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -820,19 +835,25 @@
                             <constraint firstItem="Obt-lF-QPc" firstAttribute="leading" secondItem="K1N-DV-Tps" secondAttribute="leading" constant="20" id="LDX-GU-YVx"/>
                             <constraint firstItem="K1N-DV-Tps" firstAttribute="bottom" secondItem="7EQ-mm-1LX" secondAttribute="bottom" constant="57" id="LNS-zy-pyQ"/>
                             <constraint firstItem="K1N-DV-Tps" firstAttribute="trailing" secondItem="Obt-lF-QPc" secondAttribute="trailing" constant="20" id="RPH-PG-QcX"/>
+                            <constraint firstItem="Oge-Sw-vKU" firstAttribute="top" secondItem="Obt-lF-QPc" secondAttribute="bottom" constant="31" id="VbC-gf-SP6"/>
+                            <constraint firstItem="K1N-DV-Tps" firstAttribute="trailing" secondItem="Oge-Sw-vKU" secondAttribute="trailing" constant="20" id="VoL-pt-brY"/>
                             <constraint firstItem="7EQ-mm-1LX" firstAttribute="leading" secondItem="K1N-DV-Tps" secondAttribute="leading" constant="20" id="yPI-4T-pLb"/>
                             <constraint firstItem="K1N-DV-Tps" firstAttribute="trailing" secondItem="7EQ-mm-1LX" secondAttribute="trailing" constant="20" id="yyg-qr-Jcm"/>
+                            <constraint firstItem="Oge-Sw-vKU" firstAttribute="leading" secondItem="K1N-DV-Tps" secondAttribute="leading" constant="20" id="zwO-Fo-Ry8"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="xlj-wH-XQA"/>
                     <connections>
                         <outlet property="favoriteListButtonOutlet" destination="Obt-lF-QPc" id="MOX-gn-eui"/>
+                        <outlet property="myAdvertListButtonOutlet" destination="Oge-Sw-vKU" id="DpZ-qq-iF2"/>
                         <segue destination="BYZ-38-t0r" kind="presentation" identifier="exitToSingPage" modalPresentationStyle="fullScreen" id="8K5-PR-uwd"/>
+                        <segue destination="J9T-zQ-cPB" kind="show" identifier="toDetailsFav" id="Fk8-MK-5on"/>
+                        <segue destination="in6-IF-1Z4" kind="show" identifier="toMyAdvert" id="wN8-PN-ow2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uhY-XO-8F7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1545" y="437"/>
+            <point key="canvasLocation" x="1544.9275362318842" y="436.60714285714283"/>
         </scene>
         <!--İlan Ekleme-->
         <scene sceneID="UXp-cT-NGf">
@@ -1185,7 +1206,6 @@
                         <segue destination="3VY-LR-Lxx" kind="relationship" relationship="viewControllers" id="Kck-tX-C2d"/>
                         <segue destination="crO-uE-8Xz" kind="relationship" relationship="viewControllers" id="ha5-7h-Ofm"/>
                         <segue destination="jtC-3t-uvO" kind="relationship" relationship="viewControllers" id="Bte-HR-q26"/>
-                        <segue destination="F5g-di-Www" kind="relationship" relationship="viewControllers" id="NcY-7I-FgV"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="suN-vT-T6n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1201,13 +1221,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="İlan Sayısı :  Yükleniyor" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n93-1n-YZa">
-                                <rect key="frame" x="0.0" y="160" width="414" height="26.5"/>
+                                <rect key="frame" x="0.0" y="108" width="414" height="26.5"/>
                                 <fontDescription key="fontDescription" type="italicSystem" pointSize="22"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Tz-4b-CHG">
-                                <rect key="frame" x="0.0" y="210" width="414" height="603"/>
+                                <rect key="frame" x="0.0" y="158" width="414" height="655"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fRX-Ou-jg7">
                                     <size key="itemSize" width="370" height="158"/>
@@ -1216,7 +1236,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <activityIndicatorView key="backgroundView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" id="iIg-Ds-389">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="603"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="655"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <cells>
@@ -1325,7 +1345,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDs-aX-AeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="876.81159420289862" y="-1763.1696428571429"/>
+            <point key="canvasLocation" x="3735" y="1162"/>
         </scene>
         <!--İlan Ekle-->
         <scene sceneID="v8l-KL-oDu">
@@ -1540,25 +1560,6 @@
             </objects>
             <point key="canvasLocation" x="260.86956521739131" y="419.53125"/>
         </scene>
-        <!--llanlarım-->
-        <scene sceneID="8M6-SL-bEW">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F5g-di-Www" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="llanlarım" image="square.split.1x2.fill" catalog="system" id="cEx-NI-Mid"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="d3v-DY-LUX">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="in6-IF-1Z4" kind="relationship" relationship="rootViewController" id="UO4-1M-M8o"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="G7b-Eq-wQp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-33.333333333333336" y="-1763.1696428571429"/>
-        </scene>
         <!--Favori Listem-->
         <scene sceneID="vdb-he-FDL">
             <objects>
@@ -1708,20 +1709,38 @@
                                     <constraint firstAttribute="width" constant="374" id="iqj-aY-CVf"/>
                                     <constraint firstAttribute="height" constant="128" id="kqs-pC-xIi"/>
                                 </constraints>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o3u-Eb-r2z">
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="o3u-Eb-r2z">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="XKp-vk-jdp">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="favoriDateilsImage" id="XKp-vk-jdp" customClass="FavoriDetailCVC" customModule="AdoptingHay" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="66C-R2-Snz">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bI8-7U-xRw">
+                                                    <rect key="frame" x="8" y="12" width="112" height="105"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="112" id="KWB-dz-goc"/>
+                                                        <constraint firstAttribute="height" constant="105" id="Soe-gv-onf"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="bI8-7U-xRw" secondAttribute="trailing" constant="8" id="6fK-1O-XPV"/>
+                                                <constraint firstItem="bI8-7U-xRw" firstAttribute="top" secondItem="66C-R2-Snz" secondAttribute="top" constant="12" id="Ejk-cf-zBU"/>
+                                                <constraint firstItem="bI8-7U-xRw" firstAttribute="leading" secondItem="66C-R2-Snz" secondAttribute="leading" constant="8" id="FvP-a6-KEL"/>
+                                                <constraint firstAttribute="bottom" secondItem="bI8-7U-xRw" secondAttribute="bottom" constant="11" id="YUa-a3-gML"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="detailImage" destination="bI8-7U-xRw" id="deA-r2-9J2"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
@@ -1771,6 +1790,9 @@
                                 <buttonConfiguration key="configuration" style="tinted" title="Kaldır">
                                     <color key="baseForegroundColor" red="0.94895344972610474" green="0.94771009683609009" blue="0.79423195123672485" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="removeFavoriAdvert:" destination="8az-L0-m0w" eventType="touchUpInside" id="SFE-Y4-qHo"/>
+                                </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="kjkjkj" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="fhk-V0-X4g">
                                 <rect key="frame" x="87" y="536" width="240" height="128"/>
@@ -1834,6 +1856,7 @@
                         <outlet property="advertOwnerNot" destination="fhk-V0-X4g" id="kLa-3i-VJ4"/>
                         <outlet property="advertSick" destination="mmg-Hh-2kx" id="jPF-kj-BIQ"/>
                         <outlet property="buttonInfoOutlet" destination="TDC-b6-4IC" id="Vah-HN-eZf"/>
+                        <outlet property="favoriCollectionView" destination="ize-Qf-XIt" id="lXE-cb-BjF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l4o-Eo-o8R" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1852,7 +1875,6 @@
         <image name="paw" width="170.5" height="170.5"/>
         <image name="person" catalog="system" width="128" height="117"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="square.split.1x2.fill" catalog="system" width="128" height="114"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

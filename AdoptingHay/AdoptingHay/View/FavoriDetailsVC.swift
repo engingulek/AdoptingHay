@@ -7,9 +7,12 @@
 
 import UIKit
 
-class FavoriDetailsVC: UIViewController {
+class FavoriDetailsVC: UIViewController{
+  
+    
     var getAdvert : FavoritList?
     @IBOutlet weak var advertName: UILabel!
+    @IBOutlet weak var favoriCollectionView: UICollectionView!
     
     @IBOutlet weak var advertAge: UILabel!
     @IBOutlet weak var advertGenus: UILabel!
@@ -19,10 +22,13 @@ class FavoriDetailsVC: UIViewController {
     @IBOutlet weak var advertSick: UILabel!
     
     @IBOutlet weak var advertOwnerNot: UITextView!
-    
+    var animalImages:[Data] = [Data]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        favoriCollectionView.delegate = self
+        favoriCollectionView.dataSource = self
+        favoriCollectionView.showsHorizontalScrollIndicator = false
         if let getAnimalname = getAdvert?.animalName {
             if let getAnimalGenus = getAdvert?.animalGenus {
                 if let getAnimalKinds = getAdvert?.animalKinds {
@@ -48,6 +54,26 @@ class FavoriDetailsVC: UIViewController {
                                     
                                 }
                                 
+                                if let getAnimalImageDetails = getAdvert?.imageDetails {
+                                    for  a in getAnimalImageDetails {
+                                        print("VciamgeDetails \(a)")
+                                        let imageUrl = URL(string: "\(a)")!
+                                        if let animalImageData = try?  Data(contentsOf: imageUrl) {
+                                            
+                                            print("kalae \(animalImageData)")
+                                            
+                                            self.animalImages.append(animalImageData)
+                                            self.favoriCollectionView.reloadData()
+                                            
+                                            
+                                            
+                                        }
+                                        
+                                        
+                                        
+                                    }
+                                }
+                                
                                 
                                 
                                }}}}}
@@ -55,8 +81,44 @@ class FavoriDetailsVC: UIViewController {
         
     }
     
+        
 
   
 
 }
+    
+    @IBAction func removeFavoriAdvert(_ sender: Any) {
+        if let advertUid = getAdvert?.animalUid {
+            
+            
+    
+            self.dismiss(animated: true) {
+                Service().removeFavoriAdvert(advertId: advertUid)
+                self.tabBarController?.selectedIndex = 0
+                
+            }
+                       
+        }
+    }
+    
+    
+    
+}
+
+extension FavoriDetailsVC :   UICollectionViewDelegate, UICollectionViewDataSource  {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return animalImages.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+       let cell = favoriCollectionView.dequeueReusableCell(withReuseIdentifier: "favoriDateilsImage", for: indexPath) as! FavoriDetailCVC
+        cell.detailImage.image = UIImage(data: animalImages[indexPath.row])
+        cell.layer.cornerRadius = 25
+ 
+        cell.layer.borderWidth = 2
+        return cell
+        
+        
+        
+    }
 }

@@ -773,6 +773,25 @@ class Service {
     }
     
     
+    func removeFavoriAdvert(advertId:String) {
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid
+    
+        print("pandacık \(userId) --- \(advertId)")
+        if let userId = userId {
+ db.collection("userList").document(userId).collection("favoriList").document(advertId).delete()
+            
+            
+        }
+       
+        
+        
+        
+        
+        
+    }
+    
+    
 
     
     
