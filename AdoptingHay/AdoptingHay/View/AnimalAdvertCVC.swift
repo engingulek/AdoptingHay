@@ -14,6 +14,7 @@ class AnimalAdvertCVC: UICollectionViewCell {
     @IBOutlet weak var animalAdvertKindsLabel: UILabel!
     @IBOutlet weak var animalAdvertSickLabel: UILabel!
     @IBOutlet weak var advertId: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     
     @IBOutlet weak var userId: UILabel!
     @IBOutlet weak var addFavorite: UIButton!

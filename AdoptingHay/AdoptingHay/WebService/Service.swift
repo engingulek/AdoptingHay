@@ -71,7 +71,14 @@ class Service {
                                      if let userId = document.get("userId") as? String {
                                          
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                             
+                                             let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                 
+                                             
+                                             
+                                             
+                                           
+                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails, dateEvent: a)
                                              
                                              self.animalAdvertList.append(animalAdvert)
                                              
@@ -280,7 +287,8 @@ class Service {
                                      if let userId = document.get("userId") as? String {
                                          
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                             let a = Date()
+                                             let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: a)
                                              
                                              self.animalAdvertList.append(animalAdvert)
                                              
@@ -356,7 +364,8 @@ class Service {
                                                     if let userId = document.get("userId") as? String {
                                                         
                                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                            let date = Date()
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                             
                                                             self.animalAdvertList.append(animalAdvert)
                                                             
@@ -385,12 +394,12 @@ class Service {
     
     
     
-    func dowlandAnimalAdvertMintoMaxFromFirestore (completion: @escaping ([AnimalAdvert]?)->()) {
+    func dowlandAnimalAdvertAgeShortFromFirestore (shortType:Bool,completion: @escaping ([AnimalAdvert]?)->()) {
         
         let db = Firestore.firestore()
         animalAdvertList = [AnimalAdvert]()
         
-        db.collection("animalAdvert").order(by: "animalAge", descending: false).getDocuments { snapshot, error in
+        db.collection("animalAdvert").order(by: "animalAge", descending: shortType).getDocuments { snapshot, error in
             
             if error != nil {
                 print("Max to min error ")
@@ -417,7 +426,8 @@ class Service {
                                                 if let userName = document.get("userName") as? String {
                                                     if let userId = document.get("userId") as? String {
                                                         if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                            let date = Date()
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                             
                                                             self.animalAdvertList.append(animalAdvert)
                                                             
@@ -488,7 +498,8 @@ class Service {
                                                         if let userId = document.get("userId") as? String {
                                                             
                                                             if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                                let date = Date()
+                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                                 
                                                                 self.animalAdvertList.append(animalAdvert)
                                                                 
@@ -550,8 +561,9 @@ class Service {
                                          
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
                                              if  animalGenus.lowercased().contains(getSeacrhBarText.lowercased()) {
+                                                 let date = Date()
                                                  
-                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails)
+                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                  
                                                  self.animalAdvertList.append(animalAdvert)
                                                  
@@ -783,10 +795,65 @@ class Service {
             
             
         }
-       
+    }
+    
+    func dowlandAnimalAdvertDateShortFromFirestore (shortType:Bool,completion: @escaping ([AnimalAdvert]?)->()) {
         
+        let db = Firestore.firestore()
+        animalAdvertList = [AnimalAdvert]()
         
+        db.collection("animalAdvert").order(by: "date", descending: shortType).getDocuments { snapshot, error in
+            
+            if error != nil {
+                print("Max to min error ")
+            }
+            
+            else {
+                for document in (snapshot?.documents)! {
+                                   if let animalAdvertUid = document.documentID as? String {
+                                       if let animalImage =  document.get("animalImage") as? String {
+                                           
+                                   
+                                               
+                              if let animalName = document.get("animalName") as? String {
+                                                   if let animalAge = document.get("animalAge") as? Int {
+                             if let animalGenus = document.get("animalGenus") as? String {
+                                                           if let animalSick = document.get("animalSick") as? String {
+                                    if let animalKinds = document.get("animalKinds") as? String {
+                
+                                        if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                            
+                                            
+                                            if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                
+                                                if let userName = document.get("userName") as? String {
+                                                    if let userId = document.get("userId") as? String {
+                                                        
+                                                        if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                            let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                            
+                                                            self.animalAdvertList.append(animalAdvert)
+                                                            
+                                                            completion(self.animalAdvertList)
+                                                            
+                                                        }
+                                                        
+                                                    }
+                                                }
+                
+                                            }
+                                            
+                                        }
+                      
+                                        completion (self.animalAdvertList)
+                                 }}}}   } }}}
+
+
+                
+            }
         
+        }
         
         
     }

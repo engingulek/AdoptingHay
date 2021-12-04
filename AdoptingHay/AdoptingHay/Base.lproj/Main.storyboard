@@ -351,6 +351,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Svt-Ea-QXq">
+                                                    <rect key="frame" x="249" y="8" width="107" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="E7D-SB-HBW"/>
+                                                        <constraint firstAttribute="width" constant="107" id="JgN-FD-ngq"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="m3a-CF-jcA" firstAttribute="leading" secondItem="P8Z-W4-bUj" secondAttribute="leading" constant="16" id="1tV-kG-P5y"/>
@@ -360,10 +370,13 @@
                                                 <constraint firstAttribute="trailing" secondItem="B0s-r2-Rgd" secondAttribute="trailing" constant="209" id="Cu7-HK-XJ2"/>
                                                 <constraint firstItem="T9W-yV-TX9" firstAttribute="top" secondItem="P8Z-W4-bUj" secondAttribute="top" constant="120" id="DCw-Xb-xJx"/>
                                                 <constraint firstItem="m3a-CF-jcA" firstAttribute="top" secondItem="P8Z-W4-bUj" secondAttribute="top" constant="23" id="FvM-ps-aTe"/>
+                                                <constraint firstItem="Svt-Ea-QXq" firstAttribute="leading" secondItem="B0s-r2-Rgd" secondAttribute="trailing" constant="88" id="Gdg-yo-xTV"/>
                                                 <constraint firstItem="yvM-EK-9h6" firstAttribute="leading" secondItem="srP-bY-Ju5" secondAttribute="leading" id="Je8-SP-lR6"/>
                                                 <constraint firstAttribute="bottom" secondItem="m3a-CF-jcA" secondAttribute="bottom" constant="37" id="KL6-Uz-Hk3"/>
                                                 <constraint firstItem="iho-Fr-rJ9" firstAttribute="top" secondItem="srP-bY-Ju5" secondAttribute="bottom" constant="8" symbolic="YES" id="KUd-Cv-KHQ"/>
                                                 <constraint firstItem="yvM-EK-9h6" firstAttribute="centerX" secondItem="P8Z-W4-bUj" secondAttribute="centerX" id="PqR-FV-i1D"/>
+                                                <constraint firstAttribute="trailing" secondItem="Svt-Ea-QXq" secondAttribute="trailing" constant="14" id="Qnl-MQ-Odz"/>
+                                                <constraint firstItem="Svt-Ea-QXq" firstAttribute="top" secondItem="P8Z-W4-bUj" secondAttribute="top" constant="8" id="Tqf-Fv-GWQ"/>
                                                 <constraint firstItem="UHw-5T-FJ4" firstAttribute="top" secondItem="P8Z-W4-bUj" secondAttribute="top" constant="33" id="U3a-AT-qll"/>
                                                 <constraint firstItem="srP-bY-Ju5" firstAttribute="leading" secondItem="m3a-CF-jcA" secondAttribute="trailing" constant="43" id="UFR-BN-iET"/>
                                                 <constraint firstItem="iho-Fr-rJ9" firstAttribute="leading" secondItem="T9W-yV-TX9" secondAttribute="trailing" constant="39.5" id="abC-s1-F9j"/>
@@ -388,6 +401,7 @@
                                             <outlet property="animalAdvertKindsLabel" destination="srP-bY-Ju5" id="toF-Ju-mSf"/>
                                             <outlet property="animalAdvertNameLabel" destination="UHw-5T-FJ4" id="QS8-U6-jNq"/>
                                             <outlet property="animalAdvertSickLabel" destination="iho-Fr-rJ9" id="q4R-Xe-K7f"/>
+                                            <outlet property="dateLabel" destination="Svt-Ea-QXq" id="pr5-ZK-kfT"/>
                                             <outlet property="userId" destination="6eL-IH-x56" id="VAF-Gq-lwa"/>
                                         </connections>
                                     </collectionViewCell>

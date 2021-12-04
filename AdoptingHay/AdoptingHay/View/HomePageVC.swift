@@ -102,10 +102,7 @@ class HomePageVC: UIViewController {
         let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) {action in
           
           
-            
-            
-            
-            Service().dowlandAnimalAdvertMaxtoMinFromFirestore{ (animalA) in
+            Service().dowlandAnimalAdvertAgeShortFromFirestore(shortType: true) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                     print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
@@ -114,6 +111,9 @@ class HomePageVC: UIViewController {
                 }
                 
             }
+            
+            
+          
         }
         
     
@@ -121,7 +121,7 @@ class HomePageVC: UIViewController {
         let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
             
            
-            Service().dowlandAnimalAdvertMintoMaxFromFirestore{ (animalA) in
+            Service().dowlandAnimalAdvertAgeShortFromFirestore(shortType: false) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                     print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
@@ -150,15 +150,50 @@ class HomePageVC: UIViewController {
             }
         }
         
+        
+        
+        let newAdvert = UIAlertAction(title: "Yeni İlanlar", style: .default) { action in
+            Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: true) { animalA in
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                  
+                    self.animalAdvertCollectionView.reloadData()
+               
+                }
+                
+            }
+            
+            
+           
+        }
+        
+        
+        let oldAdvert = UIAlertAction(title: "Eski İlanlar", style: .default) { action in
+            
+            Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: false) { animalA in
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                  
+                    self.animalAdvertCollectionView.reloadData()
+               
+                }
+                
+            }
+            
+           
+        }
+        
+        
         let cancel = UIAlertAction(title: "İptal", style: .cancel) { action in
             print("İptal tıklandı")
         }
         
         actionController.addAction(sickBoll)
         actionController.addAction(cancel)
-        
-        actionController.addAction(ageShortMaxtoMin)
         actionController.addAction(ageShortMintoMax)
+        actionController.addAction(ageShortMaxtoMin)
+        actionController.addAction(newAdvert)
+        actionController.addAction(oldAdvert)
         
         
         
@@ -274,9 +309,10 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             
             cell.userId.text = "\(advertViewModel.userId)"
           
-            
+            print("Tarih \(advertViewModel.addDate)")
             
             cell.addFavoriteButton(advertViewModel)
+            cell.dateLabel.text = "\(advertViewModel.addDate)"
             
            
             

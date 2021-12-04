@@ -74,6 +74,18 @@ struct AnimalAdvertViewModel {
     var userId : String {
         return self.animalAdvert.userId!
     }
+    var addDate : String {
+        
+        var dateString : String {
+            let formatter = DateFormatter()
+            formatter.locale = NSLocale(localeIdentifier: "tr") as Locale
+            formatter.dateFormat = "dd/MMMM/yyyy"
+            return formatter.string(from: animalAdvert.dateEvent)
+        }
+        return dateString
+        
+        
+    }
     
     
     

@@ -21,11 +21,13 @@ class AnimalAdvert  {
     var userId : String?
     var userName : String?
     var imageDetails : [String]
+    var dateEvent : Date
+   
 
     
 
 
-    init(userId:String,userName : String,animalUid:String,animalImage:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String,imageDetails:[String]){
+    init(userId:String,userName : String,animalUid:String,animalImage:String,animalName:String,animalKinds:String,animalAge:Int,animalSick:String,animalGenus:String,animalOwnerNot: String,animalSickInfo:String,imageDetails:[String],dateEvent:Date){
         self.animalUid = animalUid
         self.animalImage = animalImage
         self.animalName = animalName
@@ -38,6 +40,7 @@ class AnimalAdvert  {
         self.userName = userName
         self.animalSickInfo = animalSickInfo
         self.imageDetails = imageDetails
+        self.dateEvent = dateEvent
     }
 
     
