@@ -21,6 +21,7 @@ class HomePageVC: UIViewController {
     var animalKindsImage:[Data] = [Data]()
    // var animalKindsTitle:[String] = [String]()
     var animalAdvertLists = [AnimalAdvert]()
+    var getKinds : String = "nil"
     
     
     
@@ -100,17 +101,21 @@ class HomePageVC: UIViewController {
         
         
         let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) {action in
-          
-          
-            Service().dowlandAnimalAdvertAgeShortFromFirestore(shortType: true) { animalA in
-                if let animalA = animalA {
-                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                    print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
-                    self.animalAdvertCollectionView.reloadData()
-               
+            
+            print("oluyor \(self.getKinds)")
+            Service().dowlandAnimalAdvertAgeShortFromFirestore(kinds:self.getKinds,shortType: true) { animalA in
+                    if let animalA = animalA {
+                        self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                        print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
+                        self.animalAdvertCollectionView.reloadData()
+                   
+                    }
+                    
                 }
                 
-            }
+            
+          
+          
             
             
           
@@ -120,8 +125,8 @@ class HomePageVC: UIViewController {
         
         let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
             
-           
-            Service().dowlandAnimalAdvertAgeShortFromFirestore(shortType: false) { animalA in
+            
+            Service().dowlandAnimalAdvertAgeShortFromFirestore(kinds:self.getKinds,shortType: false) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                     print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
@@ -139,13 +144,26 @@ class HomePageVC: UIViewController {
         
         let sickBoll = UIAlertAction(title: "Hastalık yok", style: .default) { action in
             
-            Service().dowlandAnimalAdvertSickBoolFromFirestore { (animalA) in
-                if let animalA = animalA {
-                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                  
-                    self.animalAdvertCollectionView.reloadData()
-               
+            Service().dowlandAnimalAdvertSickBoolFromFirestore(kinds: self.getKinds) { animalA in
+                
+                if animalA == nil {
+                    self.getAnimalAdvertData()
+                    self.alertMessage(title: "Uyarı", message: "Şuanda bu filtrelemede ilan bulunmamaktadır.")
+                   
+                    
+                    
                 }
+                
+                else {
+                    if let animalA = animalA {
+                        self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                      
+                        self.animalAdvertCollectionView.reloadData()
+                   
+                    }
+                    
+                }
+                
                 
             }
         }
@@ -365,6 +383,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         if collectionView == self.animalKindsCollectionView {
             let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(indexPath.row)
             let getAnimalKinds = kindsViewModel.name
+            self.getKinds = getAnimalKinds
             if getAnimalKinds == "Hepsi" {
                 self.getAnimalAdvertData()
             }
@@ -372,6 +391,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 
                 if animalA == nil && getAnimalKinds != "Hepsi" {
                     self.alertMessage(title: "Uyarı", message: "Şuanda bu türde ilan bulunmamaktadır.")
+              
                     
                     
                 }
@@ -381,6 +401,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                         
                        
                         self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    
                         self.animalAdvertCollectionView.reloadData()
                     }
                     
