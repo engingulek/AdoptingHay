@@ -56,6 +56,10 @@ struct AddAdvertViewModel {
     var animalImage : String {
         return self.addAdvert.animalImage!
     }
+    var date : Date {
+        let addDate = Date()
+        return addDate
+    }
     
     
     

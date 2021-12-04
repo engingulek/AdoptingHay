@@ -177,7 +177,9 @@ class Service {
             "animalName"  : advert.animalName!,
             "animalOwnerNot" : advert.animalOwnerNot!,
             "animalSickInfo"   :  advert.animalSickInfo!,
-            "animalSick" : advert.animalSickBool
+            "animalSick" : advert.animalSickBool,
+            "date" : advert.date
+        
         ]
         
         db.collection("animalAdvert").document("\(advertId)").setData(docData) {
@@ -283,7 +285,7 @@ class Service {
                                          if let userId = document.get("userId") as? String {
                                              
                                              if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                 let a = Date()
+                                                 let a =  (document.get("date") as? Timestamp)?.dateValue() ?? Date()
                                                  let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: a)
                                                  
                                                  self.animalAdvertList.append(animalAdvert)
@@ -354,7 +356,7 @@ class Service {
                                              if let userId = document.get("userId") as? String {
                                                  
                                                  if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                     let a = Date()
+                                                     let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
                                                      let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: a)
                                                      
                                                      self.animalAdvertList.append(animalAdvert)
@@ -442,7 +444,7 @@ class Service {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
                                                             if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                                let date = Date()
+                                                                let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
                                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                                 
                                                                 self.animalAdvertList.append(animalAdvert)
@@ -498,7 +500,7 @@ class Service {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
                                                             if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                                let date = Date()
+                                                                let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
                                                                 let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                                 
                                                                 self.animalAdvertList.append(animalAdvert)
@@ -531,73 +533,365 @@ class Service {
     
     
     
-    func dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds:String, completion: @escaping ([AnimalAdvert]?)->()) {
+    func dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds:String,ageShortType:String ,completion: @escaping ([AnimalAdvert]?)->()) {
         let db = Firestore.firestore()
         animalAdvertList = [AnimalAdvert]()
-        db.collection("animalAdvert").whereField("animalKinds", isEqualTo: getAnimalKinds).getDocuments { snapshot, error in
-            if error != nil {
-                print("Kinds filter hata var")
-                
-            }
-            
-            else {
-                
-                if snapshot?.documents.count == 0 {
+    
+        
+        if ageShortType == "nil"  {
+            db.collection("animalAdvert").whereField("animalKinds", isEqualTo: getAnimalKinds).getDocuments { snapshot, error in
+                if error != nil {
+                    print("Kinds filter hata var")
                     
-                 completion(nil)
-                    
-                    
-                   
-                   
                 }
                 
                 else {
-                    for document in (snapshot?.documents)! {
-                                       if let animalAdvertUid = document.documentID as? String {
-                                           if let animalImage =  document.get("animalImage") as? String {
-                                               
-                                     
-                                                   
-                                  if let animalName = document.get("animalName") as? String {
-                                                       if let animalAge = document.get("animalAge") as? Int {
-                                 if let animalGenus = document.get("animalGenus") as? String {
-                                                               if let animalSick = document.get("animalSick") as? String {
-                                        if let animalKinds = document.get("animalKinds") as? String {
                     
-                                            if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
-                                                
-                                                
-                                                if let animalSickInfo = document.get("animalSickInfo") as? String {
+                    if snapshot?.documents.count == 0 {
+                        
+                     completion(nil)
+                        
+                        
+                       
+                       
+                    }
+                    
+                    else {
+                        for document in (snapshot?.documents)! {
+                                           if let animalAdvertUid = document.documentID as? String {
+                                               if let animalImage =  document.get("animalImage") as? String {
+                                                   
+                                         
+                                                       
+                                      if let animalName = document.get("animalName") as? String {
+                                                           if let animalAge = document.get("animalAge") as? Int {
+                                     if let animalGenus = document.get("animalGenus") as? String {
+                                                                   if let animalSick = document.get("animalSick") as? String {
+                                            if let animalKinds = document.get("animalKinds") as? String {
+                        
+                                                if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
                                                     
-                                                    if let userName = document.get("userName") as? String {
-                                                        if let userId = document.get("userId") as? String {
-                                                            
-                                                            if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                                let date = Date()
-                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                    
+                                                    if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                        
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
                                                                 
-                                                                self.animalAdvertList.append(animalAdvert)
-                                                                
-                                                                completion(self.animalAdvertList)
+                                                                if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                    
+                                                                    self.animalAdvertList.append(animalAdvert)
+                                                                    
+                                                                    completion(self.animalAdvertList)
+                                                                    
+                                                                }
                                                                 
                                                             }
-                                                            
                                                         }
+                        
                                                     }
-                    
+                                                    
                                                 }
-                                                
-                                            }
-                          
-                                            completion (self.animalAdvertList)
-                                     }}}}   } }}}
+                              
+                                                completion (self.animalAdvertList)
+                                         }}}}   } }}}
+                    }
+                  
+
+
+                    
                 }
-              
-
-
-                
             }
+            
         }
+        
+        else if ageShortType == "Yok" {
+           
+            db.collection("animalAdvert").whereField("animalKinds", isEqualTo: getAnimalKinds) .whereField("animalSick", isEqualTo:"Yok") .getDocuments { snapshot, error in
+                if error != nil {
+                    print("Kinds filter hata var")
+                    
+                }
+                
+                else {
+                    
+                    if snapshot?.documents.count == 0 {
+                        
+                     completion(nil)
+                        
+                        
+                       
+                       
+                    }
+                    
+                    else {
+                        for document in (snapshot?.documents)! {
+                                           if let animalAdvertUid = document.documentID as? String {
+                                               if let animalImage =  document.get("animalImage") as? String {
+                                                   
+                                         
+                                                       
+                                      if let animalName = document.get("animalName") as? String {
+                                                           if let animalAge = document.get("animalAge") as? Int {
+                                     if let animalGenus = document.get("animalGenus") as? String {
+                                                                   if let animalSick = document.get("animalSick") as? String {
+                                            if let animalKinds = document.get("animalKinds") as? String {
+                        
+                                                if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                                    
+                                                    
+                                                    if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                        
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                
+                                                                if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                    let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                    
+                                                                    self.animalAdvertList.append(animalAdvert)
+                                                                    
+                                                                    completion(self.animalAdvertList)
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                        
+                                                    }
+                                                    
+                                                }
+                              
+                                                completion (self.animalAdvertList)
+                                         }}}}   } }}}
+                    }
+                  
+
+
+                    
+                }
+            }
+            
+        }
+        
+        //---
+        
+        else if ageShortType == "Dtrue" {
+            
+            
+            
+          
+            db.collection("animalAdvert").whereField("animalKinds", isEqualTo: getAnimalKinds).order(by: "date", descending: true).getDocuments { snapshot, error in
+                if error != nil {
+                    print("Kinds filter hata var")
+                    
+                }
+                
+                else {
+                    
+                    if snapshot?.documents.count == 0 {
+                        
+                     completion(nil)
+                        
+                        
+                       
+                       
+                    }
+                    
+                    else {
+                        for document in (snapshot?.documents)! {
+                                           if let animalAdvertUid = document.documentID as? String {
+                                               if let animalImage =  document.get("animalImage") as? String {
+                                                   
+                                         
+                                                       
+                                      if let animalName = document.get("animalName") as? String {
+                                                           if let animalAge = document.get("animalAge") as? Int {
+                                     if let animalGenus = document.get("animalGenus") as? String {
+                                                                   if let animalSick = document.get("animalSick") as? String {
+                                            if let animalKinds = document.get("animalKinds") as? String {
+                        
+                                                if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                                    
+                                                    
+                                                    if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                        
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                
+                                                                if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                    let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                    
+                                                                    self.animalAdvertList.append(animalAdvert)
+                                                                    
+                                                                    completion(self.animalAdvertList)
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                        
+                                                    }
+                                                    
+                                                }
+                              
+                                                completion (self.animalAdvertList)
+                                         }}}}   } }}}
+                    }
+                  
+
+
+                    
+                }
+            }
+            
+        }
+        
+    //---
+        
+        
+        else if ageShortType == "Dfalse" {
+            
+           
+            db.collection("animalAdvert").whereField("animalKinds", isEqualTo: getAnimalKinds).order(by: "date", descending: false).getDocuments { snapshot, error in
+                if error != nil {
+                    print("Kinds filter hata var")
+                    
+                }
+                
+                else {
+                    
+                    if snapshot?.documents.count == 0 {
+                        
+                     completion(nil)
+                        
+                        
+                       
+                       
+                    }
+                    
+                    else {
+                        for document in (snapshot?.documents)! {
+                                           if let animalAdvertUid = document.documentID as? String {
+                                               if let animalImage =  document.get("animalImage") as? String {
+                                                   
+                                         
+                                                       
+                                      if let animalName = document.get("animalName") as? String {
+                                                           if let animalAge = document.get("animalAge") as? Int {
+                                     if let animalGenus = document.get("animalGenus") as? String {
+                                                                   if let animalSick = document.get("animalSick") as? String {
+                                            if let animalKinds = document.get("animalKinds") as? String {
+                        
+                                                if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                                    
+                                                    
+                                                    if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                        
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                
+                                                                if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                    let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                    
+                                                                    self.animalAdvertList.append(animalAdvert)
+                                                                    
+                                                                    completion(self.animalAdvertList)
+                                                                    
+                                                                }
+                                                                
+                                                            }
+                                                        }
+                        
+                                                    }
+                                                    
+                                                }
+                              
+                                                completion (self.animalAdvertList)
+                                         }}}}   } }}}
+                    }
+                  
+
+
+                    
+                }
+            }
+            
+        }
+       else {
+           let ageShort = Bool(ageShortType)!
+           db.collection("animalAdvert").whereField("animalKinds", isEqualTo: getAnimalKinds).order(by: "animalAge", descending: ageShort ).getDocuments { snapshot, error in
+               if error != nil {
+                   print("Kinds filter hata var")
+                   
+               }
+               
+               else {
+                   
+                   if snapshot?.documents.count == 0 {
+                       
+                    completion(nil)
+                       
+                       
+                      
+                      
+                   }
+                   
+                   else {
+                       for document in (snapshot?.documents)! {
+                                          if let animalAdvertUid = document.documentID as? String {
+                                              if let animalImage =  document.get("animalImage") as? String {
+                                                  
+                                        
+                                                      
+                                     if let animalName = document.get("animalName") as? String {
+                                                          if let animalAge = document.get("animalAge") as? Int {
+                                    if let animalGenus = document.get("animalGenus") as? String {
+                                                                  if let animalSick = document.get("animalSick") as? String {
+                                           if let animalKinds = document.get("animalKinds") as? String {
+                       
+                                               if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                                   
+                                                   
+                                                   if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                       
+                                                       if let userName = document.get("userName") as? String {
+                                                           if let userId = document.get("userId") as? String {
+                                                               
+                                                               if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                   let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                   let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                   
+                                                                   self.animalAdvertList.append(animalAdvert)
+                                                                   
+                                                                   completion(self.animalAdvertList)
+                                                                   
+                                                               }
+                                                               
+                                                           }
+                                                       }
+                       
+                                                   }
+                                                   
+                                               }
+                             
+                                               completion (self.animalAdvertList)
+                                        }}}}   } }}}
+                   }
+                 
+
+
+                   
+               }
+           }
+          
+        }
+        
+        
+    
         
     }
     
@@ -636,7 +930,7 @@ class Service {
                                          
                                          if let imageDetails = document.get("animalImageDetails") as? [String] {
                                              if  animalGenus.lowercased().contains(getSeacrhBarText.lowercased()) {
-                                                 let date = Date()
+                                                 let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
                                                  
                                                  let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
                                                  
@@ -872,63 +1166,128 @@ class Service {
         }
     }
     
-    func dowlandAnimalAdvertDateShortFromFirestore (shortType:Bool,completion: @escaping ([AnimalAdvert]?)->()) {
+    func dowlandAnimalAdvertDateShortFromFirestore (shortType:Bool,kinds:String,completion: @escaping ([AnimalAdvert]?)->()) {
         
-        let db = Firestore.firestore()
-        animalAdvertList = [AnimalAdvert]()
         
-        db.collection("animalAdvert").order(by: "date", descending: shortType).getDocuments { snapshot, error in
+        if kinds == "nil" || kinds == "Hepsi"  {
+            let db = Firestore.firestore()
+            animalAdvertList = [AnimalAdvert]()
             
-            if error != nil {
-                print("Max to min error ")
-            }
-            
-            else {
-                for document in (snapshot?.documents)! {
-                                   if let animalAdvertUid = document.documentID as? String {
-                                       if let animalImage =  document.get("animalImage") as? String {
-                                           
-                                   
-                                               
-                              if let animalName = document.get("animalName") as? String {
-                                                   if let animalAge = document.get("animalAge") as? Int {
-                             if let animalGenus = document.get("animalGenus") as? String {
-                                                           if let animalSick = document.get("animalSick") as? String {
-                                    if let animalKinds = document.get("animalKinds") as? String {
+            db.collection("animalAdvert").order(by: "date", descending: shortType).getDocuments { snapshot, error in
                 
-                                        if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
-                                            
-                                            
-                                            if let animalSickInfo = document.get("animalSickInfo") as? String {
+                if error != nil {
+                    print("Max to min error ")
+                }
+                
+                else {
+                    for document in (snapshot?.documents)! {
+                                       if let animalAdvertUid = document.documentID as? String {
+                                           if let animalImage =  document.get("animalImage") as? String {
+                                               
+                                       
+                                                   
+                                  if let animalName = document.get("animalName") as? String {
+                                                       if let animalAge = document.get("animalAge") as? Int {
+                                 if let animalGenus = document.get("animalGenus") as? String {
+                                                               if let animalSick = document.get("animalSick") as? String {
+                                        if let animalKinds = document.get("animalKinds") as? String {
+                    
+                                            if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
                                                 
-                                                if let userName = document.get("userName") as? String {
-                                                    if let userId = document.get("userId") as? String {
-                                                        
-                                                        if let imageDetails = document.get("animalImageDetails") as? [String] {
-                                                            let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                            let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                
+                                                if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                    
+                                                    if let userName = document.get("userName") as? String {
+                                                        if let userId = document.get("userId") as? String {
                                                             
-                                                            self.animalAdvertList.append(animalAdvert)
-                                                            
-                                                            completion(self.animalAdvertList)
+                                                            if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                
+                                                                self.animalAdvertList.append(animalAdvert)
+                                                                
+                                                                completion(self.animalAdvertList)
+                                                                
+                                                            }
                                                             
                                                         }
-                                                        
                                                     }
+                    
                                                 }
-                
+                                                
                                             }
-                                            
-                                        }
-                      
-                                        completion (self.animalAdvertList)
-                                 }}}}   } }}}
+                          
+                                            completion (self.animalAdvertList)
+                                     }}}}   } }}}
 
 
-                
+                    
+                }
+            
             }
-        
+            
         }
+        
+        else {
+            let db = Firestore.firestore()
+            animalAdvertList = [AnimalAdvert]()
+            
+            db.collection("animalAdvert").whereField("animalKinds", isEqualTo: kinds).order(by: "date", descending: shortType).getDocuments { snapshot, error in
+                
+                if error != nil {
+                    print("Max to min error ")
+                }
+                
+                else {
+                    for document in (snapshot?.documents)! {
+                                       if let animalAdvertUid = document.documentID as? String {
+                                           if let animalImage =  document.get("animalImage") as? String {
+                                               
+                                       
+                                                   
+                                  if let animalName = document.get("animalName") as? String {
+                                                       if let animalAge = document.get("animalAge") as? Int {
+                                 if let animalGenus = document.get("animalGenus") as? String {
+                                                               if let animalSick = document.get("animalSick") as? String {
+                                        if let animalKinds = document.get("animalKinds") as? String {
+                    
+                                            if let animalAdvertOwnerNot = document.get("animalOwnerNot") as? String {
+                                                
+                                                
+                                                if let animalSickInfo = document.get("animalSickInfo") as? String {
+                                                    
+                                                    if let userName = document.get("userName") as? String {
+                                                        if let userId = document.get("userId") as? String {
+                                                            
+                                                            if let imageDetails = document.get("animalImageDetails") as? [String] {
+                                                                let date = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let animalAdvert = AnimalAdvert(userId: userId, userName: userName, animalUid: animalAdvertUid, animalImage: animalImage, animalName: animalName, animalKinds: animalKinds, animalAge: animalAge, animalSick: animalSick, animalGenus: animalGenus, animalOwnerNot: animalAdvertOwnerNot, animalSickInfo: animalSickInfo, imageDetails: imageDetails,dateEvent: date)
+                                                                
+                                                                self.animalAdvertList.append(animalAdvert)
+                                                                
+                                                                completion(self.animalAdvertList)
+                                                                
+                                                            }
+                                                            
+                                                        }
+                                                    }
+                    
+                                                }
+                                                
+                                            }
+                          
+                                            completion (self.animalAdvertList)
+                                     }}}}   } }}}
+
+
+                    
+                }
+            
+            }
+            
+        }
+        
+       
         
         
     }

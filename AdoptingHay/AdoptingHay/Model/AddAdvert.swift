@@ -19,8 +19,8 @@ class AddAdvert {
     var animalImage : String?
     var animalImageDetails: [String]?
     var animalSickBool:String
-    
-    init(userName:String,uuid:String,animalName:String,animalKinds:String,animalAge:Int,animalSickInfo:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String],animalImage:String,animalSickBool:String){
+    var date : Date
+    init(userName:String,uuid:String,animalName:String,animalKinds:String,animalAge:Int,animalSickInfo:String,animalGenus:String,animalOwnerNot: String,animalImageDetails:[String],animalImage:String,animalSickBool:String,date:Date){
        
         self.uuid = uuid
         self.userName = userName
@@ -33,6 +33,7 @@ class AddAdvert {
         self.animalImageDetails = animalImageDetails
         self.animalImage = animalImage
         self.animalSickBool = animalSickBool
+        self.date = date
     }
 }
 

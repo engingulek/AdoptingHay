@@ -22,6 +22,8 @@ class HomePageVC: UIViewController {
    // var animalKindsTitle:[String] = [String]()
     var animalAdvertLists = [AnimalAdvert]()
     var getKinds : String = "nil"
+    var ageShortlValue:String = "nil"
+    
     
     
     
@@ -102,7 +104,11 @@ class HomePageVC: UIViewController {
         
         let ageShortMaxtoMin = UIAlertAction(title: "Büyükten küçüğe", style: .default) {action in
             
-            print("oluyor \(self.getKinds)")
+            print("oluyor aga beeee \(self.getKinds)")
+            self.ageShortlValue = "true"
+            
+            
+            
             Service().dowlandAnimalAdvertAgeShortFromFirestore(kinds:self.getKinds,shortType: true) { animalA in
                     if let animalA = animalA {
                         self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
@@ -125,7 +131,7 @@ class HomePageVC: UIViewController {
         
         let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
             
-            
+            self.ageShortlValue = "false"
             Service().dowlandAnimalAdvertAgeShortFromFirestore(kinds:self.getKinds,shortType: false) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
@@ -143,15 +149,14 @@ class HomePageVC: UIViewController {
         
         
         let sickBoll = UIAlertAction(title: "Hastalık yok", style: .default) { action in
+            self.ageShortlValue = "Yok"
             
             Service().dowlandAnimalAdvertSickBoolFromFirestore(kinds: self.getKinds) { animalA in
                 
                 if animalA == nil {
                     self.getAnimalAdvertData()
                     self.alertMessage(title: "Uyarı", message: "Şuanda bu filtrelemede ilan bulunmamaktadır.")
-                   
-                    
-                    
+
                 }
                 
                 else {
@@ -171,7 +176,8 @@ class HomePageVC: UIViewController {
         
         
         let newAdvert = UIAlertAction(title: "Yeni İlanlar", style: .default) { action in
-            Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: true) { animalA in
+            self.ageShortlValue = "Dtrue"
+            Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: true,kinds: self.getKinds) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                   
@@ -187,8 +193,9 @@ class HomePageVC: UIViewController {
         
         
         let oldAdvert = UIAlertAction(title: "Eski İlanlar", style: .default) { action in
+            self.ageShortlValue = "Dfalse"
             
-            Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: false) { animalA in
+            Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: false,kinds: self.getKinds) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                   
@@ -387,7 +394,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             if getAnimalKinds == "Hepsi" {
                 self.getAnimalAdvertData()
             }
-            Service().dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds: getAnimalKinds) { animalA in
+            Service().dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds: getAnimalKinds,ageShortType:self.ageShortlValue) { animalA in
                 
                 if animalA == nil && getAnimalKinds != "Hepsi" {
                     self.alertMessage(title: "Uyarı", message: "Şuanda bu türde ilan bulunmamaktadır.")
