@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class MyAdvertDetailsVC: UIViewController {
+class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
    
     private var animalKindsListViewModel : AnimalKindsListViewModel!
     var getAdvert : MyAdvert?
@@ -31,15 +31,47 @@ class MyAdvertDetailsVC: UIViewController {
     @IBOutlet weak var advertKinds: UILabel!
     
     @IBOutlet weak var sickInfo: UITextView!
-    
+    var sickBool:String = ""
     @IBOutlet weak var advertAge: UITextField!
     @IBOutlet weak var ownerNote: UITextView!
     var imageDetailss:[Data] = [Data]()
+    
+    let imagepicker = UIImagePickerController()
+    let imagepickerOne = UIImagePickerController()
+    let imagepickerTwo = UIImagePickerController()
+    let imagepickerThird = UIImagePickerController()
+
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerKinds.delegate = self
         pickerKinds.dataSource = self
         getAnimalKindsData()
+        
+        
+        advertImage.isUserInteractionEnabled = true
+        let gestureRecognizeradvertImage = UITapGestureRecognizer(target: self, action: #selector(chooseAddAdvertImage))
+        advertImage.addGestureRecognizer(gestureRecognizeradvertImage)
+        
+        oneImage.isUserInteractionEnabled = true
+        let gestureRecognizeroneImage =  UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageOne))
+        oneImage.addGestureRecognizer(gestureRecognizeroneImage)
+        
+    secondImage.isUserInteractionEnabled = true
+        let gestureRecognizersecondImage = UITapGestureRecognizer(target: self, action: #selector( chooseaddAdvertImageTwo))
+        secondImage.addGestureRecognizer(gestureRecognizersecondImage)
+        
+        
+        thirdImage.isUserInteractionEnabled = true
+        let gestureRecognizerthirdImage = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageThird))
+        thirdImage.addGestureRecognizer(gestureRecognizerthirdImage)
+        
+        
+        
+        
+        
         
         if let name = getAdvert?.animalName {
             if let genus = getAdvert?.animalGenus{
@@ -58,11 +90,13 @@ class MyAdvertDetailsVC: UIViewController {
                                     if sickBool == "Var" {
                                         self.sickInfo.text = sickInf
                                         sickSwitch.isOn = true
+                                        self.sickBool = "Var"
                                     }
                                     if sickBool == "Yok"{
                                         self.sickInfo.text = ""
                                         sickSwitch.isOn = false
                                         self.sickInfo.isUserInteractionEnabled = false
+                                        self.sickBool = "Yok"
                                     }
                                     
                                     
@@ -111,6 +145,40 @@ class MyAdvertDetailsVC: UIViewController {
        
     }
     
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if picker == self.imagepicker {
+            advertImage.image = info[.originalImage] as? UIImage
+            
+        }
+        if picker == self.imagepickerOne {
+            oneImage.image = info[.originalImage] as? UIImage
+            
+        }
+        
+        if picker == self.imagepickerTwo {
+            secondImage.image = info[.originalImage] as? UIImage
+            
+        }
+        
+        
+        if picker == self.imagepickerThird {
+            thirdImage.image = info[.originalImage] as? UIImage
+            
+        }
+        
+        
+      
+    
+       
+     
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     func getAnimalKindsData() {
         Service().dowlandAnimalKindsFromFirestore { (animalK) in
             if let animalK = animalK {
@@ -123,8 +191,140 @@ class MyAdvertDetailsVC: UIViewController {
     }
     
     
+    @objc func chooseaddAdvertImageOne() {
+        imagepickerOne.delegate = self
+        imagepickerOne.sourceType = .photoLibrary
+        self.present(imagepickerOne, animated: true, completion: nil)
+        
+    }
     
     
+    
+    @objc func chooseaddAdvertImageTwo() {
+        
+        
+       
+        imagepickerTwo.delegate = self
+        imagepickerTwo.sourceType = .photoLibrary
+        self.present(imagepickerTwo, animated: true, completion: nil)
+        
+    }
+    
+    
+    @objc func chooseaddAdvertImageThird() {
+        
+        
+       
+        imagepickerThird.delegate = self
+        imagepickerThird.sourceType = .photoLibrary
+        self.present(imagepickerThird, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+   
+    
+    
+    @objc func chooseAddAdvertImage() {
+        
+        
+       
+        imagepicker.delegate = self
+        imagepicker.sourceType = .photoLibrary
+        self.present(imagepicker, animated: true, completion: nil)
+        
+    }
+    
+    
+    
+    @IBAction func valueChanged(_ sender: Any) {
+        
+        if sickSwitch.isOn {
+            sickInfo.isUserInteractionEnabled = true
+            self.sickBool = "Var"
+        }
+        else {
+            sickInfo.isUserInteractionEnabled = false
+            self.sickBool = "Yok"
+            sickInfo.text = ""
+        }
+    }
+    
+    
+    @IBAction func updateButton(_ sender: Any) {
+        let storage = Storage.storage()
+        let storageReferance = storage.reference()
+        let medinaFolder = storageReferance.child("media")
+        
+        if let advertImageData = advertImage.image?.jpegData(compressionQuality: 0.5){
+            let uuid = UUID().uuidString
+            let advertImageRefetance = medinaFolder.child("\(uuid).jpeg")
+            advertImageRefetance.putData(advertImageData, metadata: nil) { metaData, error in
+                if error != nil {
+                    print("Güncelleme resim ekleme hata \(error?.localizedDescription)")
+                }
+                
+                else {
+                    advertImageRefetance.downloadURL {url, error in
+                        if error != nil {
+                            print("Günceleme resim indirme hata")
+                        }
+                        
+                        else {
+                           let advertImageUrl = url?.absoluteString
+                            let updateData : [String : Any] =
+                                           [
+                                            "animalName" : self.advertName.text!,
+                                            "animalAge"  : Int(self.advertAge.text!)!,
+                                            "animalKinds" : self.advertKinds.text!,
+                                            "animalOwnerNot" : self.ownerNote.text!,
+                                            "animalSickInfo" : self.sickInfo.text!,
+                                            "animalSick": self.sickBool,
+                                            "animalImage" : advertImageUrl!,
+                                            "animalImageDetails" : self.getAdvert?.animalImageDetails ?? ["",""]
+                                            
+                                            
+                                            
+                                            
+                                           
+                                           
+                                           ]
+                            
+                            if let advertId = self.getAdvert?.animaluuid {
+
+                                if let userId = Auth.auth().currentUser?.uid {
+                                    Service().updateMyAdvert(userId: userId, advertId: advertId, updateData: updateData)
+                                    
+                                    
+                                    self.navigationController?.popViewController(animated: true)
+                                    
+                                }
+                               
+                                
+                       
+                            }
+                        }
+                    }
+                    
+                }
+            }
+            
+            
+        }
+     
+        
+      
+        
+        
+        
+        
+      
+        
+        
+       
+        
+    }
     
    
     
@@ -152,14 +352,22 @@ extension MyAdvertDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
        
         return kindsViewModel.name != "Hepsi" ? kindsViewModel.name :
         "Diğer"
-        
-    
-            
-        
-        
-       
-        
 
-     
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if self.animalKindsListViewModel.animalKindsAtIndex(row).name == "Hepsi" {
+            if let kinds = getAdvert?.animalKinds{
+                self.advertKinds.text = "Diğer"
+                
+            }
+          
+        }
+        
+        else {
+            self.advertKinds.text = self.animalKindsListViewModel.animalKindsAtIndex(row).name
+        }
+
+        
     }
 }

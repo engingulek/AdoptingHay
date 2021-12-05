@@ -1482,6 +1482,9 @@
                                             </textView>
                                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HCf-ng-dGN">
                                                 <rect key="frame" x="285" y="672" width="49" height="31"/>
+                                                <connections>
+                                                    <action selector="valueChanged:" destination="pWx-eo-xOZ" eventType="valueChanged" id="W6d-3V-bUd"/>
+                                                </connections>
                                             </switch>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hastalık" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COp-o5-Ihm">
                                                 <rect key="frame" x="169" y="672" width="94" height="24"/>
@@ -1536,6 +1539,9 @@
                                                 <rect key="frame" x="85" y="1069" width="245" height="43"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="tinted" title="Güncelle"/>
+                                                <connections>
+                                                    <action selector="updateButton:" destination="pWx-eo-xOZ" eventType="touchUpInside" id="Zmf-tX-O0U"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
