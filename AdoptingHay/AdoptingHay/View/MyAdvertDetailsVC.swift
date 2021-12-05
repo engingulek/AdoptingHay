@@ -40,6 +40,8 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     let imagepickerOne = UIImagePickerController()
     let imagepickerTwo = UIImagePickerController()
     let imagepickerThird = UIImagePickerController()
+    
+    var imageDetailsUrl : [String] = [String]()
 
     
     
@@ -55,6 +57,14 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         let gestureRecognizeradvertImage = UITapGestureRecognizer(target: self, action: #selector(chooseAddAdvertImage))
         advertImage.addGestureRecognizer(gestureRecognizeradvertImage)
         
+        
+        thirdImage.isUserInteractionEnabled = true
+        let gestureRecognizerthirdImage = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageThird))
+        thirdImage.addGestureRecognizer(gestureRecognizerthirdImage)
+        
+        
+        
+        
         oneImage.isUserInteractionEnabled = true
         let gestureRecognizeroneImage =  UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageOne))
         oneImage.addGestureRecognizer(gestureRecognizeroneImage)
@@ -64,9 +74,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         secondImage.addGestureRecognizer(gestureRecognizersecondImage)
         
         
-        thirdImage.isUserInteractionEnabled = true
-        let gestureRecognizerthirdImage = UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageThird))
-        thirdImage.addGestureRecognizer(gestureRecognizerthirdImage)
+
         
         
         
@@ -257,66 +265,126 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         let storageReferance = storage.reference()
         let medinaFolder = storageReferance.child("media")
         
-        if let advertImageData = advertImage.image?.jpegData(compressionQuality: 0.5){
-            let uuid = UUID().uuidString
-            let advertImageRefetance = medinaFolder.child("\(uuid).jpeg")
-            advertImageRefetance.putData(advertImageData, metadata: nil) { metaData, error in
-                if error != nil {
-                    print("Güncelleme resim ekleme hata \(error?.localizedDescription)")
+        
+        if let imageOneData = oneImage.image?.jpegData(compressionQuality: 0.5)
+         {
+            let imageOneDataUuid = UUID().uuidString
+            let imageOneReferance = medinaFolder.child("\(imageOneDataUuid).jpeg")
+            imageOneReferance.putData(imageOneData, metadata: nil) { metaData, error in
+                if error == nil {
+                    imageOneReferance.downloadURL { url, error in
+                        let imageOneUrl = url?.absoluteString
+                        self.imageDetailsUrl.append(imageOneUrl!)
+                        if let imageTwoData = self.secondImage.image?.jpegData(compressionQuality: 0.5)
+                         {
+                            let imageTwoDataUuid = UUID().uuidString
+                            let imageTwoReferance = medinaFolder.child("\(imageTwoDataUuid).jpeg")
+                            imageTwoReferance.putData(imageTwoData, metadata: nil) { metaData, error in
+                                if error == nil {
+                                    imageTwoReferance.downloadURL { url, error in
+                                        let imageTwoUrl = url?.absoluteString
+                                        self.imageDetailsUrl.append(imageTwoUrl!)
+                                        if let imageThirdData = self.thirdImage.image?.jpegData(compressionQuality: 0.5)
+                                         {
+                                            let imageThirdDataUuid = UUID().uuidString
+                                            let imageThirdReferance = medinaFolder.child("\(imageThirdDataUuid).jpeg")
+                                            imageThirdReferance.putData(imageThirdData, metadata: nil) { metaData, error in
+                                                if error == nil {
+                                                    imageThirdReferance.downloadURL { url, error in
+                                                        let imageThirdUrl = url?.absoluteString
+                                              
+                                                        self.imageDetailsUrl.append(imageThirdUrl!)
+                                                        if let advertImageData = self.advertImage.image?.jpegData(compressionQuality: 0.5){
+                                                                    let uuid = UUID().uuidString
+                                                                    let advertImageRefetance = medinaFolder.child("\(uuid).jpeg")
+                                                                    advertImageRefetance.putData(advertImageData, metadata: nil) { metaData, error in
+                                                                        if error != nil {
+                                                                            print("Güncelleme resim ekleme hata \(error?.localizedDescription)")
+                                                                        }
+                                                                        
+                                                                        else {
+                                                                            advertImageRefetance.downloadURL {url, error in
+                                                                                if error != nil {
+                                                                                    print("Günceleme resim indirme hata")
+                                                                                }
+                                                                                
+                                                                                else {
+                                                                                   let advertImageUrl = url?.absoluteString
+                                                                                    let updateData : [String : Any] =
+                                                                                                                                                                                [
+                                                                                                                                                                                 "animalName" : self.advertName.text!,
+                                                                                                                                                                                 "animalAge"  : Int(self.advertAge.text!)!,
+                                                                                                                                                                                 "animalKinds" : self.advertKinds.text!,
+                                                                                                                                                                                 "animalOwnerNot" : self.ownerNote.text!,
+                                                                                                                                                                                 "animalSickInfo" : self.sickInfo.text!,
+                                                                                                                                                                                 "animalSick": self.sickBool,
+                                                                                                                                                                                 "animalImage" : advertImageUrl!,
+                                                                                "animalImageDetails" : self.imageDetailsUrl,
+                                                                                                                                                                                 "animalGenus" : self.advertGenus.text!
+                                                                                                                                                                                ]
+                                                                                                                                                                 
+                                                                                                                                                                 if let advertId = self.getAdvert?.animaluuid {
+                                                                                                                                      
+                                                                                                                                                                     if let userId = Auth.auth().currentUser?.uid {
+                                                                                                                                                                         Service().updateMyAdvert(userId: userId, advertId: advertId, updateData: updateData)
+                                                                                                                                                                         
+                                                                                                                                                                         
+                                                                                                                                                                         self.navigationController?.popViewController(animated: true)
+                                                                                                                                                                         
+                                                                                                                                                                     }
+                                                                                   
+                                                                                                                                                                 }
+
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                            
+                                                                                }
+                                                                            }
+                                                                            
+                                                                        }
+                                                                    }
+                                                                    
+                                                                    
+                                                                }
+
+                                                      
+                                                        
+                                                    }
+                                                    
+                                                }
+                                            }
+                                        }
+                                  
+                                    }
+                                    
+                                }
+                            }
+                        }
+                        
+                    }
+                  
+                    
                 }
                 
                 else {
-                    advertImageRefetance.downloadURL {url, error in
-                        if error != nil {
-                            print("Günceleme resim indirme hata")
-                        }
-                        
-                        else {
-                           let advertImageUrl = url?.absoluteString
-                            let updateData : [String : Any] =
-                                           [
-                                            "animalName" : self.advertName.text!,
-                                            "animalAge"  : Int(self.advertAge.text!)!,
-                                            "animalKinds" : self.advertKinds.text!,
-                                            "animalOwnerNot" : self.ownerNote.text!,
-                                            "animalSickInfo" : self.sickInfo.text!,
-                                            "animalSick": self.sickBool,
-                                            "animalImage" : advertImageUrl!,
-                                            "animalImageDetails" : self.getAdvert?.animalImageDetails ?? ["",""]
-                                            
-                                            
-                                            
-                                            
-                                           
-                                           
-                                           ]
-                            
-                            if let advertId = self.getAdvert?.animaluuid {
-
-                                if let userId = Auth.auth().currentUser?.uid {
-                                    Service().updateMyAdvert(userId: userId, advertId: advertId, updateData: updateData)
-                                    
-                                    
-                                    self.navigationController?.popViewController(animated: true)
-                                    
-                                }
-                               
-                                
-                       
-                            }
-                        }
-                    }
-                    
+                    print("Resim hatası \(error?.localizedDescription)")
                 }
             }
-            
-            
         }
-     
+        
+        
+   
+        
+        
+   
+        
+        
+  
+
         
       
-        
-        
         
         
       
