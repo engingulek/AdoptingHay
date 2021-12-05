@@ -25,10 +25,16 @@ class MyAdvertVC: UIViewController {
         getMyAnimalAdvert()
         spinner.startAnimating()
         
-       
-        
+        self.tabBarController?.tabBar.isHidden = true
+        myAdvertsCollectionView.reloadData()
        
     
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        getMyAnimalAdvert()
+        myAdvertsCollectionView.reloadData()
+        
     }
     
     
@@ -99,7 +105,7 @@ extension MyAdvertVC : UICollectionViewDelegate, UICollectionViewDataSource {
         
         cell.advertName.text = "Adı : \(myAdvert.name)"
         cell.advertAge.text = "Yaş : \(myAdvert.age)"
-        cell.advertGenus.text = "Cins : \(myAdvert.genus)"
+        cell.advertGenus.text = "Cins : \(myAdvert.kinds)/\(myAdvert.genus)"
         cell.advertSick.text = "Hastalık : \(myAdvert.sick)"
         let imageUrl = URL(string: myAdvert.image)!
         if let imageData = try? Data(contentsOf: imageUrl)
@@ -119,7 +125,21 @@ extension MyAdvertVC : UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        
+        let myAdvert = self.myAnimalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
+        performSegue(withIdentifier: "myAdverttoDetails", sender: myAdvert.myAdvert)
     
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "myAdverttoDetails" {
+            
+            if let getAnimalAdvert = sender as? MyAdvert {
+                let toMyAdvertDetailVC = segue.destination as! MyAdvertDetailsVC
+                toMyAdvertDetailVC.getAdvert = getAnimalAdvert
+            }
+            
+        }
     }
     
 }

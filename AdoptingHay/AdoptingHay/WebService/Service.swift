@@ -248,6 +248,22 @@ class Service {
         
     }
     
+    
+    
+    func updateMyAdvert(userId:String,advertId:String,updateData:[String:Any]) {
+        let db = Firestore.firestore()
+        db.collection("userList").document(userId).collection("advertList").document(advertId).updateData(updateData)
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+   
+    
     func dowlandAnimalAdvertSickBoolFromFirestore(kinds:String,completion: @escaping ([AnimalAdvert]?)->()) {
         
         let db = Firestore.firestore()
