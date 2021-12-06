@@ -13,6 +13,7 @@ class FavoriListVC: UIViewController {
     @IBOutlet weak var favoriteCollectionView: UICollectionView!
     private var favoritListViewModel : FavoritListViewModel!
     
+    @IBOutlet weak var advertCount: UILabel!
     @IBOutlet weak var favoriCount: UILabel!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     override func viewDidLoad() {
@@ -34,8 +35,8 @@ class FavoriListVC: UIViewController {
 
         
      
-
         
+        design()
 
 
         
@@ -45,14 +46,66 @@ class FavoriListVC: UIViewController {
     }
     
     
+    func design(){
+       
+    
+        let myNewView=UIView(frame: CGRect(x: 0, y: 95, width: view.frame.size.width, height: view.frame.height/6))
+            myNewView.backgroundColor=UIColor.red
+        myNewView.layer.zPosition = -1
+        myNewView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+        self.view.addSubview(myNewView)
+        
+        let personImage = UIImage(named: "heart")
+        let myImageView:UIImageView = UIImageView()
+        myImageView.contentMode = UIView.ContentMode.scaleAspectFit
+        myImageView.frame.size.width = self.view.frame.width/4
+        myImageView.frame.size.height = self.view.frame.height/8
+        myImageView.center.x = self.view.center.x
+        myImageView.center.y = self.view.center.y/2.5
+        myImageView.image = personImage
+        myImageView.backgroundColor = .white
+        myImageView.layer.borderColor = UIColor.red.cgColor
+        myImageView.layer.borderWidth = 3
+        myImageView.layer.cornerRadius = 15
+        myImageView.backgroundColor = UIColor.red
+        self.view.addSubview(myImageView)
+        
+      
+
+      
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         getFavoriList()
         self.favoriteCollectionView.reloadData()
         
         
        if self.favoritListViewModel == nil {
+           self.favoriteCollectionView.isHidden = true
+           self.advertCount.text = "0 İlan"
+           
+           let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+           myNameLabel.text = "Favori Listeniz Boş"
+           myNameLabel.textAlignment = .center
+           myNameLabel.center.x = self.view.center.x
+           myNameLabel.center.y = self.view.center.y
+           myNameLabel.font = UIFont.systemFont(ofSize: 40, weight: .bold)
+           myNameLabel.textColor = .black
+           self.view.addSubview(myNameLabel)
           
-            navigationController?.popViewController(animated: true)
+          
+              
+           
+            
+        }
+        
+        else {
+            self.favoriteCollectionView.isHidden = false
+            let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
+            
+            self.advertCount.text = "\(counst) İlan"
+           
             
         }
         
@@ -76,9 +129,9 @@ class FavoriListVC: UIViewController {
                 else {
                     if let myAnimal = myAnimal {
                         self.favoritListViewModel = FavoritListViewModel(favoritList: myAnimal)
-                        let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
+               
                         
-                        self.favoriCount.text = "Favori Sayısı : \(counst)"
+                        
                         
                         self.favoriteCollectionView.reloadData()
                         self.spinner.stopAnimating()
@@ -158,4 +211,13 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     
+}
+
+extension UIView {
+   func roundCorners(corners: UIRectCorner, radius: CGFloat) {
+        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+        let mask = CAShapeLayer()
+        mask.path = path.cgPath
+        layer.mask = mask
+    }
 }

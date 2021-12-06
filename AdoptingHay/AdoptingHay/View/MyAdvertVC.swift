@@ -10,6 +10,7 @@ import Firebase
 class MyAdvertVC: UIViewController {
    
     
+    
     @IBOutlet weak var myAdvertsCount: UILabel!
     private var myAnimalAdvertListViewModel : MyAnimalAdvertListViewModel!
     var resultCount : Int?
@@ -27,14 +28,69 @@ class MyAdvertVC: UIViewController {
         
         self.tabBarController?.tabBar.isHidden = true
         myAdvertsCollectionView.reloadData()
+        
+        design()
        
     
     }
     
+    func design(){
+       
+    
+        let myNewView=UIView(frame: CGRect(x: 0, y: 95, width: view.frame.size.width, height: view.frame.height/6))
+            myNewView.backgroundColor=UIColor.red
+        myNewView.layer.zPosition = -1
+        myNewView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
+        self.view.addSubview(myNewView)
+        
+        let personImage = UIImage(named: "heart")
+        let myImageView:UIImageView = UIImageView()
+        myImageView.contentMode = UIView.ContentMode.scaleAspectFit
+        myImageView.frame.size.width = self.view.frame.width/4
+        myImageView.frame.size.height = self.view.frame.height/8
+        myImageView.center.x = self.view.center.x
+        myImageView.center.y = self.view.center.y/2.5
+        myImageView.image = personImage
+        myImageView.backgroundColor = .white
+        myImageView.layer.borderColor = UIColor.red.cgColor
+        myImageView.layer.borderWidth = 3
+        myImageView.layer.cornerRadius = 15
+        myImageView.backgroundColor = UIColor.red
+        self.view.addSubview(myImageView)
+        
+      
+
+      
+    }
+    
+    
+    
+    
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         getMyAnimalAdvert()
-        myAdvertsCollectionView.reloadData()
-        print("Enişte")
+        if self.myAnimalAdvertListViewModel == nil {
+            self.myAdvertsCollectionView.isHidden = true
+            self.myAdvertsCount.text = "0 İlan"
+            
+            let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+            myNameLabel.text = "İlanınz Bulunmamaktadır"
+            myNameLabel.textAlignment = .center
+            myNameLabel.center.x = self.view.center.x
+            myNameLabel.center.y = self.view.center.y
+            myNameLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+            myNameLabel.textColor = .black
+            self.view.addSubview(myNameLabel)
+        }
+        
+        else {
+            
+            self.myAdvertsCollectionView.isHidden = false
+            let counts = self.myAnimalAdvertListViewModel == nil ? 0 :
+            self.myAnimalAdvertListViewModel.numberOfRowsInSection()
+            self.myAdvertsCount.text = "\(counts) İlan"
+        }
         
     }
     
@@ -58,11 +114,11 @@ class MyAdvertVC: UIViewController {
                     if let myAnimal = myAnimal {
                         self.myAnimalAdvertListViewModel = MyAnimalAdvertListViewModel(myAdvertList: myAnimal)
                         
-                        let counst = self.myAnimalAdvertListViewModel == nil ? 0 : self.myAnimalAdvertListViewModel.numberOfRowsInSection()
+                   
                  
                      
                         
-                        self.myAdvertsCount.text = "İlan Sayısı : \(counst)"
+              
                      
                         
                      
