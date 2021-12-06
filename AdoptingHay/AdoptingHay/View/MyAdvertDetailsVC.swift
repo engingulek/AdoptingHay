@@ -264,7 +264,9 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     @IBAction func deleteMyAdvert(_ sender: Any) {
         let userId = Auth.auth().currentUser?.uid
         let advertId = getAdvert?.animaluuid
+        
         Service().removeMyAdvert(userId: userId!, advertId: advertId!)
+        navigationController?.popViewController(animated: true)
     }
     
     

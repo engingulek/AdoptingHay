@@ -34,6 +34,7 @@ class MyAdvertVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         getMyAnimalAdvert()
         myAdvertsCollectionView.reloadData()
+        print("Enişte")
         
     }
     

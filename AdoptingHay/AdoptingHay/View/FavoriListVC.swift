@@ -48,6 +48,15 @@ class FavoriListVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         getFavoriList()
         self.favoriteCollectionView.reloadData()
+        
+        
+       if self.favoritListViewModel == nil {
+          
+            navigationController?.popViewController(animated: true)
+            
+        }
+        
+       
     }
     
  
@@ -70,9 +79,13 @@ class FavoriListVC: UIViewController {
                         let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
                         
                         self.favoriCount.text = "Favori Sayısı : \(counst)"
+                        
                         self.favoriteCollectionView.reloadData()
                         self.spinner.stopAnimating()
                         self.spinner.isHidden = true
+                        
+                        
+                        
                       
                         
                     }
@@ -88,7 +101,9 @@ class FavoriListVC: UIViewController {
 
 extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
         return self.favoritListViewModel == nil ? 0 : self.favoritListViewModel.numberOfRowsInSection()
+       
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -103,6 +118,8 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
             cell.imageView.image =  UIImage(data: animalImageData)
             
         }
+        
+       
         
         
    

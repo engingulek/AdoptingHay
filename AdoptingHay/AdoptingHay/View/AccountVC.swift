@@ -84,6 +84,7 @@ class AccountVC: UIViewController{
                         self.favoritListViewModel = FavoritListViewModel(favoritList: myAnimal)
                         let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
                         print("gaga \(counst)")
+                     
                         self.resultFavoriListCount = counst
                      
                       
@@ -135,21 +136,57 @@ class AccountVC: UIViewController{
     
     
     @IBAction func toFavoriListButton(_ sender: Any) {
+      
+        
         if resultFavoriListCount == nil {
-            let alertController = UIAlertController(title: "UYARI" , message: "Favorli Listenizde İlan Bulunmamaktadır", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
-            alertController.addAction(alertAction)
-            self.present(alertController, animated: true, completion: nil)
+            let alertController = UIAlertController(title: "UYARI" , message: "Favori Listenizde İlan Bulunmamaktadır.", preferredStyle: .alert)
+             let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
+             alertController.addAction(alertAction)
+             self.present(alertController, animated: true, completion: nil)
         }
         
+    
+        
         else {
-            performSegue(withIdentifier: "toDetailsFav", sender: nil)
+          
+          
+                self.performSegue(withIdentifier: "toDetailsFav", sender: nil)
+                
+            
+        
+          
+           
+             
+            
+       
+               
+
+                
+            
+            
+           
+           
+            
+            
+            
+            
+            
+            
+            
         }
+        
+       
+        
+        
+ 
+        
+       
     }
     
     
     
     @IBAction func toMyAdvertList(_ sender: Any) {
+        getMyAnimalAdvert()
         if  resultMyAdvertCount == nil {
             let alertController = UIAlertController(title: "UYARI" , message: "İlan  İlan Bulunmamaktadır", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
@@ -166,7 +203,7 @@ class AccountVC: UIViewController{
     }
     
    
- 
+  
     
     func design() {
         // view Design
