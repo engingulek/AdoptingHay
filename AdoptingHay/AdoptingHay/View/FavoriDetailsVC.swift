@@ -94,7 +94,7 @@ class FavoriDetailsVC: UIViewController{
     
             self.dismiss(animated: true) {
                 Service().removeFavoriAdvert(advertId: advertUid)
-                self.tabBarController?.selectedIndex = 0
+                //self.tabBarController?.selectedIndex = 0
                 
             }
                        

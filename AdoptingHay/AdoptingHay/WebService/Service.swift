@@ -253,7 +253,15 @@ class Service {
     func updateMyAdvert(userId:String,advertId:String,updateData:[String:Any]) {
         let db = Firestore.firestore()
         db.collection("userList").document(userId).collection("advertList").document(advertId).updateData(updateData)
-        
+        db.collection("animalAdvert").document("\(advertId)").updateData(updateData)
+   
+    }
+    
+    func removeMyAdvert(userId:String,advertId:String) {
+        print("Aykut : \(userId) ---   \(advertId)")
+        let db = Firestore.firestore()
+        db.collection("userList").document(userId).collection("advertList").document(advertId).delete()
+        db.collection("animalAdvert").document("\(advertId)").delete()
     }
     
     

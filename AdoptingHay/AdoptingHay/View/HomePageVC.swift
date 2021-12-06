@@ -42,7 +42,7 @@ class HomePageVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        self.tabBarController?.tabBar.isHidden = false
 
         searchBar.delegate = self
         
@@ -83,6 +83,7 @@ class HomePageVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         getAnimalAdvertData()
         self.animalAdvertCollectionView.reloadData()
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
