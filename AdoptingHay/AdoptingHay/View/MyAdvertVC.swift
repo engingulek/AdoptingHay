@@ -38,12 +38,12 @@ class MyAdvertVC: UIViewController {
        
     
         let myNewView=UIView(frame: CGRect(x: 0, y: 95, width: view.frame.size.width, height: view.frame.height/6))
-            myNewView.backgroundColor=UIColor.red
+        myNewView.backgroundColor=UIColor.red
         myNewView.layer.zPosition = -1
         myNewView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 10.0)
         self.view.addSubview(myNewView)
         
-        let personImage = UIImage(named: "heart")
+        let personImage = UIImage(named: "bilbord")
         let myImageView:UIImageView = UIImageView()
         myImageView.contentMode = UIView.ContentMode.scaleAspectFit
         myImageView.frame.size.width = self.view.frame.width/4
@@ -55,7 +55,7 @@ class MyAdvertVC: UIViewController {
         myImageView.layer.borderColor = UIColor.red.cgColor
         myImageView.layer.borderWidth = 3
         myImageView.layer.cornerRadius = 15
-        myImageView.backgroundColor = UIColor.red
+        myImageView.backgroundColor = UIColor.white
         self.view.addSubview(myImageView)
         
       

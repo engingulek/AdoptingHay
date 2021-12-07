@@ -1239,8 +1239,13 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="8Tz-4b-CHG">
                                 <rect key="frame" x="0.0" y="312" width="414" height="501"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fRX-Ou-jg7">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="PQx-7W-E4T"/>
+                                    <constraint firstAttribute="height" constant="501" id="kSi-8F-Yt6"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fRX-Ou-jg7">
                                     <size key="itemSize" width="370" height="158"/>
+                                    <size key="estimatedItemSize" width="370" height="158"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -1253,7 +1258,7 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="myadvertsCell" id="pRO-7Z-Op7" customClass="MyAdvertsCVC" customModule="AdoptingHay" customModuleProvider="target">
                                         <rect key="frame" x="22" y="0.0" width="370" height="158"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ALM-gx-V7C">
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="370" height="158"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
@@ -1290,7 +1295,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                        </collectionViewCellContentView>
+                                        </view>
                                         <size key="customSize" width="370" height="158"/>
                                         <connections>
                                             <outlet property="advertAge" destination="yaQ-cU-4J6" id="EJ6-Wh-hlf"/>
@@ -1302,14 +1307,14 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="İlanlarım" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5uz-n5-y4f">
-                                <rect key="frame" x="20" y="256" width="101" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="İlanlarım" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UOf-qv-4BC">
+                                <rect key="frame" x="20" y="259" width="101" height="30"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 İlan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cz7-yO-Nuz">
-                                <rect key="frame" x="350.5" y="256" width="43.5" height="23"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 İlan" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ys8-vo-mKm">
+                                <rect key="frame" x="343" y="260" width="43.5" height="23"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1318,20 +1323,21 @@
                         <viewLayoutGuide key="safeArea" id="rIK-IU-RAn"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="8Tz-4b-CHG" firstAttribute="bottom" secondItem="rIK-IU-RAn" secondAttribute="bottom" id="HCI-BI-tNa"/>
-                            <constraint firstItem="rIK-IU-RAn" firstAttribute="trailing" secondItem="cz7-yO-Nuz" secondAttribute="trailing" constant="20" id="OsK-he-E4K"/>
-                            <constraint firstAttribute="trailing" secondItem="8Tz-4b-CHG" secondAttribute="trailing" id="SOD-JY-O4f"/>
-                            <constraint firstItem="cz7-yO-Nuz" firstAttribute="top" secondItem="rIK-IU-RAn" secondAttribute="top" constant="168" id="Vza-ZF-noR"/>
-                            <constraint firstItem="5uz-n5-y4f" firstAttribute="leading" secondItem="0sO-7C-QwH" secondAttribute="leadingMargin" id="hoY-XH-KRq"/>
-                            <constraint firstItem="8Tz-4b-CHG" firstAttribute="top" secondItem="5uz-n5-y4f" secondAttribute="bottom" constant="26" id="s1O-wE-eF5"/>
-                            <constraint firstItem="8Tz-4b-CHG" firstAttribute="leading" secondItem="0sO-7C-QwH" secondAttribute="leading" id="uV3-jY-5pY"/>
-                            <constraint firstItem="5uz-n5-y4f" firstAttribute="top" secondItem="cz7-yO-Nuz" secondAttribute="top" id="wSd-qP-Ykb"/>
+                            <constraint firstItem="8Tz-4b-CHG" firstAttribute="top" secondItem="rIK-IU-RAn" secondAttribute="top" constant="224" id="5Zi-cx-ByC"/>
+                            <constraint firstItem="rIK-IU-RAn" firstAttribute="trailing" secondItem="ys8-vo-mKm" secondAttribute="trailing" constant="27.5" id="8eU-OF-fzu"/>
+                            <constraint firstItem="UOf-qv-4BC" firstAttribute="top" secondItem="rIK-IU-RAn" secondAttribute="top" constant="171" id="Enp-na-wap"/>
+                            <constraint firstItem="ys8-vo-mKm" firstAttribute="leading" secondItem="UOf-qv-4BC" secondAttribute="trailing" constant="222" id="Fnn-9x-vx5"/>
+                            <constraint firstItem="8Tz-4b-CHG" firstAttribute="leading" secondItem="rIK-IU-RAn" secondAttribute="leading" id="IT9-yx-jbX"/>
+                            <constraint firstItem="UOf-qv-4BC" firstAttribute="leading" secondItem="rIK-IU-RAn" secondAttribute="leading" constant="20" id="QLt-OZ-Cv9"/>
+                            <constraint firstItem="8Tz-4b-CHG" firstAttribute="trailing" secondItem="rIK-IU-RAn" secondAttribute="trailing" id="cDt-kc-x6R"/>
+                            <constraint firstItem="rIK-IU-RAn" firstAttribute="trailing" secondItem="UOf-qv-4BC" secondAttribute="trailing" constant="293" id="gNR-9E-v0v"/>
+                            <constraint firstItem="ys8-vo-mKm" firstAttribute="top" secondItem="rIK-IU-RAn" secondAttribute="top" constant="172" id="xsF-79-bUm"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="always" id="jZU-P0-eXS"/>
                     <connections>
                         <outlet property="myAdvertsCollectionView" destination="8Tz-4b-CHG" id="gZB-BE-Hhg"/>
-                        <outlet property="myAdvertsCount" destination="cz7-yO-Nuz" id="X0f-xg-FMR"/>
+                        <outlet property="myAdvertsCount" destination="ys8-vo-mKm" id="qMQ-eX-lKV"/>
                         <outlet property="spinner" destination="iIg-Ds-389" id="z2e-dw-Bk3"/>
                         <segue destination="pWx-eo-xOZ" kind="show" identifier="myAdverttoDetails" id="4up-Gf-U0b"/>
                     </connections>
