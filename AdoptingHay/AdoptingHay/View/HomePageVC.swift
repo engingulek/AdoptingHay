@@ -7,11 +7,13 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 
 class HomePageVC: UIViewController {
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
+    var permissionCheck:Bool = false
     
     @IBOutlet weak var animalKindsCollectionView: UICollectionView!
     
@@ -35,12 +37,13 @@ class HomePageVC: UIViewController {
     private var animalAdvertListViewModel : AnimalAdvertListViewModel!
     
 
-    
+    var timer = Timer()
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        UNUserNotificationCenter.current().delegate = self
 
         self.tabBarController?.tabBar.isHidden = false
 
@@ -76,7 +79,85 @@ class HomePageVC: UIViewController {
        
         
         self.animalAdvertCollectionView.reloadData()
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
+           
+            self.permissionCheck = granted
+            
+            if granted {
+                print("İzin alma işlemi başarılı")
+                
+            }
+            else {
+                print("İzin alma işlemi başarısız")
+                
+            }
+        }
+        
+        
+        
+       
+            self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+                self.getNotificationFromFirestore()
+                
+            })
+        
 
+    }
+    
+    func getNotificationFromFirestore(){
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid
+       
+        if let userId = userId {
+            db.collection("userList").document("\(userId)").collection("notiList").getDocuments { snaphot, error in
+                if error == nil {
+                    
+                    if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
+                        print("Yeni bir bildirim yok \(userId)")
+                    }
+                    
+                    else {
+                        print("Yeni bir bildirim var \(userId)")
+                    
+                        UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
+                        if self.permissionCheck {
+                            
+                            for documents in (snaphot?.documents)! {
+                                if let userName =  documents.get("sendUserName") {
+                                    print("Bildirim Kontrol")
+                                    let icerik =  UNMutableNotificationContent()
+                                    icerik.title = "AdoptingHay"
+                                    icerik.subtitle = "Bir ilanız favorilere eklendi"
+                                    icerik.body = "\(userName) kişisi ilanınızı favorilerine ekledi"
+                                  //  icerik.badge = 1
+                                    icerik.sound = UNNotificationSound.default
+                                    
+                                    // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
+                                    let tetikleme = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+                                    
+                                    // Bildirim isteği oluşturulması
+                                    let bildirimIstegi = UNNotificationRequest(identifier: "bildirim", content: icerik, trigger: tetikleme)
+                                    
+                                    UNUserNotificationCenter.current().add(bildirimIstegi, withCompletionHandler: nil)
+                                    
+                                }
+                                
+                            }
+                            
+                            
+                           
+                        }
+                        
+                      
+                        
+                     
+                       
+                    }
+                    
+                }
+            }
+        }
     }
 
     
@@ -259,19 +340,13 @@ class HomePageVC: UIViewController {
         
     }
     
- 
-  
+}
 
-    
-    
 
-    
-    
-    
-    
- 
-  
-
+extension HomePageVC:UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner,.sound])
+    }
 }
 
 extension HomePageVC:UISearchBarDelegate {
@@ -450,6 +525,9 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
  
     
 }
+
+
+
 
 
 

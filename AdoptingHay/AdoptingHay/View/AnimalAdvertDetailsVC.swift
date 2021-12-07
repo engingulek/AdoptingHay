@@ -82,7 +82,28 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     @IBAction func addFavoriteButton(_ sender: Any) {
-        Service().addAdvertFavoriteToFirebase(advert: getAnimalAdvert!)
+   
+        let userName = Auth.auth().currentUser?.displayName!
+        let userId = getAnimalAdvert?.userId
+        let myUserId = Auth.auth().currentUser?.uid
+        
+        if let myUserId = myUserId {
+            if let userName = userName {
+              if  let userId = userId {
+                  print("UserName \(userName)  gidecek kişi \(userId)  benim id im \(myUserId)")
+                  Service().addAdvertFavoriteToFirebase(advert: getAnimalAdvert!,sendUserName:userName,getuserId:userId)
+                
+                  
+                    
+                }
+               
+            }
+            
+        }
+       
+       
+        
+    
     }
     
     
@@ -95,7 +116,7 @@ class AnimalAdvertDetailsVC: UIViewController {
                         if let getAnimakSickBool = getAnimalAdvert?.animalSick{
                             if let getAnimalAdvertOwner = getAnimalAdvert?.animalOwnerNot {
                                 
-                               
+                        
                                 
                                 self.animalName.text = "Adı : \(getAnimalname)"
                                 self.animalGenus.text = "Cinsi : \(getAnimalKinds) / \(getAnimalGenus)  "

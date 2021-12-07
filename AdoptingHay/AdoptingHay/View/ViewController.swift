@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var goGoogleButton: UIButton!
     
     @IBOutlet weak var goEmailButton: UIButton!
+    
+   
 
 
     override func viewDidLoad() {
