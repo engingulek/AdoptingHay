@@ -7,6 +7,7 @@
 
 import UIKit
 import MessageKit
+import InputBarAccessoryView
 
 
 struct Message : MessageType {
@@ -38,12 +39,26 @@ class ChatVC: MessagesViewController {
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
+        messageInputBar.delegate = self
         messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Merhaba")))
         messages.append(Message(sender: sendSender, messageId: "2", sentDate: Date(), kind: .text("İyi aga")))
        
     }
 
 }
+
+
+extension ChatVC : InputBarAccessoryViewDelegate {
+    func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
+     
+        
+        print("\(text)")
+      
+    }
+}
+
+
+
 
 
 extension ChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayDelegate {
@@ -64,5 +79,20 @@ extension ChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayD
         return messages.count
     }
     
+    func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
+        let sender = message.sender
+        if sender.senderId == selfSender.senderId {
+            // our image
+            avatarView.image = UIImage(named: "bird")
+        }
+        else {
+            avatarView.image = UIImage(named: "dog")
+        }
+    }
+    
+    
+    
+    
+ 
     
 }
