@@ -12,16 +12,16 @@ import UserNotifications
 class HomePageVC: UIViewController {
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-
+    
     var permissionCheck:Bool = false
     
     @IBOutlet weak var animalKindsCollectionView: UICollectionView!
     
     @IBOutlet weak var animalAdvertCollectionView: UICollectionView!
     var maxToMinBool:Bool = false
-
+    
     var animalKindsImage:[Data] = [Data]()
-   // var animalKindsTitle:[String] = [String]()
+    // var animalKindsTitle:[String] = [String]()
     var animalAdvertLists = [AnimalAdvert]()
     var getKinds : String = "nil"
     var ageShortlValue:String = "nil"
@@ -36,52 +36,52 @@ class HomePageVC: UIViewController {
     private var animalKindsListViewModel : AnimalKindsListViewModel!
     private var animalAdvertListViewModel : AnimalAdvertListViewModel!
     
-
+    
     var timer = Timer()
     
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         UNUserNotificationCenter.current().delegate = self
-
+        
         self.tabBarController?.tabBar.isHidden = false
-
+        
         searchBar.delegate = self
         
         animalKindsCollectionView.delegate = self
         animalKindsCollectionView.dataSource = self
         
         animalKindsCollectionView.showsHorizontalScrollIndicator = false
-       
+        
         
         
         
         animalAdvertCollectionView.delegate = self
         animalAdvertCollectionView.dataSource = self
-
+        
         // viewModel içirisine ihityacımız olan tüm listi vermiş olduk()
-   
-
-            
         
         
         
         
- // viewModel içirisine ihityacımız olan tüm listi vermiş olduk
+        
+        
+        
+        // viewModel içirisine ihityacımız olan tüm listi vermiş olduk
         getAnimalKindsData()
-
         
-      getAnimalAdvertData()
-       
+        
+        getAnimalAdvertData()
+        
         spinner.startAnimating()
         spinnerKinds.startAnimating()
-       
+        
         
         self.animalAdvertCollectionView.reloadData()
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
-           
+            
             self.permissionCheck = granted
             
             if granted {
@@ -96,19 +96,19 @@ class HomePageVC: UIViewController {
         
         
         
-       
-            self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
-                self.getNotificationFromFirestore()
-                
-            })
         
-
+        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+           // self.getNotificationFromFirestore()
+            
+        })
+        
+        
     }
     
     func getNotificationFromFirestore(){
         let db = Firestore.firestore()
         let userId = Auth.auth().currentUser?.uid
-       
+        
         if let userId = userId {
             db.collection("userList").document("\(userId)").collection("notiList").getDocuments { snaphot, error in
                 if error == nil {
@@ -119,7 +119,7 @@ class HomePageVC: UIViewController {
                     
                     else {
                         print("Yeni bir bildirim var \(userId)")
-                    
+                        
                         UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
                         if self.permissionCheck {
                             
@@ -130,7 +130,7 @@ class HomePageVC: UIViewController {
                                     icerik.title = "AdoptingHay"
                                     icerik.subtitle = "Bir ilanız favorilere eklendi"
                                     icerik.body = "\(userName) kişisi ilanınızı favorilerine ekledi"
-                                  //  icerik.badge = 1
+                                    //  icerik.badge = 1
                                     icerik.sound = UNNotificationSound.default
                                     
                                     // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
@@ -146,20 +146,20 @@ class HomePageVC: UIViewController {
                             }
                             
                             
-                           
+                            
                         }
                         
-                      
                         
-                     
-                       
+                        
+                        
+                        
                     }
                     
                 }
             }
         }
     }
-
+    
     
     override func viewDidAppear(_ animated: Bool) {
         getAnimalAdvertData()
@@ -168,11 +168,11 @@ class HomePageVC: UIViewController {
         
     }
     
-  
-            
-            
-       
-       
+    
+    
+    
+    
+    
     
     
     
@@ -192,24 +192,24 @@ class HomePageVC: UIViewController {
             
             
             Service().dowlandAnimalAdvertAgeShortFromFirestore(kinds:self.getKinds,shortType: true) { animalA in
-                    if let animalA = animalA {
-                        self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                        print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
-                        self.animalAdvertCollectionView.reloadData()
-                   
-                    }
+                if let animalA = animalA {
+                    self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
+                    self.animalAdvertCollectionView.reloadData()
                     
                 }
                 
-            
-          
-          
+            }
             
             
-          
+            
+            
+            
+            
+            
         }
         
-    
+        
         
         let ageShortMintoMax = UIAlertAction(title: "Küçükten büyüğe", style: .default) { action in
             
@@ -219,7 +219,7 @@ class HomePageVC: UIViewController {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                     print("Sayilasi sick bool\( self.animalAdvertListViewModel.animalAdvertList.count)")
                     self.animalAdvertCollectionView.reloadData()
-               
+                    
                 }
                 
             }
@@ -238,15 +238,15 @@ class HomePageVC: UIViewController {
                 if animalA == nil {
                     self.getAnimalAdvertData()
                     self.alertMessage(title: "Uyarı", message: "Şuanda bu filtrelemede ilan bulunmamaktadır.")
-
+                    
                 }
                 
                 else {
                     if let animalA = animalA {
                         self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                      
+                        
                         self.animalAdvertCollectionView.reloadData()
-                   
+                        
                     }
                     
                 }
@@ -262,15 +262,15 @@ class HomePageVC: UIViewController {
             Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: true,kinds: self.getKinds) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                  
+                    
                     self.animalAdvertCollectionView.reloadData()
-               
+                    
                 }
                 
             }
             
             
-           
+            
         }
         
         
@@ -280,14 +280,14 @@ class HomePageVC: UIViewController {
             Service().dowlandAnimalAdvertDateShortFromFirestore(shortType: false,kinds: self.getKinds) { animalA in
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                  
+                    
                     self.animalAdvertCollectionView.reloadData()
-               
+                    
                 }
                 
             }
             
-           
+            
         }
         
         
@@ -314,7 +314,7 @@ class HomePageVC: UIViewController {
         Service().dowlandAnimalKindsFromFirestore { (animalK) in
             if let animalK = animalK {
                 self.animalKindsListViewModel = AnimalKindsListViewModel(animalKindsList: animalK)
-               
+                
                 if self.animalKindsListViewModel.animalKindsList.count > 0 {
                     self.spinnerKinds.stopAnimating()
                     self.spinnerKinds.isHidden = true
@@ -350,9 +350,9 @@ extension HomePageVC:UNUserNotificationCenterDelegate {
 }
 
 extension HomePageVC:UISearchBarDelegate {
-
+    
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
+        
         print("Arama \(searchText)")
         
         if searchText == "" {
@@ -364,8 +364,8 @@ extension HomePageVC:UISearchBarDelegate {
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                     self.animalAdvertCollectionView.reloadData()
-            }
-        } } }}
+                }
+            } } }}
 
 
 
@@ -384,7 +384,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         if collectionView == self.animalAdvertCollectionView {
             let cell = animalAdvertCollectionView.dequeueReusableCell(withReuseIdentifier: "animalAdvertCell", for: indexPath) as! AnimalAdvertCVC
             
@@ -399,7 +399,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 
             }
             
-//
+            //
             cell.advertId.text = "\(advertViewModel.advertid)"
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"
@@ -409,21 +409,21 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             cell.advertUserName.text = "\(advertViewModel.userName)"
             
             cell.userId.text = "\(advertViewModel.userId)"
-          
+            
             print("Tarih \(advertViewModel.addDate)")
             
             cell.addFavoriteButton(advertViewModel)
             cell.dateLabel.text = "\(advertViewModel.addDate)"
             
-           
             
             
-           cell.layer.cornerRadius = 25
-     
+            
+            cell.layer.cornerRadius = 25
+            
             cell.layer.borderWidth = 2
             
             cell.addFavoriteButton("ali")
-         
+            
             return cell
         }
         
@@ -432,16 +432,16 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             
             
             let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(indexPath.row)
-           
+            
             cell.animaKindsIcon.image = UIImage(data: kindsViewModel.image)
             
-        
+            
             cell.animalKindsTitle.text = kindsViewModel.name
-              cell.layer.cornerRadius = 25
+            cell.layer.cornerRadius = 25
             cell.layer.borderColor = UIColor.red.cgColor
             cell.layer.borderWidth = 2
             return cell
-            }
+        }
     }
     
     
@@ -449,11 +449,11 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
         
         if collectionView == self.animalAdvertCollectionView {
             
-        let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
-          
+            let advertViewModel = self.animalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
             
-          //  let animalAdvertUid = advertViewModel.advertid
-           performSegue(withIdentifier: "homePageToAdvertDetails", sender: advertViewModel.animalAdvert)
+            
+            //  let animalAdvertUid = advertViewModel.advertid
+            performSegue(withIdentifier: "homePageToAdvertDetails", sender: advertViewModel.animalAdvert)
             
             
         }
@@ -474,7 +474,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 
                 if animalA == nil && getAnimalKinds != "Hepsi" {
                     self.alertMessage(title: "Uyarı", message: "Şuanda bu türde ilan bulunmamaktadır.")
-              
+                    
                     
                     
                 }
@@ -482,16 +482,16 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 else {
                     if let animalA = animalA {
                         
-                       
+                        
                         self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
-                    
+                        
                         self.animalAdvertCollectionView.reloadData()
                     }
                     
                 }
                 
                 
-               
+                
                 
                 
                 
@@ -502,15 +502,15 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         if segue.identifier == "homePageToAdvertDetails" {
-             
-             if let getAnimalAdvert = sender as? AnimalAdvert {
-                 var toAnimalAdvertDetailVC = segue.destination as! AnimalAdvertDetailsVC
-                 toAnimalAdvertDetailVC.getAnimalAdvert = getAnimalAdvert
-             
+        if segue.identifier == "homePageToAdvertDetails" {
+            
+            if let getAnimalAdvert = sender as? AnimalAdvert {
+                var toAnimalAdvertDetailVC = segue.destination as! AnimalAdvertDetailsVC
+                toAnimalAdvertDetailVC.getAnimalAdvert = getAnimalAdvert
                 
-             } }
-     }
+                
+            } }
+    }
     
     
     
@@ -522,7 +522,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     
- 
+    
     
 }
 
