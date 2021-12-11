@@ -18,7 +18,9 @@ class Service {
     
     var myAnimalAdvertList = [MyAdvert]()
     var favoriAdvertList = [FavoritList]()
+    var notificationList = [Notification]()
     var  animalAdvertListViewModel : AnimalAdvertListViewModel!
+
     
     func dowlandAnimalKindsFromFirestore(completion: @escaping ([AnimalKinds]?)->()) {
         let db = Firestore.firestore()
@@ -242,29 +244,19 @@ class Service {
             db.collection("userList").document("\(userId)").collection("favoriList").document("\(advert.animalUid!)").setData(docData) {
                 err in
                 if  err != nil {
-                    print("Ekleme Hata var  \(err?.localizedDescription)")
-                }
+                    print("Ekleme Hata var  \(err?.localizedDescription)") }
                 
                 else {
                     print("Ekleme İşlemi başarılı user list")
                     let uuid = UUID().uuidString
+                    // Bildirimi gönderilmesi veritabanına bildirim bilgilerinin gönderilemesi
                     db.collection("userList").document("\(getuserId)").collection("notiList").document(uuid).setData(notificationData) {
                         err in
                         if err != nil {
                             print("Noti hata \(err?.localizedDescription)")
                         }
                         else {
-                            print("Noti hata")
-                        }
-                    }
-                }
-            }
-            
-        }
-        
-        
-        
-    }
+                            print("Noti hata") } }}} }}
     
     
     
@@ -1333,6 +1325,66 @@ class Service {
         
         
     }
+    
+    
+    
+    func dowloandNotiList(completion: @escaping ([Notification]?)->()) {
+        let db = Firestore.firestore()
+        
+        let uid = Auth.auth().currentUser?.uid
+        if let uuid = uid {
+            print("noti deneme uuid \(uuid)")
+            db.collection("userList").document(uuid).collection("notiList").getDocuments { snapshot, error in
+                if error != nil {
+                    completion(nil)
+                    print("Noti ERROR")
+                }
+                
+                else {
+                    
+                    for document in (snapshot?.documents)! {
+                        if let getUserId = document.get("getUserId") as? String {
+                            print("nOTİ DENEME 1 ")
+                            if let sendMessage = document.get("sendMessage") as? String {
+                                print("nOTİ DENEME 2 ")
+                                if let sendNotiSubtitle = document.get("sendNotiSubtitle") as? String {
+                                    print("nOTİ DENEME 3 ")
+                                    if let sendNotiTitle = document.get("sendNotiTitle") as? String {
+                                        print("nOTİ DENEME 4 ")
+                                       
+                                        if let sendUserName = document.get("sendUserName") as? String {
+                                            print("nOTİ DENEME 5 \(sendUserName)")
+                                            
+                                            let notiList = Notification(getUserId: getUserId, sendMessage: sendMessage, sendNotiSubtitle: sendNotiSubtitle, sendNotiTitle: sendNotiTitle, sendUserName: sendUserName)
+                                            
+                                            self.notificationList.append(notiList)
+                                            completion(self.notificationList)
+                                            
+                                           
+                                            
+                                        }
+                                    }
+                                    
+                                }
+                               
+                                
+                            }
+                           
+                            
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+        
+       
+        
+        
+        
+    }
+        
     
     
     

@@ -8,21 +8,22 @@
 import Foundation
 
 class Notification {
-    var id:Int?
-    var notificationImage:String?
-    var notificationName:String?
-    var notificationNoti:String?
+ 
+    var getUserId : String?
+    var sendMessage:String?
+    var sendNotiSubtitle:String?
+    var sendNotiTitle:String?
+    var sendUserName:String?
     
-    init() {
+    
+    
+    init(getUserId : String, sendMessage:String,sendNotiSubtitle:String,sendNotiTitle:String,sendUserName:String){
+        self.getUserId = getUserId
+        self.sendMessage = sendMessage
+        self.sendNotiSubtitle = sendNotiSubtitle
+        self.sendNotiTitle = sendNotiTitle
+        self.sendUserName = sendUserName
         
-    }
-    
-    
-    init(id:Int,notificationImage:String,notificationName:String,notificationNoti:String) {
-        self.id = id
-        self.notificationImage = notificationImage
-        self.notificationName = notificationName
-        self.notificationNoti = notificationNoti
     }
     
 }

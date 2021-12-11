@@ -41,7 +41,8 @@ class ChatVC: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
         messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("Merhaba")))
-        messages.append(Message(sender: sendSender, messageId: "2", sentDate: Date(), kind: .text("İyi aga")))
+        messages.append(Message(sender: selfSender, messageId: "1", sentDate: Date(), kind: .text("İyi Günler")))
+        messages.append(Message(sender: sendSender, messageId: "2", sentDate: Date(), kind: .text("Merhaba")))
        
     }
 

@@ -733,32 +733,33 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ilanınızı favorilerine ekledi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCe-J8-ngB">
-                                                    <rect key="frame" x="155" y="42" width="155" height="16"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbF-Jo-Mdc">
                                                     <rect key="frame" x="170" y="69.5" width="168" height="26"/>
                                                     <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                    <state key="normal" title="Profile Git"/>
+                                                    <state key="normal" title="Mesaj Gönder"/>
                                                     <connections>
                                                         <action selector="notficationtoProfilButton:" destination="fvc-0s-aJL" eventType="touchUpInside" id="fY2-en-baM"/>
                                                     </connections>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ilanınızı favorilerine ekledi" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BCe-J8-ngB">
+                                                    <rect key="frame" x="125" y="42" width="269" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="wbF-Jo-Mdc" firstAttribute="top" secondItem="BCe-J8-ngB" secondAttribute="bottom" constant="11.33" id="160-i6-jtD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="MXF-8G-bVH" secondAttribute="trailing" constant="72" id="86p-ns-rsY"/>
                                                 <constraint firstItem="MXF-8G-bVH" firstAttribute="leading" secondItem="vd9-WL-7f1" secondAttribute="trailing" constant="79" id="8up-PV-feW"/>
                                                 <constraint firstItem="MXF-8G-bVH" firstAttribute="top" secondItem="Sfs-qU-c7y" secondAttribute="topMargin" id="Dj3-hp-YgC"/>
+                                                <constraint firstItem="BCe-J8-ngB" firstAttribute="top" secondItem="MXF-8G-bVH" secondAttribute="bottom" constant="10" id="Gdc-DJ-bHg"/>
+                                                <constraint firstItem="wbF-Jo-Mdc" firstAttribute="top" secondItem="BCe-J8-ngB" secondAttribute="bottom" constant="11.5" id="KGh-rb-SEO"/>
                                                 <constraint firstItem="vd9-WL-7f1" firstAttribute="top" secondItem="Sfs-qU-c7y" secondAttribute="topMargin" constant="5.3300000000000001" id="N7y-zs-duf"/>
+                                                <constraint firstItem="BCe-J8-ngB" firstAttribute="trailing" secondItem="Sfs-qU-c7y" secondAttribute="trailingMargin" id="N9T-pn-0en"/>
                                                 <constraint firstItem="wbF-Jo-Mdc" firstAttribute="leading" secondItem="vd9-WL-7f1" secondAttribute="trailing" constant="64" id="OUF-J8-k0u"/>
-                                                <constraint firstItem="BCe-J8-ngB" firstAttribute="top" secondItem="MXF-8G-bVH" secondAttribute="bottom" constant="10" id="QGL-VP-qYZ"/>
-                                                <constraint firstItem="BCe-J8-ngB" firstAttribute="leading" secondItem="vd9-WL-7f1" secondAttribute="trailing" constant="49" id="e9M-Fb-d0z"/>
+                                                <constraint firstItem="BCe-J8-ngB" firstAttribute="leading" secondItem="vd9-WL-7f1" secondAttribute="trailing" constant="19" id="XTD-dj-zkh"/>
                                                 <constraint firstItem="vd9-WL-7f1" firstAttribute="leading" secondItem="Sfs-qU-c7y" secondAttribute="leadingMargin" id="lMW-Zv-sVg"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="vd9-WL-7f1" secondAttribute="bottom" constant="9" id="t85-7l-7Do"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="wbF-Jo-Mdc" secondAttribute="trailing" constant="56" id="xbQ-aA-jWn"/>
@@ -789,7 +790,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmV-D5-czs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-762" y="420"/>
+            <point key="canvasLocation" x="-762.31884057971024" y="419.86607142857139"/>
         </scene>
         <!--AccountVC-->
         <scene sceneID="fVE-Pf-ig4">
@@ -1690,7 +1691,7 @@
             </objects>
             <point key="canvasLocation" x="-359" y="-1712"/>
         </scene>
-        <!--User Name-->
+        <!--Selin Çiçek-->
         <scene sceneID="Mjo-J1-wqp">
             <objects>
                 <viewController id="FVp-sB-6Pb" customClass="ChatVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
@@ -1700,7 +1701,7 @@
                         <viewLayoutGuide key="safeArea" id="gSL-aM-x12"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="User Name" largeTitleDisplayMode="never" id="CI5-wB-W5X"/>
+                    <navigationItem key="navigationItem" title="Selin Çiçek" largeTitleDisplayMode="never" id="CI5-wB-W5X"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCP-m3-H79" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
