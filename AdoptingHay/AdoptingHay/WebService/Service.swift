@@ -213,7 +213,6 @@ class Service {
     
     func addAdvertFavoriteToFirebase(advert:AnimalAdvert,sendUserName:String,getuserId:String){
         let db = Firestore.firestore()
-        
         let docData : [String:Any] = [
             "userId": advert.userId!,
             "userName" : advert.userName!,
@@ -227,7 +226,6 @@ class Service {
             "animalSickInfo"   :  advert.animalSickInfo!,
             "animalSick" : advert.animalSick!
         ]
-        
         let notificationData : [String:Any] = [
             "sendUserName" : sendUserName,
             "getUserUd"    : getuserId,
@@ -235,17 +233,12 @@ class Service {
             "sendNotiSubtitle" : "Bir İlanınız Favorilere Eklendi",
             "sendMessage" : "\(sendUserName) Kişisi İlanınızı Favorilere Ekledi"
         ]
-        
-        
         let userId = Auth.auth().currentUser?.uid
-        
         if let userId = userId {
-            
             db.collection("userList").document("\(userId)").collection("favoriList").document("\(advert.animalUid!)").setData(docData) {
                 err in
                 if  err != nil {
                     print("Ekleme Hata var  \(err?.localizedDescription)") }
-                
                 else {
                     print("Ekleme İşlemi başarılı user list")
                     let uuid = UUID().uuidString
@@ -253,8 +246,7 @@ class Service {
                     db.collection("userList").document("\(getuserId)").collection("notiList").document(uuid).setData(notificationData) {
                         err in
                         if err != nil {
-                            print("Noti hata \(err?.localizedDescription)")
-                        }
+                            print("Noti hata \(err?.localizedDescription)")}
                         else {
                             print("Noti hata") } }}} }}
     

@@ -98,8 +98,7 @@ class HomePageVC: UIViewController {
         
         
         self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
-           // self.getNotificationFromFirestore()
-            
+            self.getNotificationFromFirestore()
         })
         
         
@@ -108,57 +107,29 @@ class HomePageVC: UIViewController {
     func getNotificationFromFirestore(){
         let db = Firestore.firestore()
         let userId = Auth.auth().currentUser?.uid
-        
         if let userId = userId {
             db.collection("userList").document("\(userId)").collection("notiList").getDocuments { snaphot, error in
                 if error == nil {
-                    
                     if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
-                        print("Yeni bir bildirim yok \(userId)")
+                        print("Yeni bildirim yok")
                     }
-                    
                     else {
-                        print("Yeni bir bildirim var \(userId)")
-                        
                         UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
                         if self.permissionCheck {
-                            
                             for documents in (snaphot?.documents)! {
                                 if let userName =  documents.get("sendUserName") {
-                                    print("Bildirim Kontrol")
-                                    let icerik =  UNMutableNotificationContent()
-                                    icerik.title = "AdoptingHay"
-                                    icerik.subtitle = "Bir ilanız favorilere eklendi"
-                                    icerik.body = "\(userName) kişisi ilanınızı favorilerine ekledi"
-                                    //  icerik.badge = 1
-                                    icerik.sound = UNNotificationSound.default
-                                    
+                                    let content =  UNMutableNotificationContent()
+                                    content.title = "AdoptingHay"
+                                    content.subtitle = "Bir ilanız favorilere eklendi"
+                                    content.body = "\(userName) kişisi ilanınızı favorilerine ekledi"
+                                    content.sound = UNNotificationSound.default
                                     // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
-                                    let tetikleme = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-                                    
+                                    let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
                                     // Bildirim isteği oluşturulması
-                                    let bildirimIstegi = UNNotificationRequest(identifier: "bildirim", content: icerik, trigger: tetikleme)
-                                    
-                                    UNUserNotificationCenter.current().add(bildirimIstegi, withCompletionHandler: nil)
-                                    
-                                }
-                                
-                            }
-                            
-                            
-                            
-                        }
-                        
-                        
-                        
-                        
-                        
-                    }
-                    
-                }
-            }
-        }
-    }
+                                    let noti = UNNotificationRequest(identifier: "bildirim", content: content, trigger: react)
+                                    // Bildirimin eklenmesi
+                                    UNUserNotificationCenter.current().add(noti, withCompletionHandler: nil)
+} }} }}} } }
     
     
     override func viewDidAppear(_ animated: Bool) {
