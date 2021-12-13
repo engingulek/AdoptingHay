@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class AnimalAdvertDetailsVC: UIViewController {
- 
+    
     
     @IBOutlet weak var animalName: UILabel!
     
@@ -43,13 +43,13 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     private var animalAdvertDetailsViewModel : AnimalAdvertDetailsViewModel!
     
-   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  getAnimalAdvertDetailNot()
+        //  getAnimalAdvertDetailNot()
         animalDetailsImagesCollectionView.delegate = self
         animalDetailsImagesCollectionView.dataSource = self
-     
+        
         
         animalAdvertDetailMesajCollectionView.delegate = self
         animalAdvertDetailMesajCollectionView.dataSource = self
@@ -58,11 +58,11 @@ class AnimalAdvertDetailsVC: UIViewController {
         animalDetailsImagesCollectionView.showsHorizontalScrollIndicator = false
         animalAdvertDetailMesajCollectionView.showsHorizontalScrollIndicator = false
         
-       // animalImages = ["pamukkopek","tarcinkedi","sarikus"]
+        // animalImages = ["pamukkopek","tarcinkedi","sarikus"]
         autoMesaj = ["Merhaba","İlan Akifmi","Hastalığı önemlimi","Sahiplencem"]
-       
-      animalDetails()
-      
+        
+        animalDetails()
+        
         //getAnimalAdvertDetails()
         
         
@@ -77,33 +77,33 @@ class AnimalAdvertDetailsVC: UIViewController {
         myNameLabel.font = UIFont.systemFont(ofSize: 25, weight: .bold)
         myNameLabel.textColor = .red
         self.view.addSubview(myNameLabel)
-
+        
     }
     
     
     @IBAction func addFavoriteButton(_ sender: Any) {
-   
+        
         let userName = Auth.auth().currentUser?.displayName!
         let userId = getAnimalAdvert?.userId
         let myUserId = Auth.auth().currentUser?.uid
         
         if let myUserId = myUserId {
             if let userName = userName {
-              if  let userId = userId {
-                  print("UserName \(userName)  gidecek kişi \(userId)  benim id im \(myUserId)")
-                  Service().addAdvertFavoriteToFirebase(advert: getAnimalAdvert!,sendUserName:userName,getuserId:userId)
-                
-                  
+                if  let userId = userId {
+                    print("UserName \(userName)  gidecek kişi \(userId)  benim id im \(myUserId)")
+                    Service().addAdvertFavoriteToFirebase(advert: getAnimalAdvert!,sendUserName:userName,getuserId:userId)
+                    
+                    
                     
                 }
-               
+                
             }
             
         }
-       
-       
         
-    
+        
+        
+        
     }
     
     
@@ -116,7 +116,7 @@ class AnimalAdvertDetailsVC: UIViewController {
                         if let getAnimakSickBool = getAnimalAdvert?.animalSick{
                             if let getAnimalAdvertOwner = getAnimalAdvert?.animalOwnerNot {
                                 
-                        
+                                
                                 
                                 self.animalName.text = "Adı : \(getAnimalname)"
                                 self.animalGenus.text = "Cinsi : \(getAnimalKinds) / \(getAnimalGenus)  "
@@ -163,7 +163,7 @@ class AnimalAdvertDetailsVC: UIViewController {
                                     
                                 }
                                 
-                      
+                                
                             }
                         }
                     }
@@ -172,8 +172,8 @@ class AnimalAdvertDetailsVC: UIViewController {
             
         }
         
-    
-       
+        
+        
     }
     
     
@@ -182,17 +182,17 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     
-  
+    
     @IBAction func messageSend(_ sender: Any) {
         
         if mesajText.text == "" {
-           print("Text Boş")
+            print("Text Boş")
         }
         
         else {
-            print(mesajText.text ?? "Hata")
+            Service().sendMessage(sendUserId: (getAnimalAdvert?.userId)!, sendUserName: (getAnimalAdvert?.userName)!, sendMessage: mesajText.text!)
         }
-       
+        
     }
     
     
@@ -203,11 +203,11 @@ class AnimalAdvertDetailsVC: UIViewController {
             
         }
         
-      
+        
         let alertController = UIAlertController(title: "Hastalık" , message: sicktoAlert, preferredStyle: .actionSheet)
         
         let close = UIAlertAction(title: "Kapat", style: .cancel) { action in
-        print("Kapatıldı")
+            print("Kapatıldı")
         }
         
         alertController.addAction(close)
@@ -219,10 +219,10 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     
     
-   
     
-
-
+    
+    
+    
 }
 
 
@@ -231,7 +231,7 @@ extension AnimalAdvertDetailsVC: UICollectionViewDelegate, UICollectionViewDataS
         
         if collectionView == self.animalDetailsImagesCollectionView {
             return   animalImages.count
-
+            
         }
         
         print("Sayi2 \(animalImages.count)")
@@ -241,7 +241,7 @@ extension AnimalAdvertDetailsVC: UICollectionViewDelegate, UICollectionViewDataS
         
         
         return autoMesaj.count
-       
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -249,47 +249,55 @@ extension AnimalAdvertDetailsVC: UICollectionViewDelegate, UICollectionViewDataS
         
         if collectionView == self.animalDetailsImagesCollectionView {
             let cell = animalDetailsImagesCollectionView.dequeueReusableCell(withReuseIdentifier: "animalDetailsImageCell", for: indexPath) as! AnimalAdvertDetailsImageCVC
-           
+            
             
             cell.animalmageDetails.image = UIImage(data: animalImages[indexPath.row])
             
             print("cell kısmı13 \(animalImages.count) ")
             
-        
-        
-        
-        cell.layer.cornerRadius = 25
- 
-        cell.layer.borderWidth = 2
-        return cell
+            
+            
+            
+            cell.layer.cornerRadius = 25
+            
+            cell.layer.borderWidth = 2
+            return cell
             
         }
-       
+        
         else {
             let cell = animalAdvertDetailMesajCollectionView.dequeueReusableCell(withReuseIdentifier: "mesajcell", for: indexPath) as! AnimalAdvertDetailsMesajCVC
             cell.mesajLabel.text = autoMesaj[indexPath.row]
             cell.layer.cornerRadius = 25
-     
+            
             cell.layer.borderWidth = 2
             cell.layer.borderColor = UIColor.red.cgColor
             cell.backgroundColor = UIColor.red
             
-        
+            
             return cell
-            }
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == self.animalDetailsImagesCollectionView {
-        
+            
             
         }
-       
+        
         else {
             mesajText.text = autoMesaj[indexPath.row]
             
-            }
+        
+            
+         
+            
+           
+            
+           
+            
+        }
     }
     
     

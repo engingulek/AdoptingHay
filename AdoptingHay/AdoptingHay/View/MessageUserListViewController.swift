@@ -10,12 +10,20 @@ import UIKit
 class MessageUserListViewController: UIViewController {
 
     @IBOutlet weak var messageUserListTableView: UITableView!
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         messageUserListTableView.delegate = self
         messageUserListTableView.dataSource = self
+      
     }
+    
+    
+
+    
+   
     
 
 
@@ -28,12 +36,17 @@ extension MessageUserListViewController : UITableViewDelegate,UITableViewDataSou
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = messageUserListTableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
-        cell.textLabel?.text = "Selin Çiçek"
+        
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         performSegue(withIdentifier: "toMessage", sender: nil)
     }
+    
+    
+  
+    
+    //
     
     
 }

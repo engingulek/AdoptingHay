@@ -1,10 +1,3 @@
-//
-//  ChatVC.swift
-//  AdoptingHay
-//
-//  Created by engin gülek on 11.12.2021.
-//
-
 import UIKit
 import MessageKit
 import InputBarAccessoryView
@@ -27,13 +20,17 @@ struct Sender:SenderType {
     var displayName: String
     
     
+    
 }
 
 class ChatVC: MessagesViewController {
     private var messages = [Message]()
-    private var selfSender:Sender!
-    private var sendSender:Sender!
-    private var messageCount:Int!
+    private var selfSender = Sender(senderId: "1", displayName: "Engin Gülek")
+    private var sendSender = Sender(senderId: "2", displayName: "Selin Çiçek")
+    var messageViewModelList : MessageViewModelList!
+ 
+    var senderName:String?
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +41,20 @@ class ChatVC: MessagesViewController {
         messageInputBar.delegate = self
         
      
-       
-        getAllMessage()
-       
-    }
+        
+   
+        
+        
+        getAll()
+        
+        
+      
+            
+           
+            
+        }
     
-    func getAllMessage() {
+    func getAll() {
         let db = Firestore.firestore()
     
         
@@ -66,10 +71,12 @@ class ChatVC: MessagesViewController {
                         print("Messsge sender id : \(document.documentID)")
                         if let messageSenderName = document.get("kullanıcıName") as? String {
                             print("Message sender name \(messageSenderName)")
+                            self.navigationItem.title = messageSenderName
                             
                             if let message = document.get("message") as? [Any]
                             {
-                                self.messageCount = 2
+                                
+                            
                                 
                                 for i in 0...message.count-1 {
                                     print("\(i). sıra \(message[i])")
@@ -81,21 +88,26 @@ class ChatVC: MessagesViewController {
                                         if let gonderilenMessage = messageOrder["gonderilenMessage"] as? String {
                                             
                                             if let sendUserID = messageOrder["senderId"] as? String {
-                                                if sendUserID != authUserID {
-                                                    self.sendSender = Sender(senderId: "2", displayName: "Selin Çiçek" )
+                                                
+                                                print("USER ID : \(Auth.auth().currentUser?.uid)")
+                                                
+                                                if let userId = Auth.auth().currentUser?.uid as? String {
+                                                    if userId == sendUserID {
+                                                        self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                        
+                                                    }
+                                                    else {
+                                                        self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                        
+                                                    }
                                                     
-                                                    self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text("Merhaba")))
-                                                    print("Gönderen Id : \(sendUserID) mesaj => \(gonderilenMessage)")
                                                 }
-                                                else {
-                                                    self.selfSender = Sender(senderId: "1", displayName: "Engin Gülek")
-
-                                                    
-                                                //    self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text("Merhaba")))
-                                                    
-                                                    print("Gönderen Id : \(sendUserID) mesaj => \(gonderilenMessage)")
-                                                    
-                                                }
+                                                
+                                                
+                                                self.messagesCollectionView.reloadData()
+                                                
+                                              
+                                             
                                             }
                                             
                                         }
@@ -116,11 +128,35 @@ class ChatVC: MessagesViewController {
                     }
                 }
             }
-            
-        }
-        
+
         
     }
+    
+  
+    
+ 
+    
+
+                
+        
+        
+       
+       
+       
+      
+        
+    
+       
+    }
+   
+    
+ 
+     
+            
+   
+        
+        
+    
     
     
     
@@ -134,9 +170,16 @@ class ChatVC: MessagesViewController {
 
 extension ChatVC : InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-     
+//       self.messages.removeAll()
         
-        print("\(text)")
+//        Service().sendMessage(sendUserId: (getAnimalAdvert?.userId)!, sendUserName: (getAnimalAdvert?.userName)!, sendMessage: mesajText.text!)
+    
+    
+     
+     
+      // getAll()
+
+//        print("\(text)")
       
     }
 }
@@ -149,21 +192,33 @@ extension ChatVC : InputBarAccessoryViewDelegate {
 
 extension ChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayDelegate {
     func currentSender() -> SenderType {
-      return selfSender!
+      return selfSender
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
-        return messages[indexPath.section]
+        
+       
+        return  messages[indexPath.section]
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         print("Message sayi \(messages.count)")
-        return 2
+        
+     
+        
+     
+        
+        
+        
+       
+        
+        
+        return messages.count
     }
     
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let sender = message.sender
-        if sender.senderId == selfSender!.senderId {
+        if sender.senderId == selfSender.senderId {
             // our image
             avatarView.image = UIImage(named: "bird")
         }

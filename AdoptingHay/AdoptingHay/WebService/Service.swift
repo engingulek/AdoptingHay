@@ -20,6 +20,7 @@ class Service {
     var favoriAdvertList = [FavoritList]()
     var notificationList = [Notification]()
     var  animalAdvertListViewModel : AnimalAdvertListViewModel!
+    var messageList = [MessageModel]()
 
     
     func dowlandAnimalKindsFromFirestore(completion: @escaping ([AnimalKinds]?)->()) {
@@ -1370,13 +1371,58 @@ class Service {
             }
             
         }
+
+    }
+   
+    
+    
+    
+    
+    func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String) {
         
-       
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).getDocument { snapshot, Error in
+                
+             if  snapshot?.get("message") == nil {
+                 
+                 let message : [String:Any] = [
+                          "date":Date(),
+                          "sendMessage":sendMessage,
+                          "senderId": authUserId
+                      ]
+                      
+                      let messageData : [String:Any] = [
+                        "userName" : sendUserName,
+                          "message": [message]
+                              ]
+                 
+                 
+                 db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).setData(messageData)
+
+                    
+                }
+                else {
+                    let message : [String:Any] = [
+                        "date":Date(),
+                        "sendMessage":sendMessage,
+                        "senderId": authUserId
+                    ]
+                    
+                    
+                    db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).updateData([
+                        "message": FieldValue.arrayUnion([message])
+                    ])
+
+                }
+                
+            }
+        }
+   
         
         
         
     }
-        
     
     
     
