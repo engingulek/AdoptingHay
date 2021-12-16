@@ -203,7 +203,14 @@ class AnimalAdvertDetailsVC: UIViewController {
         }
         
         else {
-            Service().sendMessage(sendUserId: (getAnimalAdvert?.userId)!, sendUserName: (getAnimalAdvert?.userName)!, sendMessage: mesajText.text!)
+            if let authUserName = Auth.auth().currentUser?.displayName as? String {
+                Service().sendMessage(sendUserId: (getAnimalAdvert?.userId)!, sendUserName: authUserName, sendMessage: mesajText.text!,getUserName: (getAnimalAdvert?.userName)!)
+                mesajText.text = ""
+                
+            }
+            
+            
+          
         }
         
     }

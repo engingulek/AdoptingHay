@@ -1379,7 +1379,7 @@ class Service {
     
     
     
-    func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String) {
+    func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String) {
         
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
@@ -1392,14 +1392,38 @@ class Service {
                           "sendMessage":sendMessage,
                           "senderId": authUserId
                       ]
+                 
+                 if let getUserName = getUserName as? String{
+                     
+                     
+                     
+                     let sendMessageData : [String:Any] = [
+                       "sendUserName" : sendUserName,
+                       "getUserName"  : getUserName,
+                         "message": [message]
+                             ]
+                     
+                     
+                     let getMessageData : [String:Any] = [
+                       "sendUserName" : getUserName,
+                       "getUserName"  : sendUserName,
+                         "message": [message]
+                             ]
+                     
+                     
+                     
+                     
+                     
+                     db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).setData(sendMessageData)
+                     
+                     db.collection("userList").document(sendUserId).collection("conversation").document(authUserId).setData(getMessageData)
+                     
+                 }
                       
-                      let messageData : [String:Any] = [
-                        "userName" : sendUserName,
-                          "message": [message]
-                              ]
+                      
                  
                  
-                 db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).setData(messageData)
+           
 
                     
                 }
@@ -1412,6 +1436,11 @@ class Service {
                     
                     
                     db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).updateData([
+                        "message": FieldValue.arrayUnion([message])
+                    ])
+                    
+                    
+                    db.collection("userList").document(sendUserId).collection("conversation").document(authUserId).updateData([
                         "message": FieldValue.arrayUnion([message])
                     ])
 
@@ -1439,12 +1468,24 @@ class Service {
                         print("dffd ")
                         if let userId  = document.documentID as? String {
                             
-                            if let  userName = document.get("userName") as? String {
+                 
+                                
+                                if let getUserName = document.get("getUserName") as? String {
+                                    
+                                    
+                                    let messageUser = MessageUserList(sendName: getUserName, sendUserId: userId)
+                                     self.messageUserList.append(messageUser)
+                                      completion(self.messageUserList)
+                                  
+                                    
+                                    
+                                    
+                                    
+                                }
+                                
                                 print(" dffd ")
-                                let messageUser = MessageUserList(sendName: userName, sendUserId: userId)
-                                self.messageUserList.append(messageUser)
-                                completion(self.messageUserList)
-                            }
+                              
+                            
                         }
                     }
                 }

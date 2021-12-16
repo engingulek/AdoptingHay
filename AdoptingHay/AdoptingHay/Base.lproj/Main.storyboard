@@ -1679,7 +1679,7 @@
             </objects>
             <point key="canvasLocation" x="-359" y="-1712"/>
         </scene>
-        <!--Selin Çiçek-->
+        <!--ChatVC-->
         <scene sceneID="Mjo-J1-wqp">
             <objects>
                 <viewController id="FVp-sB-6Pb" customClass="ChatVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
@@ -1689,7 +1689,7 @@
                         <viewLayoutGuide key="safeArea" id="gSL-aM-x12"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Selin Çiçek" largeTitleDisplayMode="never" id="CI5-wB-W5X"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="CI5-wB-W5X"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GCP-m3-H79" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1702,7 +1702,7 @@
                     <tabBarItem key="tabBarItem" title="İlan Ekle" image="plus" catalog="system" id="mdA-jP-QzX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="X4n-jO-kMr">
-                        <rect key="frame" x="0.0" y="44" width="414" height="104"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

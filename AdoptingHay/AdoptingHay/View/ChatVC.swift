@@ -30,6 +30,7 @@ class ChatVC: MessagesViewController {
     private var sendSender = Sender(senderId: "2", displayName: "Selin Çiçek")
     var messageViewModelList : MessageViewModelList!
     var timer = Timer()
+    var  messageGetUserName : String?
  
     var senderName:String?
 
@@ -79,8 +80,9 @@ class ChatVC: MessagesViewController {
                         
                         if let sendUserId = self.userId {
                             if sendUserId == document.documentID {
-                                if let messageSenderName = document.get("userName") as? String {
+                                if let messageSenderName = document.get("getUserName") as? String {
                                                             print("Message sender name \(messageSenderName)")
+                                    self.messageGetUserName = messageSenderName
                                                             self.navigationItem.title = messageSenderName
                                                             
                                                             if let message = document.get("message") as? [Any]
@@ -193,29 +195,15 @@ extension ChatVC : InputBarAccessoryViewDelegate {
          
             self.messagesCollectionView.reloadData()
             if let sendUserName = Auth.auth().currentUser?.displayName as? String {
-                Service().sendMessage(sendUserId: sendUserId , sendUserName: sendUserName, sendMessage: text)
-               
-               
+                Service().sendMessage(sendUserId: sendUserId , sendUserName: sendUserName, sendMessage: text,getUserName:self.messageGetUserName!)
                 
-              
-                
-                
+                inputBar.inputTextView.text = ""
+
             }
-          
-            
-         
-            
-            
         }
         
-    
-    
-    
-     
-     
+        
 
-
-//        print("\(text)")
       
     }
 }
