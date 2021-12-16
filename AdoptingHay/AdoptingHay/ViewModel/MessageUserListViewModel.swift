@@ -8,7 +8,7 @@
 import Foundation
 
 struct MessageUserListViewModel {
-    let messageUserList : [MessageUserList]
+    var messageUserList : [MessageUserList]
     
     func messsageUserListCount () -> Int {
         return messageUserList.count

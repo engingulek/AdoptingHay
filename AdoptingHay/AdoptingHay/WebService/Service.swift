@@ -1383,15 +1383,61 @@ class Service {
         
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
-            db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).getDocument { snapshot, Error in
+            let myDb = db.collection("userList").document(authUserId).collection("conversation").document(sendUserId)
+                let orderDb =  db.collection("userList").document(sendUserId).collection("conversation").document(authUserId)
+            
+            
+            myDb.getDocument { mysnaphot, error in
                 
-             if  snapshot?.get("message") == nil {
+                orderDb.getDocument { orderSnaphot, error in
+                  if  mysnaphot?.get("message") != nil && orderSnaphot?.get("message") == nil  {
+                      let message : [String:Any] = [
+                               "date":Date(),
+                               "sendMessage":sendMessage,
+                               "senderId": authUserId
+                           ]
+                      if let getUserName = getUserName as? String{
+                          let getMessageData : [String:Any] = [
+                            "sendUserName" : getUserName,
+                            "getUserName"  : sendUserName,
+                              "message": [message]
+                                  ]
+                          db.collection("userList").document(sendUserId).collection("conversation").document(authUserId).setData(getMessageData)
+                          
+                      }
+                      
+                        
+                    }
+                    
+                  
+                    
+                }
+                
+               
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            db.collection("userList").document(authUserId).collection("conversation").document(sendUserId).getDocument { snapshot, error in
+                
+                if  snapshot?.get("message") == nil  {
                  
                  let message : [String:Any] = [
                           "date":Date(),
                           "sendMessage":sendMessage,
                           "senderId": authUserId
                       ]
+                 
+                 
+             
                  
                  if let getUserName = getUserName as? String{
                      
@@ -1427,6 +1473,11 @@ class Service {
 
                     
                 }
+                
+                
+         
+                
+                
                 else {
                     let message : [String:Any] = [
                         "date":Date(),
@@ -1467,43 +1518,21 @@ class Service {
                     for document in (snapshot?.documents)! {
                         print("dffd ")
                         if let userId  = document.documentID as? String {
-                            
-                 
-                                
                                 if let getUserName = document.get("getUserName") as? String {
-                                    
-                                    
                                     let messageUser = MessageUserList(sendName: getUserName, sendUserId: userId)
                                      self.messageUserList.append(messageUser)
                                       completion(self.messageUserList)
-                                  
-                                    
-                                    
-                                    
-                                    
-                                }
-                                
-                                print(" dffd ")
-                              
-                            
-                        }
-                    }
-                }
-            }
-            
+                                }}}} }}}
+    
+    func deleteMessage(id:String){
+        print("Mesaj id si :\(id)")
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("conversation").document(id).delete()
+
         }
- 
-        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     
 }
 

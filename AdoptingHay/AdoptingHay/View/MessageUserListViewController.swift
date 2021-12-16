@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseAuth
 
 class MessageUserListViewController: UIViewController {
 
@@ -20,8 +22,22 @@ class MessageUserListViewController: UIViewController {
 
         messageUserListTableView.delegate = self
         messageUserListTableView.dataSource = self
-        getMessageUserList()
+
+            getMessageUserList()
+        messageUserListTableView.reloadData()
+            
+        
+       
       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+            getMessageUserList()
+        messageUserListTableView.reloadData()
+            
+        
+        
     }
     
     func getMessageUserList(){
@@ -62,6 +78,21 @@ extension MessageUserListViewController : UITableViewDelegate,UITableViewDataSou
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
         performSegue(withIdentifier: "toMessage", sender: self.messageUserListViewModel.messageUserNameIndex(indexPath.row).id)
+    }
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "siL") { contextuaActcion, viewa, boolValue in
+            
+            Service().deleteMessage(id:  self.messageUserListViewModel.messageUserNameIndex(indexPath.row).id)
+            self.messageUserListViewModel.messageUserList.remove(at: indexPath.row)
+            self.messageUserListTableView.deleteRows(at: [indexPath], with: .fade)
+          
+            
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

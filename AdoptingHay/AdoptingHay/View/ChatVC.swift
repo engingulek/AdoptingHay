@@ -19,6 +19,8 @@ struct Sender:SenderType {
     var senderId: String
     var displayName: String
     
+   
+    
     
     
 }
@@ -31,7 +33,7 @@ class ChatVC: MessagesViewController {
     var messageViewModelList : MessageViewModelList!
     var timer = Timer()
     var  messageGetUserName : String?
- 
+
     var senderName:String?
 
 
@@ -244,10 +246,10 @@ extension ChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayD
         let sender = message.sender
         if sender.senderId == selfSender.senderId {
             // our image
-            avatarView.image = UIImage(named: "bird")
+            avatarView.image = UIImage(named: "red")
         }
         else {
-            avatarView.image = UIImage(named: "dog")
+            avatarView.image = UIImage(named: "blue")
         }
     }
 }
