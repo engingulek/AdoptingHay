@@ -25,9 +25,11 @@ struct Sender:SenderType {
 
 class ChatVC: MessagesViewController {
     private var messages = [Message]()
+    var userId:String?
     private var selfSender = Sender(senderId: "1", displayName: "Engin Gülek")
     private var sendSender = Sender(senderId: "2", displayName: "Selin Çiçek")
     var messageViewModelList : MessageViewModelList!
+    var timer = Timer()
  
     var senderName:String?
 
@@ -42,10 +44,15 @@ class ChatVC: MessagesViewController {
         
      
         
-   
+   print("Konuşulan kişi id \(userId)")
+        
+        self.getAll()
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+                    self.getAll()
+                })
         
         
-        getAll()
+     
         
         
       
@@ -55,6 +62,7 @@ class ChatVC: MessagesViewController {
         }
     
     func getAll() {
+        self.messages.removeAll()
         let db = Firestore.firestore()
     
         
@@ -68,60 +76,68 @@ class ChatVC: MessagesViewController {
                 else {
                     
                     for document in (snasphot?.documents)! {
-                        print("Messsge sender id : \(document.documentID)")
-                        if let messageSenderName = document.get("kullanıcıName") as? String {
-                            print("Message sender name \(messageSenderName)")
-                            self.navigationItem.title = messageSenderName
-                            
-                            if let message = document.get("message") as? [Any]
-                            {
+                        
+                        if let sendUserId = self.userId {
+                            if sendUserId == document.documentID {
+                                if let messageSenderName = document.get("userName") as? String {
+                                                            print("Message sender name \(messageSenderName)")
+                                                            self.navigationItem.title = messageSenderName
+                                                            
+                                                            if let message = document.get("message") as? [Any]
+                                                            {
+                                                                
+                                                            
+                                                                
+                                                                for i in 0...message.count-1 {
+                                                                    print("\(i). sıra \(message[i])")
+                                                                    
+                                                                    if let messageOrder = message[i] as? [String:Any] {
+                                                                        
+                                                                        
+                                                                        
+                                                                        if let gonderilenMessage = messageOrder["sendMessage"] as? String {
+                                                                            
+                                                                            if let sendUserID = messageOrder["senderId"] as? String {
+                                                                                
+                                                                                print("USER ID : \(Auth.auth().currentUser?.uid)")
+                                                                                
+                                                                                if let userId = Auth.auth().currentUser?.uid as? String {
+                                                                                    if userId == sendUserID {
+                                                                                        self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                                                        
+                                                                                    }
+                                                                                    else {
+                                                                                        self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                                                        
+                                                                                    }
+                                                                                    self.messagesCollectionView.reloadData()
+                                                                                    
+                                                                                }
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                              
+                                                                             
+                                                                            }
+                                                                            
+                                                                        }
+                                                                    }
+                                                                
+                                                                    
+                                                                
+                                                                    
+                                                                    
+                                                                }
+                                                      
+                                                                    
+                                                                }
+                                                            }
+
                                 
-                            
-                                
-                                for i in 0...message.count-1 {
-                                    print("\(i). sıra \(message[i])")
-                                    
-                                    if let messageOrder = message[i] as? [String:Any] {
-                                        
-                                        
-                                        
-                                        if let gonderilenMessage = messageOrder["gonderilenMessage"] as? String {
-                                            
-                                            if let sendUserID = messageOrder["senderId"] as? String {
-                                                
-                                                print("USER ID : \(Auth.auth().currentUser?.uid)")
-                                                
-                                                if let userId = Auth.auth().currentUser?.uid as? String {
-                                                    if userId == sendUserID {
-                                                        self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                        
-                                                    }
-                                                    else {
-                                                        self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                        
-                                                    }
-                                                    
-                                                }
-                                                
-                                                
-                                                self.messagesCollectionView.reloadData()
-                                                
-                                              
-                                             
-                                            }
-                                            
-                                        }
-                                    }
-                                
-                                    
-                                
-                                    
-                                    
-                                }
-                      
-                                    
-                                }
                             }
+                            }
+
                         }
                         
                         
@@ -170,14 +186,34 @@ class ChatVC: MessagesViewController {
 
 extension ChatVC : InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-//       self.messages.removeAll()
+      
         
-//        Service().sendMessage(sendUserId: (getAnimalAdvert?.userId)!, sendUserName: (getAnimalAdvert?.userName)!, sendMessage: mesajText.text!)
+        if let sendUserId = userId as? String {
+           
+         
+            self.messagesCollectionView.reloadData()
+            if let sendUserName = Auth.auth().currentUser?.displayName as? String {
+                Service().sendMessage(sendUserId: sendUserId , sendUserName: sendUserName, sendMessage: text)
+               
+               
+                
+              
+                
+                
+            }
+          
+            
+         
+            
+            
+        }
+        
+    
     
     
      
      
-      // getAll()
+
 
 //        print("\(text)")
       

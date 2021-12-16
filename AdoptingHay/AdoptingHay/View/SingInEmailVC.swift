@@ -16,6 +16,7 @@ class SingInEmailVC: UIViewController {
     @IBOutlet weak var textFieldEmail: UITextField!
     
     
+    @IBOutlet weak var secButtonOutlet: UIButton!
     @IBOutlet weak var textFiledPassword: UITextField!
     
     
@@ -24,6 +25,25 @@ class SingInEmailVC: UIViewController {
 
         singInButton.layer.cornerRadius = 15
     }
+    
+    
+    @IBAction func secButtonAction(_ sender: Any) {
+        
+        if textFiledPassword.isSecureTextEntry == false {
+            textFiledPassword.isSecureTextEntry = true
+            if let image = UIImage(systemName: "eye.slash") {
+                secButtonOutlet.setImage(image, for: .normal)
+            }
+            
+        }
+        else {
+           textFiledPassword.isSecureTextEntry = false
+            if let image = UIImage(systemName: "eye") {
+                secButtonOutlet.setImage(image, for: .normal)
+            }
+        }
+    }
+    
     
     @IBAction func singInButtonAction(_ sender: Any) {
         

@@ -21,6 +21,7 @@ class Service {
     var notificationList = [Notification]()
     var  animalAdvertListViewModel : AnimalAdvertListViewModel!
     var messageList = [MessageModel]()
+    var messageUserList = [MessageUserList]()
 
     
     func dowlandAnimalKindsFromFirestore(completion: @escaping ([AnimalKinds]?)->()) {
@@ -1421,6 +1422,36 @@ class Service {
    
         
         
+        
+    }
+    
+    
+    func getAllMessageList(completion: @escaping ([MessageUserList]?)->()){
+        
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("conversation").getDocuments { snapshot, error in
+                if error != nil {
+                    print("Message User List Error \(error?.localizedDescription)")
+                }
+                else {
+                    for document in (snapshot?.documents)! {
+                        print("dffd ")
+                        if let userId  = document.documentID as? String {
+                            
+                            if let  userName = document.get("userName") as? String {
+                                print(" dffd ")
+                                let messageUser = MessageUserList(sendName: userName, sendUserId: userId)
+                                self.messageUserList.append(messageUser)
+                                completion(self.messageUserList)
+                            }
+                        }
+                    }
+                }
+            }
+            
+        }
+ 
         
     }
     

@@ -17,6 +17,7 @@ class AnimalAdvertDetailsVC: UIViewController {
     
     @IBOutlet weak var animalAge: UILabel!
     
+    @IBOutlet weak var sendMessage: UIButton!
     
     @IBOutlet weak var animalSick: UILabel!
     
@@ -67,6 +68,18 @@ class AnimalAdvertDetailsVC: UIViewController {
         
         
         // mesajcell
+        
+        
+        // Kendi ilanlarında mesaj kısmını gizleme
+        if let authUserId = Auth.auth().currentUser?.uid {
+            if authUserId == getAnimalAdvert?.userId {
+                mesajText.isHidden = true
+                animalAdvertDetailMesajCollectionView.isHidden = true
+                sendMessage.isHidden = true
+                
+            }
+            
+        }
         
         
         let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
@@ -274,6 +287,7 @@ extension AnimalAdvertDetailsVC: UICollectionViewDelegate, UICollectionViewDataS
             cell.layer.borderColor = UIColor.red.cgColor
             cell.backgroundColor = UIColor.red
             
+           
             
             return cell
         }

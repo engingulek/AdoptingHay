@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import FirebaseAuth
 
 
 class SingUpEmailVC: UIViewController {
@@ -17,6 +18,7 @@ class SingUpEmailVC: UIViewController {
     @IBOutlet weak var textFieldSurname: UITextField!
     
     @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var secButtonOutlet: UIButton!
     
     @IBOutlet weak var textFieldPassword: UITextField!
     override func viewDidLoad() {
@@ -24,6 +26,28 @@ class SingUpEmailVC: UIViewController {
         
 
         singUpButton.layer.cornerRadius = 15
+        textFieldPassword.isSecureTextEntry = true
+    }
+    
+    
+    
+    
+    @IBAction func secButtonAction(_ sender: Any) {
+        if textFieldPassword.isSecureTextEntry == false {
+            textFieldPassword.isSecureTextEntry = true
+            if let image = UIImage(systemName: "eye.slash") {
+                secButtonOutlet.setImage(image, for: .normal)
+            }
+            
+        }
+        else {
+            textFieldPassword.isSecureTextEntry = false
+            if let image = UIImage(systemName: "eye") {
+                secButtonOutlet.setImage(image, for: .normal)
+            }
+        }
+        
+       
     }
     
     @IBAction func singUpButtonAction(_ sender: Any) {
@@ -33,15 +57,42 @@ class SingUpEmailVC: UIViewController {
         }
         
         else {
+            
+    
+            
+            
+            
+            
+            
+            
+            
+            
             Auth.auth().createUser(withEmail: textFieldEmail.text!,
-            password: textFieldPassword.text!)
+                                   password: textFieldPassword.text!)
             { (authData, error) in
                 if error != nil {
                     self.alertMessage(title: "Hata", text: error!.localizedDescription)
                 }else
                 {
+                    
+                    let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+                    changeRequest?.displayName = "\(self.textFieldName.text!) \(self.textFieldSurname.text!)"
+                    changeRequest?.commitChanges(completion: { error in
+                        if error == nil {
+                        
+                        }
+                    })
+
+
+
+
+
                     self.performSegue(withIdentifier: "singUptoHomePage", sender: nil)
-                }}}
+                }}
+//
+            
+            
+        }
             
         }
     

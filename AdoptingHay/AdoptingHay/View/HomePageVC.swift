@@ -95,6 +95,8 @@ class HomePageVC: UIViewController {
         }
         
         
+        print("Kullanıcı ismi : \(Auth.auth().currentUser?.displayName)")
+        
         
         
 //        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
@@ -386,7 +388,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             cell.addFavoriteButton(advertViewModel)
             cell.dateLabel.text = "\(advertViewModel.addDate)"
             
-            
+      
             
             
             cell.layer.cornerRadius = 25
