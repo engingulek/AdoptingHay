@@ -8,7 +8,7 @@
 import Foundation
 
 struct FavoritListViewModel {
-    let favoritList : [FavoritList]
+    var favoritList : [FavoritList]
     
     
     func numberOfRowsInSection()-> Int {

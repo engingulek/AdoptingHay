@@ -10,22 +10,25 @@ import Firebase
 
 class FavoriListVC: UIViewController {
    
-    @IBOutlet weak var favoriteCollectionView: UICollectionView!
+ 
     private var favoritListViewModel : FavoritListViewModel!
+    @IBOutlet weak var favoriListTableView: UITableView!
+
     
     @IBOutlet weak var advertCount: UILabel!
     @IBOutlet weak var favoriCount: UILabel!
+
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBarController?.tabBar.isHidden = true
+        favoriListTableView.delegate = self
+        favoriListTableView.dataSource = self
         
-        favoriteCollectionView.delegate = self
-        favoriteCollectionView.dataSource = self
+     
         
         getFavoriList()
-        spinner.startAnimating()
-        self.favoriteCollectionView.reloadData()
+      
         
         
        
@@ -77,12 +80,11 @@ class FavoriListVC: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
-        getFavoriList()
-        self.favoriteCollectionView.reloadData()
+      
         
-        
+        self.spinner.isHidden = true
        if self.favoritListViewModel == nil {
-           self.favoriteCollectionView.isHidden = true
+           self.favoriListTableView.isHidden = true
            self.advertCount.text = "0 İlan"
            
            let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
@@ -101,7 +103,7 @@ class FavoriListVC: UIViewController {
         }
         
         else {
-            self.favoriteCollectionView.isHidden = false
+            self.favoriListTableView.isHidden = false
             let counst = self.favoritListViewModel == nil ? 0 :  self.favoritListViewModel.numberOfRowsInSection()
             
             self.advertCount.text = "\(counst) İlan"
@@ -133,7 +135,7 @@ class FavoriListVC: UIViewController {
                         
                         
                         
-                        self.favoriteCollectionView.reloadData()
+                        self.favoriListTableView.reloadData()
                         self.spinner.stopAnimating()
                         self.spinner.isHidden = true
                         
@@ -153,17 +155,14 @@ class FavoriListVC: UIViewController {
 
 }
 
-extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
+
+extension  FavoriListVC  : UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.favoritListViewModel == nil ? 0 : self.favoritListViewModel.numberOfRowsInSection()
-       
     }
     
-
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell =  favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "favoriCell", for: indexPath) as! FavoritListCVC
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell =  favoriListTableView.dequeueReusableCell(withIdentifier: "favoriCell", for: indexPath) as! FavoriListTVC
         
         let favoriAdvert = self.favoritListViewModel.animalAdvertAtIndex(indexPath.row)
     
@@ -171,7 +170,7 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
       
        if let animalImageData = try?  Data(contentsOf: imageUrl!) {
             
-            cell.imageView.image =  UIImage(data: animalImageData)
+           cell.animalImage.image =  UIImage(data: animalImageData)
             
         }
         
@@ -181,25 +180,27 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
    
         cell.animalName.text = "Adı : \(favoriAdvert.name)"
         cell.animalAge.text  = "Hastalık : \(favoriAdvert.age)"
-        cell.animalGenus.text = "Cinsi : \(favoriAdvert.kinds) / \(favoriAdvert.genus)"
+        cell.animalKinds.text = "Cinsi : \(favoriAdvert.kinds) / \(favoriAdvert.genus)"
         cell.animalSick.text = "Hastalık : \(favoriAdvert.sick)"
         cell.userName.text = "\(favoriAdvert.userName)"
         cell.layer.cornerRadius = 25
   
          cell.layer.borderWidth = 2
+        cell.frame.size.height = 160
         cell.layer.borderColor = UIColor.red.cgColor
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == self.favoriteCollectionView  {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == self.favoriListTableView {
             let favoriteViewModel = self.favoritListViewModel.animalAdvertAtIndex(indexPath.row)
             
             performSegue(withIdentifier: "favoriToDetails", sender: favoriteViewModel.favoritList)
+            
         }
     }
     
-  
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == "favoriToDetails" {
@@ -214,9 +215,36 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
     
     
     
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let removeAction = UIContextualAction(style: .destructive, title: "Kaldır") { contextuaActcion, viewa, boolValue in
+            if let advertUid = self.favoritListViewModel.animalAdvertAtIndex(indexPath.row).uuid as? String{
+                
+                
+        
+                self.dismiss(animated: true) {
+                    Service().removeFavoriAdvert(advertId: advertUid)
+                    self.favoritListViewModel.favoritList.remove(at: indexPath.row)
+                    self.favoriListTableView.deleteRows(at: [indexPath], with: .fade)
+                
+                    
+                }
+                           
+            }
+            
+     
+          
+            
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [removeAction])
+    }
     
     
 }
+
+
+
 
 extension UIView {
    func roundCorners(corners: UIRectCorner, radius: CGFloat) {

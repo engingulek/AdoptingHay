@@ -7,14 +7,6 @@
 
 import UIKit
 
-class FavoritListCVC: UICollectionViewCell {
-    @IBOutlet weak var imageView: UIImageView!
-    
-    @IBOutlet weak var animalGenus: UILabel!
-    @IBOutlet weak var animalName: UILabel!
-
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var animalAge: UILabel!
-    
-    @IBOutlet weak var animalSick: UILabel!
+class FavoritListCVC: UITableViewCell {
+  
 }

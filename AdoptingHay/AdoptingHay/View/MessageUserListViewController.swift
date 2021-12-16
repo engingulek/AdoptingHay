@@ -82,7 +82,7 @@ extension MessageUserListViewController : UITableViewDelegate,UITableViewDataSou
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "siL") { contextuaActcion, viewa, boolValue in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Sil") { contextuaActcion, viewa, boolValue in
             
             Service().deleteMessage(id:  self.messageUserListViewModel.messageUserNameIndex(indexPath.row).id)
             self.messageUserListViewModel.messageUserList.remove(at: indexPath.row)
