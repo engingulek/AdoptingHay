@@ -2010,12 +2010,25 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dm7-98-2qW">
+                                                    <rect key="frame" x="328" y="4" width="34" height="24"/>
+                                                    <state key="normal" title="Button"/>
+                                                    <buttonConfiguration key="configuration" style="filled" title="Sil">
+                                                        <fontDescription key="titleFontDescription" type="system" pointSize="8"/>
+                                                    </buttonConfiguration>
+                                                    <connections>
+                                                        <action selector="removeCell:" destination="J9T-zQ-cPB" eventType="touchUpInside" id="dNS-Yt-GTU"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="Dm7-98-2qW" firstAttribute="leading" secondItem="jjz-wA-wQ5" secondAttribute="leading" constant="328" id="1bw-G6-6NK"/>
                                                 <constraint firstItem="0Pg-ne-qZ0" firstAttribute="trailing" secondItem="mpH-gu-9fG" secondAttribute="trailing" id="4nC-po-m2n"/>
+                                                <constraint firstAttribute="trailing" secondItem="Dm7-98-2qW" secondAttribute="trailing" constant="8" id="7nj-hP-L8F"/>
                                                 <constraint firstItem="g1W-wS-OZ1" firstAttribute="trailing" secondItem="0Pg-ne-qZ0" secondAttribute="trailing" id="DRO-gp-8Hc"/>
                                                 <constraint firstItem="0Pg-ne-qZ0" firstAttribute="leading" secondItem="mpH-gu-9fG" secondAttribute="leading" id="FXM-ui-NEZ"/>
                                                 <constraint firstItem="LqA-ps-jyZ" firstAttribute="top" secondItem="jjz-wA-wQ5" secondAttribute="top" constant="25" id="IiC-8l-8po"/>
+                                                <constraint firstItem="Dm7-98-2qW" firstAttribute="top" secondItem="jjz-wA-wQ5" secondAttribute="top" constant="4" id="JUc-kP-4Eh"/>
                                                 <constraint firstItem="yJ2-It-2Fy" firstAttribute="leading" secondItem="jjz-wA-wQ5" secondAttribute="leading" constant="24" id="K5h-L6-PDS"/>
                                                 <constraint firstItem="g1W-wS-OZ1" firstAttribute="top" secondItem="LqA-ps-jyZ" secondAttribute="bottom" constant="8" id="Mk3-1D-Kkm"/>
                                                 <constraint firstItem="Jhr-OU-4wJ" firstAttribute="top" secondItem="yJ2-It-2Fy" secondAttribute="bottom" constant="5" id="SLO-aJ-piG"/>
@@ -2081,7 +2094,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QRg-Tw-bwd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2750.7246376811595" y="436.60714285714283"/>
+            <point key="canvasLocation" x="2750.7246376811595" y="436.27232142857139"/>
         </scene>
         <!--Favori DetailsVC-->
         <scene sceneID="BaN-U4-2EZ">

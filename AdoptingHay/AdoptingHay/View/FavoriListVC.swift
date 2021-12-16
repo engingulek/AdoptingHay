@@ -149,6 +149,7 @@ class FavoriListVC: UIViewController {
     }
     
     
+    
 
 }
 
@@ -158,6 +159,8 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
         return self.favoritListViewModel == nil ? 0 : self.favoritListViewModel.numberOfRowsInSection()
        
     }
+    
+
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =  favoriteCollectionView.dequeueReusableCell(withReuseIdentifier: "favoriCell", for: indexPath) as! FavoritListCVC
@@ -195,6 +198,8 @@ extension FavoriListVC : UICollectionViewDelegate, UICollectionViewDataSource {
             performSegue(withIdentifier: "favoriToDetails", sender: favoriteViewModel.favoritList)
         }
     }
+    
+  
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
          if segue.identifier == "favoriToDetails" {

@@ -1512,7 +1512,7 @@ class Service {
         if let authUserId = Auth.auth().currentUser?.uid {
             db.collection("userList").document(authUserId).collection("conversation").getDocuments { snapshot, error in
                 if error != nil {
-                    print("Message User List Error \(error?.localizedDescription)")
+                                print("Message User List Error \(error?.localizedDescription)")
                 }
                 else {
                     for document in (snapshot?.documents)! {
