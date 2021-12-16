@@ -17,17 +17,21 @@ class MyAdvertVC: UIViewController {
     
  
     @IBOutlet weak var spinner: UIActivityIndicatorView!
-    @IBOutlet weak var myAdvertsCollectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var myAdvertsTableView: UITableView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        myAdvertsCollectionView.delegate = self
-        myAdvertsCollectionView.dataSource = self
+        myAdvertsTableView.delegate = self
+        myAdvertsTableView.dataSource = self
         getMyAnimalAdvert()
         spinner.startAnimating()
         
         self.tabBarController?.tabBar.isHidden = true
-        myAdvertsCollectionView.reloadData()
+        myAdvertsTableView.reloadData()
         
         design()
        
@@ -71,7 +75,7 @@ class MyAdvertVC: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         getMyAnimalAdvert()
         if self.myAnimalAdvertListViewModel == nil {
-            self.myAdvertsCollectionView.isHidden = true
+            self.myAdvertsTableView.isHidden = true
             self.myAdvertsCount.text = "0 İlan"
             
             let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
@@ -86,7 +90,7 @@ class MyAdvertVC: UIViewController {
         
         else {
             
-            self.myAdvertsCollectionView.isHidden = false
+            self.myAdvertsTableView.isHidden = false
             let counts = self.myAnimalAdvertListViewModel == nil ? 0 :
             self.myAnimalAdvertListViewModel.numberOfRowsInSection()
             self.myAdvertsCount.text = "\(counts) İlan"
@@ -122,7 +126,7 @@ class MyAdvertVC: UIViewController {
                      
                         
                      
-                        self.myAdvertsCollectionView.reloadData()
+                        self.myAdvertsTableView.reloadData()
                         self.spinner.stopAnimating()
                         self.spinner.isHidden = true
                         
@@ -147,16 +151,18 @@ class MyAdvertVC: UIViewController {
 
 }
 
-extension MyAdvertVC : UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+
+extension MyAdvertVC : UITableViewDelegate,UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.myAnimalAdvertListViewModel == nil ? 0 : self.myAnimalAdvertListViewModel.numberOfRowsInSection()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell =  myAdvertsCollectionView.dequeueReusableCell(withReuseIdentifier: "myadvertsCell", for: indexPath) as! MyAdvertsCVC
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = myAdvertsTableView.dequeueReusableCell(withIdentifier:"myadvertsCell", for: indexPath) as! MyAdvertsTVC
         
         let myAdvert = self.myAnimalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
+        
         
         
         
@@ -180,14 +186,45 @@ extension MyAdvertVC : UICollectionViewDelegate, UICollectionViewDataSource {
         return cell
     }
     
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let myAdvert = self.myAnimalAdvertListViewModel.animalAdvertAtIndex(indexPath.row)
         performSegue(withIdentifier: "myAdverttoDetails", sender: myAdvert.myAdvert)
-    
     }
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let removeAction = UIContextualAction(style: .destructive, title: "Kaldır") { contextuaActcion, viewa, boolValue in
+            if let advertId = self.myAnimalAdvertListViewModel.myAdvertList[indexPath.row].animaluuid as? String{
+                
+                
+        
+             
+                    let userId = Auth.auth().currentUser?.uid
+                    
+                    
+                    Service().removeMyAdvert(userId: userId!, advertId: advertId)
+                    self.myAnimalAdvertListViewModel.myAdvertList.remove(at: indexPath.row)
+                    self.myAdvertsTableView.deleteRows(at: [indexPath], with: .fade)
+                
+                    
+                
+                           
+            }
+            
+     
+          
+            
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [removeAction])
+    }
+    
+    
+    
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "myAdverttoDetails" {
             
@@ -199,4 +236,7 @@ extension MyAdvertVC : UICollectionViewDelegate, UICollectionViewDataSource {
         }
     }
     
+    
 }
+
+

@@ -8,7 +8,7 @@
 import Foundation
 
 struct MyAnimalAdvertListViewModel {
-    let myAdvertList : [MyAdvert]
+    var myAdvertList : [MyAdvert]
     
     
     func numberOfRowsInSection()-> Int {

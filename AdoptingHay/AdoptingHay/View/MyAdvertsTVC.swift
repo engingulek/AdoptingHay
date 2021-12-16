@@ -7,14 +7,20 @@
 
 import UIKit
 
-class MyAdvertsCVC: UICollectionViewCell {
+class MyAdvertsTVC: UITableViewCell {
+    
     @IBOutlet weak var advertImageView: UIImageView!
     
+   
+  
     @IBOutlet weak var advertName: UILabel!
     
+    
     @IBOutlet weak var advertAge: UILabel!
+    
 
     @IBOutlet weak var advertGenus: UILabel!
+    
     
     @IBOutlet weak var advertSick: UILabel!
     
