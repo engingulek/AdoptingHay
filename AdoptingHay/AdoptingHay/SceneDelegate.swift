@@ -20,7 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           
           if currentUser != nil {
             let board = UIStoryboard(name: "Main", bundle: nil)
-            let tabBar = board.instantiateViewController(withIdentifier: "tabBar") as! UITabBarController
+            let tabBar = board.instantiateViewController(withIdentifier: "sectionType") as! UIViewController
             window?.rootViewController = tabBar
              
           }
