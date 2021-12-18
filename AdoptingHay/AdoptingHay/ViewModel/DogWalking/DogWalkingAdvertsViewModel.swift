@@ -48,4 +48,11 @@ struct DogWalKingViewModel {
     var sick:String{
         return self.dogWalkingAdvert.advertAnimalSick!
     }
+    var sickInfo: String {
+        return self.dogWalkingAdvert.sickInfo!
+    }
+    
+    var ownerNote: String {
+        return self.dogWalkingAdvert.ownerNote!
+    }
 }

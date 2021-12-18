@@ -73,5 +73,22 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let advert = self.dogWalkingListViewModel.animalKindsAtIndex(indexPath.row)
+        performSegue(withIdentifier: "toDetailsWalking", sender: advert.dogWalkingAdvert )
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toDetailsWalking" {
+            
+            if let getAdvert = sender as? DogwalkingAdvert {
+                let toAdvertDetailVC = segue.destination as! DogWalkingAdvertDetailsVC
+                print("İdd \(getAdvert.advertId)")
+                toAdvertDetailVC.getAdvertWalking = getAdvert
+                
+            } }
+    }
+    
     
 }
