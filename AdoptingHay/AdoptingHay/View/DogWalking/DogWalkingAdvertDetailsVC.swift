@@ -24,7 +24,15 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        advertImageView.image = UIImage(data: getAdvertWalking.advertImage!)
+        
+        let imageUrl = URL(string: getAdvertWalking.advertImage!)!
+        
+        if let imageData = try?  Data(contentsOf: imageUrl) {
+            advertImageView.image = UIImage(data: imageData)
+            
+        }
+        
+
         advertAnimalName.text = "Adı: \(getAdvertWalking.advertAnimalName!)"
         
         advertRange.text = "\(getAdvertWalking.advertRange!)"
@@ -38,7 +46,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
         else {
             self.animalSickInfo.text = getAdvertWalking.sickInfo
         }
-        
+        animalOwnerNote.isEditable = false
         animalOwnerNote.text = getAdvertWalking.ownerNote
         
         
@@ -48,7 +56,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     
 
     @IBAction func addFavAdvert(_ sender: Any) {
-        print("Add \(getAdvertWalking.advertId)")
+        DogWalkingService().addDogWalkingAdvert(getAdvert: getAdvertWalking!)
     }
     
 

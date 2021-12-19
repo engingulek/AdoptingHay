@@ -29,48 +29,42 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                                     if let animaSick = document.get("animaSick") as? String {
                                         
                                         if let animalImage = document.get("animalImage") as? String {
-                                            let imageUrl = URL(string: "\(animalImage)")!
                                             
-                                            if let imageData = try?  Data(contentsOf: imageUrl) {
                                                 if let ownerNote = document.get("ownerNote") as? String {
                                                     if let sickInfo = document.get("sickInfo") as? String {
-                                                        let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: imageData, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: animaSick,ownerNote: ownerNote,sickInfo: sickInfo)
+                                                        let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: animaSick,ownerNote: ownerNote,sickInfo: sickInfo)
                                                         self.dogWalkingAdvertList.append(dogWalkingAdvert)
                                                         completion(self.dogWalkingAdvertList)
                                                         
-                                                    }
-                                                }
-                                                
-                                                
-                                            }
-                                            
-                                        }
-                                        
-                                 
-                                        
-                                        
-                                    }
-                                    
-                                    
-                                    
-                                }
-                                
-                                
-                            }
-                            
-                        }
-                        
-                    }
-                
-                }
-              
-                
-            }
+                                                    } } }}} }}}}}}}
+    
+    
+    
+    
+    func addDogWalkingAdvert(getAdvert:DogwalkingAdvert) {
+        let db = Firestore.firestore()
+        let docData : [String:Any] = [
+            "animalImage" : getAdvert.advertImage!,
+            "animalName" : getAdvert.advertAnimalName!,
+            "hoursRange": getAdvert.advertRange!,
+            "animaSick" : getAdvert.advertAnimalSick!,
+            "animalKindsAge" : getAdvert.advertAnimalKindsandAge!,
+            "ownerNote" : getAdvert.ownerNote!,
+            "sickInfo":getAdvert.sickInfo!
+        
+        ]
+        
+        if let userId = Auth.auth().currentUser?.uid {
+        
+            db.collection("userList").document(userId).collection("dogWalklingFavoriList").document(getAdvert.advertId!).setData(docData)
             
         }
         
         
-        
+      
     }
+    
+    
+    
 
 }

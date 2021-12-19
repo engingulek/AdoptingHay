@@ -28,7 +28,7 @@ struct DogWalKingViewModel {
         return self.dogWalkingAdvert.advertId!
     }
     
-    var image:Data {
+    var image:String {
         return self.dogWalkingAdvert.advertImage!
     }
     

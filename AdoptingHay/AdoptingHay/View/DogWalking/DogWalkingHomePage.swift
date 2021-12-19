@@ -62,7 +62,15 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         cell.advertsRange.text = advert.range
         cell.adversKindsandAge.text = "Cins/Yaş: \(advert.kindsAndAge)"
         cell.advertsSick.text = "Hastalık: \(advert.sick)"
-        cell.advertImageView.image = UIImage(data: advert.image)
+        
+        let imageUrl = URL(string:advert.image)!
+        
+        if let imageData = try?  Data(contentsOf: imageUrl) {
+            cell.advertImageView.image = UIImage(data: imageData )
+            
+        }
+        
+      
         
         cell.layer.cornerRadius = 25
         

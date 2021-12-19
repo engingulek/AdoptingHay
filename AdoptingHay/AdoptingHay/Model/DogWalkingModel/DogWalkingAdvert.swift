@@ -10,7 +10,7 @@ import Foundation
 
 class DogwalkingAdvert {
     var advertId:String?
-    var advertImage:Data?
+    var advertImage:String?
     var advertRange:String?
     var advertAnimalName:String?
     var advertAnimalKindsandAge:String?
@@ -19,7 +19,7 @@ class DogwalkingAdvert {
     var sickInfo:String?
 
     
-    init(advertId:String,advertImage:Data,advertRange:String,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String) {
+    init(advertId:String,advertImage:String,advertRange:String,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String) {
         self.advertImage = advertImage
         self.advertRange = advertRange
         self.advertAnimalName = advertAnimalName
