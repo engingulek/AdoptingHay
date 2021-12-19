@@ -55,4 +55,11 @@ struct DogWalKingViewModel {
     var ownerNote: String {
         return self.dogWalkingAdvert.ownerNote!
     }
+    var userName:String {
+        return self.dogWalkingAdvert.userName!
+    }
+    
+    var userId:String{
+        return self.dogWalkingAdvert.userId!
+    }
 }

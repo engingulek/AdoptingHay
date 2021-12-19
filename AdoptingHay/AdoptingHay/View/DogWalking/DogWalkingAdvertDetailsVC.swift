@@ -24,7 +24,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        animalSickInfo.isUserInteractionEnabled = false
         let imageUrl = URL(string: getAdvertWalking.advertImage!)!
         
         if let imageData = try?  Data(contentsOf: imageUrl) {

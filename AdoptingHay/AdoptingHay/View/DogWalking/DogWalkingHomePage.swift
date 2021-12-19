@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class DogWalkingHomePage: UIViewController {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -21,9 +21,18 @@ class DogWalkingHomePage: UIViewController {
         dogWalkingCollectionView.delegate = self
         dogWalkingCollectionView.dataSource = self
         getAllAdvert()
+        
+ 
 
        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        getAllAdvert()
+        dogWalkingCollectionView.reloadData()
+    }
+    
     
     // MARK : SERVICE CONNECT
     
@@ -70,6 +79,7 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
             
         }
         
+        
       
         
         cell.layer.cornerRadius = 25
@@ -83,8 +93,27 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let advert = self.dogWalkingListViewModel.animalKindsAtIndex(indexPath.row)
-        performSegue(withIdentifier: "toDetailsWalking", sender: advert.dogWalkingAdvert )
+        if let authUserId = Auth.auth().currentUser?.uid {
+            if authUserId == advert.userId {
+                self.alertMessage(title: "Hata", messsage: "Kendi ilanınızdır")
+            }
+            else {
+                performSegue(withIdentifier: "toDetailsWalking", sender: advert.dogWalkingAdvert )
+                
+            }
+        }
+        
     }
+    
+    
+    // alert Message
+    func alertMessage(title:String,messsage:String){
+        let alertController = UIAlertController(title: title, message: messsage, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
+        self.present(alertController,animated: true, completion: nil)
+    }
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

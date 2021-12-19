@@ -23,18 +23,24 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                     if let advertId = document.documentID as? String {
                         print("dsad \(advertId)")
                         if let animalName = document.get("animalName") as? String {
-                            if let animalKindsAge = document.get("animalKindsAge") as? String {
-                                if let hoursRange = document.get("hoursRange") as? String {
+                            if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                if let hoursRange = document.get("timeRange") as? String {
                                     
-                                    if let animaSick = document.get("animaSick") as? String {
+                                    if let sickInfo = document.get("sickInfo") as? String {
                                         
                                         if let animalImage = document.get("animalImage") as? String {
                                             
                                                 if let ownerNote = document.get("ownerNote") as? String {
-                                                    if let sickInfo = document.get("sickInfo") as? String {
-                                                        let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: animaSick,ownerNote: ownerNote,sickInfo: sickInfo)
-                                                        self.dogWalkingAdvertList.append(dogWalkingAdvert)
-                                                        completion(self.dogWalkingAdvertList)
+                                                    if let sickBool = document.get("sickBool") as? String {
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                                
+                                                            }
+                                                        }
+                                                  
                                                         
                                                     } } }}} }}}}}}}
     
@@ -58,10 +64,44 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         
             db.collection("userList").document(userId).collection("dogWalklingFavoriList").document(getAdvert.advertId!).setData(docData)
             
+            
+           
+            
         }
         
+    
+    }
+    
+    
+    func addDogWalkingAdvertToFirebase(advert:DogWalkAddAdvert){
+        let db = Firestore.firestore()
+        if let userId = Auth.auth().currentUser?.uid {
+            if let userName = Auth.auth().currentUser?.displayName {
+                let docData : [String:Any] = [
+                    "userId" : userId,
+                    "userName" : userName,
+                    "animalName" : advert.animalName!,
+                    "ageAndGenus" : advert.ageAndGenus!,
+                    "sickInfo" : advert.sickInfo!,
+                    "sickBool" : advert.sickBool!,
+                    "ownerNote" : advert.ownerNote!,
+                    "animalImage" : advert.addImage!,
+                    "date" : advert.time!,
+                    "timeRange": advert.timeRange!,
+                ]
+                
+                let advertId = UUID()
+                
+                db.collection("dogWalkingAdvert").document("\(advertId)").setData(docData)
+                db.collection("userList").document(userId).collection("dogWalkingAdvert").document("\(advertId)").setData(docData)
+                
+            }
+       
+            
+        }
+
         
-      
+        
     }
     
     

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     @IBOutlet weak var addImageView: UIImageView!
@@ -85,11 +86,55 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
         }
         
         else {
-            print("Başarılı")
+            let storage = Storage.storage()
+            let storageReferance = storage.reference()
+            let medinaFolder = storageReferance.child("media")
+            if let name = self.nameTextField.text {
+                if let ageGenus = ageAndGenus.text {
+                    if let sickInfo = sickInfo.text {
+                        if let sickBool = sickBoolText.text{
+                            if let ownerNote = ownerNote.text {
+                                // image date to imageUrl
+                                if let imageData = self.addImageView.image?.jpegData(compressionQuality: 0.5)
+                                 {
+                                    let imageDataUuid = UUID().uuidString
+                                    let imageReferance = medinaFolder.child("\(imageDataUuid).jpeg")
+                                    imageReferance.putData(imageData, metadata: nil) { metaData, error in
+                                        if error == nil {
+                                            imageReferance.downloadURL { url, error in
+                                                let imagedUrl = url?.absoluteString
+                                                
+                                                let date = self.datePicker.date
+                                                var time = self.timePicker.countDownDuration
+                                               time = (time/1800)*30
+                                               
+                                                    
+        
+                                                let advert = DogWalkAddAdvert(addImage: imagedUrl!, time: date, timeRange: String(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
+                                         
+                                                DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
+                                                self.tabBarController?.selectedIndex = 0
+                                            }
+                                            
+                                        }
+                                    }
+                                }
+                                
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+           
         }
         
     }
     
+    
+   
+
     
     // alert Message
     func alertMessage(title:String,messsage:String){
