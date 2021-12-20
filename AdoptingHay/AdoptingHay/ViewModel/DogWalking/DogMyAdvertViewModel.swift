@@ -31,7 +31,7 @@ struct DogMyAdvertViewModel {
         return self.dogmyAdvert.animalImage!
     }
     
-    var range:String {
+    var range:Int {
         return self.dogmyAdvert.timeRange!
     }
     
@@ -60,6 +60,20 @@ struct DogMyAdvertViewModel {
     
     var userId:String{
         return self.dogmyAdvert.userId!
+    }
+    
+    
+    var addDate : String {
+        
+        var dateString : String {
+            let formatter = DateFormatter()
+            formatter.locale = NSLocale(localeIdentifier: "tr") as Locale
+            formatter.dateFormat = "dd/MMMM/yyyy"
+            return formatter.string(from: dogmyAdvert.time!)
+        }
+        return dateString
+        
+        
     }
 }
 

@@ -14,6 +14,8 @@ class DogFavListTVC: UITableViewCell {
     
     @IBOutlet weak var name: UILabel!
     
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var kindAge: UILabel!
     
     @IBOutlet weak var sickBool: UILabel!

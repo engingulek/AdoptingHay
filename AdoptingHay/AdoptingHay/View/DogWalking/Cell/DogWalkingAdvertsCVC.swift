@@ -14,4 +14,6 @@ class DogWalkingAdvertsCVC: UICollectionViewCell {
     @IBOutlet weak var adversKindsandAge: UILabel!
     @IBOutlet weak var advertsSick: UILabel!
     
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var userName: UILabel!
 }

@@ -62,7 +62,7 @@ design()
         DogWalkingService().dowloandDogWalkingFavList { favLis in
             if let favLis = favLis {
                 
-                self.dogFavViewModelList = DogWalkingFavListViewModel(dogWalkingAdvertFav: favLis)
+                self.dogFavViewModelList = DogWalkingFavListViewModel(dogFavAdvertList: favLis)
                 self.favListTableView.reloadData()
                 
                 
@@ -116,8 +116,9 @@ extension DogWalkFavListVC : UITableViewDataSource, UITableViewDelegate {
         cell.name.text = "Adı: \(favAdvert.name)"
         cell.kindAge.text = "Cins/Yaş: \(favAdvert.kindsAndAge)"
         cell.sickBool.text = "Hastalık \(favAdvert.sick)"
-        cell.time.text = favAdvert.range
-        
+        cell.time.text = "\(favAdvert.range) dk"
+        cell.userName.text = favAdvert.userName
+        cell.dateLabel.text = favAdvert.addDate
         print("Adı: \(favAdvert.name)")
         let imageUrl = URL(string:favAdvert.image)!
         
@@ -139,12 +140,12 @@ extension DogWalkFavListVC : UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let favAdvert = self.dogFavViewModelList.animalKindsAtIndex(indexPath.row)
-        performSegue(withIdentifier:"toFavDetail", sender: favAdvert.dogWalkingAdvert)
+        performSegue(withIdentifier:"toFavDetail", sender: favAdvert.dogFavAdvert)
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toFavDetail" {
             
-            if let getFavAdvert = sender as? DogwalkingAdvert {
+            if let getFavAdvert = sender as? DogFavAdvert {
                 let toDogFavDetailVC = segue.destination as! DogFavAdvertDetail
                 toDogFavDetailVC.getAdvert = getFavAdvert
             }
@@ -162,7 +163,7 @@ extension DogWalkFavListVC : UITableViewDataSource, UITableViewDelegate {
         
                 
                 DogWalkingService().removeFavoriAdvert(advertId: advertUid)
-                    self.dogFavViewModelList.dogWalkingAdvertFav.remove(at: indexPath.row)
+                self.dogFavViewModelList.dogFavAdvertList.remove(at: indexPath.row)
                     self.favListTableView.deleteRows(at: [indexPath], with: .fade)
                 
                     

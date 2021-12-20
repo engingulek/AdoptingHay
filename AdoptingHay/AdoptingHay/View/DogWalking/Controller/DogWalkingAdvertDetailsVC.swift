@@ -35,7 +35,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
 
         advertAnimalName.text = "Adı: \(getAdvertWalking.advertAnimalName!)"
         
-        advertRange.text = "\(getAdvertWalking.advertRange!)"
+        advertRange.text = "\(getAdvertWalking.advertRange!) dk"
         advertAnimalKindsAge.text = "Cins-Yaş \(getAdvertWalking.advertAnimalKindsandAge!)"
         
         if getAdvertWalking.advertAnimalSick == "Yok" {

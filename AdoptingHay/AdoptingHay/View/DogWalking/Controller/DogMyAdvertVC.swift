@@ -121,7 +121,7 @@ extension DogMyAdvertVC : UITableViewDelegate,UITableViewDataSource {
         let myAdvert = self.myAdvertListViewModel.animalKindsAtIndex(indexPath.row)
         
         cell.nameLabel.text = "Adı: \(myAdvert.name)"
-        cell.rangeLabel.text = myAdvert.range
+        cell.rangeLabel.text = "\(myAdvert.range) dk" 
         cell.genusAge.text = "Cins/Yaş \(myAdvert.genusAndAge)"
         cell.sickBool.text = "Hastalık \(myAdvert.sick)"
         
@@ -144,7 +144,21 @@ extension DogMyAdvertVC : UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier:"toMyAdvertDetail", sender: nil)
+        let myAdvert = self.myAdvertListViewModel.animalKindsAtIndex(indexPath.row)
+        performSegue(withIdentifier:"toMyAdvertDetail", sender: myAdvert.dogmyAdvert )
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMyAdvertDetail" {
+            
+            if let getMyAdvert = sender as? DogMyAdvert{
+                let toDogMyvDetailVC = segue.destination as! DogMyAdvertDetail
+                toDogMyvDetailVC.getAdvert = getMyAdvert
+            }
+            
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

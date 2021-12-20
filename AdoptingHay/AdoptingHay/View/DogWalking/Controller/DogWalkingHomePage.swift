@@ -68,9 +68,12 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         let advert = self.dogWalkingListViewModel.animalKindsAtIndex(indexPath.row)
         
         cell.advertsName.text = "Adı: \(advert.name)  "
-        cell.advertsRange.text = advert.range
+        cell.advertsRange.text = "\(advert.range) dk" 
         cell.adversKindsandAge.text = "Cins/Yaş: \(advert.kindsAndAge)"
         cell.advertsSick.text = "Hastalık: \(advert.sick)"
+        cell.userName.text  = advert.userName
+        cell.dateLabel.text = advert.addDate
+        
         
         let imageUrl = URL(string:advert.image)!
         

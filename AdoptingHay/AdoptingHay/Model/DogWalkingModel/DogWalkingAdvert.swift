@@ -11,7 +11,7 @@ import Foundation
 class DogwalkingAdvert {
     var advertId:String?
     var advertImage:String?
-    var advertRange:String?
+    var advertRange:Int?
     var advertAnimalName:String?
     var advertAnimalKindsandAge:String?
     var advertAnimalSick:String?
@@ -19,9 +19,10 @@ class DogwalkingAdvert {
     var sickInfo:String?
     var userId:String?
     var userName:String?
+    var dateEvent:Date?
 
     
-    init(advertId:String,advertImage:String,advertRange:String,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String,userId:String,userName:String) {
+    init(advertId:String,advertImage:String,advertRange:Int,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String,userId:String,userName:String,dateEvent:Date) {
         self.advertImage = advertImage
         self.advertRange = advertRange
         self.advertAnimalName = advertAnimalName
@@ -32,6 +33,7 @@ class DogwalkingAdvert {
         self.advertId = advertId
         self.userId = userId
         self.userName = userName
+        self.dateEvent = dateEvent
         
     }
 }

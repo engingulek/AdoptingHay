@@ -32,7 +32,7 @@ struct DogWalKingViewModel {
         return self.dogWalkingAdvert.advertImage!
     }
     
-    var range:String {
+    var range:Int {
         return self.dogWalkingAdvert.advertRange!
     }
     
@@ -61,5 +61,18 @@ struct DogWalKingViewModel {
     
     var userId:String{
         return self.dogWalkingAdvert.userId!
+    }
+    
+    var addDate : String {
+        
+        var dateString : String {
+            let formatter = DateFormatter()
+            formatter.locale = NSLocale(localeIdentifier: "tr") as Locale
+            formatter.dateFormat = "dd/MMMM/yyyy"
+            return formatter.string(from: dogWalkingAdvert.dateEvent!)
+        }
+        return dateString
+        
+        
     }
 }

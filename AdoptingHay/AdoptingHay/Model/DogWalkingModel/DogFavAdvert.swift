@@ -1,5 +1,5 @@
 //
-//  DogMyAdvert.swift
+//  DogFavAdvert.swift
 //  AdoptingHay
 //
 //  Created by engin gülek on 20.12.2021.
@@ -7,7 +7,8 @@
 
 import Foundation
 
-class DogMyAdvert {
+
+class DogFavAdvert{
     var animalImage:String?
     var time: Date?
     var timeRange:Int?
@@ -38,3 +39,4 @@ class DogMyAdvert {
         
     }
 }
+

@@ -10,6 +10,7 @@ import Firebase
 class DogWalkingService {
     var dogWalkingAdvertList = [DogwalkingAdvert]()
     var dogMyAdvertList = [DogMyAdvert]()
+    var dogFavList = [DogFavAdvert]()
     
     // Connet Firebase DogWalkingAdvert 
 func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
@@ -25,7 +26,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                         print("dsad \(advertId)")
                         if let animalName = document.get("animalName") as? String {
                             if let animalKindsAge = document.get("ageAndGenus") as? String {
-                                if let hoursRange = document.get("timeRange") as? String {
+                                if let hoursRange = document.get("timeRange") as? Int {
                                     
                                     if let sickInfo = document.get("sickInfo") as? String {
                                         
@@ -35,7 +36,8 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                                                     if let sickBool = document.get("sickBool") as? String {
                                                         if let userName = document.get("userName") as? String {
                                                             if let userId = document.get("userId") as? String {
-                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName)
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
                                                                 self.dogWalkingAdvertList.append(dogWalkingAdvert)
                                                                 completion(self.dogWalkingAdvertList)
                                                                 
@@ -111,7 +113,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
     
     
     // Connect firebase to My Favlist dowlond advert
-    func dowloandDogWalkingFavList(completion: @escaping ([DogwalkingAdvert]?)->()){
+    func dowloandDogWalkingFavList(completion: @escaping ([DogFavAdvert]?)->()){
         
         let db = Firestore.firestore()
         if let authId = Auth.auth().currentUser?.uid {
@@ -125,7 +127,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                        
                             if let animalName = document.get("animalName") as? String {
                                 if let animalKindsAge = document.get("ageAndGenus") as? String {
-                                    if let hoursRange = document.get("timeRange") as? String {
+                                    if let hoursRange = document.get("timeRange") as? Int {
                                         
                                         if let sickInfo = document.get("sickInfo") as? String {
                                             
@@ -135,9 +137,12 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                                                         if let sickBool = document.get("sickBool") as? String {
                                                             if let userName = document.get("userName") as? String {
                                                                 if let userId = document.get("userId") as? String {
-                                                                    let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName)
-                                                                    self.dogWalkingAdvertList.append(dogWalkingAdvert)
-                                                                    completion(self.dogWalkingAdvertList)
+                                                                    let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    
+                                                                    let advert = DogFavAdvert(userId: userId, userName: userName, animalImage: animalImage, time: a, timeRange: hoursRange, animalName: animalName, ageAndGenus: animalKindsAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId)
+                                                                    self.dogFavList.append(advert)
+                                                                    completion(self.dogFavList)
+                                                                   
                                                                     
                                                                 }
                                                             }
@@ -185,7 +190,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                        
                             if let animalName = document.get("animalName") as? String {
                                 if let animalGenusAge = document.get("ageAndGenus") as? String {
-                                    if let hoursRange = document.get("timeRange") as? String {
+                                    if let hoursRange = document.get("timeRange") as? Int{
                                         
                                         if let sickInfo = document.get("sickInfo") as? String {
                                             

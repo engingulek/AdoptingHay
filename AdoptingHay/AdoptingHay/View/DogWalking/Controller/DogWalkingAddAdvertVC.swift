@@ -112,7 +112,7 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
                                                        
                                                             
                 
-                                                        let advert = DogWalkAddAdvert(userId:authId,userName: userName,addImage: imagedUrl!, time: date, timeRange: String(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
+                                                        let advert = DogWalkAddAdvert(userId:authId,userName: userName,addImage: imagedUrl!, time: date, timeRange: Int(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
                                                  
                                                         DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
                                                         self.tabBarController?.selectedIndex = 0

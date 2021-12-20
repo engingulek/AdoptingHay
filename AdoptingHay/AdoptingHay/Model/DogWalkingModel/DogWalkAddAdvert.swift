@@ -10,7 +10,7 @@ import Foundation
 class DogWalkAddAdvert{
     var addImage:String?
     var time: Date?
-    var timeRange:String?
+    var timeRange:Int?
     var animalName:String?
     var ageAndGenus:String?
     var sickBool:String?
@@ -19,7 +19,7 @@ class DogWalkAddAdvert{
     var userId: String?
     var userName: String?
     
-    init(userId: String,userName: String,addImage:String,time: Date,timeRange:String,animalName:String,ageAndGenus:String,sickBool:String,sickInfo:String,ownerNote:String){
+    init(userId: String,userName: String,addImage:String,time: Date,timeRange:Int,animalName:String,ageAndGenus:String,sickBool:String,sickInfo:String,ownerNote:String){
         
         self.addImage = addImage
         self.time = time
