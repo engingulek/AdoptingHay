@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 class DogWalkingService {
     var dogWalkingAdvertList = [DogwalkingAdvert]()
+    var dogMyAdvertList = [DogMyAdvert]()
     
     // Connet Firebase DogWalkingAdvert 
 func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
@@ -46,7 +47,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
     
     
     
-    // Add advert to Firebase
+    // Add advert to Firebase fav list
     func addDogWalkingAdvert(getAdvert:DogwalkingAdvert) {
         let db = Firestore.firestore()
         let docData : [String:Any] = [
@@ -59,6 +60,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
             "sickInfo":getAdvert.sickInfo!,
             "userName" : getAdvert.userName!,
             "userId" : getAdvert.userId!
+            
         
         ]
         
@@ -74,7 +76,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
     
     }
     
-    // add advert my Favori List
+    // add advert firebase
     func addDogWalkingAdvertToFirebase(advert:DogWalkAddAdvert){
         let db = Firestore.firestore()
         if let userId = Auth.auth().currentUser?.uid {
@@ -89,7 +91,8 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                     "ownerNote" : advert.ownerNote!,
                     "animalImage" : advert.addImage!,
                     "date" : advert.time!,
-                    "timeRange": advert.timeRange!,
+                    "timeRange" : advert.timeRange!
+                  
                 ]
                 
                 let advertId = UUID()
@@ -107,7 +110,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
     }
     
     
-    
+    // Connect firebase to My Favlist dowlond advert
     func dowloandDogWalkingFavList(completion: @escaping ([DogwalkingAdvert]?)->()){
         
         let db = Firestore.firestore()
@@ -156,10 +159,65 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         
  
         if let userId = userId {
-            db.collection("userList").document(userId).collection("dogWalklingFavoriList").document(advertId).delete()
-            
+            db.collection("userList").document(userId).collection("dogWalklingFavoriList").document(advertId).delete()}}
+    
+    
+    func removeMyAdvert(advertId:String) {
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid
+        
+ 
+        if let userId = userId {
+            db.collection("userList").document(userId).collection("dogWalkingAdvert").document(advertId).delete()}}
+    
+    
+    
+    func dowlondDogMyAdvert(completion: @escaping ([DogMyAdvert]?)->()){
+        let db = Firestore.firestore()
+        if let authId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authId).collection("dogWalkingAdvert").getDocuments { snapshot, error in
+                if error != nil{
+                    completion(nil)
+                }
+                else {
+                    for document in (snapshot?.documents)! {
+                        if let advertId = document.documentID as? String {
+                       
+                            if let animalName = document.get("animalName") as? String {
+                                if let animalGenusAge = document.get("ageAndGenus") as? String {
+                                    if let hoursRange = document.get("timeRange") as? String {
+                                        
+                                        if let sickInfo = document.get("sickInfo") as? String {
+                                            
+                                            if let animalImage = document.get("animalImage") as? String {
+                                                
+                                                    if let ownerNote = document.get("ownerNote") as? String {
+                                                        if let sickBool = document.get("sickBool") as? String {
+                                                            if let userName = document.get("userName") as? String {
+                                                                if let userId = document.get("userId") as? String {
+                                                                    
+                                                                        
+                                                                        
+                                                                        let myAdvert =  DogMyAdvert(userId: userId, userName: userName, animalImage: animalImage, time: Date(), timeRange: hoursRange, animalName: animalName, ageAndGenus: animalGenusAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId)
+                                                                        
+                                                                        self.dogMyAdvertList.append(myAdvert)
+                                                                        completion(self.dogMyAdvertList)
+                                                                        
+                                                                     
+                                                                        
+                                                                        
+                                                                    }
+                                                                   
+                                                                    
+                                                                }
+                                                            }
+                                                      
+                                                            
+                                                        } } }}} }}}}}
             
         }
+        
+        
     }
     
     

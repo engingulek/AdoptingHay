@@ -104,16 +104,23 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
                                             imageReferance.downloadURL { url, error in
                                                 let imagedUrl = url?.absoluteString
                                                 
-                                                let date = self.datePicker.date
-                                                var time = self.timePicker.countDownDuration
-                                               time = (time/1800)*30
-                                               
-                                                    
-        
-                                                let advert = DogWalkAddAdvert(addImage: imagedUrl!, time: date, timeRange: String(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
-                                         
-                                                DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
-                                                self.tabBarController?.selectedIndex = 0
+                                                if let authId = Auth.auth().currentUser?.uid as? String {
+                                                    if let userName = Auth.auth().currentUser?.displayName as? String {
+                                                        let date = self.datePicker.date
+                                                        var time = self.timePicker.countDownDuration
+                                                       time = (time/1800)*30
+                                                       
+                                                            
+                
+                                                        let advert = DogWalkAddAdvert(userId:authId,userName: userName,addImage: imagedUrl!, time: date, timeRange: String(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
+                                                 
+                                                        DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
+                                                        self.tabBarController?.selectedIndex = 0
+                                                        
+                                                    }
+                                                }
+                                                
+                                           
                                             }
                                             
                                         }

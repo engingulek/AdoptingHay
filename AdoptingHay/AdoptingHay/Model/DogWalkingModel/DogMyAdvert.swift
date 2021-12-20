@@ -1,14 +1,14 @@
 //
-//  DogWalkAddAdvert.swift
+//  DogMyAdvert.swift
 //  AdoptingHay
 //
-//  Created by engin gülek on 19.12.2021.
+//  Created by engin gülek on 20.12.2021.
 //
 
 import Foundation
 
-class DogWalkAddAdvert{
-    var addImage:String?
+class DogMyAdvert {
+    var animalImage:String?
     var time: Date?
     var timeRange:String?
     var animalName:String?
@@ -18,10 +18,11 @@ class DogWalkAddAdvert{
     var ownerNote:String?
     var userId: String?
     var userName: String?
+    var advertId:String?
     
-    init(userId: String,userName: String,addImage:String,time: Date,timeRange:String,animalName:String,ageAndGenus:String,sickBool:String,sickInfo:String,ownerNote:String){
+    init(userId: String,userName: String,animalImage:String,time: Date,timeRange:String,animalName:String,ageAndGenus:String,sickBool:String,sickInfo:String,ownerNote:String,advertId:String){
         
-        self.addImage = addImage
+        self.animalImage = animalImage
         self.time = time
         self.timeRange = timeRange
         self.animalName = animalName
@@ -31,8 +32,8 @@ class DogWalkAddAdvert{
         self.ownerNote = ownerNote
         self.userName = userName
         self.userId = userId
+        self.advertId = advertId
         
         
     }
-    
 }

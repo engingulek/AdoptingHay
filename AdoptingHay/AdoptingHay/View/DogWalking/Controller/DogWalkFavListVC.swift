@@ -137,6 +137,22 @@ extension DogWalkFavListVC : UITableViewDataSource, UITableViewDelegate {
     return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let favAdvert = self.dogFavViewModelList.animalKindsAtIndex(indexPath.row)
+        performSegue(withIdentifier:"toFavDetail", sender: favAdvert.dogWalkingAdvert)
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toFavDetail" {
+            
+            if let getFavAdvert = sender as? DogwalkingAdvert {
+                let toDogFavDetailVC = segue.destination as! DogFavAdvertDetail
+                toDogFavDetailVC.getAdvert = getFavAdvert
+            }
+            
+        }
+        
+    }
+    
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let removeAction = UIContextualAction(style: .destructive, title: "Kaldır") { contextuaActcion, viewa, boolValue in

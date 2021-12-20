@@ -26,6 +26,7 @@ class DogWalkAccountPage: UIViewController {
     }
     
     @IBAction func toAdvertList(_ sender: Any) {
+        performSegue(withIdentifier: "toMyAdverts", sender: nil)
     }
     
     
