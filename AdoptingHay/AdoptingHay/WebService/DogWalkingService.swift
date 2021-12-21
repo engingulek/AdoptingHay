@@ -226,7 +226,7 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         
     }
     
-    
+    // update myDogWalkingAdvert
     func updateMyDogAdvert(userId:String,advertId:String,updateData:[String:Any]) {
         let db = Firestore.firestore()
         db.collection("userList").document(userId).collection("dogWalkingAdvert").document(advertId).updateData(updateData)
@@ -235,6 +235,126 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
     }
     
     
+    //MARK: Filtering Operations
+    
+    /// Date Filter
+    func dateFilter(filterType:Bool,completion: @escaping ([DogwalkingAdvert]?)->()) {
+        let db = Firestore.firestore()
+        db.collection("dogWalkingAdvert").order(by: "date",descending: filterType).getDocuments { snapshot, error in
+            if error != nil{
+                completion(nil)
+            }
+            else {
+                for document in (snapshot?.documents)! {
+                    if let advertId = document.documentID as? String {
+                        print("dsad \(advertId)")
+                        if let animalName = document.get("animalName") as? String {
+                            if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                if let hoursRange = document.get("timeRange") as? Int {
+                                    
+                                    if let sickInfo = document.get("sickInfo") as? String {
+                                        
+                                        if let animalImage = document.get("animalImage") as? String {
+                                            
+                                                if let ownerNote = document.get("ownerNote") as? String {
+                                                    if let sickBool = document.get("sickBool") as? String {
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                                
+                                                            }
+                                                        }
+                                                  
+                                                        
+                                                    } } }}} }}}}}
+            
+            
+        }
+        
+    }
+    
+    func timeFilter(filterType:Bool,completion: @escaping ([DogwalkingAdvert]?)->()) {
+        let db = Firestore.firestore()
+        db.collection("dogWalkingAdvert").order(by: "timeRange",descending: filterType).getDocuments { snapshot, error in
+            if error != nil{
+                completion(nil)
+            }
+            else {
+                for document in (snapshot?.documents)! {
+                    if let advertId = document.documentID as? String {
+                        print("dsad \(advertId)")
+                        if let animalName = document.get("animalName") as? String {
+                            if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                if let hoursRange = document.get("timeRange") as? Int {
+                                    
+                                    if let sickInfo = document.get("sickInfo") as? String {
+                                        
+                                        if let animalImage = document.get("animalImage") as? String {
+                                            
+                                                if let ownerNote = document.get("ownerNote") as? String {
+                                                    if let sickBool = document.get("sickBool") as? String {
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                                
+                                                            }
+                                                        }
+                                                  
+                                                        
+                                                    } } }}} }}}}}
+            
+            
+        }
+        
+    }
+    
+    func sickFilter(sickBool:String,completion: @escaping ([DogwalkingAdvert]?)->()) {
+        let db = Firestore.firestore()
+        print("hastalık \(sickBool)")
+        db.collection("dogWalkingAdvert").whereField("sickBool", isEqualTo: sickBool).getDocuments { snapshot, error in
+            if error != nil{
+                completion(nil)
+            }
+            else {
+                for document in (snapshot?.documents)! {
+                    if let advertId = document.documentID as? String {
+                        print("dsad \(advertId)")
+                        if let animalName = document.get("animalName") as? String {
+                            if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                if let hoursRange = document.get("timeRange") as? Int {
+                                    
+                                    if let sickInfo = document.get("sickInfo") as? String {
+                                        
+                                        if let animalImage = document.get("animalImage") as? String {
+                                            
+                                                if let ownerNote = document.get("ownerNote") as? String {
+                                                    if let sickBool = document.get("sickBool") as? String {
+                                                        if let userName = document.get("userName") as? String {
+                                                            if let userId = document.get("userId") as? String {
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                                
+                                                            }
+                                                        }
+                                                  
+                                                        
+                                                    } } }}} }}}}}
+
+        }
+        
+        
+        
+    }
+    
+//        .whereField("animalSick", isEqualTo:"Yok")
     
 
 }

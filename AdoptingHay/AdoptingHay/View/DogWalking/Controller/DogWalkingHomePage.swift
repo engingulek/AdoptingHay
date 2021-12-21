@@ -34,6 +34,130 @@ class DogWalkingHomePage: UIViewController {
     }
     
     
+    
+    @IBAction func dogWalkingAdvertFilter(_ sender: Any) {
+        // Create Action Controller
+        let actionController = UIAlertController(title: "Sıralama ve Filtreleme", message: "Uygu işlemei seçinniz", preferredStyle: .actionSheet)
+        
+        
+        let timeRangeShortMaxToMin = UIAlertAction(title: "Süre Azalan", style: UIAlertAction.Style.default) { actin in
+            
+            DogWalkingService().timeFilter(filterType: true) { dogwalkingAdvert in
+                if let dogwalkingAdvert = dogwalkingAdvert {
+                    self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogwalkingAdvert)
+                    self.dogWalkingCollectionView.reloadData()
+                    self.spinner.stopAnimating()
+                    
+                    self.spinner.isHidden = true
+                    
+                    
+                }
+            }
+            
+        }
+        
+        let timeRangeMinToMax = UIAlertAction(title: "Süre Artan", style: .default) { action in
+            DogWalkingService().timeFilter(filterType: false) { dogwalkingAdvert in
+                if let dogwalkingAdvert = dogwalkingAdvert {
+                    self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogwalkingAdvert)
+                    self.dogWalkingCollectionView.reloadData()
+                    self.spinner.stopAnimating()
+                    
+                    self.spinner.isHidden = true
+                    
+                    
+                }
+            }
+            
+        }
+        
+        let newDate = UIAlertAction(title: "En uzak tarih", style: .default) { action in
+            DogWalkingService().dateFilter(filterType: true) { dogWalkingAdvert in
+                
+                if let dogWalkingAdvert = dogWalkingAdvert {
+                    self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
+                    self.dogWalkingCollectionView.reloadData()
+                    self.spinner.stopAnimating()
+                    
+                    self.spinner.isHidden = true
+                }
+             
+            }
+            
+        }
+        
+        
+        let oldDate = UIAlertAction(title: "En yakın tarih", style: .default) { action in
+            DogWalkingService().dateFilter(filterType: false) { dogWalkingAdvert in
+                
+                if let dogWalkingAdvert = dogWalkingAdvert {
+                    self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
+                    self.dogWalkingCollectionView.reloadData()
+                    self.spinner.stopAnimating()
+                    
+                    self.spinner.isHidden = true
+                }
+             
+            }
+            
+        }
+        
+        let sickFalse = UIAlertAction(title: "Hastalık Yok", style: .default) { action in
+            DogWalkingService().sickFilter(sickBool: "Yok") { dogWalkingAdvert in
+                if let dogWalkingAdvert = dogWalkingAdvert {
+                    self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
+                    self.dogWalkingCollectionView.reloadData()
+                    self.spinner.stopAnimating()
+                    
+                    self.spinner.isHidden = true
+                }
+                
+                
+            }
+            
+        }
+        
+        let sickTrue = UIAlertAction(title: "Hastalık Var", style: .default) { action in
+            DogWalkingService().sickFilter(sickBool: "Var") { dogWalkingAdvert in
+                if let dogWalkingAdvert = dogWalkingAdvert {
+                    self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
+                    self.dogWalkingCollectionView.reloadData()
+                    self.spinner.stopAnimating()
+                    
+                    self.spinner.isHidden = true
+                }
+                
+            }
+            
+            
+        }
+        
+        
+        let all = UIAlertAction(title: "Hepsi", style: .destructive) { action in
+            self.getAllAdvert()
+        }
+        
+        let cancel = UIAlertAction(title: "İptal", style: .cancel) { action in
+            print("İptal tıklandı")
+        }
+        
+        actionController.addAction(timeRangeMinToMax)
+        actionController.addAction(timeRangeShortMaxToMin)
+        actionController.addAction(sickTrue)
+        actionController.addAction(sickFalse)
+        actionController.addAction(newDate)
+        actionController.addAction(oldDate)
+        actionController.addAction(all)
+        actionController.addAction(cancel)
+        
+        
+        self.present(actionController, animated: true, completion: nil)
+        
+        
+        
+    }
+    
+    
     // MARK : SERVICE CONNECT
     
     /// Get alll walking advert

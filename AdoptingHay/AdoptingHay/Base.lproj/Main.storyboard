@@ -2106,6 +2106,9 @@
                                 <buttonConfiguration key="configuration" style="filled" title="Filtrele">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="20"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="dogWalkingAdvertFilter:" destination="B48-iM-7r9" eventType="touchUpInside" id="nu9-Yz-tmE"/>
+                                </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bdn-6E-Ems">
                                 <rect key="frame" x="0.0" y="198" width="414" height="615"/>
