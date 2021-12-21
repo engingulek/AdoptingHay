@@ -201,9 +201,10 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
                                                             if let userName = document.get("userName") as? String {
                                                                 if let userId = document.get("userId") as? String {
                                                                     
+                                                                    let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    
                                                                         
-                                                                        
-                                                                        let myAdvert =  DogMyAdvert(userId: userId, userName: userName, animalImage: animalImage, time: Date(), timeRange: hoursRange, animalName: animalName, ageAndGenus: animalGenusAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId)
+                                                                        let myAdvert =  DogMyAdvert(userId: userId, userName: userName, animalImage: animalImage, time: a, timeRange: hoursRange, animalName: animalName, ageAndGenus: animalGenusAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId)
                                                                         
                                                                         self.dogMyAdvertList.append(myAdvert)
                                                                         completion(self.dogMyAdvertList)
@@ -222,6 +223,14 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
             
         }
         
+        
+    }
+    
+    
+    func updateMyDogAdvert(userId:String,advertId:String,updateData:[String:Any]) {
+        let db = Firestore.firestore()
+        db.collection("userList").document(userId).collection("dogWalkingAdvert").document(advertId).updateData(updateData)
+        db.collection("dogWalkingAdvert").document("\(advertId)").updateData(updateData)
         
     }
     

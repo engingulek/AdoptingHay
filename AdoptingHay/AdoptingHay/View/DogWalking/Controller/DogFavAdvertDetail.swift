@@ -84,9 +84,5 @@ class DogFavAdvertDetail: UIViewController {
     }
     
 
-//    let formatter = DateFormatter()
-//    formatter.locale = NSLocale(localeIdentifier: "tr") as Locale
-//    formatter.dateFormat = "dd/MMMM/yyyy"
-//    return formatter.string(from: animalAdvert.dateEvent)
 
 }

@@ -9,7 +9,7 @@ import UIKit
 import Firebase
 
 class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-   
+    
     private var animalKindsListViewModel : AnimalKindsListViewModel!
     var getAdvert : MyAdvert?
     @IBOutlet weak var oneImage: UIImageView!
@@ -42,7 +42,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     let imagepickerThird = UIImagePickerController()
     
     var imageDetailsUrl : [String] = [String]()
-
+    
     
     
     
@@ -69,12 +69,12 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         let gestureRecognizeroneImage =  UITapGestureRecognizer(target: self, action: #selector(chooseaddAdvertImageOne))
         oneImage.addGestureRecognizer(gestureRecognizeroneImage)
         
-    secondImage.isUserInteractionEnabled = true
+        secondImage.isUserInteractionEnabled = true
         let gestureRecognizersecondImage = UITapGestureRecognizer(target: self, action: #selector( chooseaddAdvertImageTwo))
         secondImage.addGestureRecognizer(gestureRecognizersecondImage)
         
         
-
+        
         
         
         
@@ -109,7 +109,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                                     
                                     
                                     
-                                   
+                                    
                                     
                                 }
                                 
@@ -138,7 +138,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                             self.secondImage.image = UIImage(data: imageDetailss[1])
                             self.thirdImage.image = UIImage(data: imageDetailss[2])
                             
-                           
+                            
                             
                         }
                     }
@@ -147,10 +147,10 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
             }
         }
         
-      
+        
         
         self.tabBarController?.tabBar.isHidden = true
-       
+        
     }
     
     
@@ -178,10 +178,10 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         
         
-      
-    
-       
-     
+        
+        
+        
+        
         self.dismiss(animated: true, completion: nil)
     }
     
@@ -192,7 +192,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
             if let animalK = animalK {
                 self.animalKindsListViewModel = AnimalKindsListViewModel(animalKindsList: animalK)
                 self.pickerKinds.reloadAllComponents()
-              
+                
                 
             }
         }
@@ -211,7 +211,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     @objc func chooseaddAdvertImageTwo() {
         
         
-       
+        
         imagepickerTwo.delegate = self
         imagepickerTwo.sourceType = .photoLibrary
         self.present(imagepickerTwo, animated: true, completion: nil)
@@ -222,7 +222,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     @objc func chooseaddAdvertImageThird() {
         
         
-       
+        
         imagepickerThird.delegate = self
         imagepickerThird.sourceType = .photoLibrary
         self.present(imagepickerThird, animated: true, completion: nil)
@@ -231,13 +231,13 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     
     
     
-   
+    
     
     
     @objc func chooseAddAdvertImage() {
         
         
-       
+        
         imagepicker.delegate = self
         imagepicker.sourceType = .photoLibrary
         self.present(imagepicker, animated: true, completion: nil)
@@ -261,7 +261,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
     
     
     
-
+    
     
     
     @IBAction func updateButton(_ sender: Any) {
@@ -271,7 +271,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         
         
         if let imageOneData = oneImage.image?.jpegData(compressionQuality: 0.5)
-         {
+        {
             let imageOneDataUuid = UUID().uuidString
             let imageOneReferance = medinaFolder.child("\(imageOneDataUuid).jpeg")
             imageOneReferance.putData(imageOneData, metadata: nil) { metaData, error in
@@ -280,7 +280,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                         let imageOneUrl = url?.absoluteString
                         self.imageDetailsUrl.append(imageOneUrl!)
                         if let imageTwoData = self.secondImage.image?.jpegData(compressionQuality: 0.5)
-                         {
+                        {
                             let imageTwoDataUuid = UUID().uuidString
                             let imageTwoReferance = medinaFolder.child("\(imageTwoDataUuid).jpeg")
                             imageTwoReferance.putData(imageTwoData, metadata: nil) { metaData, error in
@@ -289,78 +289,78 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                                         let imageTwoUrl = url?.absoluteString
                                         self.imageDetailsUrl.append(imageTwoUrl!)
                                         if let imageThirdData = self.thirdImage.image?.jpegData(compressionQuality: 0.5)
-                                         {
+                                        {
                                             let imageThirdDataUuid = UUID().uuidString
                                             let imageThirdReferance = medinaFolder.child("\(imageThirdDataUuid).jpeg")
                                             imageThirdReferance.putData(imageThirdData, metadata: nil) { metaData, error in
                                                 if error == nil {
                                                     imageThirdReferance.downloadURL { url, error in
                                                         let imageThirdUrl = url?.absoluteString
-                                              
+                                                        
                                                         self.imageDetailsUrl.append(imageThirdUrl!)
                                                         if let advertImageData = self.advertImage.image?.jpegData(compressionQuality: 0.5){
-                                                                    let uuid = UUID().uuidString
-                                                                    let advertImageRefetance = medinaFolder.child("\(uuid).jpeg")
-                                                                    advertImageRefetance.putData(advertImageData, metadata: nil) { metaData, error in
+                                                            let uuid = UUID().uuidString
+                                                            let advertImageRefetance = medinaFolder.child("\(uuid).jpeg")
+                                                            advertImageRefetance.putData(advertImageData, metadata: nil) { metaData, error in
+                                                                if error != nil {
+                                                                    print("Güncelleme resim ekleme hata \(error?.localizedDescription)")
+                                                                }
+                                                                
+                                                                else {
+                                                                    advertImageRefetance.downloadURL {url, error in
                                                                         if error != nil {
-                                                                            print("Güncelleme resim ekleme hata \(error?.localizedDescription)")
+                                                                            print("Günceleme resim indirme hata")
                                                                         }
                                                                         
                                                                         else {
-                                                                            advertImageRefetance.downloadURL {url, error in
-                                                                                if error != nil {
-                                                                                    print("Günceleme resim indirme hata")
+                                                                            let advertImageUrl = url?.absoluteString
+                                                                            let updateData : [String : Any] =
+                                                                            [
+                                                                                "animalName" : self.advertName.text!,
+                                                                                "animalAge"  : Int(self.advertAge.text!)!,
+                                                                                "animalKinds" : self.advertKinds.text!,
+                                                                                "animalOwnerNot" : self.ownerNote.text!,
+                                                                                "animalSickInfo" : self.sickInfo.text!,
+                                                                                "animalSick": self.sickBool,
+                                                                                "animalImage" : advertImageUrl!,
+                                                                                "animalImageDetails" : self.imageDetailsUrl,
+                                                                                "animalGenus" : self.advertGenus.text!
+                                                                            ]
+                                                                            
+                                                                            if let advertId = self.getAdvert?.animaluuid {
+                                                                                
+                                                                                if let userId = Auth.auth().currentUser?.uid {
+                                                                                    Service().updateMyAdvert(userId: userId, advertId: advertId, updateData: updateData)
+                                                                                    
+                                                                                    
+                                                                                    self.navigationController?.popViewController(animated: true)
+                                                                                    
                                                                                 }
                                                                                 
-                                                                                else {
-                                                                                   let advertImageUrl = url?.absoluteString
-                                                                                    let updateData : [String : Any] =
-                                                                                                                                                                                [
-                                                                                                                                                                                 "animalName" : self.advertName.text!,
-                                                                                                                                                                                 "animalAge"  : Int(self.advertAge.text!)!,
-                                                                                                                                                                                 "animalKinds" : self.advertKinds.text!,
-                                                                                                                                                                                 "animalOwnerNot" : self.ownerNote.text!,
-                                                                                                                                                                                 "animalSickInfo" : self.sickInfo.text!,
-                                                                                                                                                                                 "animalSick": self.sickBool,
-                                                                                                                                                                                 "animalImage" : advertImageUrl!,
-                                                                                "animalImageDetails" : self.imageDetailsUrl,
-                                                                                                                                                                                 "animalGenus" : self.advertGenus.text!
-                                                                                                                                                                                ]
-                                                                                                                                                                 
-                                                                                                                                                                 if let advertId = self.getAdvert?.animaluuid {
-                                                                                                                                      
-                                                                                                                                                                     if let userId = Auth.auth().currentUser?.uid {
-                                                                                                                                                                         Service().updateMyAdvert(userId: userId, advertId: advertId, updateData: updateData)
-                                                                                                                                                                         
-                                                                                                                                                                         
-                                                                                                                                                                         self.navigationController?.popViewController(animated: true)
-                                                                                                                                                                         
-                                                                                                                                                                     }
-                                                                                   
-                                                                                                                                                                 }
-
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                            
-                                                                                }
                                                                             }
+                                                                            
+                                                                            
+                                                                            
+                                                                            
+                                                                            
                                                                             
                                                                         }
                                                                     }
                                                                     
-                                                                    
                                                                 }
-
-                                                      
+                                                            }
+                                                            
+                                                            
+                                                        }
+                                                        
+                                                        
                                                         
                                                     }
                                                     
                                                 }
                                             }
                                         }
-                                  
+                                        
                                     }
                                     
                                 }
@@ -368,7 +368,7 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
                         }
                         
                     }
-                  
+                    
                     
                 }
                 
@@ -379,29 +379,29 @@ class MyAdvertDetailsVC: UIViewController, UIImagePickerControllerDelegate, UINa
         }
         
         
-   
         
         
-   
         
         
-  
-
-        
-      
         
         
-      
         
         
-       
+        
+        
+        
+        
+        
+        
+        
+        
         
     }
     
-   
     
-
-  
+    
+    
+    
     
     
 }
@@ -421,10 +421,10 @@ extension MyAdvertDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
         
         let kindsViewModel = self.animalKindsListViewModel.animalKindsAtIndex(row)
         
-       
+        
         return kindsViewModel.name != "Hepsi" ? kindsViewModel.name :
         "Diğer"
-
+        
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
@@ -433,13 +433,13 @@ extension MyAdvertDetailsVC: UIPickerViewDelegate, UIPickerViewDataSource {
                 self.advertKinds.text = "Diğer"
                 
             }
-          
+            
         }
         
         else {
             self.advertKinds.text = self.animalKindsListViewModel.animalKindsAtIndex(row).name
         }
-
+        
         
     }
 }
