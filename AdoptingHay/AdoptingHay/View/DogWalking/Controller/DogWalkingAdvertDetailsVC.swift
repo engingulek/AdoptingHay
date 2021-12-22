@@ -63,14 +63,14 @@ class DogWalkingAdvertDetailsVC: UIViewController {
                 "sendUserName": authUserName, // gönderen kişi
                 "notiTitle":"AdoptingHay",
                 " notiSubtitle":"Bir gezdirme ilanınız favorilere eklendi",
-                "notiMessage":"\(getAdvertWalking.userName!) kişisi gezdirme ilanınızı favorilerine ekledi",
+                "notiMessage":"\(authUserName) gezdirme ilanınızı favorilerine ekledi",
                 "getUserName": getAdvertWalking.userName!,  // alan kişi
                 "getUserId" : getAdvertWalking.userId!
                 
             
             ]
             
-            DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate)
+            DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
             
         }
     
