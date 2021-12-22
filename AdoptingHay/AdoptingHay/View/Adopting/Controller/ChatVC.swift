@@ -200,6 +200,8 @@ extension ChatVC : InputBarAccessoryViewDelegate {
                 Service().sendMessage(sendUserId: sendUserId , sendUserName: sendUserName, sendMessage: text,getUserName:self.messageGetUserName!)
                 
                 inputBar.inputTextView.text = ""
+                
+                Service().addMessageNotification(sendUserName: sendUserName , getuserId: self.userId! )
 
             }
         }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class DogWalkingAdvertDetailsVC: UIViewController {
     var getAdvertWalking: DogwalkingAdvert!
     
@@ -57,6 +57,25 @@ class DogWalkingAdvertDetailsVC: UIViewController {
 
     @IBAction func addFavAdvert(_ sender: Any) {
         DogWalkingService().addDogWalkingAdvert(getAdvert: getAdvertWalking!)
+        
+        if let authUserName = Auth.auth().currentUser?.displayName {
+            let notiDate : [String:Any] = [
+                "sendUserName": authUserName, // gönderen kişi
+                "notiTitle":"AdoptingHay",
+                " notiSubtitle":"Bir gezdirme ilanınız favorilere eklendi",
+                "notiMessage":"\(getAdvertWalking.userName!) kişisi gezdirme ilanınızı favorilerine ekledi",
+                "getUserName": getAdvertWalking.userName!,  // alan kişi
+                "getUserId" : getAdvertWalking.userId!
+                
+            
+            ]
+            
+            DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate)
+            
+        }
+    
+
+       
     }
     
 

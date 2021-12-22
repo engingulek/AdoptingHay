@@ -233,7 +233,8 @@ class Service {
             "getUserUd"    : getuserId,
             "sendNotiTitle" : "AdoptingHay",
             "sendNotiSubtitle" : "Bir İlanınız Favorilere Eklendi",
-            "sendMessage" : "\(sendUserName) Kişisi İlanınızı Favorilere Ekledi"
+            "sendMessage" : "\(sendUserName) Kişisi İlanınızı Favorilere Ekledi",
+            "messageType" : "favNoti"
         ]
         let userId = Auth.auth().currentUser?.uid
         if let userId = userId {
@@ -271,7 +272,28 @@ class Service {
     
     
     
-    
+    // message notification
+    func addMessageNotification(sendUserName:String,getuserId:String){
+        print("\(getuserId) -- \(sendUserName)")
+        let db = Firestore.firestore()
+        let notificationData : [String:Any] = [
+            "sendUserName" : sendUserName,
+            "getUserUd"    : getuserId,
+            "sendNotiTitle" : "AdoptingHay",
+            "sendNotiSubtitle" : "Bir Mesajınız Bulunmaktadır.",
+            "sendMessage" : "\(sendUserName) Kişisi Size Mesaj Gönderdi",
+            "notiType" : "messageNoti"
+        ]
+        let uuid = UUID().uuidString
+        
+        db.collection("userList").document("\(getuserId)").collection("notiList").document(uuid).setData(notificationData) {
+            err in
+            if err != nil {
+                print("Noti hata \(err?.localizedDescription)")}
+            else {
+                print("Noti hata") } }
+        
+    }
     
     
     
@@ -1337,7 +1359,7 @@ class Service {
                 else {
                     
                     for document in (snapshot?.documents)! {
-                        if let getUserId = document.get("getUserId") as? String {
+                        if let getUserId = document.get("getUserUd") as? String {
                             print("nOTİ DENEME 1 ")
                             if let sendMessage = document.get("sendMessage") as? String {
                                 print("nOTİ DENEME 2 ")
@@ -1348,11 +1370,15 @@ class Service {
                                        
                                         if let sendUserName = document.get("sendUserName") as? String {
                                             print("nOTİ DENEME 5 \(sendUserName)")
+                                            if let notiId = document.documentID as? String {
+                                                let notiList = Notification(getUserId: getUserId, sendMessage: sendMessage, sendNotiSubtitle: sendNotiSubtitle, sendNotiTitle: sendNotiTitle, sendUserName: sendUserName,notiId:notiId)
+                                                
+                                                self.notificationList.append(notiList)
+                                                completion(self.notificationList)
+                                                
+                                            }
                                             
-                                            let notiList = Notification(getUserId: getUserId, sendMessage: sendMessage, sendNotiSubtitle: sendNotiSubtitle, sendNotiTitle: sendNotiTitle, sendUserName: sendUserName)
-                                            
-                                            self.notificationList.append(notiList)
-                                            completion(self.notificationList)
+                                         
                                             
                                            
                                             
@@ -1377,6 +1403,15 @@ class Service {
    
     
     
+    
+    func removeNotiAnimalAdvert(notiId:String) {
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("notiList").document(notiId).delete()
+            
+        }
+     
+    }
     
     
     func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String) {

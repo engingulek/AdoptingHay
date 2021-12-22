@@ -353,8 +353,21 @@ func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         
         
     }
+    // dog walking add to notiList
+    func addDogWalkingAdvertNoti(notiData:[String:Any]) {
+        let db = Firestore.firestore()
+        if let authId = Auth.auth().currentUser?.uid {
+            let notiId = UUID().uuidString
+            db.collection("userList").document(authId).collection("dogWalkingNoti").document(notiId).setData(notiData)
+            
+        }
+        
+        
+        
+    }
     
-//        .whereField("animalSick", isEqualTo:"Yok")
+
+
     
 
 }

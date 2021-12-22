@@ -207,6 +207,12 @@ class AnimalAdvertDetailsVC: UIViewController {
                 Service().sendMessage(sendUserId: (getAnimalAdvert?.userId)!, sendUserName: authUserName, sendMessage: mesajText.text!,getUserName: (getAnimalAdvert?.userName)!)
                 mesajText.text = ""
                 
+                if let getUserId = getAnimalAdvert?.userId {
+                    Service().addMessageNotification(sendUserName: authUserName, getuserId: getUserId)
+                    
+                }
+               
+                
             }
             
             

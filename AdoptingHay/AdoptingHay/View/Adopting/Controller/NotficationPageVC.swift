@@ -82,6 +82,22 @@ extension NotficationPageVC: UITableViewDelegate, UITableViewDataSource  {
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let notificationDelete = UIContextualAction(style: .destructive, title: "Sil") { (contextualAction, view, boolValue) in}
+        let notificationDelete = UIContextualAction(style: .destructive, title: "Sil") { (contextualAction, view, boolValue) in
+            
+            
+            let notiId = self.notiViewModel.animalAdvertAtIndex(indexPath.row).notiId
+            print("Notfication Id \(notiId)")
+            
+            Service().removeNotiAnimalAdvert(notiId: notiId)
+            self.notiViewModel.notiList.remove(at: indexPath.row)
+            self.notficationTableView.deleteRows(at: [indexPath], with: .fade)
+            
+            
+            
+            
+            
+            
+            
+        }
         return UISwipeActionsConfiguration(actions: [notificationDelete])}
 }

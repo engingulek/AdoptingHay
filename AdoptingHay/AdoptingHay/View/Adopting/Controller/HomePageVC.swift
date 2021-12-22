@@ -102,7 +102,7 @@ class HomePageVC: UIViewController {
 //        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
 //            self.getNotificationFromFirestore()
 //        })
-        
+//        
         
     }
     
@@ -120,17 +120,25 @@ class HomePageVC: UIViewController {
                         if self.permissionCheck {
                             for documents in (snaphot?.documents)! {
                                 if let userName =  documents.get("sendUserName") {
-                                    let content =  UNMutableNotificationContent()
-                                    content.title = "AdoptingHay"
-                                    content.subtitle = "Bir ilanız favorilere eklendi"
-                                    content.body = "\(userName) kişisi ilanınızı favorilerine ekledi"
-                                    content.sound = UNNotificationSound.default
-                                    // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
-                                    let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-                                    // Bildirim isteği oluşturulması
-                                    let noti = UNNotificationRequest(identifier: "bildirim", content: content, trigger: react)
-                                    // Bildirimin eklenmesi
-                                    UNUserNotificationCenter.current().add(noti, withCompletionHandler: nil)
+                                    if let sendMessageBody = documents.get("sendMessage") {
+                                        if let sendMessageSubtitle = documents.get("sendNotiSubtitle") {
+                                            let content =  UNMutableNotificationContent()
+                                            content.title = "AdoptingHay"
+                                            content.subtitle = "\(sendMessageSubtitle)"
+                                            content.body = "\(sendMessageBody)"
+                                            content.sound = UNNotificationSound.default
+                                            // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
+                                            let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+                                            // Bildirim isteği oluşturulması
+                                            let noti = UNNotificationRequest(identifier: "bildirim", content: content, trigger: react)
+                                            // Bildirimin eklenmesi
+                                            UNUserNotificationCenter.current().add(noti, withCompletionHandler: nil)
+                                            
+                                        }
+                                      
+                                        
+                                    }
+                                   
 } }} }}} } }
     
     

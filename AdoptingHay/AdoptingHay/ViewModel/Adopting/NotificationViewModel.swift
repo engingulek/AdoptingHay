@@ -8,7 +8,7 @@
 import Foundation
 
 struct NotificationListViewModel {
-    let notiList : [Notification]
+    var notiList : [Notification]
     
     
     func numberOfRowsInSection()-> Int {
@@ -47,6 +47,10 @@ struct NotificationViewModel {
     
     var sendName : String {
         return self.notification.sendUserName!
+    }
+    
+    var notiId : String {
+        return self.notification.notiId!
     }
     
     
