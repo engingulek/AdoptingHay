@@ -578,6 +578,16 @@ class DogWalkingService {
                                 }}}} }}}
     
     
+    func deleteMessage(id:String){
+        print("Mesaj id si :\(id)")
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("dogWalkingConversation").document(id).delete()
+
+        }
+    }
+    
+    
     
     
     

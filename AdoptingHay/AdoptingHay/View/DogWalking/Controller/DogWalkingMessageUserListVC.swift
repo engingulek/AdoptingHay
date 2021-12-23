@@ -63,6 +63,26 @@ extension DogWalkingMessageUserListVC : UITableViewDelegate,UITableViewDataSourc
         performSegue(withIdentifier: "toMessage", sender: self.messageUserListViewModel.messageUserNameIndex(indexPath.row).id)
     }
     
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "Sil") { contextuaActcion, viewa, boolValue in
+            
+            DogWalkingService().deleteMessage(id:  self.messageUserListViewModel.messageUserNameIndex(indexPath.row).id)
+            self.messageUserListViewModel.messageUserList.remove(at: indexPath.row)
+            self.messaUserListTableView.deleteRows(at: [indexPath], with: .fade)
+          
+            
+            
+        }
+        
+        return UISwipeActionsConfiguration(actions: [deleteAction])
+    }
+    
+    
+    
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMessage" {
             if let id = sender as? String{
