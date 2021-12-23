@@ -21,20 +21,36 @@ class DogWalkingMessageUserListVC: UIViewController {
      
     }
     
+    func getMessageUserList(){
+        DogWalkingService().getAllMessageList { messageUserListA in
+            if let messageUserListA = messageUserListA {
+                self.messageUserListViewModel = MessageUserListViewModel(messageUserList: messageUserListA)
+                self.messaUserListTableView.reloadData()
+                
+                print("Name user list : \( self.messageUserListViewModel.messsageUserListCount() ) ")
+            }
+            
+            
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
+        getMessageUserList()
+        messaUserListTableView.reloadData()
     }
     
 }
 
 extension DogWalkingMessageUserListVC : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+         return self.messageUserListViewModel == nil ? 0 : self.messageUserListViewModel.messsageUserListCount()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = messaUserListTableView.dequeueReusableCell(withIdentifier: "messageCell", for: indexPath)
-        cell.textLabel?.text = "Engimn Gülek"
+        let cell = messaUserListTableView.dequeueReusableCell(withIdentifier: "nameCell", for: indexPath)
+        cell.textLabel?.text = self.messageUserListViewModel.messageUserNameIndex(indexPath.row).name
+        
         return cell
     }
     
@@ -50,9 +66,9 @@ extension DogWalkingMessageUserListVC : UITableViewDelegate,UITableViewDataSourc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toMessage" {
             if let id = sender as? String{
-                let toChatVC = segue.destination as!
-                ChatVC
-                toChatVC.userId = id
+                let toDogChatVC = segue.destination as!
+                DogChatVC
+                toDogChatVC.userId = id
             }
         }
     }

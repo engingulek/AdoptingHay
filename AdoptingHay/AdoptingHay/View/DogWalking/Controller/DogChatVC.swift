@@ -64,9 +64,71 @@ class DogChatVC: MessagesViewController {
     
     
     
-    func detailsMessageChangeToCompareChat(id:String) {
+    func ada(document:QueryDocumentSnapshot,id:String) {
+        let db = Firestore.firestore()
+        if id == document.documentID {
+            if let messageSenderName = document.get("getUserName") as? String {
+                                        print("Message sender name \(messageSenderName)")
+                self.messageGetUserName = messageSenderName
+                                        self.navigationItem.title = messageSenderName
+                                        
+                                        if let message = document.get("message") as? [Any]
+                                        {
+                                            
+                                        
+                                            
+                                            for i in 0...message.count-1 {
+                                                print("\(i). sıra \(message[i])")
+                                                
+                                                if let messageOrder = message[i] as? [String:Any] {
+                                                    
+                                                    
+                                                    
+                                                    if let gonderilenMessage = messageOrder["sendMessage"] as? String {
+                                                        
+                                                        if let sendUserID = messageOrder["senderId"] as? String {
+                                                            
+                                                            print("USER ID : \(Auth.auth().currentUser?.uid)")
+                                                            
+                                                            if let userId = Auth.auth().currentUser?.uid as? String {
+                                                                if userId == sendUserID {
+                                                                    self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                                    
+                                                                }
+                                                                else {
+                                                                    self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                                    
+                                                                }
+                                                                self.messagesCollectionView.reloadData()
+                                                                
+                                                            }
+                                                            
+                                                            
+                                                            
+                                                            
+                                                          
+                                                         
+                                                        }
+                                                        
+                                                    }
+                                                }
+                                            
+                                                
+                                            
+                                                
+                                                
+                                            }
+                                  
+                                                
+                                            }
+                                        }
+
+            
+        }
+        
         
     }
+    
     
     func getAllMessageData() {
         self.messages.removeAll()
@@ -81,134 +143,23 @@ class DogChatVC: MessagesViewController {
                 }
                 
                 else {
+                   
+                    
                     
                     for document in (snasphot?.documents)! {
                         
-                        if let sendUserId = self.userId {
-                            if sendUserId == document.documentID {
-                                if let messageSenderName = document.get("getUserName") as? String {
-                                                            print("Message sender name \(messageSenderName)")
-                                    self.messageGetUserName = messageSenderName
-                                                            self.navigationItem.title = messageSenderName
-                                                            
-                                                            if let message = document.get("message") as? [Any]
-                                                            {
-                                                                
-                                                            
-                                                                
-                                                                for i in 0...message.count-1 {
-                                                                    print("\(i). sıra \(message[i])")
-                                                                    
-                                                                    if let messageOrder = message[i] as? [String:Any] {
-                                                                        
-                                                                        
-                                                                        
-                                                                        if let gonderilenMessage = messageOrder["sendMessage"] as? String {
-                                                                            
-                                                                            if let sendUserID = messageOrder["senderId"] as? String {
-                                                                                
-                                                                                print("USER ID : \(Auth.auth().currentUser?.uid)")
-                                                                                
-                                                                                if let userId = Auth.auth().currentUser?.uid as? String {
-                                                                                    if userId == sendUserID {
-                                                                                        self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                                                        
-                                                                                    }
-                                                                                    else {
-                                                                                        self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                                                        
-                                                                                    }
-                                                                                    self.messagesCollectionView.reloadData()
-                                                                                    
-                                                                                }
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                              
-                                                                             
-                                                                            }
-                                                                            
-                                                                        }
-                                                                    }
-                                                                
-                                                                    
-                                                                
-                                                                    
-                                                                    
-                                                                }
-                                                      
-                                                                    
-                                                                }
-                                                            }
-
-                                
-                            }
+                       
                         
+                        
+                        if let sendUserId = self.userId {
+                            self.ada(document: document, id: sendUserId)
                             }
                         
                         
                         else {
                             if let senderUserId = self.sendToGetMessageDataChat!["messageGetUserId"] as? String {
                                 
-                                if senderUserId == document.documentID {
-                                    if let messageSenderName = document.get("getUserName") as? String {
-                                                                print("Message sender name \(messageSenderName)")
-                                        self.messageGetUserName = messageSenderName
-                                                                self.navigationItem.title = messageSenderName
-                                                                
-                                                                if let message = document.get("message") as? [Any]
-                                                                {
-                                                                    
-                                                                
-                                                                    
-                                                                    for i in 0...message.count-1 {
-                                                                        print("\(i). sıra \(message[i])")
-                                                                        
-                                                                        if let messageOrder = message[i] as? [String:Any] {
-                                                                            
-                                                                            
-                                                                            
-                                                                            if let gonderilenMessage = messageOrder["sendMessage"] as? String {
-                                                                                
-                                                                                if let sendUserID = messageOrder["senderId"] as? String {
-                                                                                    
-                                                                                    print("USER ID : \(Auth.auth().currentUser?.uid)")
-                                                                                    
-                                                                                    if let userId = Auth.auth().currentUser?.uid as? String {
-                                                                                        if userId == sendUserID {
-                                                                                            self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                                                            
-                                                                                        }
-                                                                                        else {
-                                                                                            self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                                                            
-                                                                                        }
-                                                                                        self.messagesCollectionView.reloadData()
-                                                                                        
-                                                                                    }
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                    
-                                                                                  
-                                                                                 
-                                                                                }
-                                                                                
-                                                                            }
-                                                                        }
-                                                                    
-                                                                        
-                                                                    
-                                                                        
-                                                                        
-                                                                    }
-                                                          
-                                                                        
-                                                                    }
-                                                                }
-                                    
-                                }
+                                self.ada(document: document, id: senderUserId)
                            
 
                                 
@@ -253,14 +204,14 @@ extension DogChatVC : InputBarAccessoryViewDelegate {
 
             if let senduserid = self.sendToGetMessageDataChat!["messageGetUserId"] as? String {
               
-                
+                self.messagesCollectionView.reloadData()
                 if let sendUserName =  Auth.auth().currentUser?.displayName as? String {
                     
                     if let messageGetuserName = self.sendToGetMessageDataChat!["messageGetUserName"] as? String {
                         
                         DogWalkingService().sendMessage(sendUserId: senduserid , sendUserName: sendUserName, sendMessage: text,getUserName: messageGetuserName)
             inputBar.inputTextView.text = ""
-                        self.messagesCollectionView.reloadData()
+                        
                     }
                     
         

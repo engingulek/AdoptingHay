@@ -12,7 +12,7 @@ class DogWalkingService {
     var dogMyAdvertList = [DogMyAdvert]()
     var dogFavList = [DogFavAdvert]()
     var dogNotiList = [DogNotification]()
-    
+    var messageUserList = [MessageUserList]()
     // Connet Firebase DogWalkingAdvert
     func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         let db = Firestore.firestore()
@@ -556,6 +556,26 @@ class DogWalkingService {
         
         
     }
+    
+    
+    
+    func getAllMessageList(completion: @escaping ([MessageUserList]?)->()){
+        
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("dogWalkingConversation").getDocuments { snapshot, error in
+                if error != nil {
+                                print("Message User List Error \(error?.localizedDescription)")
+                }
+                else {
+                    for document in (snapshot?.documents)! {
+                        print("dffd ")
+                        if let userId  = document.documentID as? String {
+                                if let getUserName = document.get("getUserName") as? String {
+                                    let messageUser = MessageUserList(sendName: getUserName, sendUserId: userId)
+                                     self.messageUserList.append(messageUser)
+                                      completion(self.messageUserList)
+                                }}}} }}}
     
     
     
