@@ -19,7 +19,7 @@ struct Sender:SenderType {
     var senderId: String
     var displayName: String
     
-   
+    
     
     
     
@@ -33,41 +33,41 @@ class ChatVC: MessagesViewController {
     var messageViewModelList : MessageViewModelList!
     var timer = Timer()
     var  messageGetUserName : String?
-
+    
     var senderName:String?
-
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         messagesCollectionView.messagesDataSource = self
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
         
-     
         
-   print("Konuşulan kişi id \(userId)")
+        
+        print("Konuşulan kişi id \(userId)")
         
         self.getAll()
-                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
-                    self.getAll()
-                })
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { _ in
+            self.getAll()
+        })
         
         
-     
         
         
-      
-            
-           
-            
-        }
+        
+        
+        
+        
+        
+    }
     
     func getAll() {
         self.messages.removeAll()
         let db = Firestore.firestore()
-    
+        
         
         if let authUserID = Auth.auth().currentUser?.uid {
             
@@ -83,118 +83,50 @@ class ChatVC: MessagesViewController {
                         if let sendUserId = self.userId {
                             if sendUserId == document.documentID {
                                 if let messageSenderName = document.get("getUserName") as? String {
-                                                            print("Message sender name \(messageSenderName)")
+                                    print("Message sender name \(messageSenderName)")
                                     self.messageGetUserName = messageSenderName
-                                                            self.navigationItem.title = messageSenderName
-                                                            
-                                                            if let message = document.get("message") as? [Any]
-                                                            {
+                                    self.navigationItem.title = messageSenderName
+                                    
+                                    if let message = document.get("message") as? [Any]
+                                    {
+                                        
+                                        
+                                        
+                                        for i in 0...message.count-1 {
+                                            print("\(i). sıra \(message[i])")
+                                            
+                                            if let messageOrder = message[i] as? [String:Any] {
+                                                
+                                                
+                                                
+                                                if let gonderilenMessage = messageOrder["sendMessage"] as? String {
+                                                    
+                                                    if let sendUserID = messageOrder["senderId"] as? String {
+                                                        
+                                                        print("USER ID : \(Auth.auth().currentUser?.uid)")
+                                                        
+                                                        if let userId = Auth.auth().currentUser?.uid as? String {
+                                                            if userId == sendUserID {
+                                                                self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
                                                                 
-                                                            
-                                                                
-                                                                for i in 0...message.count-1 {
-                                                                    print("\(i). sıra \(message[i])")
-                                                                    
-                                                                    if let messageOrder = message[i] as? [String:Any] {
-                                                                        
-                                                                        
-                                                                        
-                                                                        if let gonderilenMessage = messageOrder["sendMessage"] as? String {
-                                                                            
-                                                                            if let sendUserID = messageOrder["senderId"] as? String {
-                                                                                
-                                                                                print("USER ID : \(Auth.auth().currentUser?.uid)")
-                                                                                
-                                                                                if let userId = Auth.auth().currentUser?.uid as? String {
-                                                                                    if userId == sendUserID {
-                                                                                        self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                                                        
-                                                                                    }
-                                                                                    else {
-                                                                                        self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
-                                                                                        
-                                                                                    }
-                                                                                    self.messagesCollectionView.reloadData()
-                                                                                    
-                                                                                }
-                                                                                
-                                                                                
-                                                                                
-                                                                                
-                                                                              
-                                                                             
-                                                                            }
-                                                                            
-                                                                        }
-                                                                    }
-                                                                
-                                                                    
-                                                                
-                                                                    
-                                                                    
-                                                                }
-                                                      
-                                                                    
-                                                                }
                                                             }
-
-                                
-                            }
-                            }
-
-                        }
-                        
-                        
-                    }
-                }
-            }
-
-        
-    }
+                                                            else {
+                                                                self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                                
+                                                            }
+                                                            self.messagesCollectionView.reloadData()
+                                                            
+                                                        } } } }} } } }  } } }} }}
     
-  
-    
- 
-    
-
-                
-        
-        
-       
-       
-       
-      
-        
-    
-       
-    }
-   
-    
- 
-     
-            
-   
-        
-        
-    
-    
-    
-    
-    
-    
-    
-    
-
-
-
+}
 
 extension ChatVC : InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
-      
+        
         
         if let sendUserId = userId as? String {
-           
-         
+            
+            
             self.messagesCollectionView.reloadData()
             if let sendUserName = Auth.auth().currentUser?.displayName as? String {
                 Service().sendMessage(sendUserId: sendUserId , sendUserName: sendUserName, sendMessage: text,getUserName:self.messageGetUserName!)
@@ -202,13 +134,13 @@ extension ChatVC : InputBarAccessoryViewDelegate {
                 inputBar.inputTextView.text = ""
                 
                 Service().addMessageNotification(sendUserName: sendUserName , getuserId: self.userId! )
-
+                
             }
         }
         
         
-
-      
+        
+        
     }
 }
 
@@ -220,25 +152,25 @@ extension ChatVC : InputBarAccessoryViewDelegate {
 
 extension ChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayDelegate {
     func currentSender() -> SenderType {
-      return selfSender
+        return selfSender
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
         
-       
+        
         return  messages[indexPath.section]
     }
     
     func numberOfSections(in messagesCollectionView: MessagesCollectionView) -> Int {
         print("Message sayi \(messages.count)")
         
-     
-        
-     
         
         
         
-       
+        
+        
+        
+        
         
         
         return messages.count

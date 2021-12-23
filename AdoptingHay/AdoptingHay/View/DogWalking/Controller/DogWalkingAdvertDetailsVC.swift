@@ -20,6 +20,10 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     
     @IBOutlet weak var animalSickInfo: UITextView!
     
+    @IBOutlet weak var advertContactButton: UIButton!
+    
+    @IBOutlet weak var advertAddFavButton: UIButton!
+    
     @IBOutlet weak var animalOwnerNote: UITextView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,8 @@ class DogWalkingAdvertDetailsVC: UIViewController {
             
         }
         
+        advertContactButton.layer.cornerRadius = 15
+        advertAddFavButton.layer.cornerRadius = 15
 
         advertAnimalName.text = "Adı: \(getAdvertWalking.advertAnimalName!)"
         
@@ -54,7 +60,20 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     
     }
     
-
+    @IBAction func advertContactAction(_ sender: Any) {
+        
+            self.performSegue(withIdentifier:"a",sender: nil)
+    
+        
+            
+        
+       
+        
+        
+        
+        
+    }
+    
     @IBAction func addFavAdvert(_ sender: Any) {
         DogWalkingService().addDogWalkingAdvert(getAdvert: getAdvertWalking!)
         
@@ -66,17 +85,14 @@ class DogWalkingAdvertDetailsVC: UIViewController {
                 "notiMessage":"\(authUserName) gezdirme ilanınızı favorilerine ekledi",
                 "getUserName": getAdvertWalking.userName!,  // alan kişi
                 "getUserId" : getAdvertWalking.userId!
-                
-            
             ]
             
             DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
-            
         }
-    
-
-       
     }
-    
-
 }
+
+
+
+
+

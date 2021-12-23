@@ -1494,7 +1494,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDs-aX-AeW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7968.115942028986" y="1166.5178571428571"/>
+            <point key="canvasLocation" x="8878.2608695652179" y="1166.5178571428571"/>
         </scene>
         <!--İlan Güncelle-->
         <scene sceneID="Sxk-jA-zf6">
@@ -1789,7 +1789,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EIy-VZ-74y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="9079.7101449275378" y="1300.4464285714284"/>
+            <point key="canvasLocation" x="9989.855072463768" y="1300.4464285714284"/>
         </scene>
         <!--Mesaj-->
         <scene sceneID="bc9-vH-Zjp">
@@ -2278,6 +2278,9 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Temasa Geç"/>
+                                <connections>
+                                    <action selector="advertContactAction:" destination="hBA-gR-x8b" eventType="touchUpInside" id="dtu-GS-9kY"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aralık : Yükleniyor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDO-BR-OI0">
                                 <rect key="frame" x="106" y="172" width="203" height="24"/>
@@ -2368,17 +2371,20 @@
                     </view>
                     <navigationItem key="navigationItem" id="TwW-XS-XIK"/>
                     <connections>
+                        <outlet property="advertAddFavButton" destination="CnB-XK-eSz" id="zyy-7Z-kYl"/>
                         <outlet property="advertAnimalKindsAge" destination="fP1-kU-BmS" id="iQY-AK-7qE"/>
                         <outlet property="advertAnimalName" destination="be3-PS-3yp" id="MdM-k5-plw"/>
+                        <outlet property="advertContactButton" destination="XE9-v4-8eK" id="rgf-iI-rlg"/>
                         <outlet property="advertImageView" destination="HxA-bv-Og8" id="upV-od-T5T"/>
                         <outlet property="advertRange" destination="LDO-BR-OI0" id="Dhv-tn-Mdo"/>
                         <outlet property="animalOwnerNote" destination="qWJ-L4-8Is" id="cZk-zP-AbX"/>
                         <outlet property="animalSickInfo" destination="L5g-va-ddT" id="jpH-Y9-cGz"/>
+                        <segue destination="M35-A9-eOo" kind="show" identifier="a" id="Obw-CZ-Qfd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l7m-kB-e4v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1778.2608695652175" y="618.75"/>
+            <point key="canvasLocation" x="1777" y="644"/>
         </scene>
         <!--Hesabım-->
         <scene sceneID="tK9-by-VgW">
@@ -3069,6 +3075,7 @@
                         <segue destination="Czc-ia-tnl" kind="relationship" relationship="viewControllers" id="hGl-Hh-cem"/>
                         <segue destination="9HM-pk-EJI" kind="relationship" relationship="viewControllers" id="jjD-ZT-pml"/>
                         <segue destination="tg4-td-IiR" kind="relationship" relationship="viewControllers" id="3Ym-kE-CD2"/>
+                        <segue destination="6c6-eT-sKI" kind="relationship" relationship="viewControllers" id="Kd0-nd-Ved"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dcW-KO-yh3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3659,6 +3666,66 @@
             </objects>
             <point key="canvasLocation" x="437.68115942028987" y="1359.375"/>
         </scene>
+        <!--Kullanıcı Listesi-->
+        <scene sceneID="AQq-hI-fZ0">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDx-CQ-Pa9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="ASO-Rg-La6" customClass="DogWalkingMessageUserListVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="t6R-li-2ib">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="hp6-Yf-qz0">
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="messageCell" id="YP6-wG-XMC">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="YP6-wG-XMC" id="lUP-dr-A1k">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="YqX-cm-w8t"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="hp6-Yf-qz0" secondAttribute="bottom" id="1sS-SI-1Ka"/>
+                            <constraint firstItem="hp6-Yf-qz0" firstAttribute="top" secondItem="YqX-cm-w8t" secondAttribute="top" id="KZ3-N1-zlu"/>
+                            <constraint firstItem="hp6-Yf-qz0" firstAttribute="leading" secondItem="YqX-cm-w8t" secondAttribute="leading" id="Uzi-b9-W8M"/>
+                            <constraint firstItem="hp6-Yf-qz0" firstAttribute="trailing" secondItem="YqX-cm-w8t" secondAttribute="trailing" id="ge7-lj-WXb"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Kullanıcı Listesi" id="iiy-Vg-Pp4"/>
+                    <connections>
+                        <outlet property="messaUserListTableView" destination="hp6-Yf-qz0" id="N5w-gr-des"/>
+                        <segue destination="M35-A9-eOo" kind="show" identifier="toMessage" id="z6q-q8-7lt"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2702.898550724638" y="1382.8125"/>
+        </scene>
+        <!--Kullanıcı İsmi-->
+        <scene sceneID="f5S-jw-Ao3">
+            <objects>
+                <viewController id="M35-A9-eOo" customClass="DogChatVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="67X-iL-TwY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="wev-5D-vh0"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="PUN-8r-ygL"/>
+                    <navigationItem key="navigationItem" title="Kullanıcı İsmi" id="IbH-nQ-WWZ"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3S8-9H-0qr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3658" y="1383"/>
+        </scene>
         <!--İlan Ekle-->
         <scene sceneID="OAG-cX-pKz">
             <objects>
@@ -4114,8 +4181,29 @@
             </objects>
             <point key="canvasLocation" x="-881.15942028985512" y="2899.5535714285711"/>
         </scene>
+        <!--Kullanıcı Listesi-->
+        <scene sceneID="2AO-wJ-3MN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6c6-eT-sKI" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Mesaj" image="message" catalog="system" id="vaw-Oa-fwk"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Kullanıcı Listesi" id="usz-sO-GZc"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="oxM-X6-NWs">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="ASO-Rg-La6" kind="relationship" relationship="rootViewController" id="feL-Uz-SGP"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRC-x3-DgR" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1778" y="1383"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Obw-CZ-Qfd"/>
         <segue reference="J57-BP-jiN"/>
         <segue reference="kcS-aM-oPg"/>
     </inferredMetricsTieBreakers>
@@ -4126,6 +4214,7 @@
         <image name="dogWalking" width="512" height="512"/>
         <image name="eye.slash" catalog="system" width="128" height="86"/>
         <image name="house" catalog="system" width="128" height="106"/>
+        <image name="message" catalog="system" width="128" height="113"/>
         <image name="message.fill" catalog="system" width="128" height="113"/>
         <image name="pamukkopek" width="600" height="400"/>
         <image name="pamukopek" width="600" height="400"/>

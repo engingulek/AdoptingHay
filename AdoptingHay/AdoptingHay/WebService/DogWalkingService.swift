@@ -24,7 +24,7 @@ class DogWalkingService {
             else {
                 for document in (snapshot?.documents)! {
                     if let advertId = document.documentID as? String {
-                      
+                        
                         if let animalName = document.get("animalName") as? String {
                             if let animalKindsAge = document.get("ageAndGenus") as? String {
                                 if let hoursRange = document.get("timeRange") as? Int {
@@ -248,7 +248,7 @@ class DogWalkingService {
             else {
                 for document in (snapshot?.documents)! {
                     if let advertId = document.documentID as? String {
-                   
+                        
                         if let animalName = document.get("animalName") as? String {
                             if let animalKindsAge = document.get("ageAndGenus") as? String {
                                 if let hoursRange = document.get("timeRange") as? Int {
@@ -286,7 +286,7 @@ class DogWalkingService {
             else {
                 for document in (snapshot?.documents)! {
                     if let advertId = document.documentID as? String {
-                    
+                        
                         if let animalName = document.get("animalName") as? String {
                             if let animalKindsAge = document.get("ageAndGenus") as? String {
                                 if let hoursRange = document.get("timeRange") as? Int {
@@ -317,7 +317,7 @@ class DogWalkingService {
     
     func sickFilter(sickBool:String,completion: @escaping ([DogwalkingAdvert]?)->()) {
         let db = Firestore.firestore()
-  
+        
         db.collection("dogWalkingAdvert").whereField("sickBool", isEqualTo: sickBool).getDocuments { snapshot, error in
             if error != nil{
                 completion(nil)
@@ -325,7 +325,7 @@ class DogWalkingService {
             else {
                 for document in (snapshot?.documents)! {
                     if let advertId = document.documentID as? String {
-                       
+                        
                         if let animalName = document.get("animalName") as? String {
                             if let animalKindsAge = document.get("ageAndGenus") as? String {
                                 if let hoursRange = document.get("timeRange") as? Int {
@@ -380,19 +380,19 @@ class DogWalkingService {
                     for document in (snapshot?.documents)! {
                         
                         if let notiId = document.documentID as? String {
-                        
+                            
                             if let  getUserId = document.get("getUserId") as? String {
-                         
+                                
                                 if let  getUserName = document.get("getUserName") as? String {
-                                 
+                                    
                                     if let  notiTitle = document.get("notiTitle") as? String {
-                                      
+                                        
                                         if let  notiSubtitle = document.get("notiSubtitle") as? String {
-                                           
+                                            
                                             if let  notiMessage = document.get("notiMessage") as? String {
-                                               
+                                                
                                                 if let  sendUserName = document.get("sendUserName") as? String {
-                                                   
+                                                    
                                                     let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName)
                                                     
                                                     self.dogNotiList.append(noti)
@@ -431,6 +431,133 @@ class DogWalkingService {
         }
         db.collection("userList")
     }
+    
+    func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String) {
+        
+        
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            let myDb = db.collection("userList").document(authUserId).collection("dogWalkingConversation").document(sendUserId)
+            let orderDb =  db.collection("userList").document(sendUserId).collection("dogWalkingConversation").document(authUserId)
+            
+            
+            myDb.getDocument { mysnaphot, error in
+                
+                orderDb.getDocument { orderSnaphot, error in
+                    if  mysnaphot?.get("message") != nil && orderSnaphot?.get("message") == nil  {
+                        let message : [String:Any] = [
+                            "date":Date(),
+                            "sendMessage":sendMessage,
+                            "senderId": authUserId
+                        ]
+                        if let getUserName = getUserName as? String{
+                            let getMessageData : [String:Any] = [
+                                "sendUserName" : getUserName,
+                                "getUserName"  : sendUserName,
+                                "message": [message]
+                            ]
+                            db.collection("userList").document(sendUserId).collection("dogWalkingConversation").document(authUserId).setData(getMessageData)
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                
+                
+                
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            db.collection("userList").document(authUserId).collection("dogWalkingConversation").document(sendUserId).getDocument { snapshot, error in
+                
+                if  snapshot?.get("message") == nil  {
+                    
+                    let message : [String:Any] = [
+                        "date":Date(),
+                        "sendMessage":sendMessage,
+                        "senderId": authUserId
+                    ]
+                    
+                    
+                    
+                    
+                    if let getUserName = getUserName as? String{
+                        
+                        
+                        
+                        let sendMessageData : [String:Any] = [
+                            "sendUserName" : sendUserName,
+                            "getUserName"  : getUserName,
+                            "message": [message]
+                        ]
+                        
+                        
+                        let getMessageData : [String:Any] = [
+                            "sendUserName" : getUserName,
+                            "getUserName"  : sendUserName,
+                            "message": [message]
+                        ]
+                        
+                        
+                        
+                        
+                        
+                        db.collection("userList").document(authUserId).collection("dogWalkingConversation").document(sendUserId).setData(sendMessageData)
+                        
+                        db.collection("userList").document(sendUserId).collection("dogWalkingConversation").document(authUserId).setData(getMessageData)
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+                
+                
+                else {
+                    let message : [String:Any] = [
+                        "date":Date(),
+                        "sendMessage":sendMessage,
+                        "senderId": authUserId
+                    ]
+                    
+                    
+                    db.collection("userList").document(authUserId).collection("dogWalkingConversation").document(sendUserId).updateData([
+                        "message": FieldValue.arrayUnion([message])
+                    ])
+                    
+                    
+                    db.collection("userList").document(sendUserId).collection("dogWalkingConversation").document(authUserId).updateData([
+                        "message": FieldValue.arrayUnion([message])
+                    ])
+                    
+                }
+                
+            }
+        }
+        
+        
+    }
+    
+    
     
     
     
