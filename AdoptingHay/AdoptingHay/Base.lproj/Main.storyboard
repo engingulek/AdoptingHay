@@ -3678,7 +3678,6 @@
         <!--Kullanıcı Listesi-->
         <scene sceneID="AQq-hI-fZ0">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="kDx-CQ-Pa9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="ASO-Rg-La6" customClass="DogWalkingMessageUserListVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="t6R-li-2ib">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
@@ -3714,6 +3713,7 @@
                         <segue destination="M35-A9-eOo" kind="show" identifier="toMessage" id="z6q-q8-7lt"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kDx-CQ-Pa9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2702.898550724638" y="1382.8125"/>
         </scene>
@@ -3722,7 +3722,7 @@
             <objects>
                 <viewController id="M35-A9-eOo" customClass="DogChatVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="67X-iL-TwY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wev-5D-vh0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4212,7 +4212,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="z6q-q8-7lt"/>
+        <segue reference="Obw-CZ-Qfd"/>
         <segue reference="J57-BP-jiN"/>
         <segue reference="kcS-aM-oPg"/>
     </inferredMetricsTieBreakers>

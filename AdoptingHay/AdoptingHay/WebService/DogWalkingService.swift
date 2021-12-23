@@ -432,7 +432,7 @@ class DogWalkingService {
         db.collection("userList")
     }
     
-    func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String) {
+    func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String,sendImage:String) {
         
         
         let db = Firestore.firestore()
@@ -447,8 +447,9 @@ class DogWalkingService {
                     if  mysnaphot?.get("message") != nil && orderSnaphot?.get("message") == nil  {
                         let message : [String:Any] = [
                             "date":Date(),
-                            "sendMessage":sendMessage,
-                            "senderId": authUserId
+                            "sendMessage":sendMessage ?? "",
+                            "senderId": authUserId,
+                            "sendImage" : sendImage
                         ]
                         if let getUserName = getUserName as? String{
                             let getMessageData : [String:Any] = [
@@ -487,7 +488,8 @@ class DogWalkingService {
                     let message : [String:Any] = [
                         "date":Date(),
                         "sendMessage":sendMessage,
-                        "senderId": authUserId
+                        "senderId": authUserId,
+                        "sendImage" : sendImage
                     ]
                     
                     
@@ -536,7 +538,8 @@ class DogWalkingService {
                     let message : [String:Any] = [
                         "date":Date(),
                         "sendMessage":sendMessage,
-                        "senderId": authUserId
+                        "senderId": authUserId,
+                        "sendImage" : sendImage
                     ]
                     
                     
