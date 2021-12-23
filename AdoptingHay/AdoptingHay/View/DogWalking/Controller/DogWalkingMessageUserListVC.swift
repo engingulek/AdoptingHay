@@ -10,6 +10,7 @@ import UIKit
 class DogWalkingMessageUserListVC: UIViewController {
 
     @IBOutlet weak var messaUserListTableView: UITableView!
+    private var  messageUserListViewModel : MessageUserListViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,7 +39,22 @@ extension DogWalkingMessageUserListVC : UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "toMessage", sender: nil)
+        
+       
+      
+        
+        
+        performSegue(withIdentifier: "toMessage", sender: self.messageUserListViewModel.messageUserNameIndex(indexPath.row).id)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toMessage" {
+            if let id = sender as? String{
+                let toChatVC = segue.destination as!
+                ChatVC
+                toChatVC.userId = id
+            }
+        }
     }
     
     

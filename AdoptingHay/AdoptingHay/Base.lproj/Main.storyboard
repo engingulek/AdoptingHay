@@ -2277,7 +2277,7 @@
                                     <constraint firstAttribute="height" constant="31" id="rkH-yI-3qs"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Temasa Geç"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Merhaba De"/>
                                 <connections>
                                     <action selector="advertContactAction:" destination="hBA-gR-x8b" eventType="touchUpInside" id="dtu-GS-9kY"/>
                                 </connections>
@@ -2334,6 +2334,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Merhaba deyip temasa geç" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WbE-fU-dHi">
+                                <rect key="frame" x="33" y="686" width="152" height="36"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ndO-2i-yPJ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -2341,6 +2347,8 @@
                             <constraint firstItem="ndO-2i-yPJ" firstAttribute="trailing" secondItem="LDO-BR-OI0" secondAttribute="trailing" constant="105" id="2m9-nP-iVv"/>
                             <constraint firstItem="qWJ-L4-8Is" firstAttribute="leading" secondItem="ndO-2i-yPJ" secondAttribute="leading" constant="87" id="2oa-FB-sfU"/>
                             <constraint firstItem="be3-PS-3yp" firstAttribute="leading" secondItem="ndO-2i-yPJ" secondAttribute="leading" constant="106" id="3PK-Qr-X0C"/>
+                            <constraint firstItem="WbE-fU-dHi" firstAttribute="top" secondItem="qWJ-L4-8Is" secondAttribute="bottom" constant="30" id="6QZ-UB-paW"/>
+                            <constraint firstItem="ndO-2i-yPJ" firstAttribute="trailing" secondItem="WbE-fU-dHi" secondAttribute="trailing" constant="229" id="7LH-Py-oZK"/>
                             <constraint firstItem="CnB-XK-eSz" firstAttribute="top" secondItem="qWJ-L4-8Is" secondAttribute="bottom" constant="82" id="AAT-29-ePk"/>
                             <constraint firstItem="ndO-2i-yPJ" firstAttribute="trailing" secondItem="L5g-va-ddT" secondAttribute="trailing" constant="87" id="AKN-Bu-2v8"/>
                             <constraint firstItem="qWJ-L4-8Is" firstAttribute="top" secondItem="shE-50-bKn" secondAttribute="bottom" constant="22" id="ECf-QU-9Ux"/>
@@ -2363,6 +2371,7 @@
                             <constraint firstItem="ndO-2i-yPJ" firstAttribute="trailing" secondItem="qWJ-L4-8Is" secondAttribute="trailing" constant="87" id="exw-ro-sKx"/>
                             <constraint firstItem="CnB-XK-eSz" firstAttribute="leading" secondItem="XE9-v4-8eK" secondAttribute="trailing" constant="37" id="hGu-Am-qAu"/>
                             <constraint firstItem="fP1-kU-BmS" firstAttribute="leading" secondItem="ndO-2i-yPJ" secondAttribute="leading" constant="106" id="jeQ-W8-mb7"/>
+                            <constraint firstItem="WbE-fU-dHi" firstAttribute="leading" secondItem="ndO-2i-yPJ" secondAttribute="leading" constant="33" id="kLk-cW-ICC"/>
                             <constraint firstItem="LDO-BR-OI0" firstAttribute="leading" secondItem="ndO-2i-yPJ" secondAttribute="leading" constant="106" id="kcv-fn-FnB"/>
                             <constraint firstItem="ndO-2i-yPJ" firstAttribute="trailing" secondItem="TzO-yi-dG8" secondAttribute="trailing" constant="105" id="uoU-kZ-CAn"/>
                             <constraint firstItem="ndO-2i-yPJ" firstAttribute="trailing" secondItem="be3-PS-3yp" secondAttribute="trailing" constant="105" id="wPn-CS-0jh"/>
@@ -2384,7 +2393,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l7m-kB-e4v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="644"/>
+            <point key="canvasLocation" x="1776.8115942028987" y="643.52678571428567"/>
         </scene>
         <!--Hesabım-->
         <scene sceneID="tK9-by-VgW">

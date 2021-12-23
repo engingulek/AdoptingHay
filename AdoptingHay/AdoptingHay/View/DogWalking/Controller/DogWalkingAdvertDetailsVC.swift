@@ -25,6 +25,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     @IBOutlet weak var advertAddFavButton: UIButton!
     
     @IBOutlet weak var animalOwnerNote: UITextView!
+    private var  messageUserListViewModel : MessageUserListViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -62,17 +63,39 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     
     @IBAction func advertContactAction(_ sender: Any) {
         
-            self.performSegue(withIdentifier:"a",sender: nil)
-    
         
+        if let userId = getAdvertWalking.userId {
+            if let userName = getAdvertWalking.userName {
+                let sendToGetMessageData : [String:Any] = [
+                    "messageGetUserId" : userId,
+                    "messageGetUserName" : userName
+                
+                ]
+                self.performSegue(withIdentifier:"a",sender: sendToGetMessageData)
+                
+            }
             
+      
+            
+        }
         
-       
-        
-        
-        
-        
+     
     }
+    
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "a" {
+            if let data = sender as? [String:Any] {
+            let toDogChatVC = segue.destination as! DogChatVC
+                toDogChatVC.sendToGetMessageDataChat = data
+            
+        }
+      
+        }
+    }
+    
+    
     
     @IBAction func addFavAdvert(_ sender: Any) {
         DogWalkingService().addDogWalkingAdvert(getAdvert: getAdvertWalking!)
