@@ -10,7 +10,7 @@ import Firebase
 class DogWalkAccountPage: UIViewController {
 
     @IBOutlet weak var puanLabel: UILabel!
-    @IBOutlet weak var balanceLabel: UILabel!
+  
     override func viewDidLoad() {
         super.viewDidLoad()
   
@@ -29,9 +29,16 @@ class DogWalkAccountPage: UIViewController {
         performSegue(withIdentifier: "toMyAdverts", sender: nil)
     }
     
+    @IBAction func myOutSideListButton(_ sender: Any) {
+        performSegue(withIdentifier: "isentRequest", sender: nil)
+    }
+    
+    @IBAction func myRequestListButton(_ sender: Any) {
+        performSegue(withIdentifier: "myRequestList", sender: nil)
+    }
     
     
-    
+    // singOutButton
     @IBAction func singOut(_ sender: Any) {
         
         let firebaseAuth = Auth.auth()
@@ -41,10 +48,8 @@ class DogWalkAccountPage: UIViewController {
      } catch let signOutError as NSError {
        print("Error signing out: %@", signOutError)
      }
-        
-        
-        
     }
+    
     
     
     

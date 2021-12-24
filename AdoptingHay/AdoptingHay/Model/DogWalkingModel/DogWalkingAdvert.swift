@@ -20,9 +20,10 @@ class DogwalkingAdvert {
     var userId:String?
     var userName:String?
     var dateEvent:Date?
+    var situation:String?
 
     
-    init(advertId:String,advertImage:String,advertRange:Int,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String,userId:String,userName:String,dateEvent:Date) {
+    init(advertId:String,advertImage:String,advertRange:Int,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String,userId:String,userName:String,dateEvent:Date,situation:String) {
         self.advertImage = advertImage
         self.advertRange = advertRange
         self.advertAnimalName = advertAnimalName
@@ -34,6 +35,7 @@ class DogwalkingAdvert {
         self.userId = userId
         self.userName = userName
         self.dateEvent = dateEvent
+        self.situation = situation
         
     }
 }

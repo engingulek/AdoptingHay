@@ -61,6 +61,9 @@ struct DogMyAdvertViewModel {
     var userId:String{
         return self.dogmyAdvert.userId!
     }
+    var situation:String {
+        return self.dogmyAdvert.situation!
+    }
     
     
     var addDate : String {

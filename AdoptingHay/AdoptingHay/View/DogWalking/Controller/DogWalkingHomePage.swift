@@ -197,6 +197,7 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         cell.advertsSick.text = "Hastalık: \(advert.sick)"
         cell.userName.text  = advert.userName
         cell.dateLabel.text = advert.addDate
+      
         
         
         let imageUrl = URL(string:advert.image)!

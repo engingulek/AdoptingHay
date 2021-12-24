@@ -1,23 +1,21 @@
 //
-//  DogMyAdvertCell.swift
+//  IncomingRequestTVC.swift
 //  AdoptingHay
 //
-//  Created by engin gülek on 20.12.2021.
+//  Created by engin gülek on 24.12.2021.
 //
 
 import UIKit
 
-class DogMyAdvertCell: UITableViewCell {
-
-    @IBOutlet weak var animalImageView: UIImageView!
-    @IBOutlet weak var rangeLabel: UILabel!
+class IncomingRequestTVC: UITableViewCell {
+    @IBOutlet weak var animalImage: UIImageView!
     
-    @IBOutlet weak var genusAge: UILabel!
+    @IBOutlet weak var range: UILabel!
+    
+    @IBOutlet weak var name: UILabel!
     
     @IBOutlet weak var sickBool: UILabel!
-    
-   
-    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var genusAge: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

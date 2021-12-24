@@ -119,6 +119,7 @@ extension DogWalkFavListVC : UITableViewDataSource, UITableViewDelegate {
         cell.time.text = "\(favAdvert.range) dk"
         cell.userName.text = favAdvert.userName
         cell.dateLabel.text = favAdvert.addDate
+        cell.situation.text = favAdvert.situation
         print("Adı: \(favAdvert.name)")
         let imageUrl = URL(string:favAdvert.image)!
         

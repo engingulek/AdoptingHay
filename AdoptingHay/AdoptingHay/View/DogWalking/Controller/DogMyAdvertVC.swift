@@ -124,6 +124,7 @@ extension DogMyAdvertVC : UITableViewDelegate,UITableViewDataSource {
         cell.rangeLabel.text = "\(myAdvert.range) dk" 
         cell.genusAge.text = "Cins/Yaş \(myAdvert.genusAndAge)"
         cell.sickBool.text = "Hastalık \(myAdvert.sick)"
+ 
         
         let imageUrl = URL(string:myAdvert.image)!
         

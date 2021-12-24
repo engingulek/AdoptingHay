@@ -19,9 +19,10 @@ class DogMyAdvert {
     var userId: String?
     var userName: String?
     var advertId:String?
+    var situation:String?
           
     
-    init(userId: String,userName: String,animalImage:String,time: Date,timeRange:Int,animalName:String,ageAndGenus:String,sickBool:String,sickInfo:String,ownerNote:String,advertId:String){
+    init(userId: String,userName: String,animalImage:String,time: Date,timeRange:Int,animalName:String,ageAndGenus:String,sickBool:String,sickInfo:String,ownerNote:String,advertId:String,situation:String){
         
         self.animalImage = animalImage
         self.time = time
@@ -34,6 +35,7 @@ class DogMyAdvert {
         self.userName = userName
         self.userId = userId
         self.advertId = advertId
+        self.situation = situation
         
         
     }

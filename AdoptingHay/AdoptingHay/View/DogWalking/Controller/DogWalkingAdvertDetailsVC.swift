@@ -82,6 +82,20 @@ class DogWalkingAdvertDetailsVC: UIViewController {
      
     }
     
+    // request send for advert
+    @IBAction func advertRequest(_ sender: Any) {
+        DogWalkingService().sendRequest(getAdvert: getAdvertWalking)
+        
+  
+         
+            
+
+       
+        
+        
+    }
+    
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

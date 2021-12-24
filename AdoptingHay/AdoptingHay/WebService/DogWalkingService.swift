@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 class DogWalkingService {
     var dogWalkingAdvertList = [DogwalkingAdvert]()
+    var inComingRequestList = [DogwalkingAdvert]()
     var dogMyAdvertList = [DogMyAdvert]()
     var dogFavList = [DogFavAdvert]()
     var dogNotiList = [DogNotification]()
@@ -37,10 +38,16 @@ class DogWalkingService {
                                                 if let sickBool = document.get("sickBool") as? String {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
-                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                            let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
-                                                            self.dogWalkingAdvertList.append(dogWalkingAdvert)
-                                                            completion(self.dogWalkingAdvertList)
+                                                            if let situation = document.get("situation") as? String{
+                                                                if situation == "Aktif" {
+                                                                    let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a,situation: situation)
+                                                                    self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                    completion(self.dogWalkingAdvertList)
+                                                                    
+                                                                }
+                                                             
+                                                            }
                                                             
                                                         }
                                                     }
@@ -62,7 +69,9 @@ class DogWalkingService {
             "ownerNote" : getAdvert.ownerNote!,
             "sickInfo":getAdvert.sickInfo!,
             "userName" : getAdvert.userName!,
-            "userId" : getAdvert.userId!
+            "userId" : getAdvert.userId!,
+            "situation" : getAdvert.situation!
+            
             
             
         ]
@@ -94,7 +103,8 @@ class DogWalkingService {
                     "ownerNote" : advert.ownerNote!,
                     "animalImage" : advert.addImage!,
                     "date" : advert.time!,
-                    "timeRange" : advert.timeRange!
+                    "timeRange" : advert.timeRange!,
+                    "situation" : "Aktif"
                     
                 ]
                 
@@ -138,11 +148,20 @@ class DogWalkingService {
                                                     if let sickBool = document.get("sickBool") as? String {
                                                         if let userName = document.get("userName") as? String {
                                                             if let userId = document.get("userId") as? String {
-                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                
-                                                                let advert = DogFavAdvert(userId: userId, userName: userName, animalImage: animalImage, time: a, timeRange: hoursRange, animalName: animalName, ageAndGenus: animalKindsAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId)
-                                                                self.dogFavList.append(advert)
-                                                                completion(self.dogFavList)
+                                                                if let situation = document.get("situation") as? String {
+                                                                    if situation == "Aktif" {
+                                                                        let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                        
+                                                                        let advert = DogFavAdvert(userId: userId, userName: userName, animalImage: animalImage, time: a, timeRange: hoursRange, animalName: animalName, ageAndGenus: animalKindsAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId,situation: situation)
+                                                                        self.dogFavList.append(advert)
+                                                                        completion(self.dogFavList)
+                                                                        
+                                                                    }
+                                                            
+                            
+                                                                    
+                                                             
+                                                                }
                                                                 
                                                                 
                                                             }
@@ -202,13 +221,20 @@ class DogWalkingService {
                                                         if let userName = document.get("userName") as? String {
                                                             if let userId = document.get("userId") as? String {
                                                                 
-                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                
-                                                                
-                                                                let myAdvert =  DogMyAdvert(userId: userId, userName: userName, animalImage: animalImage, time: a, timeRange: hoursRange, animalName: animalName, ageAndGenus: animalGenusAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId)
-                                                                
-                                                                self.dogMyAdvertList.append(myAdvert)
-                                                                completion(self.dogMyAdvertList)
+                                                                if let situation = document.get("situation") as? String {
+                                                                    let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                    
+                                                                    if situation == "Aktif" {
+                                                                        let myAdvert =  DogMyAdvert(userId: userId, userName: userName, animalImage: animalImage, time: a, timeRange: hoursRange, animalName: animalName, ageAndGenus: animalGenusAge, sickBool: sickBool, sickInfo: sickInfo, ownerNote: ownerNote, advertId: advertId,situation: situation)
+                                                                        
+                                                                        self.dogMyAdvertList.append(myAdvert)
+                                                                        completion(self.dogMyAdvertList)
+                                                                        
+                                                                    }
+                                                                    
+                                                                    
+                                                              
+                                                                }
                                                                 
                                                                 
                                                                 
@@ -261,10 +287,12 @@ class DogWalkingService {
                                                 if let sickBool = document.get("sickBool") as? String {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
-                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                            let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
-                                                            self.dogWalkingAdvertList.append(dogWalkingAdvert)
-                                                            completion(self.dogWalkingAdvertList)
+                                                            if let situation = document.get("situation") as? String{
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a,situation: situation)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                            }
                                                             
                                                         }
                                                     }
@@ -299,10 +327,12 @@ class DogWalkingService {
                                                 if let sickBool = document.get("sickBool") as? String {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
-                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                            let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
-                                                            self.dogWalkingAdvertList.append(dogWalkingAdvert)
-                                                            completion(self.dogWalkingAdvertList)
+                                                            if let situation = document.get("situation") as? String{
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a,situation: situation)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                            }
                                                             
                                                         }
                                                     }
@@ -338,10 +368,12 @@ class DogWalkingService {
                                                 if let sickBool = document.get("sickBool") as? String {
                                                     if let userName = document.get("userName") as? String {
                                                         if let userId = document.get("userId") as? String {
-                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                            let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a)
-                                                            self.dogWalkingAdvertList.append(dogWalkingAdvert)
-                                                            completion(self.dogWalkingAdvertList)
+                                                            if let situation = document.get("situation") as? String {
+                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                let dogWalkingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool,ownerNote: ownerNote,sickInfo: sickInfo,userId: userId,userName: userName,dateEvent: a,situation: situation)
+                                                                self.dogWalkingAdvertList.append(dogWalkingAdvert)
+                                                                completion(self.dogWalkingAdvertList)
+                                                            }
                                                             
                                                         }
                                                     }
@@ -589,6 +621,153 @@ class DogWalkingService {
 
         }
     }
+    
+    
+    func sendRequest(getAdvert:DogwalkingAdvert) {
+        let db = Firestore.firestore()
+       
+     
+        let docData : [String:Any] = [
+            "animalImage" : getAdvert.advertImage!,
+            "animalName" : getAdvert.advertAnimalName!,
+            "timeRange": getAdvert.advertRange!,
+            "sickBool" : getAdvert.advertAnimalSick!,
+            "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
+            "ownerNote" : getAdvert.ownerNote!,
+            "sickInfo":getAdvert.sickInfo!,
+            "userName" : getAdvert.userName!,
+            "userId" : getAdvert.userId!,
+            "situation" : getAdvert.situation!,
+            "date" : getAdvert.dateEvent!
+        ]
+        
+        // add to advert's owner request list
+        db.collection("userList").document(getAdvert.userId!).collection("incomingRequest").document(getAdvert.advertId!).setData(docData)
+        if let userId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(userId).collection("isentRequest").document(getAdvert.advertId!).setData(docData)
+        } }
+    
+    
+    func getInComingRequestList(completion: @escaping ([DogwalkingAdvert]?)->()){
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            if let authId = Auth.auth().currentUser?.uid {
+                db.collection("userList").document(authId).collection("incomingRequest").getDocuments { snapshot, error in
+                    if error != nil{
+                        completion(nil)
+                    }
+                    else {
+                        for document in (snapshot?.documents)! {
+                            if let advertId = document.documentID as? String {
+                                
+                                if let animalName = document.get("animalName") as? String {
+                                    if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                        if let hoursRange = document.get("timeRange") as? Int {
+                                            
+                                            if let sickInfo = document.get("sickInfo") as? String {
+                                                
+                                                if let animalImage = document.get("animalImage") as? String {
+                                                    
+                                                    if let ownerNote = document.get("ownerNote") as? String {
+                                                        if let sickBool = document.get("sickBool") as? String {
+                                                            if let userName = document.get("userName") as? String {
+                                                                if let userId = document.get("userId") as? String {
+                                                                    if let situation = document.get("situation") as? String {
+                                                                        if situation == "Aktif" {
+                                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                            let inComingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation)
+                                                                            self.inComingRequestList.append(inComingAdvert)
+                                                                            completion(self.inComingRequestList)
+                                                                            
+                                                                            
+                                                                            
+                                                                        
+                                                                            
+                                                                        }
+                                                                
+                                
+                                                                        
+                                                                 
+                                                                    }
+                                                                    
+                                                                    
+                                                                }
+                                                            }
+                                                            
+                                                            
+                                                        } } }}} }}}}}}
+                
+            }
+            
+        }
+        
+        
+        
+    }
+    
+    
+    
+    
+    func isendRequestList(completion: @escaping ([DogwalkingAdvert]?)->()){
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            if let authId = Auth.auth().currentUser?.uid {
+                db.collection("userList").document(authId).collection("isentRequest").getDocuments { snapshot, error in
+                    if error != nil{
+                        completion(nil)
+                    }
+                    else {
+                        for document in (snapshot?.documents)! {
+                            if let advertId = document.documentID as? String {
+                                
+                                if let animalName = document.get("animalName") as? String {
+                                    if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                        if let hoursRange = document.get("timeRange") as? Int {
+                                            
+                                            if let sickInfo = document.get("sickInfo") as? String {
+                                                
+                                                if let animalImage = document.get("animalImage") as? String {
+                                                    
+                                                    if let ownerNote = document.get("ownerNote") as? String {
+                                                        if let sickBool = document.get("sickBool") as? String {
+                                                            if let userName = document.get("userName") as? String {
+                                                                if let userId = document.get("userId") as? String {
+                                                                    if let situation = document.get("situation") as? String {
+                                                                        if situation == "Aktif" {
+                                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                            let inComingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation)
+                                                                            self.inComingRequestList.append(inComingAdvert)
+                                                                            completion(self.inComingRequestList)
+                                                                            
+                                                                            
+                                                                            
+                                                                        
+                                                                            
+                                                                        }
+                                                                
+                                
+                                                                        
+                                                                 
+                                                                    }
+                                                                    
+                                                                    
+                                                                }
+                                                            }
+                                                            
+                                                            
+                                                        } } }}} }}}}}}
+                
+            }
+            
+        }
+        
+        
+        
+    }
+        
+    
     
     
     

@@ -77,4 +77,9 @@ struct DogWalKingFavViewModel {
         
         
     }
+    
+    var situation : String {
+        return self.dogFavAdvert.situation!
+    }
+    
 }

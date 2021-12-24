@@ -75,4 +75,8 @@ struct DogWalKingViewModel {
         
         
     }
+    
+    var situation : String {
+        return self.dogWalkingAdvert.situation!
+    }
 }

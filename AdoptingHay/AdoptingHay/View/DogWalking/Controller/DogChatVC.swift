@@ -41,6 +41,7 @@ struct Media:MediaItem {
     
 }
 
+
 class DogChatVC: MessagesViewController {
     private var messages = [Message]()
     var userId:String?
@@ -63,7 +64,8 @@ class DogChatVC: MessagesViewController {
         messagesCollectionView.messagesLayoutDelegate = self
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
-        setupInputButton()
+       setupInputButton()
+   
         
         
         
@@ -97,6 +99,16 @@ class DogChatVC: MessagesViewController {
 
         
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
   private func setupInputButton() {
@@ -174,6 +186,13 @@ class DogChatVC: MessagesViewController {
                                                                               myImage.kf.setImage(with: URL(string:sendImage), placeholder: nil, options:[.transition(.fade(0.7))], completionHandler: nil)
                                                                               self.messages.append(Message(sender: self.selfSender, messageId: "2", sentDate: Date(), kind: .photo(Media(url: nil, image: myImage.image, placeholderImage: UIImage(systemName:"ellipsis")!, size: CGSize(width: 250, height: 150)))))
                                                                               
+                                                                              
+                                                                              
+                                                                
+                                                                                                    
+                                                                              
+                                                                      
+                                                                              
                                                                           
                                                                               
                                                                              
@@ -204,6 +223,7 @@ class DogChatVC: MessagesViewController {
                                                                           
                                                                          else {
                                                                               self.messages.append(Message(sender: self.sendSender, messageId: "2", sentDate: Date(), kind: .text(gonderilenMessage)))
+                                                                          
                                                                               
                                                                     }
                                                                           

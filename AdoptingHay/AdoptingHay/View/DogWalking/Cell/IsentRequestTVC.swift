@@ -1,25 +1,20 @@
 //
-//  DogFavListTVC.swift
+//  IsentRequest.swift
 //  AdoptingHay
 //
-//  Created by engin gülek on 19.12.2021.
+//  Created by engin gülek on 24.12.2021.
 //
 
 import UIKit
 
-class DogFavListTVC: UITableViewCell {
+class IsentRequestTVC: UITableViewCell {
     @IBOutlet weak var animalImage: UIImageView!
     
-    @IBOutlet weak var time: UILabel!
-    
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var range: UILabel!
     
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var kindAge: UILabel!
-    
-    @IBOutlet weak var situation: UILabel!
-    @IBOutlet weak var sickBool: UILabel!
+    @IBOutlet weak var sick: UILabel!
+    @IBOutlet weak var genusAge: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
