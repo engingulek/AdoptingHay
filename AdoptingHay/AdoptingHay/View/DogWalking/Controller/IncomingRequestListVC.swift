@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class IncomingRequestListVC: UIViewController {
     @IBOutlet weak var requestListTableView: UITableView!
     var incomingRequestViewModeList: RequestInComigViewModelList!
@@ -63,6 +63,48 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
         cell.layer.borderColor = UIColor.green.cgColor
         
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let removeAction = UIContextualAction(style: .destructive, title: "Kabul Etme") { contextuaActcion, viewa, boolValue in
+            if let advertUid = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).id as? String{
+                
+               
+                    
+                   
+                    
+                if let sendUserId = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).sendId as?
+                        String {
+                        DogWalkingService().removeComingRequest(id: advertUid,sendUserId:sendUserId)
+                        self.incomingRequestViewModeList.incomingList.remove(at: indexPath.row)
+                        self.requestListTableView.deleteRows(at: [indexPath], with: .fade)
+                    
+                    
+                    //send notification
+                    //send notification
+                    if let authUserName = Auth.auth().currentUser?.displayName {
+                        let notiDate : [String:Any] = [
+                            "sendUserName": authUserName, // gönderen kişi
+                            "notiTitle":"AdoptingHay",
+                            " notiSubtitle":"Gezdirme isteğiniz kabul edilmedi",
+                            "notiMessage":"\(authUserName) gezdirme isteğinizi kabul etmedi",
+                            "getUserName": "",  // alan kişi
+                            "getUserId" : sendUserId
+                        ]
+                        
+                        DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:sendUserId)
+                    }
+                    }
+                    
+          
+                    
+
+                
+            }
+        }
+        
+        return UISwipeActionsConfiguration(actions: [removeAction])
     }
     
  

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-
+import Firebase
 class IsentRequestVC: UIViewController {
     @IBOutlet weak var isentRequestTableView: UITableView!
     var isentRequestListViewModel:RequestInSentViewModelList!
@@ -66,4 +66,36 @@ extension IsentRequestVC: UITableViewDelegate,UITableViewDataSource {
     }
     
     
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let removeAction = UIContextualAction(style: .destructive, title: "Vazgeç") { contextuaActcion, viewa, boolValue in
+            if let advertUid = self.isentRequestListViewModel.insentRequestAtIndex(indexPath.row).id as? String{
+                
+                
+                if let advertOwnerUserId = self.isentRequestListViewModel.insentRequestAtIndex(indexPath.row).userId as? String{
+                    DogWalkingService().removeISendRequest(id: advertUid,advertOwnerUserId:advertOwnerUserId)
+                    self.isentRequestListViewModel.isentList.remove(at: indexPath.row)
+                    self.isentRequestTableView.deleteRows(at: [indexPath], with: .fade)
+                    
+                    //send notification
+                    if let authUserName = Auth.auth().currentUser?.displayName {
+                        let notiDate : [String:Any] = [
+                            "sendUserName": authUserName, // gönderen kişi
+                            "notiTitle":"AdoptingHay",
+                            " notiSubtitle":"Gezdirme isteğinden vazgeçti",
+                            "notiMessage":"\(authUserName) gezdirme isteğinden fazgeçti",
+                            "getUserName": "",  // alan kişi
+                            "getUserId" : advertOwnerUserId
+                        ]
+                        
+                        DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:advertOwnerUserId)
+                    }
+
+                }
+            }
+        }
+        
+        return UISwipeActionsConfiguration(actions: [removeAction])
+    }
+
 }

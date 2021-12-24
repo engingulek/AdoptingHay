@@ -18,7 +18,7 @@ import Foundation
 
 
 struct RequestInComigViewModelList {
-    var incomingList : [DogwalkingAdvert]
+    var incomingList : [Request]
     
     func incomingListListCount() -> Int {
         return incomingList.count
@@ -34,7 +34,7 @@ struct RequestInComigViewModelList {
 
 
 struct RequestInComigViewModel {
-    let incomingRequest : DogwalkingAdvert
+    let incomingRequest : Request
     
     var id : String {
         return self.incomingRequest.advertId!
@@ -90,6 +90,10 @@ struct RequestInComigViewModel {
     
     var situation : String {
         return self.incomingRequest.situation!
+    }
+    
+    var sendId: String {
+        return self.incomingRequest.sendId!
     }
     
  

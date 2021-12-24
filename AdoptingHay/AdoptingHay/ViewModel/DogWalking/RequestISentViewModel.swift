@@ -8,7 +8,7 @@
 import Foundation
 
 struct RequestInSentViewModelList {
-    var isentList : [DogwalkingAdvert]
+    var isentList : [Request]
     
     func insentListListCount() -> Int {
         return isentList.count
@@ -24,7 +24,7 @@ struct RequestInSentViewModelList {
 
 
 struct RequestISentViewModel {
-    let isentRequest : DogwalkingAdvert
+    let isentRequest : Request
     
     var id : String {
         return self.isentRequest.advertId!
@@ -80,6 +80,10 @@ struct RequestISentViewModel {
     
     var situation : String {
         return self.isentRequest.situation!
+    }
+    
+    var sendId: String {
+        return self.isentRequest.sendId!
     }
     
  

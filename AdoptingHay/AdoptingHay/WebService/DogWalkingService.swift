@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 class DogWalkingService {
     var dogWalkingAdvertList = [DogwalkingAdvert]()
-    var inComingRequestList = [DogwalkingAdvert]()
+    var inComingRequestList = [Request]()
     var dogMyAdvertList = [DogMyAdvert]()
     var dogFavList = [DogFavAdvert]()
     var dogNotiList = [DogNotification]()
@@ -627,28 +627,33 @@ class DogWalkingService {
         let db = Firestore.firestore()
        
      
-        let docData : [String:Any] = [
-            "animalImage" : getAdvert.advertImage!,
-            "animalName" : getAdvert.advertAnimalName!,
-            "timeRange": getAdvert.advertRange!,
-            "sickBool" : getAdvert.advertAnimalSick!,
-            "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
-            "ownerNote" : getAdvert.ownerNote!,
-            "sickInfo":getAdvert.sickInfo!,
-            "userName" : getAdvert.userName!,
-            "userId" : getAdvert.userId!,
-            "situation" : getAdvert.situation!,
-            "date" : getAdvert.dateEvent!
-        ]
+    
         
         // add to advert's owner request list
-        db.collection("userList").document(getAdvert.userId!).collection("incomingRequest").document(getAdvert.advertId!).setData(docData)
+        
         if let userId = Auth.auth().currentUser?.uid {
+            
+            
+            let docData : [String:Any] = [
+                "animalImage" : getAdvert.advertImage!,
+                "animalName" : getAdvert.advertAnimalName!,
+                "timeRange": getAdvert.advertRange!,
+                "sickBool" : getAdvert.advertAnimalSick!,
+                "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
+                "ownerNote" : getAdvert.ownerNote!,
+                "sickInfo":getAdvert.sickInfo!,
+                "userName" : getAdvert.userName!,
+                "userId" : getAdvert.userId!,
+                "situation" : getAdvert.situation!,
+                "date" : getAdvert.dateEvent!,
+                "sendRequestId" : userId
+            ]
+            db.collection("userList").document(getAdvert.userId!).collection("incomingRequest").document(getAdvert.advertId!).setData(docData)
             db.collection("userList").document(userId).collection("isentRequest").document(getAdvert.advertId!).setData(docData)
         } }
     
     
-    func getInComingRequestList(completion: @escaping ([DogwalkingAdvert]?)->()){
+    func getInComingRequestList(completion: @escaping ([Request]?)->()){
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
             let db = Firestore.firestore()
@@ -674,16 +679,18 @@ class DogWalkingService {
                                                             if let userName = document.get("userName") as? String {
                                                                 if let userId = document.get("userId") as? String {
                                                                     if let situation = document.get("situation") as? String {
-                                                                        if situation == "Aktif" {
-                                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                            let inComingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation)
-                                                                            self.inComingRequestList.append(inComingAdvert)
-                                                                            completion(self.inComingRequestList)
+                                                                        if let sendRequestId = document.get("sendRequestId") as? String {
+                                                                            if situation == "Aktif" {
+                                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                                let inComingAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId)
+                                                                                self.inComingRequestList.append(inComingAdvert)
+                                                                                completion(self.inComingRequestList)
+                                                                                
+                                                                                
+                                                                                
                                                                             
-                                                                            
-                                                                            
-                                                                        
-                                                                            
+                                                                                
+                                                                            }
                                                                         }
                                                                 
                                 
@@ -709,7 +716,7 @@ class DogWalkingService {
     
     
     
-    func isendRequestList(completion: @escaping ([DogwalkingAdvert]?)->()){
+    func isendRequestList(completion: @escaping ([Request]?)->()){
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
             let db = Firestore.firestore()
@@ -735,16 +742,18 @@ class DogWalkingService {
                                                             if let userName = document.get("userName") as? String {
                                                                 if let userId = document.get("userId") as? String {
                                                                     if let situation = document.get("situation") as? String {
-                                                                        if situation == "Aktif" {
-                                                                            let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                            let inComingAdvert = DogwalkingAdvert(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation)
-                                                                            self.inComingRequestList.append(inComingAdvert)
-                                                                            completion(self.inComingRequestList)
+                                                                        if let sendRequestId = document.get("sendRequestId") as? String {
+                                                                            if situation == "Aktif" {
+                                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                                let inComingAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId)
+                                                                                self.inComingRequestList.append(inComingAdvert)
+                                                                                completion(self.inComingRequestList)
+                                                                                
+                                                                                
+                                                                                
                                                                             
-                                                                            
-                                                                            
-                                                                        
-                                                                            
+                                                                                
+                                                                            }
                                                                         }
                                                                 
                                 
@@ -766,6 +775,36 @@ class DogWalkingService {
         
         
     }
+    
+    
+    
+    
+    func removeISendRequest(id:String,advertOwnerUserId:String){
+
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("isentRequest").document(id).delete()
+            db.collection("userList").document(advertOwnerUserId).collection("incomingRequest").document(id).delete()
+
+        }
+    }
+    
+    
+    func removeComingRequest(id:String,sendUserId:String){
+
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(authUserId).collection("incomingRequest").document(id).delete()
+            db.collection("userList").document(sendUserId).collection("isentRequest").document(id).delete()
+
+        }
+    }
+    
+    
+    
+    
+    
+
         
     
     
