@@ -46,7 +46,7 @@ class DogWalkingService {
                                                                     completion(self.dogWalkingAdvertList)
                                                                     
                                                                 }
-                                                             
+                                                                
                                                             }
                                                             
                                                         }
@@ -157,10 +157,10 @@ class DogWalkingService {
                                                                         completion(self.dogFavList)
                                                                         
                                                                     }
-                                                            
-                            
                                                                     
-                                                             
+                                                                    
+                                                                    
+                                                                    
                                                                 }
                                                                 
                                                                 
@@ -233,7 +233,7 @@ class DogWalkingService {
                                                                     }
                                                                     
                                                                     
-                                                              
+                                                                    
                                                                 }
                                                                 
                                                                 
@@ -600,17 +600,17 @@ class DogWalkingService {
         if let authUserId = Auth.auth().currentUser?.uid {
             db.collection("userList").document(authUserId).collection("dogWalkingConversation").getDocuments { snapshot, error in
                 if error != nil {
-                                print("Message User List Error \(error?.localizedDescription)")
+                    print("Message User List Error \(error?.localizedDescription)")
                 }
                 else {
                     for document in (snapshot?.documents)! {
                         print("dffd ")
                         if let userId  = document.documentID as? String {
-                                if let getUserName = document.get("getUserName") as? String {
-                                    let messageUser = MessageUserList(sendName: getUserName, sendUserId: userId)
-                                     self.messageUserList.append(messageUser)
-                                      completion(self.messageUserList)
-                                }}}} }}}
+                            if let getUserName = document.get("getUserName") as? String {
+                                let messageUser = MessageUserList(sendName: getUserName, sendUserId: userId)
+                                self.messageUserList.append(messageUser)
+                                completion(self.messageUserList)
+                            }}}} }}}
     
     
     func deleteMessage(id:String){
@@ -618,16 +618,16 @@ class DogWalkingService {
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
             db.collection("userList").document(authUserId).collection("dogWalkingConversation").document(id).delete()
-
+            
         }
     }
     
     
     func sendRequest(getAdvert:DogwalkingAdvert) {
         let db = Firestore.firestore()
-       
-     
-    
+        
+        
+        
         
         // add to advert's owner request list
         
@@ -688,14 +688,14 @@ class DogWalkingService {
                                                                                 
                                                                                 
                                                                                 
-                                                                            
+                                                                                
                                                                                 
                                                                             }
                                                                         }
-                                                                
-                                
                                                                         
-                                                                 
+                                                                        
+                                                                        
+                                                                        
                                                                     }
                                                                     
                                                                     
@@ -751,14 +751,14 @@ class DogWalkingService {
                                                                                 
                                                                                 
                                                                                 
-                                                                            
+                                                                                
                                                                                 
                                                                             }
                                                                         }
-                                                                
-                                
                                                                         
-                                                                 
+                                                                        
+                                                                        
+                                                                        
                                                                     }
                                                                     
                                                                     
@@ -780,32 +780,148 @@ class DogWalkingService {
     
     
     func removeISendRequest(id:String,advertOwnerUserId:String){
-
+        
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
             db.collection("userList").document(authUserId).collection("isentRequest").document(id).delete()
             db.collection("userList").document(advertOwnerUserId).collection("incomingRequest").document(id).delete()
-
+            
         }
     }
     
     
     func removeComingRequest(id:String,sendUserId:String){
-
+        
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
             db.collection("userList").document(authUserId).collection("incomingRequest").document(id).delete()
             db.collection("userList").document(sendUserId).collection("isentRequest").document(id).delete()
-
+            
         }
     }
     
     
     
     
-    
-
+    func acceptToRequestToFirebase(getAdvert:Request){
         
+        let db = Firestore.firestore()
+        
+        if let authUserId = Auth.auth().currentUser?.uid {
+            //
+            //                    print("Hayvan sahibi \(authUserId)")
+            //                    print("Gezdirmekİsteye \(getAdvert.sendId)")
+            //                    print("ilan id: \(getAdvert.advertId)")
+            
+            if let sendId = getAdvert.sendId {
+                if let advertId = getAdvert.advertId {
+                    
+                    let docData : [String:Any] = [
+                        "animalImage" : getAdvert.advertImage!,
+                        "animalName" : getAdvert.advertAnimalName!,
+                        "timeRange": getAdvert.advertRange!,
+                        "sickBool" : getAdvert.advertAnimalSick!,
+                        "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
+                        "ownerNote" : getAdvert.ownerNote!,
+                        "sickInfo":getAdvert.sickInfo!,
+                        "userName" : getAdvert.userName!,
+                        "userId" : getAdvert.userId!,
+                        "situation" : "Aktifdeğil",
+                        "date" : getAdvert.dateEvent!,
+                        "sendRequestId" : getAdvert.sendId!
+                    ]
+                    
+                    
+                    
+                    db.collection("userList").document(authUserId).collection("comingAcceptAdvert").document(advertId).setData(docData)
+                    db.collection("userList").document(sendId).collection("sendAcceptAdvert").document(advertId).setData(docData)
+                    
+                    
+                    // Delete advert when accept button click
+                    db.collection("userList").document(authUserId).collection("incomingRequest").document(advertId).delete()
+                    db.collection("userList").document(sendId).collection("isentRequest").document(advertId).delete()
+                    db.collection("dogWalkingAdvert").document(advertId).delete()
+                    
+                }
+            }
+            
+            
+            
+            
+            
+            
+        }
+        
+    }
+    
+    
+    
+    func getSendAcceptAdvert(completion: @escaping (Request?)->()) {
+        let db = Firestore.firestore()
+        if let authUserId = Auth.auth().currentUser?.uid {
+            let db = Firestore.firestore()
+            if let authId = Auth.auth().currentUser?.uid {
+                db.collection("userList").document(authId).collection("sendAcceptAdvert").getDocuments { snapshot, error in
+                    if error != nil{
+                        completion(nil)
+                    }
+                    else {
+                        for document in (snapshot?.documents)! {
+                            if let advertId = document.documentID as? String {
+                                
+                                if let animalName = document.get("animalName") as? String {
+                                    if let animalKindsAge = document.get("ageAndGenus") as? String {
+                                        if let hoursRange = document.get("timeRange") as? Int {
+                                            
+                                            if let sickInfo = document.get("sickInfo") as? String {
+                                                
+                                                if let animalImage = document.get("animalImage") as? String {
+                                                    
+                                                    if let ownerNote = document.get("ownerNote") as? String {
+                                                        if let sickBool = document.get("sickBool") as? String {
+                                                            if let userName = document.get("userName") as? String {
+                                                                if let userId = document.get("userId") as? String {
+                                                                    if let situation = document.get("situation") as? String {
+                                                                        if let sendRequestId = document.get("sendRequestId") as? String {
+                                                                            
+                                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                                let sendRequestAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId)
+                                                                            completion(sendRequestAdvert)
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                            
+                                                                        }
+                                                                        
+                                                                        
+                                                                        
+                                                                        
+                                                                    }
+                                                                    
+                                                                    
+                                                                }
+                                                            }
+                                                            
+                                                            
+                                                        } } }}} }}}}}}
+                
+            }
+            
+        }
+        
+        
+        
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     

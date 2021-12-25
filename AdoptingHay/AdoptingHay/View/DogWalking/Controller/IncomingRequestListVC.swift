@@ -67,13 +67,8 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
     
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let removeAction = UIContextualAction(style: .destructive, title: "Kabul Etme") { contextuaActcion, viewa, boolValue in
+        let removeAction = UIContextualAction(style: .destructive, title: "X") { contextuaActcion, viewa, boolValue in
             if let advertUid = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).id as? String{
-                
-               
-                    
-                   
-                    
                 if let sendUserId = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).sendId as?
                         String {
                         DogWalkingService().removeComingRequest(id: advertUid,sendUserId:sendUserId)
@@ -94,17 +89,26 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
                         ]
                         
                         DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:sendUserId)
-                    }
-                    }
-                    
-          
-                    
-
-                
+                    } }
             }
         }
         
-        return UISwipeActionsConfiguration(actions: [removeAction])
+        
+        
+        
+        
+        let requestToAccept = UIContextualAction(style: .normal, title: "√") { contextuaActcion, viewa, boolValue in
+            let getAdvert = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).incomingRequest
+           
+            
+                DogWalkingService().acceptToRequestToFirebase(getAdvert: getAdvert )
+                
+            
+            
+        
+        }
+        
+        return UISwipeActionsConfiguration(actions: [removeAction,requestToAccept])
     }
     
  

@@ -11,7 +11,12 @@ class DogWalkingHomePage: UIViewController {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var dogWalkingCollectionView: UICollectionView!
+    
+    
+    @IBOutlet weak var filterButtonOutlet: UIButton!
+    
     private var dogWalkingListViewModel: DogWalkingListViewModel!
+    private var sendRequestAccept :SendRequestAcceptViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.startAnimating()
@@ -21,6 +26,8 @@ class DogWalkingHomePage: UIViewController {
         dogWalkingCollectionView.delegate = self
         dogWalkingCollectionView.dataSource = self
         getAllAdvert()
+        getAllSendRequest()
+        filterButtonOutlet.isHidden = true
         
  
 
@@ -30,8 +37,173 @@ class DogWalkingHomePage: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         getAllAdvert()
+        getAllSendRequest()
         dogWalkingCollectionView.reloadData()
     }
+    
+    
+    func getAllSendRequest()
+    {
+        DogWalkingService().getSendAcceptAdvert { request in
+            if let request = request {
+                self.sendRequestAccept = SendRequestAcceptViewModel(requestAccept: request)
+                
+               if self.sendRequestAccept != nil {
+                   
+                   self.dogWalkingCollectionView.isHidden = true
+                   self.dogWalkingCollectionView.reloadData()
+                   self.acceptToRequestDesign()
+                   self.filterButtonOutlet.isHidden = true
+                    
+                }
+            }
+           
+            
+            
+        }
+    }
+    
+    
+    
+    func acceptToRequestDesign() {
+        let  timerTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+        timerTitleLabel.text = "Kalan Süre"
+        timerTitleLabel.textAlignment = .center
+        timerTitleLabel.center.x = self.view.center.x
+        timerTitleLabel.center.y = self.view.center.y/3
+        timerTitleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        timerTitleLabel.textColor = .black
+        self.view.addSubview(timerTitleLabel)
+        
+        
+        
+        let timerLabel =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
+        timerLabel.text =  "01:30"
+        timerLabel.textAlignment = .center
+        timerLabel.center.x = self.view.center.x
+        timerLabel.center.y = self.view.center.y/2
+        timerLabel.font = UIFont.systemFont(ofSize: 55,weight: .regular)
+        timerLabel.textColor = .red
+        self.view.addSubview(timerLabel)
+        
+        
+        let sendPhotoTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+        sendPhotoTitleLabel.text = "Fotoğraf İçin Kalan Süre"
+        sendPhotoTitleLabel.textAlignment = .center
+        sendPhotoTitleLabel.center.x = self.view.center.x
+        sendPhotoTitleLabel.center.y = self.view.center.y/1.5
+        sendPhotoTitleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        sendPhotoTitleLabel.textColor = .black
+        self.view.addSubview(sendPhotoTitleLabel)
+        
+        
+        let sendPhotoLabelTimer =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
+        sendPhotoLabelTimer.text =  "00:30"
+        sendPhotoLabelTimer.textAlignment = .center
+        sendPhotoLabelTimer.center.x = self.view.center.x
+        sendPhotoLabelTimer.center.y = self.view.center.y/1.2
+        sendPhotoLabelTimer.font = UIFont.systemFont(ofSize: 55,weight: .regular)
+        sendPhotoLabelTimer.textColor = .red
+        self.view.addSubview(sendPhotoLabelTimer)
+        
+        
+        
+        let amountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+        let amount = (self.sendRequestAccept.range/30)*50
+        amountLabel .text = "Ücret: \(amount)"
+        amountLabel .textAlignment = .center
+        amountLabel .center.x = self.view.center.x
+        amountLabel .center.y =  sendPhotoLabelTimer.center.y + 50
+        amountLabel .font = UIFont.systemFont(ofSize: 25, weight: .medium)
+        amountLabel .textColor = .black
+        self.view.addSubview(amountLabel)
+        
+    
+        
+        let animalName = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+        animalName.text = "Adı: \(self.sendRequestAccept.name) "
+        animalName.textAlignment = .center
+        animalName.center.x = self.view.center.x
+        animalName.center.y = amountLabel.center.y + 50
+        animalName.font = UIFont.systemFont(ofSize: 25, weight: .medium)
+        animalName.textColor = .black
+        self.view.addSubview(animalName)
+        
+        let sickInfoTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+        sickInfoTitle.text = "Hastalık Bilgi"
+        sickInfoTitle.textAlignment = .center
+        sickInfoTitle.center.x = self.view.center.x
+        sickInfoTitle.center.y =  animalName.center.y + 50
+        sickInfoTitle.font = UIFont.systemFont(ofSize: 28, weight: .bold)
+        sickInfoTitle.textColor = .black
+        self.view.addSubview(sickInfoTitle)
+        
+        if self.sendRequestAccept.sick == "Yok" {
+            let sickInfo = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+            sickInfo.text = "Yok"
+            sickInfo.textAlignment = .center
+            sickInfo.center.x = self.view.center.x
+            sickInfo.center.y =  sickInfoTitle.center.y + 50
+            sickInfo.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+            sickInfo.textColor = .black
+            self.view.addSubview(sickInfo)
+            
+        }
+        
+        else {
+            let sickInfoA = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+            sickInfoA.backgroundColor = .systemGray5
+            sickInfoA.text = "Hastalık Hakkında bilgi"
+            sickInfoA.textAlignment = .center
+            sickInfoA.isUserInteractionEnabled = false
+            sickInfoA.center.x = self.view.center.x
+            sickInfoA.font = UIFont.systemFont(ofSize: 17)
+            sickInfoA.center.y =  sickInfoTitle.center.y + 80
+            self.view.addSubview(sickInfoA)
+            
+        }
+        
+        
+        let finishButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        finishButton.backgroundColor = .systemBlue
+        finishButton.layer.cornerRadius = 15
+        finishButton.titleLabel?.font = .systemFont(ofSize: 20)
+        finishButton.setTitle("Bitir", for: UIControl.State.normal)
+        finishButton.center.x = self.view.center.x/2
+        finishButton.center.y =  sickInfoTitle.center.y + 170
+        self.view.addSubview(finishButton)
+        
+        finishButton.addTarget(self, action: #selector(sendButtonAction), for: .touchUpInside)
+        
+        
+        
+        
+        let sendPhotoButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+        sendPhotoButton.backgroundColor = .systemRed
+        sendPhotoButton.layer.cornerRadius = 15
+        sendPhotoButton.titleLabel?.font = .systemFont(ofSize: 17)
+        sendPhotoButton.setTitle("Fotoğrof Gönder", for: UIControl.State.normal)
+        sendPhotoButton.center.x = self.view.center.x + 95
+        sendPhotoButton.center.y =  sickInfoTitle.center.y + 170
+        self.view.addSubview(sendPhotoButton)
+        
+        sendPhotoButton.addTarget(self, action: #selector(sendPhotoButtonAction), for: .touchUpInside)
+        
+    
+        
+    }
+    
+    
+    @objc func sendButtonAction() {
+        print("Butona basıldı")
+    }
+    
+    @objc func sendPhotoButtonAction() {
+        print("Foto send basıldı")
+    }
+    
+ 
+    
     
     
     
@@ -49,6 +221,7 @@ class DogWalkingHomePage: UIViewController {
                     self.spinner.stopAnimating()
                     
                     self.spinner.isHidden = true
+                    self.filterButtonOutlet.isHidden = false
                     
                     
                 }

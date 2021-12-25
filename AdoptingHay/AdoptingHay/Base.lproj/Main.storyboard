@@ -2245,6 +2245,7 @@
                     <tabBarItem key="tabBarItem" title="Ana Sayfa" image="house" catalog="system" selectedImage="house" id="ijg-DE-7qy"/>
                     <connections>
                         <outlet property="dogWalkingCollectionView" destination="bdn-6E-Ems" id="2ZZ-jy-Bw7"/>
+                        <outlet property="filterButtonOutlet" destination="suZ-UB-5YB" id="vu3-wF-DI2"/>
                         <outlet property="spinner" destination="dT6-jp-oSJ" id="l1K-ov-vNU"/>
                         <segue destination="hBA-gR-x8b" kind="show" identifier="toDetailsWalking" id="MSY-OQ-vqh"/>
                     </connections>
@@ -3964,7 +3965,7 @@
             <objects>
                 <viewController id="M35-A9-eOo" customClass="DogChatVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="67X-iL-TwY">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="wev-5D-vh0"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -4454,7 +4455,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="z6q-q8-7lt"/>
+        <segue reference="Obw-CZ-Qfd"/>
         <segue reference="J57-BP-jiN"/>
         <segue reference="kcS-aM-oPg"/>
     </inferredMetricsTieBreakers>
