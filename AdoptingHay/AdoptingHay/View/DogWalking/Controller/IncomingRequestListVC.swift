@@ -75,9 +75,6 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
                         self.incomingRequestViewModeList.incomingList.remove(at: indexPath.row)
                         self.requestListTableView.deleteRows(at: [indexPath], with: .fade)
                     
-                    
-                    //send notification
-                    //send notification
                     if let authUserName = Auth.auth().currentUser?.displayName {
                         let notiDate : [String:Any] = [
                             "sendUserName": authUserName, // gönderen kişi
@@ -102,6 +99,25 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
            
             
                 DogWalkingService().acceptToRequestToFirebase(getAdvert: getAdvert )
+            
+                if let sendUserId = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).sendId as?
+                        String {
+                    
+                    
+                    if let authUserName = Auth.auth().currentUser?.displayName {
+                        let notiDate : [String:Any] = [
+                            "sendUserName": authUserName, // gönderen kişi
+                            "notiTitle":"AdoptingHay",
+                            "notiSubtitle":"Gezdirme isteğiniz kabul edildi",
+                            "notiMessage":"\(authUserName) gezdirme isteğinizi kabul etti",
+                            "getUserName": "",  // alan kişi
+                            "getUserId" : sendUserId
+                        ]
+                        
+                        DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:sendUserId)
+                    } }
+            
+            
                 
             
             

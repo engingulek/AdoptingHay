@@ -83,7 +83,7 @@ extension IsentRequestVC: UITableViewDelegate,UITableViewDataSource {
                             "sendUserName": authUserName, // gönderen kişi
                             "notiTitle":"AdoptingHay",
                             " notiSubtitle":"Gezdirme isteğinden vazgeçti",
-                            "notiMessage":"\(authUserName) gezdirme isteğinden fazgeçti",
+                            "notiMessage":"\(authUserName) gezdirme isteğinden vazgeçti",
                             "getUserName": "",  // alan kişi
                             "getUserId" : advertOwnerUserId
                         ]

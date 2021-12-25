@@ -20,7 +20,7 @@ class SectionTypeVC: UIViewController {
         adoptingHayView.layer.borderWidth = 3
         adoptingHayView.layer.borderColor = UIColor.systemGray5.cgColor
         
-        
+        UserDefaults.standard.set(0, forKey: "notiA")
         
         
         nameLabel.layer.cornerRadius = 15

@@ -86,6 +86,19 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     @IBAction func advertRequest(_ sender: Any) {
         DogWalkingService().sendRequest(getAdvert: getAdvertWalking)
         
+        if let authUserName = Auth.auth().currentUser?.displayName {
+            let notiDate : [String:Any] = [
+                "sendUserName": authUserName, // gönderen kişi
+                "notiTitle":"AdoptingHay",
+                "notiSubtitle":"Bir gezdirme isteği bulunmaktadır.",
+                "notiMessage":"\(authUserName) gezdirme isteğinde bulundu",
+                "getUserName": getAdvertWalking.userName!,  // alan kişi
+                "getUserId" : getAdvertWalking.userId!
+            ]
+            print("sasads \(getAdvertWalking.userId)")
+            DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
+        }
+        
   
          
             
@@ -118,7 +131,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
             let notiDate : [String:Any] = [
                 "sendUserName": authUserName, // gönderen kişi
                 "notiTitle":"AdoptingHay",
-                " notiSubtitle":"Bir gezdirme ilanınız favorilere eklendi",
+                "notiSubtitle":"Bir gezdirme ilanınız favorilere eklendi",
                 "notiMessage":"\(authUserName) gezdirme ilanınızı favorilerine ekledi",
                 "getUserName": getAdvertWalking.userName!,  // alan kişi
                 "getUserId" : getAdvertWalking.userId!

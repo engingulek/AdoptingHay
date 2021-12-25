@@ -7,31 +7,66 @@
 
 import UIKit
 import Firebase
-class DogWalkingHomePage: UIViewController {
+import UserNotifications
+class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var dogWalkingCollectionView: UICollectionView!
-    
+    var permissionCheck:Bool = true
     
     @IBOutlet weak var filterButtonOutlet: UIButton!
-    
+    var timer = Timer()
     private var dogWalkingListViewModel: DogWalkingListViewModel!
     private var sendRequestAccept :SendRequestAcceptViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.startAnimating()
         spinner.isHidden = false
+        UNUserNotificationCenter.current().delegate = self
         
-  
         dogWalkingCollectionView.delegate = self
         dogWalkingCollectionView.dataSource = self
         getAllAdvert()
         getAllSendRequest()
-        filterButtonOutlet.isHidden = true
+        filterButtonOutlet.isHidden = false
+        dogWalkingCollectionView.reloadData()
+        
+        
+        
+              
+        
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
+            
+            self.permissionCheck = granted
+            
+            if granted {
+                print("İzin alma işlemi başarılı")
+                
+            }
+            else {
+                print("İzin alma işlemi başarısız")
+                
+            }
+        }
+        
+        getNotificationDogWalkingFromFirestore()
+        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+            self.getNotificationDogWalkingFromFirestore()
+        })
+        
+        
+        
+        
+        
+        
         
  
 
        
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner,.sound])
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +75,44 @@ class DogWalkingHomePage: UIViewController {
         getAllSendRequest()
         dogWalkingCollectionView.reloadData()
     }
+    
+    
+    func getNotificationDogWalkingFromFirestore(){
+        let db = Firestore.firestore()
+        let userId = Auth.auth().currentUser?.uid
+        if let userId = userId {
+            db.collection("userList").document("\(userId)").collection("dogWalkingNoti").getDocuments { snaphot, error in
+                if error == nil {
+                    if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
+                        print("Yeni bildirim yok")
+                    }
+                    else {
+                        UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
+                        if self.permissionCheck {
+                            print("Yeni bir bildirim var")
+                            for documents in (snaphot?.documents)! {
+                                if let userName =  documents.get("sendUserName") {
+                                    if let sendMessageBody = documents.get("notiMessage") {
+                                        if let sendMessageSubtitle = documents.get("notiSubtitle") {
+                                            print("\(sendMessageSubtitle)")
+                                            let content =  UNMutableNotificationContent()
+                                            content.title = "AdoptingHay"
+                                            content.subtitle = "\(sendMessageSubtitle)"
+                                            content.body = "\(sendMessageBody)"
+                                            content.sound = UNNotificationSound.default
+                                            // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
+                                            let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+                                            // Bildirim isteği oluşturulması
+                                            let notii = UNNotificationRequest(identifier: "dogWalkingbildirim", content: content, trigger: react)
+                                            // Bildirimin eklenmesi
+                                            UNUserNotificationCenter.current().add(notii, withCompletionHandler: nil)
+                                            
+                                        }
+                                      
+                                        
+                                    }
+                                   
+} }} }}} } }
     
     
     func getAllSendRequest()
@@ -306,7 +379,7 @@ class DogWalkingHomePage: UIViewController {
         }
         
         
-        let all = UIAlertAction(title: "Hepsi", style: .destructive) { action in
+        let all = UIAlertAction(title: "Bütün İlanlar", style: .destructive) { action in
             self.getAllAdvert()
         }
         

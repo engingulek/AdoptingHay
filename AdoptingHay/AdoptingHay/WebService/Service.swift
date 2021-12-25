@@ -1466,8 +1466,7 @@ class Service {
                 if  snapshot?.get("message") == nil  {
                  
                  let message : [String:Any] = [
-                          "date":Date(),
-                          "sendMessage":sendMessage,
+                          "date":Date(),"sendMessage":sendMessage,
                           "senderId": authUserId
                       ]
                  

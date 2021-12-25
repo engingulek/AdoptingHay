@@ -390,8 +390,11 @@ class DogWalkingService {
     func addDogWalkingAdvertNoti(notiData:[String:Any],getUserId:String) {
         let db = Firestore.firestore()
         if let authId = Auth.auth().currentUser?.uid {
-            let notiId = UUID().uuidString
-            db.collection("userList").document(getUserId).collection("dogWalkingNoti").document(notiId).setData(notiData)
+           
+            let notiId =  UserDefaults.standard.integer(forKey: "notiA")
+            db.collection("userList").document(getUserId).collection("dogWalkingNoti").document("\(notiId)").setData(notiData)
+            UserDefaults.standard.set(notiId+1, forKey: "notiA")
+           UserDefaults.standard.integer(forKey: "notilast")
         }
     }
     
@@ -402,52 +405,102 @@ class DogWalkingService {
         
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
-            db.collection("userList").document(authUserId).collection("dogWalkingNoti").getDocuments { snapshot, error in
+           let notiLast =
+            UserDefaults.standard.integer(forKey: "notilast")
+            db.collection("userList").document(authUserId).collection("dogWalkingNoti").document("\(notiLast)").getDocument { document, error in
                 
-                if error != nil {
-                    completion(nil)
-                }
-                
-                else {
-                    for document in (snapshot?.documents)! {
-                        
-                        if let notiId = document.documentID as? String {
-                            
-                            if let  getUserId = document.get("getUserId") as? String {
-                                
-                                if let  getUserName = document.get("getUserName") as? String {
-                                    
-                                    if let  notiTitle = document.get("notiTitle") as? String {
-                                        
-                                        if let  notiSubtitle = document.get("notiSubtitle") as? String {
-                                            
-                                            if let  notiMessage = document.get("notiMessage") as? String {
-                                                
-                                                if let  sendUserName = document.get("sendUserName") as? String {
-                                                    
-                                                    let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName)
-                                                    
-                                                    self.dogNotiList.append(noti)
-                                                    
-                                                    completion(self.dogNotiList)
-                                                    
-                                                }
-                                                
+               
+
+                if let notiId = document?.documentID as? String {
+
+                        if let  getUserId = document?.get("getUserId") as? String {
+
+                            if let  getUserName = document?.get("getUserName") as? String {
+
+                                if let  notiTitle = document?.get("notiTitle") as? String {
+
+                                    if let  notiSubtitle = document?.get("notiSubtitle") as? String {
+
+                                        if let  notiMessage = document?.get("notiMessage") as? String {
+
+                                            if let  sendUserName = document?.get("sendUserName") as? String {
+
+                                                let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName)
+
+                                                self.dogNotiList.append(noti)
+
+                                                completion(self.dogNotiList)
+
                                             }
+
                                         }
-                                        
                                     }
-                                    
+
                                 }
-                                
+
                             }
-                            
-                            
-                            
+
                         }
+
+
+
                     }
-                }
+                
+                
+                
+                
+                
+                
+            
             }
+            
+            
+//            db.collection("userList").document(authUserId).collection("dogWalkingNoti").getDocuments { snapshot, error in
+//
+//                if error != nil {
+//                    completion(nil)
+//                }
+//
+//                else {
+//                    for document in (snapshot?.documents)! {
+//
+//                        if let notiId = document.documentID as? String {
+//
+//                            if let  getUserId = document.get("getUserId") as? String {
+//
+//                                if let  getUserName = document.get("getUserName") as? String {
+//
+//                                    if let  notiTitle = document.get("notiTitle") as? String {
+//
+//                                        if let  notiSubtitle = document.get("notiSubtitle") as? String {
+//
+//                                            if let  notiMessage = document.get("notiMessage") as? String {
+//
+//                                                if let  sendUserName = document.get("sendUserName") as? String {
+//
+//                                                    let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName)
+//
+//                                                    self.dogNotiList.append(noti)
+//
+//                                                    completion(self.dogNotiList)
+//
+//                                                }
+//
+//                                            }
+//                                        }
+//
+//                                    }
+//
+//                                }
+//
+//                            }
+//
+//
+//
+//                        }
+//                    }
+//                }
+//            }
             
         }
         
@@ -808,10 +861,6 @@ class DogWalkingService {
         let db = Firestore.firestore()
         
         if let authUserId = Auth.auth().currentUser?.uid {
-            //
-            //                    print("Hayvan sahibi \(authUserId)")
-            //                    print("Gezdirmekİsteye \(getAdvert.sendId)")
-            //                    print("ilan id: \(getAdvert.advertId)")
             
             if let sendId = getAdvert.sendId {
                 if let advertId = getAdvert.advertId {
@@ -836,7 +885,7 @@ class DogWalkingService {
                     db.collection("userList").document(authUserId).collection("comingAcceptAdvert").document(advertId).setData(docData)
                     db.collection("userList").document(sendId).collection("sendAcceptAdvert").document(advertId).setData(docData)
                     
-                    
+                    db.collection("userList").document(sendId).collection("dogWalklingFavoriList").document(advertId).delete()
                     // Delete advert when accept button click
                     db.collection("userList").document(authUserId).collection("incomingRequest").document(advertId).delete()
                     db.collection("userList").document(sendId).collection("isentRequest").document(advertId).delete()

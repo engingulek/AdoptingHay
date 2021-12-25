@@ -8,14 +8,25 @@
 
 /* Begin PBXBuildFile section */
 		1890916FCAC506B2C10AB1C4 /* Pods_AdoptingHay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FB37284F92E0F77E6309D259 /* Pods_AdoptingHay.framework */; };
+		7D054440276F686700FE4C1A /* DogWalkingAddAdvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D05443F276F686700FE4C1A /* DogWalkingAddAdvertVC.swift */; };
+		7D054444276F7E3100FE4C1A /* DogWalkAddAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D054443276F7E3100FE4C1A /* DogWalkAddAdvert.swift */; };
+		7D13AE32276DDFA100338D18 /* SectionTypeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D13AE31276DDFA100338D18 /* SectionTypeVC.swift */; };
+		7D1A35C9276BE6FA00EC46F3 /* FavoriListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1A35C8276BE6FA00EC46F3 /* FavoriListTVC.swift */; };
+		7D1B4026277088E3009E5A01 /* DogMyAdvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1B4025277088E3009E5A01 /* DogMyAdvertVC.swift */; };
+		7D1B402A27708ED2009E5A01 /* DogMyAdvertCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1B402927708ED2009E5A01 /* DogMyAdvertCell.swift */; };
+		7D1B402C2770984F009E5A01 /* DogMyAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1B402B2770984F009E5A01 /* DogMyAdvert.swift */; };
+		7D1B402E277098EF009E5A01 /* DogMyAdvertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1B402D277098EF009E5A01 /* DogMyAdvertViewModel.swift */; };
+		7D23A18827765D45001C4334 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23A18727765D44001C4334 /* Request.swift */; };
+		7D23A18A27767FF1001C4334 /* SendRequestAcceptViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23A18927767FF1001C4334 /* SendRequestAcceptViewModel.swift */; };
+		7D245936277602C2001644F8 /* IncomingRequestListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D245935277602C2001644F8 /* IncomingRequestListVC.swift */; };
+		7D24593827760A55001644F8 /* RequestInComigViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D24593727760A55001644F8 /* RequestInComigViewModel.swift */; };
 		7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292606271F0B9A00EBD22F /* NotficationTVC.swift */; };
 		7D29260A271F168E00EBD22F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D292609271F168E00EBD22F /* Notification.swift */; };
 		7D2A6D41275981D70001B167 /* FavoriDetailCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2A6D40275981D70001B167 /* FavoriDetailCVC.swift */; };
-		7D334E6C2759571900368249 /* FavoritListCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D334E6B2759571900368249 /* FavoritListCVC.swift */; };
 		7D334E6E2759595200368249 /* FavoritList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D334E6D2759595200368249 /* FavoritList.swift */; };
 		7D334E702759597E00368249 /* FavoritListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D334E6F2759597E00368249 /* FavoritListViewModel.swift */; };
 		7D334E72275978E100368249 /* FavoriDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D334E71275978E100368249 /* FavoriDetailsVC.swift */; };
-		7D41BF5B27580099009607E5 /* MyAdvertsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D41BF5A27580099009607E5 /* MyAdvertsCVC.swift */; };
+		7D41BF5B27580099009607E5 /* MyAdvertsTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D41BF5A27580099009607E5 /* MyAdvertsTVC.swift */; };
 		7D41BF5D275800D1009607E5 /* MyAdvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D41BF5C275800D1009607E5 /* MyAdvertVC.swift */; };
 		7D41BF5F27580BE8009607E5 /* MyAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D41BF5E27580BE8009607E5 /* MyAdvert.swift */; };
 		7D41BF61275814F2009607E5 /* MyAnimalAdvertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D41BF60275814F2009607E5 /* MyAnimalAdvertViewModel.swift */; };
@@ -29,16 +40,37 @@
 		7D4674FC2718468700632CE6 /* HomePageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FB2718468700632CE6 /* HomePageVC.swift */; };
 		7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */; };
 		7D46CB1B2724B0B70073E0B9 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7D46CB1A2724B0B70073E0B9 /* GoogleService-Info.plist */; };
+		7D5417F327761A9D004EDA79 /* IncomingRequestTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5417F227761A9D004EDA79 /* IncomingRequestTVC.swift */; };
+		7D5417F5277620D4004EDA79 /* RequestISentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5417F4277620D4004EDA79 /* RequestISentViewModel.swift */; };
+		7D5417F727762339004EDA79 /* IsentRequestTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5417F627762339004EDA79 /* IsentRequestTVC.swift */; };
+		7D5417F9277623B3004EDA79 /* IsentRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5417F8277623B3004EDA79 /* IsentRequestVC.swift */; };
 		7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */; };
 		7D59416D2764E6CF00F72F65 /* MessageUserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D59416C2764E6CF00F72F65 /* MessageUserListViewController.swift */; };
 		7D59416F2764E88E00F72F65 /* ChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D59416E2764E88E00F72F65 /* ChatVC.swift */; };
+		7D653AFA276FBEDB0025D039 /* DogWalkAccountPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D653AF9276FBEDB0025D039 /* DogWalkAccountPage.swift */; };
+		7D653AFC276FC8800025D039 /* DogWalkFavListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D653AFB276FC8800025D039 /* DogWalkFavListVC.swift */; };
+		7D653AFE276FCB8E0025D039 /* DogFavListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D653AFD276FCB8D0025D039 /* DogFavListTVC.swift */; };
+		7D653B00276FCFC20025D039 /* DogWalkingAdvertFav.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D653AFF276FCFC20025D039 /* DogWalkingAdvertFav.swift */; };
 		7D69C088272453DC00BB10C2 /* SingInEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */; };
 		7D69C08B272453FE00BB10C2 /* SingUpEmailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */; };
 		7D6F1261276530040055EBD5 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6F1260276530040055EBD5 /* NotificationViewModel.swift */; };
+		7D80E9D62771076A00C9E39D /* DogFavAdvertDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D80E9D52771076A00C9E39D /* DogFavAdvertDetail.swift */; };
 		7D898D19274D5393004E7888 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D898D18274D5393004E7888 /* Service.swift */; };
 		7D898D1B274D5D1B004E7888 /* AnimalKindsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D898D1A274D5D1B004E7888 /* AnimalKindsViewModel.swift */; };
 		7D8BD989272B1D4600B00096 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8BD988272B1D4600B00096 /* AccountVC.swift */; };
 		7DB22F3F272C56BE00C2CDB8 /* AccountTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DB22F3E272C56BE00C2CDB8 /* AccountTVC.swift */; };
+		7DBBA1D6276E3162000AD77F /* DogWalkingHomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1D5276E3162000AD77F /* DogWalkingHomePage.swift */; };
+		7DBBA1D8276E31C5000AD77F /* DogWalkingAdvertsCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1D7276E31C5000AD77F /* DogWalkingAdvertsCVC.swift */; };
+		7DBBA1DC276E3586000AD77F /* DogWalkingAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1DB276E3586000AD77F /* DogWalkingAdvert.swift */; };
+		7DBBA1E0276E3838000AD77F /* DogWalkingAdvertsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1DF276E3838000AD77F /* DogWalkingAdvertsViewModel.swift */; };
+		7DBBA1E2276E3AE7000AD77F /* DogWalkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1E1276E3AE7000AD77F /* DogWalkingService.swift */; };
+		7DBBA1E4276E504A000AD77F /* DogWalkingAdvertDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1E3276E504A000AD77F /* DogWalkingAdvertDetailsVC.swift */; };
+		7DBBA1E6276E6F0B000AD77F /* DogWalkingNotiVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1E5276E6F0B000AD77F /* DogWalkingNotiVC.swift */; };
+		7DBBA1E8276E6FEE000AD77F /* DogWalkingNotiTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBBA1E7276E6FEE000AD77F /* DogWalkingNotiTVC.swift */; };
+		7DC0BBE8276747FF00028897 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC0BBE7276747FF00028897 /* MessageViewModel.swift */; };
+		7DC0BBEA27675CB300028897 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DC0BBE927675CB300028897 /* MessageModel.swift */; };
+		7DCC50362767DE01005F1861 /* MessageUserList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC50352767DE01005F1861 /* MessageUserList.swift */; };
+		7DCC503A2767E0CC005F1861 /* MessageUserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC50392767E0CC005F1861 /* MessageUserListViewModel.swift */; };
 		7DCC6613275EAFFC00C73423 /* FavUpdataVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCC6612275EAFFC00C73423 /* FavUpdataVC.swift */; };
 		7DCDC35C275930B400400B4B /* FavoriListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCDC35B275930B400400B4B /* FavoriListVC.swift */; };
 		7DD373B7271F646400505E95 /* AddAdvertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD373B6271F646400505E95 /* AddAdvertVC.swift */; };
@@ -49,23 +81,40 @@
 		7DE123FA274D07CA0095EDD6 /* AnimalKinds.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE123F9274D07CA0095EDD6 /* AnimalKinds.swift */; };
 		7DE4DADC275CF7A200E6AE61 /* MyAdvertDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE4DADB275CF7A200E6AE61 /* MyAdvertDetailsVC.swift */; };
 		7DE5EF8B27301D2500B84596 /* AnimalAdvertDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */; };
+		7DE7A233277118530035D1EA /* DogFavAdvert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE7A232277118530035D1EA /* DogFavAdvert.swift */; };
+		7DE7A23527712DF30035D1EA /* DogMyAdvertDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE7A23427712DF30035D1EA /* DogMyAdvertDetail.swift */; };
 		7DECFA0C274E4815004E34F3 /* AnimalAdvertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DECFA0B274E4815004E34F3 /* AnimalAdvertViewModel.swift */; };
 		7DECFA0E274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DECFA0D274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift */; };
 		7DECFA10274E6078004E34F3 /* AnimalAdvertDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DECFA0F274E6078004E34F3 /* AnimalAdvertDetails.swift */; };
+		7DEE5CA527747A7E000CD4E0 /* DogWalkingMessageUserListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE5CA427747A7E000CD4E0 /* DogWalkingMessageUserListVC.swift */; };
+		7DEE5CA727748466000CD4E0 /* DogChatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE5CA627748466000CD4E0 /* DogChatVC.swift */; };
 		7DF7343A2730693800983A8C /* AnimalAdvertDetailsImageCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */; };
 		7DF7343C27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */; };
+		7DFF9F9E27735B3B00B7773F /* DogNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF9F9D27735B3B00B7773F /* DogNotification.swift */; };
+		7DFF9FA027735D7700B7773F /* DogNotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFF9F9F27735D7700B7773F /* DogNotificationViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		259F43B0FDC4DC1E4CDF8B7B /* Pods-AdoptingHay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoptingHay.debug.xcconfig"; path = "Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay.debug.xcconfig"; sourceTree = "<group>"; };
+		7D05443F276F686700FE4C1A /* DogWalkingAddAdvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingAddAdvertVC.swift; sourceTree = "<group>"; };
+		7D054443276F7E3100FE4C1A /* DogWalkAddAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkAddAdvert.swift; sourceTree = "<group>"; };
+		7D13AE31276DDFA100338D18 /* SectionTypeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionTypeVC.swift; sourceTree = "<group>"; };
+		7D1A35C8276BE6FA00EC46F3 /* FavoriListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriListTVC.swift; sourceTree = "<group>"; };
+		7D1B4025277088E3009E5A01 /* DogMyAdvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogMyAdvertVC.swift; sourceTree = "<group>"; };
+		7D1B402927708ED2009E5A01 /* DogMyAdvertCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogMyAdvertCell.swift; sourceTree = "<group>"; };
+		7D1B402B2770984F009E5A01 /* DogMyAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogMyAdvert.swift; sourceTree = "<group>"; };
+		7D1B402D277098EF009E5A01 /* DogMyAdvertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogMyAdvertViewModel.swift; sourceTree = "<group>"; };
+		7D23A18727765D44001C4334 /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		7D23A18927767FF1001C4334 /* SendRequestAcceptViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendRequestAcceptViewModel.swift; sourceTree = "<group>"; };
+		7D245935277602C2001644F8 /* IncomingRequestListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingRequestListVC.swift; sourceTree = "<group>"; };
+		7D24593727760A55001644F8 /* RequestInComigViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestInComigViewModel.swift; sourceTree = "<group>"; };
 		7D292606271F0B9A00EBD22F /* NotficationTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationTVC.swift; sourceTree = "<group>"; };
 		7D292609271F168E00EBD22F /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		7D2A6D40275981D70001B167 /* FavoriDetailCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriDetailCVC.swift; sourceTree = "<group>"; };
-		7D334E6B2759571900368249 /* FavoritListCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritListCVC.swift; sourceTree = "<group>"; };
 		7D334E6D2759595200368249 /* FavoritList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritList.swift; sourceTree = "<group>"; };
 		7D334E6F2759597E00368249 /* FavoritListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritListViewModel.swift; sourceTree = "<group>"; };
 		7D334E71275978E100368249 /* FavoriDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriDetailsVC.swift; sourceTree = "<group>"; };
-		7D41BF5A27580099009607E5 /* MyAdvertsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvertsCVC.swift; sourceTree = "<group>"; };
+		7D41BF5A27580099009607E5 /* MyAdvertsTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvertsTVC.swift; sourceTree = "<group>"; };
 		7D41BF5C275800D1009607E5 /* MyAdvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvertVC.swift; sourceTree = "<group>"; };
 		7D41BF5E27580BE8009607E5 /* MyAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvert.swift; sourceTree = "<group>"; };
 		7D41BF60275814F2009607E5 /* MyAnimalAdvertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAnimalAdvertViewModel.swift; sourceTree = "<group>"; };
@@ -81,16 +130,37 @@
 		7D4674FB2718468700632CE6 /* HomePageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageVC.swift; sourceTree = "<group>"; };
 		7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotficationPageVC.swift; sourceTree = "<group>"; };
 		7D46CB1A2724B0B70073E0B9 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		7D5417F227761A9D004EDA79 /* IncomingRequestTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IncomingRequestTVC.swift; sourceTree = "<group>"; };
+		7D5417F4277620D4004EDA79 /* RequestISentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestISentViewModel.swift; sourceTree = "<group>"; };
+		7D5417F627762339004EDA79 /* IsentRequestTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsentRequestTVC.swift; sourceTree = "<group>"; };
+		7D5417F8277623B3004EDA79 /* IsentRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IsentRequestVC.swift; sourceTree = "<group>"; };
 		7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKindsCVC.swift; sourceTree = "<group>"; };
 		7D59416C2764E6CF00F72F65 /* MessageUserListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUserListViewController.swift; sourceTree = "<group>"; };
 		7D59416E2764E88E00F72F65 /* ChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatVC.swift; sourceTree = "<group>"; };
+		7D653AF9276FBEDB0025D039 /* DogWalkAccountPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkAccountPage.swift; sourceTree = "<group>"; };
+		7D653AFB276FC8800025D039 /* DogWalkFavListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkFavListVC.swift; sourceTree = "<group>"; };
+		7D653AFD276FCB8D0025D039 /* DogFavListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFavListTVC.swift; sourceTree = "<group>"; };
+		7D653AFF276FCFC20025D039 /* DogWalkingAdvertFav.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingAdvertFav.swift; sourceTree = "<group>"; };
 		7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingInEmailVC.swift; sourceTree = "<group>"; };
 		7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingUpEmailVC.swift; sourceTree = "<group>"; };
 		7D6F1260276530040055EBD5 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
+		7D80E9D52771076A00C9E39D /* DogFavAdvertDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFavAdvertDetail.swift; sourceTree = "<group>"; };
 		7D898D18274D5393004E7888 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		7D898D1A274D5D1B004E7888 /* AnimalKindsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKindsViewModel.swift; sourceTree = "<group>"; };
 		7D8BD988272B1D4600B00096 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		7DB22F3E272C56BE00C2CDB8 /* AccountTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTVC.swift; sourceTree = "<group>"; };
+		7DBBA1D5276E3162000AD77F /* DogWalkingHomePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingHomePage.swift; sourceTree = "<group>"; };
+		7DBBA1D7276E31C5000AD77F /* DogWalkingAdvertsCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingAdvertsCVC.swift; sourceTree = "<group>"; };
+		7DBBA1DB276E3586000AD77F /* DogWalkingAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingAdvert.swift; sourceTree = "<group>"; };
+		7DBBA1DF276E3838000AD77F /* DogWalkingAdvertsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingAdvertsViewModel.swift; sourceTree = "<group>"; };
+		7DBBA1E1276E3AE7000AD77F /* DogWalkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingService.swift; sourceTree = "<group>"; };
+		7DBBA1E3276E504A000AD77F /* DogWalkingAdvertDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingAdvertDetailsVC.swift; sourceTree = "<group>"; };
+		7DBBA1E5276E6F0B000AD77F /* DogWalkingNotiVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingNotiVC.swift; sourceTree = "<group>"; };
+		7DBBA1E7276E6FEE000AD77F /* DogWalkingNotiTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingNotiTVC.swift; sourceTree = "<group>"; };
+		7DC0BBE7276747FF00028897 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
+		7DC0BBE927675CB300028897 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
+		7DCC50352767DE01005F1861 /* MessageUserList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUserList.swift; sourceTree = "<group>"; };
+		7DCC50392767E0CC005F1861 /* MessageUserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageUserListViewModel.swift; sourceTree = "<group>"; };
 		7DCC6612275EAFFC00C73423 /* FavUpdataVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavUpdataVC.swift; sourceTree = "<group>"; };
 		7DCDC35B275930B400400B4B /* FavoriListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriListVC.swift; sourceTree = "<group>"; };
 		7DD373B6271F646400505E95 /* AddAdvertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddAdvertVC.swift; sourceTree = "<group>"; };
@@ -101,11 +171,17 @@
 		7DE123F9274D07CA0095EDD6 /* AnimalKinds.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalKinds.swift; sourceTree = "<group>"; };
 		7DE4DADB275CF7A200E6AE61 /* MyAdvertDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyAdvertDetailsVC.swift; sourceTree = "<group>"; };
 		7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsVC.swift; sourceTree = "<group>"; };
+		7DE7A232277118530035D1EA /* DogFavAdvert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogFavAdvert.swift; sourceTree = "<group>"; };
+		7DE7A23427712DF30035D1EA /* DogMyAdvertDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogMyAdvertDetail.swift; sourceTree = "<group>"; };
 		7DECFA0B274E4815004E34F3 /* AnimalAdvertViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertViewModel.swift; sourceTree = "<group>"; };
 		7DECFA0D274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsViewModel.swift; sourceTree = "<group>"; };
 		7DECFA0F274E6078004E34F3 /* AnimalAdvertDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetails.swift; sourceTree = "<group>"; };
+		7DEE5CA427747A7E000CD4E0 /* DogWalkingMessageUserListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogWalkingMessageUserListVC.swift; sourceTree = "<group>"; };
+		7DEE5CA627748466000CD4E0 /* DogChatVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogChatVC.swift; sourceTree = "<group>"; };
 		7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsImageCVC.swift; sourceTree = "<group>"; };
 		7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimalAdvertDetailsMesajCVC.swift; sourceTree = "<group>"; };
+		7DFF9F9D27735B3B00B7773F /* DogNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogNotification.swift; sourceTree = "<group>"; };
+		7DFF9F9F27735D7700B7773F /* DogNotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogNotificationViewModel.swift; sourceTree = "<group>"; };
 		A6EF73076862743BC27CD1D8 /* Pods-AdoptingHay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AdoptingHay.release.xcconfig"; path = "Target Support Files/Pods-AdoptingHay/Pods-AdoptingHay.release.xcconfig"; sourceTree = "<group>"; };
 		FB37284F92E0F77E6309D259 /* Pods_AdoptingHay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AdoptingHay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -122,36 +198,86 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D1B402727708E8B009E5A01 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1D5276E3162000AD77F /* DogWalkingHomePage.swift */,
+				7DBBA1E3276E504A000AD77F /* DogWalkingAdvertDetailsVC.swift */,
+				7DBBA1E5276E6F0B000AD77F /* DogWalkingNotiVC.swift */,
+				7D05443F276F686700FE4C1A /* DogWalkingAddAdvertVC.swift */,
+				7D653AF9276FBEDB0025D039 /* DogWalkAccountPage.swift */,
+				7D653AFB276FC8800025D039 /* DogWalkFavListVC.swift */,
+				7D1B4025277088E3009E5A01 /* DogMyAdvertVC.swift */,
+				7D80E9D52771076A00C9E39D /* DogFavAdvertDetail.swift */,
+				7D13AE31276DDFA100338D18 /* SectionTypeVC.swift */,
+				7DE7A23427712DF30035D1EA /* DogMyAdvertDetail.swift */,
+				7DEE5CA427747A7E000CD4E0 /* DogWalkingMessageUserListVC.swift */,
+				7DEE5CA627748466000CD4E0 /* DogChatVC.swift */,
+				7D245935277602C2001644F8 /* IncomingRequestListVC.swift */,
+				7D5417F8277623B3004EDA79 /* IsentRequestVC.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		7D1B402827708EA2009E5A01 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1D7276E31C5000AD77F /* DogWalkingAdvertsCVC.swift */,
+				7DBBA1E7276E6FEE000AD77F /* DogWalkingNotiTVC.swift */,
+				7D653AFD276FCB8D0025D039 /* DogFavListTVC.swift */,
+				7D1B402927708ED2009E5A01 /* DogMyAdvertCell.swift */,
+				7D5417F227761A9D004EDA79 /* IncomingRequestTVC.swift */,
+				7D5417F627762339004EDA79 /* IsentRequestTVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		7D292603271F070D00EBD22F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1D4276E313A000AD77F /* DogWalking */,
+				7DBBA1D3276E310F000AD77F /* Adopting */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7D3F23842772428100D2F889 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */,
+				7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */,
+				7D292606271F0B9A00EBD22F /* NotficationTVC.swift */,
+				7DB22F3E272C56BE00C2CDB8 /* AccountTVC.swift */,
+				7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */,
+				7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */,
+				7D41BF5A27580099009607E5 /* MyAdvertsTVC.swift */,
+				7D2A6D40275981D70001B167 /* FavoriDetailCVC.swift */,
+				7D1A35C8276BE6FA00EC46F3 /* FavoriListTVC.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7D3F2385277242A300D2F889 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				7D4674E527182F2300632CE6 /* ViewController.swift */,
 				7D4674F82718460200632CE6 /* SingInwithEmailVC.swift */,
 				7D4674FB2718468700632CE6 /* HomePageVC.swift */,
 				7D4674FE27184C6300632CE6 /* NotficationPageVC.swift */,
-				7D5724E32718A319001BD38D /* AnimalKindsCVC.swift */,
-				7DD7F222271D8BA8003E611D /* AnimalAdvertCVC.swift */,
-				7D292606271F0B9A00EBD22F /* NotficationTVC.swift */,
 				7DD373B6271F646400505E95 /* AddAdvertVC.swift */,
 				7D69C087272453DC00BB10C2 /* SingInEmailVC.swift */,
 				7D69C08A272453FE00BB10C2 /* SingUpEmailVC.swift */,
 				7D8BD988272B1D4600B00096 /* AccountVC.swift */,
-				7DB22F3E272C56BE00C2CDB8 /* AccountTVC.swift */,
 				7DE5EF8A27301D2500B84596 /* AnimalAdvertDetailsVC.swift */,
-				7DF734392730693800983A8C /* AnimalAdvertDetailsImageCVC.swift */,
-				7DF7343B27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift */,
-				7D41BF5A27580099009607E5 /* MyAdvertsCVC.swift */,
 				7D41BF5C275800D1009607E5 /* MyAdvertVC.swift */,
 				7DCDC35B275930B400400B4B /* FavoriListVC.swift */,
-				7D334E6B2759571900368249 /* FavoritListCVC.swift */,
 				7D334E71275978E100368249 /* FavoriDetailsVC.swift */,
-				7D2A6D40275981D70001B167 /* FavoriDetailCVC.swift */,
 				7DE4DADB275CF7A200E6AE61 /* MyAdvertDetailsVC.swift */,
 				7DCC6612275EAFFC00C73423 /* FavUpdataVC.swift */,
 				7D59416C2764E6CF00F72F65 /* MessageUserListViewController.swift */,
 				7D59416E2764E88E00F72F65 /* ChatVC.swift */,
 			);
-			path = View;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		7D4674D527182F2200632CE6 = {
@@ -190,7 +316,25 @@
 			path = AdoptingHay;
 			sourceTree = "<group>";
 		};
-		7DD7F225271D94E5003E611D /* Model */ = {
+		7DBBA1D3276E310F000AD77F /* Adopting */ = {
+			isa = PBXGroup;
+			children = (
+				7D3F2385277242A300D2F889 /* Controller */,
+				7D3F23842772428100D2F889 /* Cell */,
+			);
+			path = Adopting;
+			sourceTree = "<group>";
+		};
+		7DBBA1D4276E313A000AD77F /* DogWalking */ = {
+			isa = PBXGroup;
+			children = (
+				7D1B402827708EA2009E5A01 /* Cell */,
+				7D1B402727708E8B009E5A01 /* Controller */,
+			);
+			path = DogWalking;
+			sourceTree = "<group>";
+		};
+		7DBBA1D9276E3545000AD77F /* AdoptingModel */ = {
 			isa = PBXGroup;
 			children = (
 				7DD7F226271D94FA003E611D /* AnimalAdvert.swift */,
@@ -200,11 +344,26 @@
 				7DDDD2FA27501A5100A814EB /* AddAdvert.swift */,
 				7D41BF5E27580BE8009607E5 /* MyAdvert.swift */,
 				7D334E6D2759595200368249 /* FavoritList.swift */,
+				7DC0BBE927675CB300028897 /* MessageModel.swift */,
+				7DCC50352767DE01005F1861 /* MessageUserList.swift */,
 			);
-			path = Model;
+			path = AdoptingModel;
 			sourceTree = "<group>";
 		};
-		7DE123F5274D04580095EDD6 /* ViewModel */ = {
+		7DBBA1DA276E356E000AD77F /* DogWalkingModel */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1DB276E3586000AD77F /* DogWalkingAdvert.swift */,
+				7D054443276F7E3100FE4C1A /* DogWalkAddAdvert.swift */,
+				7D1B402B2770984F009E5A01 /* DogMyAdvert.swift */,
+				7DE7A232277118530035D1EA /* DogFavAdvert.swift */,
+				7DFF9F9D27735B3B00B7773F /* DogNotification.swift */,
+				7D23A18727765D44001C4334 /* Request.swift */,
+			);
+			path = DogWalkingModel;
+			sourceTree = "<group>";
+		};
+		7DBBA1DD276E3779000AD77F /* Adopting */ = {
 			isa = PBXGroup;
 			children = (
 				7D898D1A274D5D1B004E7888 /* AnimalKindsViewModel.swift */,
@@ -214,6 +373,40 @@
 				7D41BF60275814F2009607E5 /* MyAnimalAdvertViewModel.swift */,
 				7D334E6F2759597E00368249 /* FavoritListViewModel.swift */,
 				7D6F1260276530040055EBD5 /* NotificationViewModel.swift */,
+				7DC0BBE7276747FF00028897 /* MessageViewModel.swift */,
+				7DCC50392767E0CC005F1861 /* MessageUserListViewModel.swift */,
+			);
+			path = Adopting;
+			sourceTree = "<group>";
+		};
+		7DBBA1DE276E3812000AD77F /* DogWalking */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1DF276E3838000AD77F /* DogWalkingAdvertsViewModel.swift */,
+				7D653AFF276FCFC20025D039 /* DogWalkingAdvertFav.swift */,
+				7D1B402D277098EF009E5A01 /* DogMyAdvertViewModel.swift */,
+				7DFF9F9F27735D7700B7773F /* DogNotificationViewModel.swift */,
+				7D24593727760A55001644F8 /* RequestInComigViewModel.swift */,
+				7D5417F4277620D4004EDA79 /* RequestISentViewModel.swift */,
+				7D23A18927767FF1001C4334 /* SendRequestAcceptViewModel.swift */,
+			);
+			path = DogWalking;
+			sourceTree = "<group>";
+		};
+		7DD7F225271D94E5003E611D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1DA276E356E000AD77F /* DogWalkingModel */,
+				7DBBA1D9276E3545000AD77F /* AdoptingModel */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7DE123F5274D04580095EDD6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7DBBA1DE276E3812000AD77F /* DogWalking */,
+				7DBBA1DD276E3779000AD77F /* Adopting */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -222,6 +415,7 @@
 			isa = PBXGroup;
 			children = (
 				7D898D18274D5393004E7888 /* Service.swift */,
+				7DBBA1E1276E3AE7000AD77F /* DogWalkingService.swift */,
 			);
 			path = WebService;
 			sourceTree = "<group>";
@@ -276,6 +470,7 @@
 				TargetAttributes = {
 					7D4674DD27182F2200632CE6 = {
 						CreatedOnToolsVersion = 12.4;
+						LastSwiftMigration = 1310;
 					};
 				};
 			};
@@ -358,48 +553,86 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7DBBA1D6276E3162000AD77F /* DogWalkingHomePage.swift in Sources */,
+				7DBBA1E8276E6FEE000AD77F /* DogWalkingNotiTVC.swift in Sources */,
 				7D4674FC2718468700632CE6 /* HomePageVC.swift in Sources */,
 				7D4674E627182F2300632CE6 /* ViewController.swift in Sources */,
+				7DBBA1E0276E3838000AD77F /* DogWalkingAdvertsViewModel.swift in Sources */,
+				7DEE5CA727748466000CD4E0 /* DogChatVC.swift in Sources */,
 				7D4674FF27184C6300632CE6 /* NotficationPageVC.swift in Sources */,
+				7D054444276F7E3100FE4C1A /* DogWalkAddAdvert.swift in Sources */,
+				7DBBA1E6276E6F0B000AD77F /* DogWalkingNotiVC.swift in Sources */,
 				7D41BF5F27580BE8009607E5 /* MyAdvert.swift in Sources */,
 				7D4674E227182F2300632CE6 /* AppDelegate.swift in Sources */,
 				7DCC6613275EAFFC00C73423 /* FavUpdataVC.swift in Sources */,
-				7D41BF5B27580099009607E5 /* MyAdvertsCVC.swift in Sources */,
+				7D054440276F686700FE4C1A /* DogWalkingAddAdvertVC.swift in Sources */,
+				7D41BF5B27580099009607E5 /* MyAdvertsTVC.swift in Sources */,
 				7D69C088272453DC00BB10C2 /* SingInEmailVC.swift in Sources */,
 				7DB22F3F272C56BE00C2CDB8 /* AccountTVC.swift in Sources */,
 				7DF7343C27307A0900983A8C /* AnimalAdvertDetailsMesajCVC.swift in Sources */,
+				7D13AE32276DDFA100338D18 /* SectionTypeVC.swift in Sources */,
+				7D1A35C9276BE6FA00EC46F3 /* FavoriListTVC.swift in Sources */,
 				7DCDC35C275930B400400B4B /* FavoriListVC.swift in Sources */,
+				7D23A18827765D45001C4334 /* Request.swift in Sources */,
 				7D292607271F0B9A00EBD22F /* NotficationTVC.swift in Sources */,
 				7D898D19274D5393004E7888 /* Service.swift in Sources */,
 				7DD7F223271D8BA8003E611D /* AnimalAdvertCVC.swift in Sources */,
 				7D4674E427182F2300632CE6 /* SceneDelegate.swift in Sources */,
+				7D1B402A27708ED2009E5A01 /* DogMyAdvertCell.swift in Sources */,
+				7D1B4026277088E3009E5A01 /* DogMyAdvertVC.swift in Sources */,
 				7D334E72275978E100368249 /* FavoriDetailsVC.swift in Sources */,
+				7DFF9F9E27735B3B00B7773F /* DogNotification.swift in Sources */,
 				7DECFA0E274E5EAA004E34F3 /* AnimalAdvertDetailsViewModel.swift in Sources */,
 				7D6F1261276530040055EBD5 /* NotificationViewModel.swift in Sources */,
 				7D2A6D41275981D70001B167 /* FavoriDetailCVC.swift in Sources */,
+				7DC0BBEA27675CB300028897 /* MessageModel.swift in Sources */,
 				7DE123FA274D07CA0095EDD6 /* AnimalKinds.swift in Sources */,
+				7D653B00276FCFC20025D039 /* DogWalkingAdvertFav.swift in Sources */,
 				7D5724E42718A319001BD38D /* AnimalKindsCVC.swift in Sources */,
+				7DC0BBE8276747FF00028897 /* MessageViewModel.swift in Sources */,
+				7D5417F9277623B3004EDA79 /* IsentRequestVC.swift in Sources */,
 				7D334E6E2759595200368249 /* FavoritList.swift in Sources */,
+				7D653AFA276FBEDB0025D039 /* DogWalkAccountPage.swift in Sources */,
 				7DDDD2FD27501BA800A814EB /* AddAdvertViewModel.swift in Sources */,
+				7D1B402E277098EF009E5A01 /* DogMyAdvertViewModel.swift in Sources */,
 				7D69C08B272453FE00BB10C2 /* SingUpEmailVC.swift in Sources */,
 				7D898D1B274D5D1B004E7888 /* AnimalKindsViewModel.swift in Sources */,
+				7D5417F327761A9D004EDA79 /* IncomingRequestTVC.swift in Sources */,
+				7DBBA1E4276E504A000AD77F /* DogWalkingAdvertDetailsVC.swift in Sources */,
 				7DE4DADC275CF7A200E6AE61 /* MyAdvertDetailsVC.swift in Sources */,
 				7D41BF5D275800D1009607E5 /* MyAdvertVC.swift in Sources */,
 				7DF7343A2730693800983A8C /* AnimalAdvertDetailsImageCVC.swift in Sources */,
+				7DBBA1D8276E31C5000AD77F /* DogWalkingAdvertsCVC.swift in Sources */,
 				7DD373B7271F646400505E95 /* AddAdvertVC.swift in Sources */,
+				7D653AFE276FCB8E0025D039 /* DogFavListTVC.swift in Sources */,
 				7D8BD989272B1D4600B00096 /* AccountVC.swift in Sources */,
+				7D23A18A27767FF1001C4334 /* SendRequestAcceptViewModel.swift in Sources */,
+				7DEE5CA527747A7E000CD4E0 /* DogWalkingMessageUserListVC.swift in Sources */,
+				7D653AFC276FC8800025D039 /* DogWalkFavListVC.swift in Sources */,
 				7D59416D2764E6CF00F72F65 /* MessageUserListViewController.swift in Sources */,
 				7DDDD2FB27501A5100A814EB /* AddAdvert.swift in Sources */,
+				7D1B402C2770984F009E5A01 /* DogMyAdvert.swift in Sources */,
 				7D29260A271F168E00EBD22F /* Notification.swift in Sources */,
-				7D334E6C2759571900368249 /* FavoritListCVC.swift in Sources */,
+				7DCC50362767DE01005F1861 /* MessageUserList.swift in Sources */,
 				7D59416F2764E88E00F72F65 /* ChatVC.swift in Sources */,
+				7D245936277602C2001644F8 /* IncomingRequestListVC.swift in Sources */,
+				7DE7A23527712DF30035D1EA /* DogMyAdvertDetail.swift in Sources */,
+				7D5417F727762339004EDA79 /* IsentRequestTVC.swift in Sources */,
+				7DBBA1E2276E3AE7000AD77F /* DogWalkingService.swift in Sources */,
+				7D5417F5277620D4004EDA79 /* RequestISentViewModel.swift in Sources */,
 				7D4674F92718460200632CE6 /* SingInwithEmailVC.swift in Sources */,
 				7DD7F227271D94FA003E611D /* AnimalAdvert.swift in Sources */,
+				7DE7A233277118530035D1EA /* DogFavAdvert.swift in Sources */,
 				7D334E702759597E00368249 /* FavoritListViewModel.swift in Sources */,
+				7DFF9FA027735D7700B7773F /* DogNotificationViewModel.swift in Sources */,
+				7D80E9D62771076A00C9E39D /* DogFavAdvertDetail.swift in Sources */,
+				7DBBA1DC276E3586000AD77F /* DogWalkingAdvert.swift in Sources */,
 				7D41BF61275814F2009607E5 /* MyAnimalAdvertViewModel.swift in Sources */,
 				7DE5EF8B27301D2500B84596 /* AnimalAdvertDetailsVC.swift in Sources */,
+				7D24593827760A55001644F8 /* RequestInComigViewModel.swift in Sources */,
 				7DECFA10274E6078004E34F3 /* AnimalAdvertDetails.swift in Sources */,
 				7DECFA0C274E4815004E34F3 /* AnimalAdvertViewModel.swift in Sources */,
+				7DCC503A2767E0CC005F1861 /* MessageUserListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,6 +780,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34G99QRS57;
 				INFOPLIST_FILE = AdoptingHay/Info.plist;
@@ -556,6 +790,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.engingulek.AdoptingHay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdoptingHay/View/AdoptingHay-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -567,6 +803,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 34G99QRS57;
 				INFOPLIST_FILE = AdoptingHay/Info.plist;
@@ -576,6 +813,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.engingulek.AdoptingHay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "AdoptingHay/View/AdoptingHay-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};

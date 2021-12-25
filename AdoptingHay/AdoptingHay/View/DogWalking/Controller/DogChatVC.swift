@@ -435,6 +435,22 @@ extension DogChatVC : InputBarAccessoryViewDelegate {
                         DogWalkingService().sendMessage(sendUserId: senduserid , sendUserName: sendUserName, sendMessage: text,getUserName: messageGetuserName,sendImage: "")
             inputBar.inputTextView.text = ""
                         
+                        
+                            
+                            
+                            if let authUserName = Auth.auth().currentUser?.displayName {
+                                let notiDate : [String:Any] = [
+                                    "sendUserName": authUserName, // gönderen kişi
+                                    "notiTitle":"AdoptingHay",
+                                    "notiSubtitle":"Bir mesajıbnız var",
+                                    "notiMessage":"\(authUserName) size mesaj gönderdi ",
+                                    "getUserName": "",  // alan kişi
+                                    "getUserId" : senduserid
+                                ]
+                                
+                                DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:senduserid)
+                            }
+                        
                     }
                     
         

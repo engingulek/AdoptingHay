@@ -79,12 +79,8 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
     // Add Advert to databese action
     @IBAction func addAdvert(_ sender: Any) {
         let defaultimage = UIImage(systemName: "plus")
-        
         if nameTextField.text == "" || ageAndGenus.text == "" || ownerNote.text == "" || defaultimage == addImageView.image   {
-            self.alertMessage(title: "Hata", messsage: "Boş kalan alanları doldurunuz")
-            
-        }
-        
+            self.alertMessage(title: "Hata", messsage: "Boş kalan alanları doldurunuz") }
         else {
             let storage = Storage.storage()
             let storageReferance = storage.reference()
@@ -109,9 +105,6 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
                                                         let date = self.datePicker.date
                                                         var time = self.timePicker.countDownDuration
                                                        time = (time/1800)*30
-                                                       
-                                                            
-                
                                                         let advert = DogWalkAddAdvert(userId:authId,userName: userName,addImage: imagedUrl!, time: date, timeRange: Int(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
                                                  
                                                         DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
