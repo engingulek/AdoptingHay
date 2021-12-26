@@ -119,6 +119,18 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
                     } }
             
             
+            
+            
+            let db = Firestore.firestore()
+            let walkingDocData : [String:Any] = [
+                "acceptDogWalkingBool" : false
+            ]
+            
+            let uuid =  UUID().uuidString
+            if let authUserId = Auth.auth().currentUser?.uid {
+                db.collection("userList").document(authUserId).collection("acceptDogWalking").document(uuid).setData(walkingDocData)
+                
+            }
                 
             
             

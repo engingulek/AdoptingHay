@@ -13,7 +13,11 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var dogWalkingCollectionView: UICollectionView!
     var permissionCheck:Bool = true
-    
+    var dogWalkingtimer:Timer = Timer()
+    var count:Int?
+    var timerCounting:Bool = false
+    var timerLabel =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
+    var finishButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
     @IBOutlet weak var filterButtonOutlet: UIButton!
     var timer = Timer()
     private var dogWalkingListViewModel: DogWalkingListViewModel!
@@ -23,6 +27,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         spinner.startAnimating()
         spinner.isHidden = false
         UNUserNotificationCenter.current().delegate = self
+        self.count = 5
         
         dogWalkingCollectionView.delegate = self
         dogWalkingCollectionView.dataSource = self
@@ -30,6 +35,8 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         getAllSendRequest()
         filterButtonOutlet.isHidden = false
         dogWalkingCollectionView.reloadData()
+        
+   
         
         
         
@@ -65,11 +72,46 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
        
     }
     
+    @objc  func timerCounter()-> Void {
+        if count == 0 {
+            finishButton.setTitle("Bitir", for: UIControl.State.normal)
+            
+        }
+        
+        else {
+            count = count! - 1
+            let time = secondsToHoursMinutesSeconds(seconds: count!)
+            let timeString = makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+            self.timerLabel.text = timeString
+           
+            
+        }
+     
+    }
+    
+    
+ func secondsToHoursMinutesSeconds(seconds:Int) -> (Int,Int,Int) {
+        return  ((seconds / 3600),((seconds % 3600)/60), ((seconds % 3600)%60))
+    }
+    
+    func makeTimeString(hours:Int,minutes:Int,seconds:Int) -> String {
+        var timeStirng = ""
+        timeStirng += String(format: "%2d", hours)
+        timeStirng += ":"
+        timeStirng += String(format: "%2d", minutes)
+        timeStirng += ":"
+        timeStirng += String(format: "%2d", seconds)
+        return timeStirng
+        
+        
+        
+    }
+    
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner,.sound])
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool)  {
         super.viewDidAppear(animated)
         getAllAdvert()
         getAllSendRequest()
@@ -121,6 +163,11 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
             if let request = request {
                 self.sendRequestAccept = RequestAcceptViewModel(requestAccept: request)
                 
+                self.count = self.sendRequestAccept.range*60
+                let time = self.secondsToHoursMinutesSeconds(seconds: self.count!)
+                let timeString = self.makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
+                self.timerLabel.text = timeString
+                
                if self.sendRequestAccept != nil {
                    
                    self.dogWalkingCollectionView.isHidden = true
@@ -147,8 +194,8 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
         
         
-        let timerLabel =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
-        timerLabel.text =  "01:30"
+        
+        
         timerLabel.textAlignment = .center
         timerLabel.center.x = self.view.center.x
         timerLabel.center.y = self.view.center.y/2
@@ -157,24 +204,10 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         self.view.addSubview(timerLabel)
         
         
-        let sendPhotoTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
-        sendPhotoTitleLabel.text = "Fotoğraf İçin Kalan Süre"
-        sendPhotoTitleLabel.textAlignment = .center
-        sendPhotoTitleLabel.center.x = self.view.center.x
-        sendPhotoTitleLabel.center.y = self.view.center.y/1.5
-        sendPhotoTitleLabel.font = UIFont.systemFont(ofSize: 28, weight: .bold)
-        sendPhotoTitleLabel.textColor = .black
-        self.view.addSubview(sendPhotoTitleLabel)
+       
         
         
-        let sendPhotoLabelTimer =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
-        sendPhotoLabelTimer.text =  "00:30"
-        sendPhotoLabelTimer.textAlignment = .center
-        sendPhotoLabelTimer.center.x = self.view.center.x
-        sendPhotoLabelTimer.center.y = self.view.center.y/1.2
-        sendPhotoLabelTimer.font = UIFont.systemFont(ofSize: 55,weight: .regular)
-        sendPhotoLabelTimer.textColor = .red
-        self.view.addSubview(sendPhotoLabelTimer)
+    
         
         
         
@@ -183,7 +216,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         amountLabel .text = "Ücret: \(amount)"
         amountLabel .textAlignment = .center
         amountLabel .center.x = self.view.center.x
-        amountLabel .center.y =  sendPhotoLabelTimer.center.y + 50
+        amountLabel .center.y =  timerLabel.center.y + 50
         amountLabel .font = UIFont.systemFont(ofSize: 25, weight: .medium)
         amountLabel .textColor = .black
         self.view.addSubview(amountLabel)
@@ -234,7 +267,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         }
         
         
-        let finishButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+       
         finishButton.backgroundColor = .systemBlue
         finishButton.layer.cornerRadius = 15
         finishButton.titleLabel?.font = .systemFont(ofSize: 20)
@@ -265,7 +298,16 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     
     @objc func sendButtonAction() {
-        print("Butona basıldı")
+        if(timerCounting) {
+            timerCounting = false
+            dogWalkingtimer.invalidate()
+            print("Gezdirme İşlemi Bitti")
+        }
+        else {
+            timerCounting = true
+            dogWalkingtimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+            print("Gezdirme İşlemi başladı")
+        }
     }
     
     @objc func sendPhotoButtonAction() {
