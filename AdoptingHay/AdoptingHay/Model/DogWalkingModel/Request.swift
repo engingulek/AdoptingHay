@@ -22,9 +22,10 @@ class Request {
     var dateEvent:Date?
     var situation:String?
     var sendId:String?
+    var acceptUserName:String?
 
     
-    init(advertId:String,advertImage:String,advertRange:Int,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String,userId:String,userName:String,dateEvent:Date,situation:String,sendId:String) {
+    init(advertId:String,advertImage:String,advertRange:Int,advertAnimalName:String,advertAnimalKindsandAge:String,advertAnimalSick:String,ownerNote:String,sickInfo:String,userId:String,userName:String,dateEvent:Date,situation:String,sendId:String,acceptUserName:String) {
         self.advertImage = advertImage
         self.advertRange = advertRange
         self.advertAnimalName = advertAnimalName
@@ -38,6 +39,7 @@ class Request {
         self.dateEvent = dateEvent
         self.situation = situation
         self.sendId = sendId
+        self.acceptUserName = acceptUserName
         
     }
 }

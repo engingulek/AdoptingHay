@@ -13,6 +13,7 @@ class IsentRequestVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
         isentRequestTableView.delegate = self
         isentRequestTableView.dataSource = self
         getAllRequest()

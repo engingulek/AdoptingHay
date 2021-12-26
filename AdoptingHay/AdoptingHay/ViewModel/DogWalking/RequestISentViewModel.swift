@@ -86,6 +86,11 @@ struct RequestISentViewModel {
         return self.isentRequest.sendId!
     }
     
+    var acceptUserName : String {
+        return self.isentRequest.acceptUserName!
+        
+    }
+    
  
 }
 

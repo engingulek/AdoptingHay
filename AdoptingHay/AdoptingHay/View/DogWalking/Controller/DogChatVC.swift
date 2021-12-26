@@ -135,9 +135,7 @@ class DogChatVC: MessagesViewController {
             
         }))
        
-        actionSheet.addAction(UIAlertAction(title: "Lokasyon", style: .default, handler: { [weak self]  _ in
-            
-        }))
+  
         actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         present(actionSheet, animated: true)

@@ -685,24 +685,29 @@ class DogWalkingService {
         // add to advert's owner request list
         
         if let userId = Auth.auth().currentUser?.uid {
+            if let authUserName = Auth.auth().currentUser?.displayName {
+                let docData : [String:Any] = [
+                    "animalImage" : getAdvert.advertImage!,
+                    "animalName" : getAdvert.advertAnimalName!,
+                    "timeRange": getAdvert.advertRange!,
+                    "sickBool" : getAdvert.advertAnimalSick!,
+                    "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
+                    "ownerNote" : getAdvert.ownerNote!,
+                    "sickInfo":getAdvert.sickInfo!,
+                    "userName" : getAdvert.userName!,
+                    "userId" : getAdvert.userId!,
+                    "situation" : getAdvert.situation!,
+                    "date" : getAdvert.dateEvent!,
+                    "sendRequestId" : userId,
+                    "acceptAdvertUserName" : authUserName
+                ]
+                db.collection("userList").document(getAdvert.userId!).collection("incomingRequest").document(getAdvert.advertId!).setData(docData)
+                db.collection("userList").document(userId).collection("isentRequest").document(getAdvert.advertId!).setData(docData)
+            }
             
             
-            let docData : [String:Any] = [
-                "animalImage" : getAdvert.advertImage!,
-                "animalName" : getAdvert.advertAnimalName!,
-                "timeRange": getAdvert.advertRange!,
-                "sickBool" : getAdvert.advertAnimalSick!,
-                "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
-                "ownerNote" : getAdvert.ownerNote!,
-                "sickInfo":getAdvert.sickInfo!,
-                "userName" : getAdvert.userName!,
-                "userId" : getAdvert.userId!,
-                "situation" : getAdvert.situation!,
-                "date" : getAdvert.dateEvent!,
-                "sendRequestId" : userId
-            ]
-            db.collection("userList").document(getAdvert.userId!).collection("incomingRequest").document(getAdvert.advertId!).setData(docData)
-            db.collection("userList").document(userId).collection("isentRequest").document(getAdvert.advertId!).setData(docData)
+          
+         
         } }
     
     
@@ -734,10 +739,12 @@ class DogWalkingService {
                                                                     if let situation = document.get("situation") as? String {
                                                                         if let sendRequestId = document.get("sendRequestId") as? String {
                                                                             if situation == "Aktif" {
-                                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                                let inComingAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId)
-                                                                                self.inComingRequestList.append(inComingAdvert)
-                                                                                completion(self.inComingRequestList)
+                                                                                if let acceptUserName = document.get("acceptAdvertUserName") as? String {
+                                                                                    let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                                    let inComingAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId,acceptUserName: acceptUserName)
+                                                                                    self.inComingRequestList.append(inComingAdvert)
+                                                                                    completion(self.inComingRequestList)
+                                                                                }
                                                                                 
                                                                                 
                                                                                 
@@ -797,10 +804,20 @@ class DogWalkingService {
                                                                     if let situation = document.get("situation") as? String {
                                                                         if let sendRequestId = document.get("sendRequestId") as? String {
                                                                             if situation == "Aktif" {
-                                                                                let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                                let inComingAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId)
-                                                                                self.inComingRequestList.append(inComingAdvert)
-                                                                                completion(self.inComingRequestList)
+                                                                                if let acceptUserName = document.get("acceptAdvertUserName") as? String {
+                                                                                    let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
+                                                                                    let inComingAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId,acceptUserName: acceptUserName)
+                                                                                    self.inComingRequestList.append(inComingAdvert)
+                                                                                    completion(self.inComingRequestList)
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                }
+                                                                                
+                                                                                
+                                                                                
+                                                                                
+                                                                        
                                                                                 
                                                                                 
                                                                                 
@@ -865,31 +882,41 @@ class DogWalkingService {
             if let sendId = getAdvert.sendId {
                 if let advertId = getAdvert.advertId {
                     
-                    let docData : [String:Any] = [
-                        "animalImage" : getAdvert.advertImage!,
-                        "animalName" : getAdvert.advertAnimalName!,
-                        "timeRange": getAdvert.advertRange!,
-                        "sickBool" : getAdvert.advertAnimalSick!,
-                        "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
-                        "ownerNote" : getAdvert.ownerNote!,
-                        "sickInfo":getAdvert.sickInfo!,
-                        "userName" : getAdvert.userName!,
-                        "userId" : getAdvert.userId!,
-                        "situation" : "Aktifdeğil",
-                        "date" : getAdvert.dateEvent!,
-                        "sendRequestId" : getAdvert.sendId!
-                    ]
+                  
+                        let docData : [String:Any] = [
+                            "animalImage" : getAdvert.advertImage!,
+                            "animalName" : getAdvert.advertAnimalName!,
+                            "timeRange": getAdvert.advertRange!,
+                            "sickBool" : getAdvert.advertAnimalSick!,
+                            "ageAndGenus" : getAdvert.advertAnimalKindsandAge!,
+                            "ownerNote" : getAdvert.ownerNote!,
+                            "sickInfo":getAdvert.sickInfo!,
+                            "userName" : getAdvert.userName!,
+                            "userId" : getAdvert.userId!,
+                            "situation" : "Aktifdeğil",
+                            "date" : getAdvert.dateEvent!,
+                            "sendRequestId" : getAdvert.sendId!,
+                            "acceptAdvertUserName" : ""
+                        ]
+                        
+                        
+                        
+                        db.collection("userList").document(authUserId).collection("comingAcceptAdvert").document(advertId).setData(docData)
+                        db.collection("userList").document(sendId).collection("sendAcceptAdvert").document(advertId).setData(docData)
+                        
+                      
+                        // Delete advert when accept button click
+                        db.collection("userList").document(authUserId).collection("incomingRequest").document(advertId).delete()
+                        db.collection("userList").document(sendId).collection("isentRequest").document(advertId).delete()
+                        db.collection("dogWalkingAdvert").document(advertId).delete()
+                        
+                    
+                    
+                   
+                        
                     
                     
                     
-                    db.collection("userList").document(authUserId).collection("comingAcceptAdvert").document(advertId).setData(docData)
-                    db.collection("userList").document(sendId).collection("sendAcceptAdvert").document(advertId).setData(docData)
-                    
-                    db.collection("userList").document(sendId).collection("dogWalklingFavoriList").document(advertId).delete()
-                    // Delete advert when accept button click
-                    db.collection("userList").document(authUserId).collection("incomingRequest").document(advertId).delete()
-                    db.collection("userList").document(sendId).collection("isentRequest").document(advertId).delete()
-                    db.collection("dogWalkingAdvert").document(advertId).delete()
                     
                 }
             }
@@ -905,12 +932,12 @@ class DogWalkingService {
     
     
     
-    func getSendAcceptAdvert(completion: @escaping (Request?)->()) {
+    func getAcceptAdvert(collectionName:String,completion: @escaping (Request?)->()) {
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
             let db = Firestore.firestore()
             if let authId = Auth.auth().currentUser?.uid {
-                db.collection("userList").document(authId).collection("sendAcceptAdvert").getDocuments { snapshot, error in
+                db.collection("userList").document(authId).collection(collectionName).getDocuments { snapshot, error in
                     if error != nil{
                         completion(nil)
                     }
@@ -933,9 +960,14 @@ class DogWalkingService {
                                                                     if let situation = document.get("situation") as? String {
                                                                         if let sendRequestId = document.get("sendRequestId") as? String {
                                                                             
+                                                                            if let acceptAdvertUserName = document.get("acceptAdvertUserName") as? String {
                                                                                 let a = (document.get("date") as? Timestamp)?.dateValue() ?? Date()
-                                                                                let sendRequestAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId)
+                                                                                let sendRequestAdvert = Request(advertId: advertId, advertImage: animalImage, advertRange: hoursRange, advertAnimalName: animalName, advertAnimalKindsandAge: animalKindsAge, advertAnimalSick: sickBool, ownerNote: ownerNote, sickInfo: sickInfo, userId: userId, userName: userName, dateEvent: a, situation: situation, sendId: sendRequestId,acceptUserName: acceptAdvertUserName)
                                                                             completion(sendRequestAdvert)
+                                                                                
+                                                                            }
+                                                                            
+                                                                           
                                                                                 
                                                                                 
                                                                                 

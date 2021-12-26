@@ -14,6 +14,7 @@ class IncomingRequestListVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBarController?.tabBar.isHidden = true
 
         requestListTableView.delegate = self
         requestListTableView.dataSource = self

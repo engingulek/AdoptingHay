@@ -17,7 +17,7 @@ import Foundation
 
 
 
-struct SendRequestAcceptViewModel{
+struct RequestAcceptViewModel{
     let requestAccept : Request
     
     var id : String {
@@ -78,6 +78,11 @@ struct SendRequestAcceptViewModel{
     
     var sendId: String {
         return self.requestAccept.sendId!
+    }
+    
+    var acceptUserName : String {
+        return self.requestAccept.acceptUserName!
+        
     }
     
  

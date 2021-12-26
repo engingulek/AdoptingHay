@@ -96,5 +96,9 @@ struct RequestInComigViewModel {
         return self.incomingRequest.sendId!
     }
     
+    var acceptUserName : String {
+        return self.incomingRequest.acceptUserName!
+    }
+    
  
 }

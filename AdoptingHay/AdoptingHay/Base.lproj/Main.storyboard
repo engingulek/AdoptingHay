@@ -2248,6 +2248,7 @@
                         <outlet property="filterButtonOutlet" destination="suZ-UB-5YB" id="vu3-wF-DI2"/>
                         <outlet property="spinner" destination="dT6-jp-oSJ" id="l1K-ov-vNU"/>
                         <segue destination="hBA-gR-x8b" kind="show" identifier="toDetailsWalking" id="MSY-OQ-vqh"/>
+                        <segue destination="M35-A9-eOo" kind="presentation" identifier="mm" id="AMA-eX-LkE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nyO-8H-Ba3" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3130,7 +3131,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ueW-7A-fHH">
                                 <rect key="frame" x="76" y="481" width="262" height="41.5"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Aktif İlanlarım">
+                                <buttonConfiguration key="configuration" style="filled" title="Açık İlanlarım">
                                     <fontDescription key="titleFontDescription" type="system" pointSize="23"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -3163,6 +3164,14 @@
                                     <action selector="myOutSideListButton:" destination="2S7-6v-9or" eventType="touchUpInside" id="Cwc-d2-Y2T"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="URj-OK-N0w">
+                                <rect key="frame" x="76" y="672" width="262" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Kabul Edilen İlan"/>
+                                <connections>
+                                    <action selector="acceptAdvertButton:" destination="2S7-6v-9or" eventType="touchUpInside" id="QKv-qW-ktC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4yF-LN-Fdv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3175,13 +3184,16 @@
                             <constraint firstItem="oA3-l6-S5w" firstAttribute="top" secondItem="ueW-7A-fHH" secondAttribute="bottom" constant="32.5" id="Iuh-tx-cVr"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="SiP-xu-Mp8" secondAttribute="trailing" constant="76" id="JzW-32-wge"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="oA3-l6-S5w" secondAttribute="trailing" constant="76" id="Mck-tD-Vqc"/>
+                            <constraint firstItem="URj-OK-N0w" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="76" id="Oy3-Cw-YaH"/>
                             <constraint firstItem="Pe1-b6-aCi" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="76" id="Vbo-KV-kWU"/>
                             <constraint firstItem="ueW-7A-fHH" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="76" id="bHT-iw-8Yt"/>
                             <constraint firstItem="HDA-bg-fuk" firstAttribute="top" secondItem="4yF-LN-Fdv" secondAttribute="top" constant="198" id="geA-5c-mXT"/>
+                            <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="URj-OK-N0w" secondAttribute="trailing" constant="76" id="hjw-Kc-5zp"/>
                             <constraint firstItem="Pe1-b6-aCi" firstAttribute="top" secondItem="oA3-l6-S5w" secondAttribute="bottom" constant="30" id="iue-XG-hmY"/>
                             <constraint firstItem="ueW-7A-fHH" firstAttribute="top" secondItem="SiP-xu-Mp8" secondAttribute="bottom" constant="34.5" id="lxR-nc-PhQ"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="Pe1-b6-aCi" secondAttribute="trailing" constant="76" id="pEH-dA-EcE"/>
                             <constraint firstItem="qaE-WC-y32" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="51" id="rYL-QK-WlD"/>
+                            <constraint firstItem="URj-OK-N0w" firstAttribute="top" secondItem="Pe1-b6-aCi" secondAttribute="bottom" constant="25" id="t8f-8a-d8C"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="qaE-WC-y32" secondAttribute="trailing" constant="51" id="uTQ-CV-n3F"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="ueW-7A-fHH" secondAttribute="trailing" constant="76" id="uca-7P-g0M"/>
                             <constraint firstItem="oA3-l6-S5w" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="76" id="y11-Fj-6Ab"/>
@@ -3197,6 +3209,7 @@
                         <segue destination="aua-Me-YBp" kind="show" identifier="toMyAdverts" id="1tU-RW-zOJ"/>
                         <segue destination="occ-Jb-lLc" kind="show" identifier="myRequestList" id="Z6n-xS-s6w"/>
                         <segue destination="cDt-ok-8ax" kind="show" identifier="isentRequest" id="Q7L-tR-w7f"/>
+                        <segue destination="6sA-Lw-oCA" kind="show" identifier="k" id="diq-p8-KF2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Jw-rH-LhL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3363,7 +3376,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NNl-D4-RW1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2781" y="2096"/>
+            <point key="canvasLocation" x="-3394" y="2105"/>
         </scene>
         <!--İlan Detay-->
         <scene sceneID="eO5-D0-TXr">
@@ -3559,7 +3572,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZdZ-m8-Czr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1832" y="2901"/>
+            <point key="canvasLocation" x="-3394" y="2910"/>
         </scene>
         <!--İlanlarım-->
         <scene sceneID="d1F-nh-hx2">
@@ -3678,7 +3691,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywX-Ld-Dde" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2028" y="2105"/>
+            <point key="canvasLocation" x="-2667" y="2105"/>
         </scene>
         <!--Gelen İstekler-->
         <scene sceneID="VN8-Dr-qFn">
@@ -3777,7 +3790,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Cu-Wi-f4c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1301.449275362319" y="2104.6875"/>
+            <point key="canvasLocation" x="-1894" y="2105"/>
         </scene>
         <!--Yapılan İstekler-->
         <scene sceneID="AwA-Ci-JSV">
@@ -3875,7 +3888,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="K5E-dt-xaW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-620.28985507246387" y="2179.6875"/>
+            <point key="canvasLocation" x="-1067" y="2105"/>
+        </scene>
+        <!--Kabul Edilen İlan-->
+        <scene sceneID="QGQ-yE-yUt">
+            <objects>
+                <viewController id="6sA-Lw-oCA" customClass="OwnerAdvertAcceptVC" customModule="AdoptingHay" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="g7g-mo-O3A">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="0Dj-sq-UFY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Kabul Edilen İlan" id="TH2-g4-ZQm"/>
+                    <connections>
+                        <segue destination="M35-A9-eOo" kind="presentation" identifier="m" id="jtj-fp-E4Z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UHk-GT-fA9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-216" y="2105"/>
         </scene>
         <!--Bildirimler-->
         <scene sceneID="vZg-Hc-NJg">
@@ -4196,7 +4228,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fYO-1e-40N" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-471.01449275362324" y="1417.6339285714284"/>
+            <point key="canvasLocation" x="-474" y="1383"/>
         </scene>
         <!--Hesap-->
         <scene sceneID="9Wa-gg-zS2">
@@ -4431,7 +4463,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zz7-Jz-Z04" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-881.15942028985512" y="2899.5535714285711"/>
+            <point key="canvasLocation" x="-2667" y="2910"/>
         </scene>
         <!--Kullanıcı Listesi-->
         <scene sceneID="2AO-wJ-3MN">
@@ -4455,7 +4487,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Obw-CZ-Qfd"/>
+        <segue reference="AMA-eX-LkE"/>
         <segue reference="J57-BP-jiN"/>
         <segue reference="kcS-aM-oPg"/>
     </inferredMetricsTieBreakers>

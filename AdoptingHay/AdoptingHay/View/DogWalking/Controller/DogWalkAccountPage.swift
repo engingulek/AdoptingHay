@@ -51,6 +51,9 @@ class DogWalkAccountPage: UIViewController {
     }
     
     
+    @IBAction func acceptAdvertButton(_ sender: Any) {
+        performSegue(withIdentifier: "k", sender: nil)
+    }
     
     
 

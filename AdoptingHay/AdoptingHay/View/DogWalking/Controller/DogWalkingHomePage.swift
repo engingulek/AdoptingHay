@@ -17,7 +17,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var filterButtonOutlet: UIButton!
     var timer = Timer()
     private var dogWalkingListViewModel: DogWalkingListViewModel!
-    private var sendRequestAccept :SendRequestAcceptViewModel!
+    private var sendRequestAccept : RequestAcceptViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
         spinner.startAnimating()
@@ -49,10 +49,10 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
             }
         }
         
-        getNotificationDogWalkingFromFirestore()
-        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
-            self.getNotificationDogWalkingFromFirestore()
-        })
+//        getNotificationDogWalkingFromFirestore()
+//        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+//            self.getNotificationDogWalkingFromFirestore()
+//        })
         
         
         
@@ -117,9 +117,9 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     func getAllSendRequest()
     {
-        DogWalkingService().getSendAcceptAdvert { request in
+        DogWalkingService().getAcceptAdvert(collectionName: "sendAcceptAdvert") { request in
             if let request = request {
-                self.sendRequestAccept = SendRequestAcceptViewModel(requestAccept: request)
+                self.sendRequestAccept = RequestAcceptViewModel(requestAccept: request)
                 
                if self.sendRequestAccept != nil {
                    
@@ -130,9 +130,6 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                     
                 }
             }
-           
-            
-            
         }
     }
     
@@ -241,7 +238,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         finishButton.backgroundColor = .systemBlue
         finishButton.layer.cornerRadius = 15
         finishButton.titleLabel?.font = .systemFont(ofSize: 20)
-        finishButton.setTitle("Bitir", for: UIControl.State.normal)
+        finishButton.setTitle("Başlat", for: UIControl.State.normal)
         finishButton.center.x = self.view.center.x/2
         finishButton.center.y =  sickInfoTitle.center.y + 170
         self.view.addSubview(finishButton)
@@ -255,7 +252,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         sendPhotoButton.backgroundColor = .systemRed
         sendPhotoButton.layer.cornerRadius = 15
         sendPhotoButton.titleLabel?.font = .systemFont(ofSize: 17)
-        sendPhotoButton.setTitle("Fotoğrof Gönder", for: UIControl.State.normal)
+        sendPhotoButton.setTitle("Mesaj Gönder", for: UIControl.State.normal)
         sendPhotoButton.center.x = self.view.center.x + 95
         sendPhotoButton.center.y =  sickInfoTitle.center.y + 170
         self.view.addSubview(sendPhotoButton)
@@ -272,8 +269,23 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     @objc func sendPhotoButtonAction() {
-        print("Foto send basıldı")
+        if let id = self.sendRequestAccept.userId as? String {
+            if let userName = self.sendRequestAccept.userName as? String {
+                let sendToGetMessageData : [String:Any] = [
+                    "messageGetUserId" : id,
+                    "messageGetUserName" : userName
+                
+                ]
+                performSegue(withIdentifier: "mm", sender: sendToGetMessageData)
+                
+            }
+        
+            
+        }
+     
     }
+    
+
     
  
     
@@ -495,10 +507,18 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
             
             if let getAdvert = sender as? DogwalkingAdvert {
                 let toAdvertDetailVC = segue.destination as! DogWalkingAdvertDetailsVC
-                print("İdd \(getAdvert.advertId)")
                 toAdvertDetailVC.getAdvertWalking = getAdvert
                 
             } }
+        
+        if segue.identifier == "mm" {
+            if let data = sender as? [String:Any] {
+            let toDogChatVC = segue.destination as! DogChatVC
+                toDogChatVC.sendToGetMessageDataChat = data
+            
+        }
+      
+        }
     }
     
     
