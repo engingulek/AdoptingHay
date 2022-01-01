@@ -1,12 +1,5 @@
-//
-//  OwnerAdvertAcceptVC.swift
-//  AdoptingHay
-//
-//  Created by engin gülek on 26.12.2021.
-//
-
 import UIKit
-
+import Firebase
 class OwnerAdvertAcceptVC: UIViewController {
     private var commingRequestAccept : RequestAcceptViewModel!
     var dogWalkingtimer:Timer = Timer()
@@ -223,6 +216,7 @@ class OwnerAdvertAcceptVC: UIViewController {
     
     
     @objc func sendButtonAction() {
+        let db = Firestore.firestore()
         if(timerCounting) {
 //            timerCounting = false
 //
@@ -231,17 +225,54 @@ class OwnerAdvertAcceptVC: UIViewController {
             
             if finishButton.currentTitle != "Başlat" {
                 print("Gezdirme İşlemi Bitti")
-                
+                if let authUserId = Auth.auth().currentUser?.uid as? String {
+                    if let uuid = self.commingRequestAccept.sendId as? String {
+                        
+                        let updateData : [String:Any] = [
+                            "acceptDogWalkingBool":"finish"
+                        ]
+                        db.collection("userList").document(authUserId).collection("acceptDogWalking").document(uuid).updateData(updateData)
+                        
+                        if let advertId = self.commingRequestAccept.id as? String {
+                            performSegue(withIdentifier: "comment", sender: uuid)
+                            db.collection("userList").document(authUserId).collection("comingAcceptAdvert").document(advertId).delete()
+                            
+                            self.navigationController?.popViewController(animated: true)
+                            
+                        }
+                        
+                  
+                    }
+                    
+                   
+                }
                 
             }
             
         }
         else {
-            timerCounting = true
-            dogWalkingtimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
-            print("Gezdirme İşlemi başladı")
+            
+            
+            if let authUserId = Auth.auth().currentUser?.uid as? String {
+                if let uuid = self.commingRequestAccept.sendId as? String {
+                    
+                    let updateData : [String:Any] = [
+                        "acceptDogWalkingBool":"start"
+                    ]
+                    db.collection("userList").document(authUserId).collection("acceptDogWalking").document(uuid).updateData(updateData)
+                    
+                    timerCounting = true
+                    dogWalkingtimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
+                    print("Gezdirme İşlemi başladı")
+                }
+            }
+            
+            
+         
         }
     }
+    
+   
     
     @objc func sendPhotoButtonAction() {
         if let id = self.commingRequestAccept.sendId as? String {
@@ -265,6 +296,14 @@ class OwnerAdvertAcceptVC: UIViewController {
         }
       
         }
+        
+        if segue.identifier == "comment" {
+            if let userId = sender as? String {
+                let toCommentVC = segue.destination as! CommentMakeVC
+                toCommentVC.getUserId = userId
+            }
+        }
+        
     }
     
 

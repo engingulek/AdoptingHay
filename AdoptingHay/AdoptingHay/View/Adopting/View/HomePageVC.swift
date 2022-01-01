@@ -102,7 +102,7 @@ class HomePageVC: UIViewController {
 //        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
 //            self.getNotificationFromFirestore()
 //        })
-//        
+        
         
     }
     

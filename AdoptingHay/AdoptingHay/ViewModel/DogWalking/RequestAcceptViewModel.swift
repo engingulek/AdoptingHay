@@ -1,18 +1,3 @@
-//
-//  SendRequestAccept.swift
-//  AdoptingHay
-//
-//  Created by engin gülek on 25.12.2021.
-//
-
-import Foundation
-//
-//  RequestISentViewModel.swift
-//  AdoptingHay
-//
-//  Created by engin gülek on 24.12.2021.
-//
-
 import Foundation
 
 

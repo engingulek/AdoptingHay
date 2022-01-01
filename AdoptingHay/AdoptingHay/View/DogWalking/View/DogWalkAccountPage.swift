@@ -37,6 +37,10 @@ class DogWalkAccountPage: UIViewController {
         performSegue(withIdentifier: "myRequestList", sender: nil)
     }
     
+    @IBAction func commentButton(_ sender: Any) {
+        performSegue(withIdentifier: "toComment", sender: nil)
+    }
+    
     
     // singOutButton
     @IBAction func singOut(_ sender: Any) {

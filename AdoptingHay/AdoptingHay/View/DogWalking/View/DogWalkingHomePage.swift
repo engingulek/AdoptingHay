@@ -1,10 +1,3 @@
-//
-//  DogWalkingHomePage.swift
-//  AdoptingHay
-//
-//  Created by engin gülek on 18.12.2021.
-//
-
 import UIKit
 import Firebase
 import UserNotifications
@@ -18,6 +11,13 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     var timerCounting:Bool = false
     var timerLabel =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
     var finishButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+    var sendPhotoButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+    var sickInfoA = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+    var sickInfo = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+    var sickInfoTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+    var animalName = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+    var amountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+    var  timerTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
     @IBOutlet weak var filterButtonOutlet: UIButton!
     var timer = Timer()
     private var dogWalkingListViewModel: DogWalkingListViewModel!
@@ -162,8 +162,8 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         DogWalkingService().getAcceptAdvert(collectionName: "sendAcceptAdvert") { request in
             if let request = request {
                 self.sendRequestAccept = RequestAcceptViewModel(requestAccept: request)
-                
-                self.count = self.sendRequestAccept.range*60
+                // süre self.sendRequestAccept.range*60
+                self.count =   5
                 let time = self.secondsToHoursMinutesSeconds(seconds: self.count!)
                 let timeString = self.makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
                 self.timerLabel.text = timeString
@@ -176,6 +176,14 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                    self.filterButtonOutlet.isHidden = true
                     
                 }
+                
+                else {
+                    self.dogWalkingCollectionView.isHidden = false
+                    self.dogWalkingCollectionView.reloadData()
+                  
+                    self.filterButtonOutlet.isHidden = false
+                    
+                }
             }
         }
     }
@@ -183,7 +191,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     
     func acceptToRequestDesign() {
-        let  timerTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+      
         timerTitleLabel.text = "Kalan Süre"
         timerTitleLabel.textAlignment = .center
         timerTitleLabel.center.x = self.view.center.x
@@ -211,7 +219,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
         
         
-        let amountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+        
         let amount = (self.sendRequestAccept.range/30)*50
         amountLabel .text = "Ücret: \(amount)"
         amountLabel .textAlignment = .center
@@ -223,7 +231,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
     
         
-        let animalName = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+      
         animalName.text = "Adı: \(self.sendRequestAccept.name) "
         animalName.textAlignment = .center
         animalName.center.x = self.view.center.x
@@ -232,7 +240,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         animalName.textColor = .black
         self.view.addSubview(animalName)
         
-        let sickInfoTitle = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+        
         sickInfoTitle.text = "Hastalık Bilgi"
         sickInfoTitle.textAlignment = .center
         sickInfoTitle.center.x = self.view.center.x
@@ -242,7 +250,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         self.view.addSubview(sickInfoTitle)
         
         if self.sendRequestAccept.sick == "Yok" {
-            let sickInfo = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+            
             sickInfo.text = "Yok"
             sickInfo.textAlignment = .center
             sickInfo.center.x = self.view.center.x
@@ -254,7 +262,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         }
         
         else {
-            let sickInfoA = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
+           
             sickInfoA.backgroundColor = .systemGray5
             sickInfoA.text = "Hastalık Hakkında bilgi"
             sickInfoA.textAlignment = .center
@@ -281,7 +289,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
         
         
-        let sendPhotoButton = UIButton(frame: CGRect(x: 0, y: 0, width: 150, height: 40))
+    
         sendPhotoButton.backgroundColor = .systemRed
         sendPhotoButton.layer.cornerRadius = 15
         sendPhotoButton.titleLabel?.font = .systemFont(ofSize: 17)
@@ -298,16 +306,110 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     
     @objc func sendButtonAction() {
+        let db = Firestore.firestore()
         if(timerCounting) {
-            timerCounting = false
-            dogWalkingtimer.invalidate()
+            
             print("Gezdirme İşlemi Bitti")
+            if let authUserId = Auth.auth().currentUser?.uid as? String {
+                if let uuid = self.sendRequestAccept.userId as? String {
+                    
+                    let updateData : [String:Any] = [
+                        "acceptDogWalkingBool":"start"
+                    ]
+                    db.collection("userList").document(uuid).collection("acceptDogWalking").document(authUserId).getDocument { document, error in
+                        
+                        if let acceptBool = document?.get("acceptDogWalkingBool") as? String {
+                            if acceptBool == "finish" {
+                                
+                                print("Gezdirme İşlemi bitirildi")
+                                self.performSegue(withIdentifier: "toThanks", sender: nil)
+                                if let advertId = self.sendRequestAccept.id as? String {
+                                    db.collection("userList").document(authUserId).collection("sendAcceptAdvert").document(advertId).delete()
+                                    self.dogWalkingCollectionView.isHidden = false
+                                    self.dogWalkingCollectionView.reloadData()
+                                  
+                                    self.filterButtonOutlet.isHidden = false
+                                    self.sickInfoTitle.isHidden = true
+                                    self.animalName.isHidden = true
+                                    self.amountLabel.isHidden = true
+                                    self.timerTitleLabel.isHidden = true
+                                    self.timerLabel.isHidden = true
+                                    self.sendPhotoButton.isHidden = true
+                                    self.sickInfo.isHidden = true
+                                    self.sickInfoA.isHidden = true
+                                    self.finishButton.isHidden = true
+                                    
+                                    
+                                    
+                                }
+                                
+                         
+                                
+                            }
+                            
+                            else {
+                                print("İlan shibi gezdirme işlemini bitirmedi")
+                                self.alertMessage(message: "İlan Sahibi Gezdirme İşlemnini Bitirmedi")
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                   
+                }
+            }
         }
         else {
-            timerCounting = true
-            dogWalkingtimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerCounter), userInfo: nil, repeats: true)
-            print("Gezdirme İşlemi başladı")
+            
+            if let authUserId = Auth.auth().currentUser?.uid as? String {
+                if let uuid = self.sendRequestAccept.userId as? String {
+                    
+                    let updateData : [String:Any] = [
+                        "acceptDogWalkingBool":"start"
+                    ]
+                    db.collection("userList").document(uuid).collection("acceptDogWalking").document(authUserId).getDocument { document, error in
+                        
+                        if let acceptBool = document?.get("acceptDogWalkingBool") as? String {
+                            if acceptBool == "start" {
+                                self.timerCounting = true
+                                self.dogWalkingtimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.timerCounter), userInfo: nil, repeats: true)
+                                print("Gezdirme İşlemi başladı")
+                                
+                            }
+                            
+                            else {
+                      
+                                self.alertMessage(message: "İlan Sahibi Gezdirme İşlemini Başlatmadı")
+                                
+                               
+                            }
+                        }
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                   
+                }
+            }
+            
+            
+            
+           
         }
+    }
+    
+    func alertMessage(message:String) {
+        let alertController = UIAlertController(title: "Uyarı", message: message, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Tamam", style: .cancel, handler: nil)
+        alertController.addAction(alertAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @objc func sendPhotoButtonAction() {
@@ -492,7 +594,7 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         let advert = self.dogWalkingListViewModel.animalKindsAtIndex(indexPath.row)
         
         cell.advertsName.text = "Adı: \(advert.name)  "
-        cell.advertsRange.text = "\(advert.range) dk" 
+        cell.advertsRange.text = "\(advert.range) dk"
         cell.adversKindsandAge.text = "Cins/Yaş: \(advert.kindsAndAge)"
         cell.advertsSick.text = "Hastalık: \(advert.sick)"
         cell.userName.text  = advert.userName

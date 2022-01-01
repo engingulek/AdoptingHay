@@ -14,6 +14,8 @@ class DogWalkingService {
     var dogFavList = [DogFavAdvert]()
     var dogNotiList = [DogNotification]()
     var messageUserList = [MessageUserList]()
+    var commentList = [Comment]()
+    var Ascore:Int = 0;
     // Connet Firebase DogWalkingAdvert
     func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         let db = Firestore.firestore()
@@ -1005,6 +1007,38 @@ class DogWalkingService {
         }
         
         
+        
+        
+    }
+    
+    
+    func getAllComment(completion: @escaping ([Comment]?)->()){
+        
+        let db = Firestore.firestore()
+    
+        if let userId = Auth.auth().currentUser?.uid {
+            db.collection("userList").document(userId).collection("commet").getDocuments { snapshot, error in
+                
+                for documents in (snapshot?.documents)! {
+                    if let commmentId = documents.documentID as? String {
+                        if let comment = documents.get("comment") as? String {
+                            if let userName = documents.get("userName") as? String {
+                                if let score = documents.get("score") as? Int {
+                                    
+                                    let comment = Comment(comment: comment, score: score, userName: userName)
+                                    self.commentList.append(comment)
+                                    completion(self.commentList)
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+        }
+       
         
         
     }

@@ -123,13 +123,21 @@ extension IncomingRequestListVC : UITableViewDelegate,UITableViewDataSource {
             
             let db = Firestore.firestore()
             let walkingDocData : [String:Any] = [
-                "acceptDogWalkingBool" : false
+                "acceptDogWalkingBool" : "ready"
             ]
             
-            let uuid =  UUID().uuidString
-            if let authUserId = Auth.auth().currentUser?.uid {
-                db.collection("userList").document(authUserId).collection("acceptDogWalking").document(uuid).setData(walkingDocData)
+           if  let uuid = self.incomingRequestViewModeList.incomingRequestAtIndex(indexPath.row).sendId as?
+                String {
+               if let authUserId = Auth.auth().currentUser?.uid {
+       db.collection("userList").document(authUserId).collection("acceptDogWalking").document(uuid).setData(walkingDocData)
+       
+               
+               
+           }
                 
+                
+                
+               
             }
                 
             
