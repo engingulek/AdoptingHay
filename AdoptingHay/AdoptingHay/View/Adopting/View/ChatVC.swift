@@ -45,6 +45,8 @@ class ChatVC: MessagesViewController {
         messagesCollectionView.messagesDisplayDelegate = self
         messageInputBar.delegate = self
         
+    
+        
         
         
         print("Konuşulan kişi id \(userId)")
@@ -244,6 +246,10 @@ extension ChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayD
         return messages.count
     }
     
+  
+    
+    
+
     func configureAvatarView(_ avatarView: AvatarView, for message: MessageType, at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) {
         let sender = message.sender
         if sender.senderId == selfSender.senderId {

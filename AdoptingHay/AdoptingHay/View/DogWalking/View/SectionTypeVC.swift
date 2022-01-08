@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import Firebase
 class SectionTypeVC: UIViewController {
     
     @IBOutlet weak var adoptingHayView: UIView!
@@ -25,6 +26,7 @@ class SectionTypeVC: UIViewController {
         
         nameLabel.layer.cornerRadius = 15
         nameLabel.layer.borderWidth = 3
+    
         nameLabel.layer.borderColor = UIColor.systemGray5.cgColor
         if let displayName = Auth.auth().currentUser?.displayName as? String{
             nameLabel.text = "Hoş Geldiniz \(displayName)"
@@ -48,6 +50,9 @@ class SectionTypeVC: UIViewController {
         dogWalkingView.addGestureRecognizer(gestureRecognizerDpgWlaking)
    
     }
+    
+    
+ 
     
     
     

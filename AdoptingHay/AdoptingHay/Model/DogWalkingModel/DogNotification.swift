@@ -14,14 +14,16 @@ class DogNotification {
     var notiSubtitle:String?
     var notiMessage:String?
     var getUserName:String?
+    var sendUserId:String?
     
-    init(notiId:String,sendUserName:String,notiTitle:String,notiSubtitle:String,notiMessage:String,getUserName:String) {
+    init(notiId:String,sendUserName:String,notiTitle:String,notiSubtitle:String,notiMessage:String,getUserName:String,sendUserId:String) {
         self.notiId = notiId
         self.sendUserName = sendUserName
         self.notiTitle = notiTitle
         self.notiSubtitle = notiSubtitle
         self.notiMessage = notiMessage
         self.getUserName = getUserName
+        self.sendUserId = sendUserId
     }
     
     

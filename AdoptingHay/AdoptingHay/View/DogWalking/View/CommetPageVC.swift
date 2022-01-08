@@ -35,7 +35,7 @@ class CommetPageVC: UIViewController {
             if let comment = comment {
                 self.commentViewModelList = DogWalkingCommentViewModelList(commentList: comment)
                 self.commetCollectionView.reloadData()
-                print("toplam \( self.commentViewModelList.totalScore()/self.commentViewModelList.commentListCount())")
+              
                 let result = Double(self.commentViewModelList.totalScore()) / Double(self.commentViewModelList.commentListCount())
                 let totalScore:String = String(format: "%.1f", result)
                 self.scoreLabel.text = "Puan: \(totalScore)/5"
@@ -54,15 +54,9 @@ class CommetPageVC: UIViewController {
 
 extension CommetPageVC : UICollectionViewDelegate,UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        
         self.commentCount.text = "Sayısı : \(self.commentViewModelList == nil ? 0 : self.commentViewModelList.commentListCount())"
-        
-      
-      
-      
-        
-       
-        
-        
         return self.commentViewModelList == nil ? 0 : self.commentViewModelList.commentListCount()
     }
     

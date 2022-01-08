@@ -91,13 +91,6 @@ extension NotficationPageVC: UITableViewDelegate, UITableViewDataSource  {
             Service().removeNotiAnimalAdvert(notiId: notiId)
             self.notiViewModel.notiList.remove(at: indexPath.row)
             self.notficationTableView.deleteRows(at: [indexPath], with: .fade)
-            
-            
-            
-            
-            
-            
-            
         }
         return UISwipeActionsConfiguration(actions: [notificationDelete])}
 }

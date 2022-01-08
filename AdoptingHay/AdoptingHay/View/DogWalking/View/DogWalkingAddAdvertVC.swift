@@ -16,6 +16,10 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
     @IBOutlet weak var timePicker: UIDatePicker!
     @IBOutlet weak var ageAndGenus: UITextField!
     
+    @IBOutlet weak var ageTextField: UITextField!
+    
+    @IBOutlet weak var kindsTextField: UITextField!
+    
     @IBOutlet weak var sickBool: UISwitch!
     
     @IBOutlet weak var sickInfo: UITextView!
@@ -79,47 +83,49 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
     // Add Advert to databese action
     @IBAction func addAdvert(_ sender: Any) {
         let defaultimage = UIImage(systemName: "plus")
-        if nameTextField.text == "" || ageAndGenus.text == "" || ownerNote.text == "" || defaultimage == addImageView.image   {
+        if nameTextField.text == "" || ageTextField.text == "" || kindsTextField.text == "" || ownerNote.text == "" || defaultimage == addImageView.image   {
             self.alertMessage(title: "Hata", messsage: "Boş kalan alanları doldurunuz") }
         else {
             let storage = Storage.storage()
             let storageReferance = storage.reference()
             let medinaFolder = storageReferance.child("media")
             if let name = self.nameTextField.text {
-                if let ageGenus = ageAndGenus.text {
-                    if let sickInfo = sickInfo.text {
-                        if let sickBool = sickBoolText.text{
-                            if let ownerNote = ownerNote.text {
-                                // image date to imageUrl
-                                if let imageData = self.addImageView.image?.jpegData(compressionQuality: 0.5)
-                                 {
-                                    let imageDataUuid = UUID().uuidString
-                                    let imageReferance = medinaFolder.child("\(imageDataUuid).jpeg")
-                                    imageReferance.putData(imageData, metadata: nil) { metaData, error in
-                                        if error == nil {
-                                            imageReferance.downloadURL { url, error in
-                                                let imagedUrl = url?.absoluteString
-                                                
-                                                if let authId = Auth.auth().currentUser?.uid as? String {
-                                                    if let userName = Auth.auth().currentUser?.displayName as? String {
-                                                        let date = self.datePicker.date
-                                                        var time = self.timePicker.countDownDuration
-                                                       time = (time/1800)*30
-                                                        let advert = DogWalkAddAdvert(userId:authId,userName: userName,addImage: imagedUrl!, time: date, timeRange: Int(time) , animalName: name, ageAndGenus: ageGenus, sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
-                                                 
-                                                        DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
-                                                        self.tabBarController?.selectedIndex = 0
-                                                        
+                if let age = ageTextField.text {
+                    if let kinds = kindsTextField.text {
+                        if let sickInfo = sickInfo.text {
+                            if let sickBool = sickBoolText.text{
+                                if let ownerNote = ownerNote.text {
+                                    // image date to imageUrl
+                                    if let imageData = self.addImageView.image?.jpegData(compressionQuality: 0.5)
+                                     {
+                                        let imageDataUuid = UUID().uuidString
+                                        let imageReferance = medinaFolder.child("\(imageDataUuid).jpeg")
+                                        imageReferance.putData(imageData, metadata: nil) { metaData, error in
+                                            if error == nil {
+                                                imageReferance.downloadURL { url, error in
+                                                    let imagedUrl = url?.absoluteString
+                                                    
+                                                    if let authId = Auth.auth().currentUser?.uid as? String {
+                                                        if let userName = Auth.auth().currentUser?.displayName as? String {
+                                                            let date = self.datePicker.date
+                                                            var time = self.timePicker.countDownDuration
+                                                           time = (time/1800)*30
+                                                            let advert = DogWalkAddAdvert(userId:authId,userName: userName,addImage: imagedUrl!, time: date, timeRange: Int(time) , animalName: name, ageAndGenus: "\(kinds)/\(age) ", sickBool: self.sickBoolText.text!, sickInfo: sickInfo, ownerNote: ownerNote)
+                                                     
+                                                            DogWalkingService().addDogWalkingAdvertToFirebase(advert: advert)
+                                                            self.tabBarController?.selectedIndex = 0
+                                                            
+                                                        }
                                                     }
+                                                    
+                                               
                                                 }
                                                 
-                                           
                                             }
-                                            
                                         }
                                     }
+                                    
                                 }
-                                
                             }
                         }
                     }

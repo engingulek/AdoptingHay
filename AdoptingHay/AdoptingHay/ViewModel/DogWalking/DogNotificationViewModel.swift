@@ -51,4 +51,8 @@ struct DogNotificationViewModel {
     var getUserName : String {
         return dogNotification.getUserName!
     }
+    
+    var sendUserId:String {
+        return dogNotification.sendUserId!
+    }
 }

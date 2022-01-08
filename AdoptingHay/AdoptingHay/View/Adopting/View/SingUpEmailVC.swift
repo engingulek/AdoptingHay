@@ -7,10 +7,10 @@
 
 import UIKit
 import Firebase
-import FirebaseAuth
 
 
-class SingUpEmailVC: UIViewController {
+
+class SingUpEmailVC: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
     @IBOutlet weak var singUpButton: UIButton!
     
     @IBOutlet weak var textFieldName: UITextField!
@@ -21,12 +21,38 @@ class SingUpEmailVC: UIViewController {
     @IBOutlet weak var secButtonOutlet: UIButton!
     
     @IBOutlet weak var textFieldPassword: UITextField!
+    
+    @IBOutlet weak var userImageView: UIImageView!
+    
+    let imagePicker = UIImagePickerController()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        userImageView.isUserInteractionEnabled = true
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectUserImage))
+        userImageView.addGestureRecognizer(gestureRecognizer)
         singUpButton.layer.cornerRadius = 15
         textFieldPassword.isSecureTextEntry = true
+    }
+    
+    
+   @objc func selectUserImage() {
+       imagePicker.delegate = self
+       imagePicker.sourceType = .photoLibrary
+       self.present(imagePicker, animated: true, completion: nil)
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        userImageView.image = info[.originalImage] as? UIImage
+        userImageView.layer.backgroundColor = UIColor.white.cgColor
+        self.dismiss(animated: true, completion: nil)
+        
+        
+        
+    
     }
     
     
@@ -76,18 +102,23 @@ class SingUpEmailVC: UIViewController {
                 {
                     
                     let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
-                    changeRequest?.displayName = "\(self.textFieldName.text!) \(self.textFieldSurname.text!)"
+                    changeRequest?.displayName =
+                    "\(self.textFieldName.text!) \(self.textFieldSurname.text!)"
                     changeRequest?.commitChanges(completion: { error in
                         if error == nil {
+                            self.addUserInfo()
                         
                         }
                     })
+                    
+                    
 
 
+                  
+                    
 
 
-
-                    self.performSegue(withIdentifier: "singUptoHomePage", sender: nil)
+                    
                 }}
 //
             
@@ -95,6 +126,57 @@ class SingUpEmailVC: UIViewController {
         }
             
         }
+    
+    
+    
+    
+    
+    func addUserInfo() {
+        let db = Firestore.firestore()
+        let storage = Storage.storage()
+        let storageReferance = storage.reference()
+        let profilImageFolder = storageReferance.child("profil")
+        if let userId = Auth.auth().currentUser?.uid as? String {
+            if let userName = Auth.auth().currentUser?.displayName as? String {
+                if let imageData = self.userImageView.image?.jpegData(compressionQuality: 0.5){
+                    
+                    let imageDataUuid = UUID().uuidString
+                    let imageReferance = profilImageFolder.child("\(imageDataUuid).jpeg")
+                    imageReferance.putData(imageData,metadata: nil) {
+                        metaData, error in
+                        if error == nil {
+                            imageReferance.downloadURL { url, error in
+                                let imageUrl = url?.absoluteString
+                                print("User image a \(imageUrl)")
+                                let userInfo : [String:Any] = [
+                                                       "userName": userName,
+                                                       "userImage":imageUrl
+                                                   ]
+                                                   
+                                                   db.collection("userInfo").document(userId).setData(userInfo)
+                                
+                            self.performSegue(withIdentifier: "singUptoHomePage", sender: nil)
+                            }
+                        }
+                        }
+                    
+                    
+                }
+                
+                
+                
+                
+               
+                
+                   
+                    
+                
+            }
+       
+            
+        }
+       
+    }
     
     
     

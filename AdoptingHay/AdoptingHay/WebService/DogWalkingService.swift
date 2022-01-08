@@ -15,6 +15,7 @@ class DogWalkingService {
     var dogNotiList = [DogNotification]()
     var messageUserList = [MessageUserList]()
     var commentList = [Comment]()
+    var accountComments = [Comment]()
     var Ascore:Int = 0;
     // Connet Firebase DogWalkingAdvert
     func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
@@ -427,11 +428,13 @@ class DogWalkingService {
 
                                             if let  sendUserName = document?.get("sendUserName") as? String {
 
-                                                let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName)
+                                                if let sendUserId = document?.get("sendUserId") as? String {
+                                                    let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName,sendUserId: sendUserId)
 
-                                                self.dogNotiList.append(noti)
+                                                    self.dogNotiList.append(noti)
 
-                                                completion(self.dogNotiList)
+                                                    completion(self.dogNotiList)
+                                                }
 
                                             }
 
@@ -1039,6 +1042,31 @@ class DogWalkingService {
             
         }
        
+        
+        
+    }
+    
+    
+    
+    func getSendNotiUserAccountInfo(userId:String,completion: @escaping ([Comment]?)->()){
+        let db = Firestore.firestore()
+        if let userId = userId  as? String {
+            db.collection("userList").document(userId).collection("commet").getDocuments { snapshot, error in
+                for documents in (snapshot?.documents)! {
+                    if let comment = documents.get("comment") as? String {
+                        if let score = documents.get("score") as? Int {
+                            if let userName = documents.get("userName") as? String {
+                           
+                                let accountComment = Comment(comment: comment, score: score, userName: userName)
+                                self.accountComments.append(accountComment)
+                                completion(self.accountComments)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
         
         
     }

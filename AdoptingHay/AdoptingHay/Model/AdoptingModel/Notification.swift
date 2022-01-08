@@ -15,6 +15,7 @@ class Notification {
     var sendNotiTitle:String?
     var sendUserName:String?
     var notiId : String?
+
     
     
     
@@ -25,6 +26,7 @@ class Notification {
         self.sendNotiTitle = sendNotiTitle
         self.sendUserName = sendUserName
         self.notiId = notiId
+
         
     }
     

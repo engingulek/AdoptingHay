@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import Kingfisher
 
 class AccountVC: UIViewController{
  
@@ -14,7 +15,7 @@ class AccountVC: UIViewController{
     @IBOutlet weak var favoriteListButtonOutlet: UIButton!
     
     @IBOutlet weak var myAdvertListButtonOutlet: UIButton!
-    
+    let myImageView:UIImageView = UIImageView()
     private var favoritListViewModel : FavoritListViewModel!
     private var myAnimalAdvertListViewModel: MyAnimalAdvertListViewModel!
     var resultFavoriListCount:Int?
@@ -28,6 +29,9 @@ class AccountVC: UIViewController{
         super.viewDidLoad()
         getFavoriList()
         getMyAnimalAdvert()
+        
+        
+        accountOwner()
       
 
        
@@ -56,6 +60,7 @@ class AccountVC: UIViewController{
     override func viewDidAppear(_ animated: Bool) {
         getFavoriList()
         getMyAnimalAdvert()
+        accountOwner()
     }
     
 
@@ -66,6 +71,7 @@ class AccountVC: UIViewController{
         self.tabBarController?.tabBar.isHidden = false
         getFavoriList()
         getMyAnimalAdvert()
+        accountOwner()
         
      
     }
@@ -173,49 +179,23 @@ myNameLabel.textColor = .white
 self.view.addSubview(myNameLabel)
 
 //AccountImage
-        
-        
-        if Auth.auth().currentUser?.photoURL == nil {
-            let personImage = UIImage(systemName: "person")
-            let myImageView:UIImageView = UIImageView()
-            myImageView.contentMode = UIView.ContentMode.scaleAspectFit
-            myImageView.frame.size.width = self.view.frame.width/4
-            myImageView.frame.size.height = self.view.frame.height/8
-            myImageView.center.x = self.view.center.x
-            myImageView.center.y = self.view.center.y/2.5
-            myImageView.image = personImage
-            myImageView.backgroundColor = .white
-            myImageView.layer.borderColor = UIColor.red.cgColor
-            myImageView.layer.borderWidth = 3
-            myImageView.layer.cornerRadius = 15
-            view.addSubview(myImageView)
-            
-        }
-        
-        
-        
-        else {
-            if let imagAe = Auth.auth().currentUser?.photoURL {
-                let url = URL(string: "\(imagAe)")!
-                if let data = try? Data(contentsOf: url){
-                    let personImage = UIImage(data: data)
-                    let myImageView:UIImageView = UIImageView()
+
                     myImageView.contentMode = UIView.ContentMode.scaleAspectFit
                     myImageView.frame.size.width = self.view.frame.width/4
                     myImageView.frame.size.height = self.view.frame.height/8
                     myImageView.center.x = self.view.center.x
                     myImageView.center.y = self.view.center.y/2.5
-                    myImageView.image = personImage
+                    
                     myImageView.backgroundColor = .white
                     myImageView.layer.borderColor = UIColor.red.cgColor
                     myImageView.layer.borderWidth = 3
                     myImageView.layer.cornerRadius = 15
                     view.addSubview(myImageView)
                     
-                }
                 
-            }
-        }
+                
+            
+        
         
         
         
@@ -233,6 +213,25 @@ self.view.addSubview(myNameLabel)
         
     }
     
+    
+    func accountOwner() {
+        let db = Firestore.firestore()
+        if let getUserId = Auth.auth().currentUser?.uid {
+            db.collection("userInfo").document(getUserId).getDocument { snapshot, error in
+                if let userName = snapshot?.get("userName") as? String {
+                    if let userImage = snapshot?.get("userImage") as? String {
+                        
+                       
+                        self.myImageView.kf.setImage(with: URL(string: userImage), placeholder: nil, options:[.transition(.fade(0.7))], completionHandler: nil)
+//                        myImage.kf.setImage(with: URL(string:sendImage), placeholder: nil, options:[.transition(.fade(0.7))], completionHandler: nil)
+                    }
+                    
+                    
+                }
+            }
+        }
+       
+    }
 
  
     @IBAction func exitAccountButton(_ sender: Any) {

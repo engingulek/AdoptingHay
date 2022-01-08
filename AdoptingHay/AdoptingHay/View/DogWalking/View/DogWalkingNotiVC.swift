@@ -78,5 +78,23 @@ extension DogWalkingNotiVC : UITableViewDelegate,UITableViewDataSource {
         return "Bildirimler"
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+      let sendUserId =   self.dogNotiViewModelList.dogNotificationAtIndex(indexPath.row).sendUserId
+        performSegue(withIdentifier: "toSendNotiAccount", sender: sendUserId)
+      
+    }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toSendNotiAccount" {
+            if let getSendId = sender as? String {
+            let toNotiAccount = segue.destination as! NotiAccountVC
+                toNotiAccount.getUserId = getSendId
+            }
+        }
+    }
+    
+
+    
     
 }

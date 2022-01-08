@@ -22,6 +22,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var addImageAdvert: UIImageView!
     
     
+   
     
     
     @IBOutlet weak var addKindsLabel: UILabel!
@@ -42,6 +43,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     @IBOutlet weak var sickSwitch: UISwitch!
     
     
+   
     @IBOutlet weak var addSickInfo: UITextView!
     
     @IBOutlet weak var addOwnerNote: UITextView!

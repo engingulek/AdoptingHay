@@ -70,10 +70,38 @@ class ViewController: UIViewController {
             .credential(withIDToken: idToken!,
                         accessToken: authentication!.accessToken)
                     
-          Auth.auth().signIn(with: credential) { (result, error) in}
-           self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
+          Auth.auth().signIn(with: credential) { (result, error) in
+              
+              if error == nil {
+                  let db = Firestore.firestore()
+                  if let userId = Auth.auth().currentUser?.uid as? String {
+                      if let userName = Auth.auth().currentUser?.displayName as? String {
+                          if let userImage = Auth.auth().currentUser?.photoURL as? URL {
+                          
+                              let userInfo : [String:Any] = [
+                                  "userName": userName,
+                                  "userImage": userImage.absoluteString
+                              ]
+                              
+                              db.collection("userInfo").document(userId).setData(userInfo)
+                              self.performSegue(withIdentifier: "googleSingIntoHomePage", sender: nil)
+                              
+                          }
+                      }
+                 
+                      
+                  }
+                  
+              }
+              
+          }
+          
                  }}
 }
+    
+    
+    
+   
         
         
     

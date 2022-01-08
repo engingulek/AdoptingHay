@@ -87,16 +87,25 @@ class DogWalkingAdvertDetailsVC: UIViewController {
         DogWalkingService().sendRequest(getAdvert: getAdvertWalking)
         
         if let authUserName = Auth.auth().currentUser?.displayName {
-            let notiDate : [String:Any] = [
-                "sendUserName": authUserName, // gönderen kişi
-                "notiTitle":"AdoptingHay",
-                "notiSubtitle":"Bir gezdirme isteği bulunmaktadır.",
-                "notiMessage":"\(authUserName) gezdirme isteğinde bulundu",
-                "getUserName": getAdvertWalking.userName!,  // alan kişi
-                "getUserId" : getAdvertWalking.userId!
-            ]
-            print("sasads \(getAdvertWalking.userId)")
-            DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
+            
+            if let authUserId = Auth.auth().currentUser?.uid {
+                let notiDate : [String:Any] = [
+                    "sendUserName": authUserName, // gönderen kişi
+                    "notiTitle":"AdoptingHay",
+                    "notiSubtitle":"Bir gezdirme isteği bulunmaktadır.",
+                    "notiMessage":"\(authUserName) gezdirme isteğinde bulundu",
+                    "getUserName": getAdvertWalking.userName!,  // alan kişi
+                    "getUserId" : getAdvertWalking.userId!,
+                    "sendUserId" : authUserId
+                ]
+                
+                DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
+                
+            }
+            
+            
+            
+          
         }
         
   
@@ -128,16 +137,21 @@ class DogWalkingAdvertDetailsVC: UIViewController {
         DogWalkingService().addDogWalkingAdvert(getAdvert: getAdvertWalking!)
         
         if let authUserName = Auth.auth().currentUser?.displayName {
-            let notiDate : [String:Any] = [
-                "sendUserName": authUserName, // gönderen kişi
-                "notiTitle":"AdoptingHay",
-                "notiSubtitle":"Bir gezdirme ilanınız favorilere eklendi",
-                "notiMessage":"\(authUserName) gezdirme ilanınızı favorilerine ekledi",
-                "getUserName": getAdvertWalking.userName!,  // alan kişi
-                "getUserId" : getAdvertWalking.userId!
-            ]
             
-            DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
+            if let authUserId = Auth.auth().currentUser?.uid {
+                let notiDate : [String:Any] = [
+                    "sendUserName": authUserName, // gönderen kişi
+                    "notiTitle":"AdoptingHay",
+                    "notiSubtitle":"Bir gezdirme ilanınız favorilere eklendi",
+                    "notiMessage":"\(authUserName) gezdirme ilanınızı favorilerine ekledi",
+                    "getUserName": getAdvertWalking.userName!,  // alan kişi
+                    "getUserId" : getAdvertWalking.userId!,
+                    "sendUserId": authUserId // gönderen kişi id
+                ]
+                
+                DogWalkingService().addDogWalkingAdvertNoti(notiData: notiDate,getUserId:getAdvertWalking.userId!)
+            }
+      
         }
     }
 }
