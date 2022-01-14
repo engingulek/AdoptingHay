@@ -60,7 +60,7 @@ class HomePageVC: UIViewController {
         animalAdvertCollectionView.delegate = self
         animalAdvertCollectionView.dataSource = self
         
-        // viewModel içirisine ihityacımız olan tüm listi vermiş olduk()
+
         
         
         
@@ -143,9 +143,29 @@ class HomePageVC: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
+        
+        if animalAdvertListViewModel == nil {
+            self.spinner.stopAnimating()
+            self.spinner.isHidden = true
+            nilAdvertListDesign()
+        }
         getAnimalAdvertData()
         self.animalAdvertCollectionView.reloadData()
         self.tabBarController?.tabBar.isHidden = false
+        
+       
+    }
+    
+    
+    func nilAdvertListDesign() {
+        let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 35))
+        myNameLabel.text = "İlan Bulunmamaktadır."
+        myNameLabel.textAlignment = .center
+        myNameLabel.center.x = self.view.center.x
+        myNameLabel.center.y = self.view.center.y
+        myNameLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        myNameLabel.textColor = .black
+        self.view.addSubview(myNameLabel)
         
     }
     
@@ -307,12 +327,16 @@ class HomePageVC: UIViewController {
     
     func getAnimalAdvertData() {
         Service().dowlandAnimalAdvertFromFirestore { (animalA) in
+        
+             
             if let animalA = animalA {
                 self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
                 if self.animalAdvertListViewModel.animalAdvertList.count > 0 {
                     self.spinner.stopAnimating()
                     self.spinner.isHidden = true
                 }
+                
+             
                 
                 self.animalAdvertCollectionView.reloadData()
                 
@@ -380,7 +404,10 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 
             }
             
-            //
+            
+            
+            
+            // İlanları yerlerine yerleştirilmesi
             cell.advertId.text = "\(advertViewModel.advertid)"
             
             cell.animalAdvertNameLabel.text = "Adı: \(advertViewModel.name )"

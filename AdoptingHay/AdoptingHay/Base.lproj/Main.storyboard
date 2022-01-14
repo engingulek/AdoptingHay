@@ -2172,7 +2172,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cins/Yaş: Kaniş/1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X17-Vb-EVr">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cins/Yaş: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X17-Vb-EVr">
                                                     <rect key="frame" x="215" y="72" width="122" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
@@ -2216,6 +2216,7 @@
                                             <outlet property="advertsName" destination="Szg-oi-lNi" id="Yk8-CK-DaR"/>
                                             <outlet property="advertsRange" destination="OMt-OK-qfr" id="djh-os-iyA"/>
                                             <outlet property="advertsSick" destination="w24-Zo-3cg" id="HkC-6C-d7m"/>
+                                            <outlet property="ageGenusLabel" destination="X17-Vb-EVr" id="1ll-iM-GEU"/>
                                             <outlet property="dateLabel" destination="dFz-R4-ag9" id="LEl-4d-dqP"/>
                                             <outlet property="userName" destination="0Qw-gu-YtK" id="0dG-3a-ghg"/>
                                         </connections>
@@ -4420,7 +4421,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Hastalık" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCa-E2-loA">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hastalık" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCa-E2-loA">
                                                 <rect key="frame" x="155" y="592" width="104" height="21"/>
                                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                                 <nil key="textColor"/>
@@ -4517,6 +4518,7 @@
                                             <constraint firstItem="lLB-aW-peg" firstAttribute="top" secondItem="cTW-bR-2Va" secondAttribute="bottom" constant="24" id="Emx-OT-qht"/>
                                             <constraint firstAttribute="trailing" secondItem="pIe-kX-KE3" secondAttribute="trailing" constant="119" id="HJY-WA-til"/>
                                             <constraint firstAttribute="trailing" secondItem="Ini-C6-ji8" secondAttribute="trailing" constant="121" id="IZs-EQ-uhb"/>
+                                            <constraint firstItem="aCa-E2-loA" firstAttribute="top" secondItem="lLB-aW-peg" secondAttribute="bottom" constant="23" id="MXl-Ae-qRg"/>
                                             <constraint firstAttribute="trailing" secondItem="G6N-j1-NNo" secondAttribute="trailing" constant="118" id="MaX-RM-GcX"/>
                                             <constraint firstItem="mvq-1I-A0Z" firstAttribute="top" secondItem="vMk-JY-q6N" secondAttribute="bottom" constant="24" id="NL0-sw-IQR"/>
                                             <constraint firstItem="pIx-TW-4It" firstAttribute="leading" secondItem="Lah-nd-AGW" secondAttribute="leading" constant="134" id="Op1-UT-u1w"/>
@@ -4912,7 +4914,7 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="AMA-eX-LkE"/>
-        <segue reference="hbp-jI-30m"/>
+        <segue reference="J57-BP-jiN"/>
         <segue reference="8K5-PR-uwd"/>
     </inferredMetricsTieBreakers>
     <resources>

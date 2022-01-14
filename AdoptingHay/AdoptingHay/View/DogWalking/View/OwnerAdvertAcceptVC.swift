@@ -64,7 +64,7 @@ class OwnerAdvertAcceptVC: UIViewController {
         DogWalkingService().getAcceptAdvert(collectionName: "comingAcceptAdvert") { request in
             if let request = request {
                 self.commingRequestAccept = RequestAcceptViewModel(requestAccept: request)
-                
+               // süre self.commingRequestAccept.range*60
                 self.count = 5
                 let time = self.secondsToHoursMinutesSeconds(seconds: self.count!)
                 let timeString = self.makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)

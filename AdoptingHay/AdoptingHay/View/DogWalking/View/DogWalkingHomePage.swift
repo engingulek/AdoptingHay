@@ -163,7 +163,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
             if let request = request {
                 self.sendRequestAccept = RequestAcceptViewModel(requestAccept: request)
                 // süre self.sendRequestAccept.range*60
-                self.count =   5
+                self.count = 5
                 let time = self.secondsToHoursMinutesSeconds(seconds: self.count!)
                 let timeString = self.makeTimeString(hours: time.0, minutes: time.1, seconds: time.2)
                 self.timerLabel.text = timeString
@@ -463,7 +463,8 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                 if let dogwalkingAdvert = dogwalkingAdvert {
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogwalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
-                    self.spinner.stopAnimating()
+                  
+                   
                     
                     self.spinner.isHidden = true
                     
@@ -585,6 +586,10 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
 extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSource
 {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if self.dogWalkingListViewModel == nil {
+            self.spinner.stopAnimating()
+            self.spinner.isHidden = true
+        }
         return self.dogWalkingListViewModel == nil ? 0 : self.dogWalkingListViewModel.numberOfRowsInSection()
     }
     
@@ -595,10 +600,12 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         
         cell.advertsName.text = "Adı: \(advert.name)  "
         cell.advertsRange.text = "\(advert.range) dk"
-        cell.adversKindsandAge.text = "Cins/Yaş: \(advert.kindsAndAge)"
+        cell.ageGenusLabel.text = "Cins/Yaş : \(advert.kindsAndAge)"
         cell.advertsSick.text = "Hastalık: \(advert.sick)"
         cell.userName.text  = advert.userName
         cell.dateLabel.text = advert.addDate
+        
+    
       
         
         
