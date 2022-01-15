@@ -266,7 +266,7 @@ class Service {
         print("Aykut : \(userId) ---   \(advertId)")
         let db = Firestore.firestore()
         db.collection("userList").document(userId).collection("advertList").document(advertId).delete()
-        db.collection("animalAdvert").document("\(advertId)").delete()
+        db.collection("animalAdvert").document(advertId).delete()
     }
     
     

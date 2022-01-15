@@ -170,21 +170,25 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
         
         if picker == self.imagepicker {
             addImageAdvert.image = info[.originalImage] as? UIImage
+            addImageAdvert.backgroundColor = UIColor.white
             
         }
         if picker == self.imagepickerOne {
             addAdvertImageOne.image = info[.originalImage] as? UIImage
+            addAdvertImageOne.backgroundColor = UIColor.white
             
         }
         
         if picker == self.imagepickerTwo {
             addAdvertImageTwo.image = info[.originalImage] as? UIImage
+            addAdvertImageTwo.backgroundColor = UIColor.white
             
         }
         
         
         if picker == self.imagepickerThird {
             addAdvrtImageThird.image = info[.originalImage] as? UIImage
+            addAdvrtImageThird.backgroundColor = UIColor.white
             
         }
         

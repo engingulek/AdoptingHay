@@ -18,14 +18,17 @@ class NotficationPageVC: UIViewController{
 
         notficationTableView.delegate = self
         notficationTableView.dataSource = self
-        
+        notficationTableView.reloadData()
         
         getNotification()
         
         
     
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        getNotification()
+        notficationTableView.reloadData()
+    }
     
 
     
@@ -70,9 +73,9 @@ extension NotficationPageVC: UITableViewDelegate, UITableViewDataSource  {
         let cell = notficationTableView.dequeueReusableCell(withIdentifier: "notificationCell", for: indexPath) as! NotficationTVC
         
         let notiCell = notiViewModel.animalAdvertAtIndex(indexPath.row)
-        cell.notficationNameLabel.text = notiCell.sendName
-        cell.notficationNotfiLabel.text = notiCell.message
-        cell.notficationImageView.image = UIImage(named: "pp")
+        cell.notficationNameLabel.text = "\(notiCell.message)"
+        
+
         return cell
     }
     

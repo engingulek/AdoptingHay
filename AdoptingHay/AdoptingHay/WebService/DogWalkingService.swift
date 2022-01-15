@@ -196,7 +196,14 @@ class DogWalkingService {
         
         
         if let userId = userId {
-            db.collection("userList").document(userId).collection("dogWalkingAdvert").document(advertId).delete()}}
+            db.collection("userList").document(userId).collection("dogWalkingAdvert").document(advertId).delete()
+            db.collection("dogWalkingAdvert").document(advertId).delete()
+            
+            
+        }
+        
+        
+    }
     
     
     
@@ -394,10 +401,9 @@ class DogWalkingService {
         let db = Firestore.firestore()
         if let authId = Auth.auth().currentUser?.uid {
            
-            let notiId =  UserDefaults.standard.integer(forKey: "notiA")
+            let notiId = UUID().uuidString
             db.collection("userList").document(getUserId).collection("dogWalkingNoti").document("\(notiId)").setData(notiData)
-            UserDefaults.standard.set(notiId+1, forKey: "notiA")
-           UserDefaults.standard.integer(forKey: "notilast")
+           
         }
     }
     

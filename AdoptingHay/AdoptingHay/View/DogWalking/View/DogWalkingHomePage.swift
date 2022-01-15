@@ -7,6 +7,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     @IBOutlet weak var dogWalkingCollectionView: UICollectionView!
     var permissionCheck:Bool = true
     var dogWalkingtimer:Timer = Timer()
+    var spinnerTimer:Timer = Timer()
     var count:Int?
     var timerCounting:Bool = false
     var timerLabel =  UILabel(frame: CGRect(x: 0, y: 0, width: 220, height: 100))
@@ -18,6 +19,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     var animalName = UILabel(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
     var amountLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
     var  timerTitleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 30))
+    let  alertLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 35))
     @IBOutlet weak var filterButtonOutlet: UIButton!
     var timer = Timer()
     private var dogWalkingListViewModel: DogWalkingListViewModel!
@@ -113,9 +115,24 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     override func viewDidAppear(_ animated: Bool)  {
         super.viewDidAppear(animated)
+        self.alertLabel.isHidden = false
+        nilDogWalkingAdvert()
         getAllAdvert()
         getAllSendRequest()
         dogWalkingCollectionView.reloadData()
+    }
+    
+    
+    func nilDogWalkingAdvertListDesign() {
+        
+        alertLabel.text = "İlan Bulunmamaktadır."
+        alertLabel.textAlignment = .center
+        alertLabel.center.x = self.view.center.x
+        alertLabel.center.y = self.view.center.y
+        alertLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        alertLabel.textColor = .black
+        self.view.addSubview(alertLabel)
+        
     }
     
     
@@ -191,7 +208,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     
     func acceptToRequestDesign() {
-      
+        alertLabel.isHidden = true
         timerTitleLabel.text = "Kalan Süre"
         timerTitleLabel.textAlignment = .center
         timerTitleLabel.center.x = self.view.center.x
@@ -444,7 +461,9 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         let timeRangeShortMaxToMin = UIAlertAction(title: "Süre Azalan", style: UIAlertAction.Style.default) { actin in
             
             DogWalkingService().timeFilter(filterType: true) { dogwalkingAdvert in
+                
                 if let dogwalkingAdvert = dogwalkingAdvert {
+                   
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogwalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
                     self.spinner.stopAnimating()
@@ -569,9 +588,9 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
             if let walkingAdvert = dogWalkingAdvert {
                 self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: walkingAdvert)
                 self.dogWalkingCollectionView.reloadData()
-                self.spinner.stopAnimating()
+              
+                self.alertLabel.isHidden = true
                 
-                self.spinner.isHidden = true
           
                 
             }
@@ -585,11 +604,24 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
 
 extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSource
 {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    
+    func nilDogWalkingAdvert() {
         if self.dogWalkingListViewModel == nil {
-            self.spinner.stopAnimating()
-            self.spinner.isHidden = true
+            self.spinnerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
+               
+             
+                })
+           
         }
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        nilDogWalkingAdvert()
+     
         return self.dogWalkingListViewModel == nil ? 0 : self.dogWalkingListViewModel.numberOfRowsInSection()
     }
     
@@ -624,6 +656,10 @@ extension DogWalkingHomePage : UICollectionViewDelegate,UICollectionViewDataSour
         cell.layer.borderWidth = 2
         
         cell.layer.borderColor = UIColor.blue.cgColor
+        
+      if self.dogWalkingListViewModel == nil {
+            self.dogWalkingCollectionView.isHidden = true
+        }
         
         return cell
     }

@@ -8,11 +8,14 @@
 import UIKit
 import Firebase
 import UserNotifications
+import SwiftUI
 
 class HomePageVC: UIViewController {
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
-    
+    let  alertLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 35))
+    var spinnerTimer:Timer = Timer()
+  
     var permissionCheck:Bool = false
     
     @IBOutlet weak var animalKindsCollectionView: UICollectionView!
@@ -46,6 +49,9 @@ class HomePageVC: UIViewController {
         UNUserNotificationCenter.current().delegate = self
         
         self.tabBarController?.tabBar.isHidden = false
+        alertLabel.isHidden = true
+      
+        
         
         searchBar.delegate = self
         
@@ -143,29 +149,35 @@ class HomePageVC: UIViewController {
     
     
     override func viewDidAppear(_ animated: Bool) {
+     
+ 
         
-        if animalAdvertListViewModel == nil {
-            self.spinner.stopAnimating()
-            self.spinner.isHidden = true
-            nilAdvertListDesign()
-        }
+      
         getAnimalAdvertData()
         self.animalAdvertCollectionView.reloadData()
         self.tabBarController?.tabBar.isHidden = false
+        
+        
+        
         
        
     }
     
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.animalAdvertCollectionView.reloadData()
+    }
+    
+    
     func nilAdvertListDesign() {
-        let  myNameLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 35))
-        myNameLabel.text = "İlan Bulunmamaktadır."
-        myNameLabel.textAlignment = .center
-        myNameLabel.center.x = self.view.center.x
-        myNameLabel.center.y = self.view.center.y
-        myNameLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
-        myNameLabel.textColor = .black
-        self.view.addSubview(myNameLabel)
+
+        alertLabel.text = "İlan Bulunmamaktadır."
+        alertLabel.textAlignment = .center
+        alertLabel.center.x = self.view.center.x
+        alertLabel.center.y = self.view.center.y
+        alertLabel.font = UIFont.systemFont(ofSize: 30, weight: .bold)
+        alertLabel.textColor = .black
+        self.view.addSubview(alertLabel)
         
     }
     
@@ -334,7 +346,16 @@ class HomePageVC: UIViewController {
                 if self.animalAdvertListViewModel.animalAdvertList.count > 0 {
                     self.spinner.stopAnimating()
                     self.spinner.isHidden = true
+                    self.alertLabel.isHidden = true
                 }
+                
+               
+                
+         
+                
+          
+                
+              
                 
              
                 
@@ -368,6 +389,8 @@ extension HomePageVC:UISearchBarDelegate {
                 
                 if let animalA = animalA {
                     self.animalAdvertListViewModel = AnimalAdvertListViewModel(animalAdvertList: animalA)
+                    
+               
                     self.animalAdvertCollectionView.reloadData()
                 }
             } } }}
@@ -376,9 +399,26 @@ extension HomePageVC:UISearchBarDelegate {
 
 extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
     
+    
+    
+    func nilAdopting() {
+        if self.animalAdvertListViewModel == nil {
+            self.spinnerTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { _ in
+                self.spinner.stopAnimating()
+                self.spinner.isHidden = true
+               
+             
+                })
+           
+        }
+        
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == self.animalAdvertCollectionView {
+            
+            nilAdopting()
             return self.animalAdvertListViewModel == nil ? 0 : self.animalAdvertListViewModel.numberOfRowsInSection()
         }
         
@@ -403,7 +443,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
                 
                 
             }
-            
+          
             
             
             
@@ -424,7 +464,7 @@ extension HomePageVC :UICollectionViewDelegate, UICollectionViewDataSource {
             cell.dateLabel.text = "\(advertViewModel.addDate)"
             
       
-            
+          
             
             cell.layer.cornerRadius = 25
             
