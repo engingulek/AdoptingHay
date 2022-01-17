@@ -414,48 +414,51 @@ class DogWalkingService {
         
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
-           let notiLast =
-            UserDefaults.standard.integer(forKey: "notilast")
-            db.collection("userList").document(authUserId).collection("dogWalkingNoti").document("\(notiLast)").getDocument { document, error in
+           
+            db.collection("userList").document(authUserId).collection("dogWalkingNoti").getDocuments { snapshot, error in
                 
                
+                for document in (snapshot?.documents)! {
+                    if let notiId = document.documentID as? String {
 
-                if let notiId = document?.documentID as? String {
+                            if let  getUserId = document.get("getUserId") as? String {
 
-                        if let  getUserId = document?.get("getUserId") as? String {
+                                if let  getUserName = document.get("getUserName") as? String {
 
-                            if let  getUserName = document?.get("getUserName") as? String {
+                                    if let  notiTitle = document.get("notiTitle") as? String {
 
-                                if let  notiTitle = document?.get("notiTitle") as? String {
+                                        if let  notiSubtitle = document.get("notiSubtitle") as? String {
 
-                                    if let  notiSubtitle = document?.get("notiSubtitle") as? String {
+                                            if let  notiMessage = document.get("notiMessage") as? String {
 
-                                        if let  notiMessage = document?.get("notiMessage") as? String {
+                                                if let  sendUserName = document.get("sendUserName") as? String {
 
-                                            if let  sendUserName = document?.get("sendUserName") as? String {
+                                                    if let sendUserId = document.get("sendUserId") as? String {
+                                                        let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName,sendUserId: sendUserId)
 
-                                                if let sendUserId = document?.get("sendUserId") as? String {
-                                                    let noti = DogNotification(notiId: notiId, sendUserName: sendUserName, notiTitle: notiTitle, notiSubtitle: notiSubtitle, notiMessage: notiMessage, getUserName: getUserName,sendUserId: sendUserId)
+                                                        self.dogNotiList.append(noti)
 
-                                                    self.dogNotiList.append(noti)
+                                                        completion(self.dogNotiList)
+                                                    }
 
-                                                    completion(self.dogNotiList)
                                                 }
 
                                             }
-
                                         }
+
                                     }
 
                                 }
 
                             }
 
+
+
                         }
+                    
+                }
 
-
-
-                    }
+            
                 
                 
                 

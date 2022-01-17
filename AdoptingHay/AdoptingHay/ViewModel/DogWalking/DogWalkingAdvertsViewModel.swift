@@ -9,7 +9,7 @@ import Foundation
 
 
 struct  DogWalkingListViewModel {
-    let dogWalkingAdvertList : [DogwalkingAdvert]
+    var dogWalkingAdvertList : [DogwalkingAdvert]
     func numberOfRowsInSection() -> Int {
         return self.dogWalkingAdvertList.count
     }

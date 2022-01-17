@@ -15,11 +15,14 @@ class DogWalkingNotiVC: UIViewController {
         super.viewDidLoad()
         notiTableView.delegate = self
         notiTableView.dataSource = self
+        
         getAllNoti()
+        notiTableView.reloadData()
         
     }
     override func viewDidAppear(_ animated: Bool) {
         getAllNoti()
+        notiTableView.reloadData()
     }
     
     func  getAllNoti() {
@@ -48,7 +51,7 @@ extension DogWalkingNotiVC : UITableViewDelegate,UITableViewDataSource {
         
         
         let dogNoti = self.dogNotiViewModelList.dogNotificationAtIndex(indexPath.row)
-        print(" ald \(dogNoti.message)")
+   
         cell.textLabel?.text = dogNoti.message
         return cell
         

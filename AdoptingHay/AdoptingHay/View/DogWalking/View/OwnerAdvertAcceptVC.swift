@@ -174,7 +174,7 @@ class OwnerAdvertAcceptVC: UIViewController {
         else {
             let sickInfoA = UITextView(frame: CGRect(x: 0, y: 0, width: 200, height: 100))
             sickInfoA.backgroundColor = .systemGray5
-            sickInfoA.text = "Hastalık Hakkında bilgi"
+            sickInfoA.text = self.commingRequestAccept.sickInfo
             sickInfoA.textAlignment = .center
             sickInfoA.isUserInteractionEnabled = false
             sickInfoA.center.x = self.view.center.x

@@ -43,20 +43,20 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
         
               
-        
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
-            
-            self.permissionCheck = granted
-            
-            if granted {
-                print("İzin alma işlemi başarılı")
-                
-            }
-            else {
-                print("İzin alma işlemi başarısız")
-                
-            }
-        }
+//
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
+//
+//            self.permissionCheck = granted
+//
+//            if granted {
+//                print("İzin alma işlemi başarılı")
+//
+//            }
+//            else {
+//                print("İzin alma işlemi başarısız")
+//
+//            }
+//        }
         
 //        getNotificationDogWalkingFromFirestore()
 //        self.timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
@@ -117,9 +117,24 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         super.viewDidAppear(animated)
         self.alertLabel.isHidden = false
         nilDogWalkingAdvert()
+        print("Çalıştı")
         getAllAdvert()
         getAllSendRequest()
         dogWalkingCollectionView.reloadData()
+        
+        
+        if self.dogWalkingListViewModel != nil {
+            self.dogWalkingListViewModel.dogWalkingAdvertList.removeAll()
+            self.spinner.isHidden = false
+            self.spinner.startAnimating()
+        }
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        dogWalkingCollectionView.reloadData()
+   
     }
     
     
@@ -136,42 +151,42 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     }
     
     
-    func getNotificationDogWalkingFromFirestore(){
-        let db = Firestore.firestore()
-        let userId = Auth.auth().currentUser?.uid
-        if let userId = userId {
-            db.collection("userList").document("\(userId)").collection("dogWalkingNoti").getDocuments { snaphot, error in
-                if error == nil {
-                    if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
-                        print("Yeni bildirim yok")
-                    }
-                    else {
-                        UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
-                        if self.permissionCheck {
-                            print("Yeni bir bildirim var")
-                            for documents in (snaphot?.documents)! {
-                                if let userName =  documents.get("sendUserName") {
-                                    if let sendMessageBody = documents.get("notiMessage") {
-                                        if let sendMessageSubtitle = documents.get("notiSubtitle") {
-                                            print("\(sendMessageSubtitle)")
-                                            let content =  UNMutableNotificationContent()
-                                            content.title = "AdoptingHay"
-                                            content.subtitle = "\(sendMessageSubtitle)"
-                                            content.body = "\(sendMessageBody)"
-                                            content.sound = UNNotificationSound.default
-                                            // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
-                                            let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-                                            // Bildirim isteği oluşturulması
-                                            let notii = UNNotificationRequest(identifier: "dogWalkingbildirim", content: content, trigger: react)
-                                            // Bildirimin eklenmesi
-                                            UNUserNotificationCenter.current().add(notii, withCompletionHandler: nil)
-                                            
-                                        }
-                                      
-                                        
-                                    }
-                                   
-} }} }}} } }
+//    func getNotificationDogWalkingFromFirestore(){
+//        let db = Firestore.firestore()
+//        let userId = Auth.auth().currentUser?.uid
+//        if let userId = userId {
+//            db.collection("userList").document("\(userId)").collection("dogWalkingNoti").getDocuments { snaphot, error in
+//                if error == nil {
+//                    if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
+//                        print("Yeni bildirim yok")
+//                    }
+//                    else {
+//                        UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
+//                        if self.permissionCheck {
+//                            print("Yeni bir bildirim var")
+//                            for documents in (snaphot?.documents)! {
+//                                if let userName =  documents.get("sendUserName") {
+//                                    if let sendMessageBody = documents.get("notiMessage") {
+//                                        if let sendMessageSubtitle = documents.get("notiSubtitle") {
+//                                            print("\(sendMessageSubtitle)")
+//                                            let content =  UNMutableNotificationContent()
+//                                            content.title = "AdoptingHay"
+//                                            content.subtitle = "\(sendMessageSubtitle)"
+//                                            content.body = "\(sendMessageBody)"
+//                                            content.sound = UNNotificationSound.default
+//                                            // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
+//                                            let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+//                                            // Bildirim isteği oluşturulması
+//                                            let notii = UNNotificationRequest(identifier: "dogWalkingbildirim", content: content, trigger: react)
+//                                            // Bildirimin eklenmesi
+//                                            UNUserNotificationCenter.current().add(notii, withCompletionHandler: nil)
+//
+//                                        }
+//
+//
+//                                    }
+//
+//} }} }}} } }
     
     
     func getAllSendRequest()
@@ -255,6 +270,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         animalName.center.y = amountLabel.center.y + 50
         animalName.font = UIFont.systemFont(ofSize: 25, weight: .medium)
         animalName.textColor = .black
+        sickInfoA.text = "\(self.sendRequestAccept.sickInfo)"
         self.view.addSubview(animalName)
         
         
@@ -281,7 +297,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         else {
            
             sickInfoA.backgroundColor = .systemGray5
-            sickInfoA.text = "Hastalık Hakkında bilgi"
+           
             sickInfoA.textAlignment = .center
             sickInfoA.isUserInteractionEnabled = false
             sickInfoA.center.x = self.view.center.x
@@ -586,6 +602,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     func getAllAdvert() {
         DogWalkingService().geDogWalkingAdvert { dogWalkingAdvert in
             if let walkingAdvert = dogWalkingAdvert {
+                
                 self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: walkingAdvert)
                 self.dogWalkingCollectionView.reloadData()
               

@@ -86,19 +86,19 @@ class HomePageVC: UIViewController {
         
         self.animalAdvertCollectionView.reloadData()
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
-            
-            self.permissionCheck = granted
-            
-            if granted {
-                print("İzin alma işlemi başarılı")
-                
-            }
-            else {
-                print("İzin alma işlemi başarısız")
-                
-            }
-        }
+//        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound]) { granted, error in
+//
+//            self.permissionCheck = granted
+//
+//            if granted {
+//                print("İzin alma işlemi başarılı")
+//
+//            }
+//            else {
+//                print("İzin alma işlemi başarısız")
+//
+//            }
+//        }
         
         
         print("Kullanıcı ismi : \(Auth.auth().currentUser?.displayName)")
@@ -112,40 +112,40 @@ class HomePageVC: UIViewController {
         
     }
     
-    func getNotificationFromFirestore(){
-        let db = Firestore.firestore()
-        let userId = Auth.auth().currentUser?.uid
-        if let userId = userId {
-            db.collection("userList").document("\(userId)").collection("notiList").getDocuments { snaphot, error in
-                if error == nil {
-                    if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
-                        print("Yeni bildirim yok")
-                    }
-                    else {
-                        UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
-                        if self.permissionCheck {
-                            for documents in (snaphot?.documents)! {
-                                if let userName =  documents.get("sendUserName") {
-                                    if let sendMessageBody = documents.get("sendMessage") {
-                                        if let sendMessageSubtitle = documents.get("sendNotiSubtitle") {
-                                            let content =  UNMutableNotificationContent()
-                                            content.title = "AdoptingHay"
-                                            content.subtitle = "\(sendMessageSubtitle)"
-                                            content.body = "\(sendMessageBody)"
-                                            content.sound = UNNotificationSound.default
-                                            // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
-                                            let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
-                                            // Bildirim isteği oluşturulması
-                                            let noti = UNNotificationRequest(identifier: "bildirim", content: content, trigger: react)
-                                            // Bildirimin eklenmesi
-                                            UNUserNotificationCenter.current().add(noti, withCompletionHandler: nil)
-                                            
-                                        }
-                                      
-                                        
-                                    }
-                                   
-} }} }}} } }
+//    func getNotificationFromFirestore(){
+//        let db = Firestore.firestore()
+//        let userId = Auth.auth().currentUser?.uid
+//        if let userId = userId {
+//            db.collection("userList").document("\(userId)").collection("notiList").getDocuments { snaphot, error in
+//                if error == nil {
+//                    if snaphot?.documents.count == UserDefaults.standard.integer(forKey: "notiCount"){
+//                        print("Yeni bildirim yok")
+//                    }
+//                    else {
+//                        UserDefaults.standard.set(snaphot?.documents.count, forKey: "notiCount")
+//                        if self.permissionCheck {
+//                            for documents in (snaphot?.documents)! {
+//                                if let userName =  documents.get("sendUserName") {
+//                                    if let sendMessageBody = documents.get("sendMessage") {
+//                                        if let sendMessageSubtitle = documents.get("sendNotiSubtitle") {
+//                                            let content =  UNMutableNotificationContent()
+//                                            content.title = "AdoptingHay"
+//                                            content.subtitle = "\(sendMessageSubtitle)"
+//                                            content.body = "\(sendMessageBody)"
+//                                            content.sound = UNNotificationSound.default
+//                                            // ilk çalıştıktan sonra kaç saniye sonra çalışacak onu belirtilir.
+//                                            let react = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
+//                                            // Bildirim isteği oluşturulması
+//                                            let noti = UNNotificationRequest(identifier: "bildirim", content: content, trigger: react)
+//                                            // Bildirimin eklenmesi
+//                                            UNUserNotificationCenter.current().add(noti, withCompletionHandler: nil)
+//
+//                                        }
+//
+//
+//                                    }
+//
+//} }} }}} } }
     
     
     override func viewDidAppear(_ animated: Bool) {
@@ -156,6 +156,11 @@ class HomePageVC: UIViewController {
         getAnimalAdvertData()
         self.animalAdvertCollectionView.reloadData()
         self.tabBarController?.tabBar.isHidden = false
+        if self.animalAdvertListViewModel != nil {
+            self.animalAdvertListViewModel.animalAdvertList.removeAll()
+            self.spinner.isHidden = false
+            self.spinner.startAnimating()
+        }
         
         
         

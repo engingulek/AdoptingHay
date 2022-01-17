@@ -3119,16 +3119,6 @@
                                     <action selector="toAdvertList:" destination="2S7-6v-9or" eventType="touchUpInside" id="8LE-tU-8W7"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaE-WC-y32">
-                                <rect key="frame" x="51" y="755" width="312" height="36"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Çıkış Yap">
-                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="singOut:" destination="2S7-6v-9or" eventType="touchUpInside" id="FcB-xp-bZ9"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oA3-l6-S5w">
                                 <rect key="frame" x="76" y="555" width="262" height="31"/>
                                 <state key="normal" title="Button"/>
@@ -3161,12 +3151,23 @@
                                     <action selector="commentButton:" destination="2S7-6v-9or" eventType="touchUpInside" id="rug-Gt-oq6"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qaE-WC-y32">
+                                <rect key="frame" x="51" y="724" width="312" height="36"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Çıkış Yap">
+                                    <fontDescription key="titleFontDescription" type="system" pointSize="18"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="singOut:" destination="2S7-6v-9or" eventType="touchUpInside" id="FcB-xp-bZ9"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="4yF-LN-Fdv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="SiP-xu-Mp8" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="76" id="1Ik-yK-NvT"/>
-                            <constraint firstItem="qaE-WC-y32" firstAttribute="top" secondItem="ueW-7A-fHH" secondAttribute="bottom" constant="232.5" id="7wW-i3-iYo"/>
+                            <constraint firstItem="qaE-WC-y32" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="51" id="DEz-Vs-Upi"/>
+                            <constraint firstItem="qaE-WC-y32" firstAttribute="top" secondItem="URj-OK-N0w" secondAttribute="bottom" constant="21" id="Fvf-10-6Af"/>
                             <constraint firstItem="oA3-l6-S5w" firstAttribute="top" secondItem="ueW-7A-fHH" secondAttribute="bottom" constant="32.5" id="Iuh-tx-cVr"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="SiP-xu-Mp8" secondAttribute="trailing" constant="76" id="JzW-32-wge"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="oA3-l6-S5w" secondAttribute="trailing" constant="76" id="Mck-tD-Vqc"/>
@@ -3181,11 +3182,10 @@
                             <constraint firstItem="Pe1-b6-aCi" firstAttribute="top" secondItem="oA3-l6-S5w" secondAttribute="bottom" constant="30" id="iue-XG-hmY"/>
                             <constraint firstItem="ueW-7A-fHH" firstAttribute="top" secondItem="SiP-xu-Mp8" secondAttribute="bottom" constant="34.5" id="lxR-nc-PhQ"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="Pe1-b6-aCi" secondAttribute="trailing" constant="76" id="pEH-dA-EcE"/>
-                            <constraint firstItem="qaE-WC-y32" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="51" id="rYL-QK-WlD"/>
                             <constraint firstItem="URj-OK-N0w" firstAttribute="top" secondItem="Pe1-b6-aCi" secondAttribute="bottom" constant="25" id="t8f-8a-d8C"/>
-                            <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="qaE-WC-y32" secondAttribute="trailing" constant="51" id="uTQ-CV-n3F"/>
                             <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="ueW-7A-fHH" secondAttribute="trailing" constant="76" id="uca-7P-g0M"/>
                             <constraint firstItem="oA3-l6-S5w" firstAttribute="leading" secondItem="4yF-LN-Fdv" secondAttribute="leading" constant="76" id="y11-Fj-6Ab"/>
+                            <constraint firstItem="4yF-LN-Fdv" firstAttribute="trailing" secondItem="qaE-WC-y32" secondAttribute="trailing" constant="51" id="yIC-Xs-XBK"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ZAO-J3-Iy9">
@@ -4378,7 +4378,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yaş" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTW-bR-2Va">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Yaş(ay)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cTW-bR-2Va">
                                                 <rect key="frame" x="55" y="490" width="104" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="104" id="L3Z-dD-N8M"/>
@@ -4892,7 +4892,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="AMA-eX-LkE"/>
         <segue reference="egD-EV-6Ay"/>
-        <segue reference="8K5-PR-uwd"/>
+        <segue reference="kcS-aM-oPg"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="adopAnimal1" width="512" height="512"/>

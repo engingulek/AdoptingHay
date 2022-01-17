@@ -9,7 +9,7 @@ import Foundation
 
 
 struct AnimalAdvertListViewModel {
-    let animalAdvertList : [AnimalAdvert]
+    var animalAdvertList : [AnimalAdvert]
     
     
     func numberOfRowsInSection()-> Int {
