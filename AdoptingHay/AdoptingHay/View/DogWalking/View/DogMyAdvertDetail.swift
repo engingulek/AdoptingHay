@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-class DogMyAdvertDetail: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class DogMyAdvertDetail: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate,UITextFieldDelegate {
     var getAdvert: DogMyAdvert?
     
     @IBOutlet weak var animalImageView: UIImageView!
@@ -18,6 +18,7 @@ class DogMyAdvertDetail: UIViewController, UIImagePickerControllerDelegate & UIN
     
     @IBOutlet weak var timePicker: UIDatePicker!
     
+    @IBOutlet weak var genusTextField: UITextField!
     
     @IBOutlet weak var genusAgeLabel: UITextField!
     
@@ -108,6 +109,10 @@ class DogMyAdvertDetail: UIViewController, UIImagePickerControllerDelegate & UIN
         }
     }
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     
     
     

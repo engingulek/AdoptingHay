@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DogFavAdvertDetail: UIViewController {
+class DogFavAdvertDetail: UIViewController,UITextFieldDelegate {
     @IBOutlet weak var animalImage: UIImageView!
     var getAdvert:DogFavAdvert?
     
@@ -38,6 +38,10 @@ class DogFavAdvertDetail: UIViewController {
 
         
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     
     
     func getData(){

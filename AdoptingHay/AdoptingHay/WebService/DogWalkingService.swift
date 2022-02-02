@@ -17,7 +17,7 @@ class DogWalkingService {
     var commentList = [Comment]()
     var accountComments = [Comment]()
     var Ascore:Int = 0;
-    // Connet Firebase DogWalkingAdvert
+    // ilanların alınması
     func geDogWalkingAdvert(completion: @escaping ([DogwalkingAdvert]?)->()){
         let db = Firestore.firestore()
         
@@ -60,7 +60,7 @@ class DogWalkingService {
     
     
     
-    // Add advert to Firebase fav list
+    // favori liste ekleme işlemi
     func addDogWalkingAdvert(getAdvert:DogwalkingAdvert) {
         let db = Firestore.firestore()
         let docData : [String:Any] = [
@@ -91,7 +91,7 @@ class DogWalkingService {
         
     }
     
-    // add advert firebase
+    // ilan ekleme
     func addDogWalkingAdvertToFirebase(advert:DogWalkAddAdvert){
         let db = Firestore.firestore()
         if let userId = Auth.auth().currentUser?.uid {
@@ -126,7 +126,7 @@ class DogWalkingService {
     }
     
     
-    // Connect firebase to My Favlist dowlond advert
+    // Favori ilanlarının alınması
     func dowloandDogWalkingFavList(completion: @escaping ([DogFavAdvert]?)->()){
         
         let db = Firestore.firestore()
@@ -180,7 +180,7 @@ class DogWalkingService {
         
     }
     
-    
+    // favoriden ilan kaldırma
     func removeFavoriAdvert(advertId:String) {
         let db = Firestore.firestore()
         let userId = Auth.auth().currentUser?.uid
@@ -189,7 +189,7 @@ class DogWalkingService {
         if let userId = userId {
             db.collection("userList").document(userId).collection("dogWalklingFavoriList").document(advertId).delete()}}
     
-    
+    // kendi ilanını silme
     func removeMyAdvert(advertId:String) {
         let db = Firestore.firestore()
         let userId = Auth.auth().currentUser?.uid
@@ -206,7 +206,7 @@ class DogWalkingService {
     }
     
     
-    
+    // kendi ilanların alınması
     func dowlondDogMyAdvert(completion: @escaping ([DogMyAdvert]?)->()){
         let db = Firestore.firestore()
         if let authId = Auth.auth().currentUser?.uid {
@@ -263,7 +263,7 @@ class DogWalkingService {
         
     }
     
-    // update myDogWalkingAdvert
+    // kendi ilanını güncelleme
     func updateMyDogAdvert(userId:String,advertId:String,updateData:[String:Any]) {
         let db = Firestore.firestore()
         db.collection("userList").document(userId).collection("dogWalkingAdvert").document(advertId).updateData(updateData)
@@ -274,7 +274,7 @@ class DogWalkingService {
     
     //MARK: Filtering Operations
     
-    /// Date Filter
+    /// Tarih filtreleme
     func dateFilter(filterType:Bool,completion: @escaping ([DogwalkingAdvert]?)->()) {
         let db = Firestore.firestore()
         db.collection("dogWalkingAdvert").order(by: "date",descending: filterType).getDocuments { snapshot, error in
@@ -314,7 +314,7 @@ class DogWalkingService {
         }
         
     }
-    
+    /// zaman filtreleme
     func timeFilter(filterType:Bool,completion: @escaping ([DogwalkingAdvert]?)->()) {
         let db = Firestore.firestore()
         db.collection("dogWalkingAdvert").order(by: "timeRange",descending: filterType).getDocuments { snapshot, error in
@@ -354,7 +354,7 @@ class DogWalkingService {
         }
         
     }
-    
+    /// hastalık filtreleme
     func sickFilter(sickBool:String,completion: @escaping ([DogwalkingAdvert]?)->()) {
         let db = Firestore.firestore()
         
@@ -396,7 +396,7 @@ class DogWalkingService {
         
         
     }
-    // dog walking add to notiList
+    // bildirimlerim gönderme
     func addDogWalkingAdvertNoti(notiData:[String:Any],getUserId:String) {
         let db = Firestore.firestore()
         if let authId = Auth.auth().currentUser?.uid {
@@ -408,7 +408,7 @@ class DogWalkingService {
     }
     
     
-    // dog walking all notiList from firebase
+    // bildirimlerin alınması
     
     func getAllDogWalkingNotifromFirebase(completion:@escaping([DogNotification]?)->()){
         
@@ -521,7 +521,7 @@ class DogWalkingService {
         
     }
     
-    
+    // Bildirim silme
     func removeDogWalkingAdvertNoti(notiId:String) {
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
@@ -530,7 +530,7 @@ class DogWalkingService {
         }
         db.collection("userList")
     }
-    
+    // mesaj gönderme
     func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String,sendImage:String) {
         
         
@@ -660,7 +660,7 @@ class DogWalkingService {
     }
     
     
-    
+    // Bütün mesajların silinmesi
     func getAllMessageList(completion: @escaping ([MessageUserList]?)->()){
         
         let db = Firestore.firestore()
@@ -679,7 +679,7 @@ class DogWalkingService {
                                 completion(self.messageUserList)
                             }}}} }}}
     
-    
+    //mesaj silme
     func deleteMessage(id:String){
         print("Mesaj id si :\(id)")
         let db = Firestore.firestore()
@@ -689,7 +689,7 @@ class DogWalkingService {
         }
     }
     
-    
+    // istek gönderme
     func sendRequest(getAdvert:DogwalkingAdvert) {
         let db = Firestore.firestore()
         
@@ -789,7 +789,7 @@ class DogWalkingService {
     
     
     
-    
+    // isteğin alınması
     func isendRequestList(completion: @escaping ([Request]?)->()){
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
@@ -862,7 +862,7 @@ class DogWalkingService {
     
     
     
-    
+   // gönderilen isteği kaldırma
     func removeISendRequest(id:String,advertOwnerUserId:String){
         
         let db = Firestore.firestore()
@@ -873,7 +873,7 @@ class DogWalkingService {
         }
     }
     
-    
+    // gelen isteği silme
     func removeComingRequest(id:String,sendUserId:String){
         
         let db = Firestore.firestore()
@@ -883,7 +883,7 @@ class DogWalkingService {
             
         }
     }
-    
+    // kabull bool
     func acceptBool () {
         let db = Firestore.firestore()
         let walkingDocData : [String:Any] = [
@@ -898,7 +898,7 @@ class DogWalkingService {
 
     }
     
-    
+    // kabul edilen istek firebase
     func acceptToRequestToFirebase(getAdvert:Request){
         
         let db = Firestore.firestore()
@@ -957,7 +957,7 @@ class DogWalkingService {
     }
     
     
-    
+    // kabul edilen istek firebase
     func getAcceptAdvert(collectionName:String,completion: @escaping (Request?)->()) {
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
@@ -1023,7 +1023,7 @@ class DogWalkingService {
         
     }
     
-    
+    // tüm yorumları alma
     func getAllComment(completion: @escaping ([Comment]?)->()){
         
         let db = Firestore.firestore()

@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-class DogWalkingAdvertDetailsVC: UIViewController {
+class DogWalkingAdvertDetailsVC: UIViewController,UITextFieldDelegate {
     var getAdvertWalking: DogwalkingAdvert!
     
     @IBOutlet weak var advertImageView: UIImageView!
@@ -82,7 +82,11 @@ class DogWalkingAdvertDetailsVC: UIViewController {
      
     }
     
-    // request send for advert
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
+    
+    // İstek Gönderme
     @IBAction func advertRequest(_ sender: Any) {
         DogWalkingService().sendRequest(getAdvert: getAdvertWalking)
         
@@ -132,7 +136,7 @@ class DogWalkingAdvertDetailsVC: UIViewController {
     }
     
     
-    
+    // Favorilere ekleme
     @IBAction func addFavAdvert(_ sender: Any) {
         DogWalkingService().addDogWalkingAdvert(getAdvert: getAdvertWalking!)
         

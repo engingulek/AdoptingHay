@@ -25,7 +25,7 @@ struct Sender:SenderType {
     
 }
 
-class ChatVC: MessagesViewController {
+class ChatVC: MessagesViewController,UITextFieldDelegate {
     private var messages = [Message]()
     var userId:String?
     private var selfSender = Sender(senderId: "1", displayName: "Engin Gülek")
@@ -65,6 +65,10 @@ class ChatVC: MessagesViewController {
         
         
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     
     func getAll() {
         self.messages.removeAll()
@@ -154,40 +158,7 @@ class ChatVC: MessagesViewController {
         
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 extension ChatVC : InputBarAccessoryViewDelegate {

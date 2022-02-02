@@ -120,6 +120,11 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     }
     
     
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
+    
     @objc func chooseaddAdvertImageOne() {
         imagepickerOne.delegate = self
         imagepickerOne.sourceType = .photoLibrary
@@ -219,7 +224,7 @@ class AddAdvertVC: UIViewController, UIImagePickerControllerDelegate, UINavigati
     
 
 
- 
+ // ilan ekleme
     @IBAction func addAdvert(_ sender: Any) {
         let storage = Storage.storage()
         let storageReferance = storage.reference()

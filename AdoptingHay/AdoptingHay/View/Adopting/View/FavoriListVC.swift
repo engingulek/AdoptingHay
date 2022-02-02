@@ -221,13 +221,13 @@ extension  FavoriListVC  : UITableViewDelegate,UITableViewDataSource {
                 
                 
         
-                self.dismiss(animated: true) {
+               
                     Service().removeFavoriAdvert(advertId: advertUid)
                     self.favoritListViewModel.favoritList.remove(at: indexPath.row)
                     self.favoriListTableView.deleteRows(at: [indexPath], with: .fade)
                 
                     
-                }
+              
                            
             }
             

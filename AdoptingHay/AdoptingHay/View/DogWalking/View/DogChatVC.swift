@@ -42,7 +42,7 @@ struct Media:MediaItem {
 }
 
 
-class DogChatVC: MessagesViewController {
+class DogChatVC: MessagesViewController,UITextFieldDelegate {
     private var messages = [Message]()
     var userId:String?
     private var selfSender = Sender(senderId: "1", displayName: "Engin Gülek")
@@ -90,7 +90,7 @@ class DogChatVC: MessagesViewController {
         
         
         
-        
+       
         self.getAllMessageData()
                 self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats:  true, block: {_ in
                     self.getAllMessageData()
@@ -107,7 +107,9 @@ class DogChatVC: MessagesViewController {
     
     
     
-    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
     
     
     
@@ -142,7 +144,7 @@ class DogChatVC: MessagesViewController {
     }
     
     
-    
+    // mesajların çekilmesi
     func ada(document:QueryDocumentSnapshot,id:String){
         let db = Firestore.firestore()
         
@@ -174,7 +176,7 @@ class DogChatVC: MessagesViewController {
                                                                   if let userId = Auth.auth().currentUser?.uid as? String {
                                                                       if userId == sendUserID {
                                                                        
-                                                                          
+                                                                          // mesajların gösterilmesi
                                                                           if gonderilenMessage == "" {
                                                                              
                                                                               let imageUrl = URL(string:sendImage)!
@@ -183,18 +185,7 @@ class DogChatVC: MessagesViewController {
                                                                               
                                                                               myImage.kf.setImage(with: URL(string:sendImage), placeholder: nil, options:[.transition(.fade(0.7))], completionHandler: nil)
                                                                               self.messages.append(Message(sender: self.selfSender, messageId: "2", sentDate: Date(), kind: .photo(Media(url: nil, image: myImage.image, placeholderImage: UIImage(systemName:"ellipsis")!, size: CGSize(width: 250, height: 150)))))
-                                                                              
-                                                                              
-                                                                              
-                                                                
-                                                                                                    
-                                                                              
-                                                                      
-                                                                              
-                                                                          
-                                                                              
-                                                                             
-//
+
                                                                           }
                                                                                                                                                                      else {
                                                                               self.messages.append(Message(sender: self.selfSender, messageId: "1", sentDate: Date(), kind: .text(gonderilenMessage)))
@@ -232,12 +223,6 @@ class DogChatVC: MessagesViewController {
                                                                      
                                                                       
                                                                   }
-                                                                  
-                                                                  
-                                                                  
-                                                                  
-                                                                
-                                                               
                                                               }
                                                               
                                                           }
@@ -246,11 +231,6 @@ class DogChatVC: MessagesViewController {
                                                           
                                                       }
                                                   }
-                                              
-                                                  
-                                              
-                                                  
-                                                  
                                               }
                                     
                                                   
@@ -260,7 +240,7 @@ class DogChatVC: MessagesViewController {
               
           }
     }
-    
+    // bütün mesajların databaseden alınması
     func getAllMessageData() {
         self.messages.removeAll()
         let db = Firestore.firestore()
@@ -283,6 +263,7 @@ class DogChatVC: MessagesViewController {
                         
                         
                         if let sendUserId = self.userId {
+                            // mesaj gösterilcek fonksiyona gönderilmesi
                             self.ada(document: document, id: sendUserId)
                           
                             }
@@ -311,7 +292,7 @@ class DogChatVC: MessagesViewController {
 
 }
 
-
+// resim gönderme işlemi
 extension DogChatVC : UIImagePickerControllerDelegate & UINavigationControllerDelegate {
    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -402,7 +383,7 @@ extension DogChatVC : UIImagePickerControllerDelegate & UINavigationControllerDe
     }
 }
 
-
+// mesajın gönderilmesi
 extension DogChatVC : InputBarAccessoryViewDelegate {
     func inputBar(_ inputBar: InputBarAccessoryView, didPressSendButtonWith text: String) {
         if let sendUserId = userId as? String {
@@ -477,7 +458,7 @@ extension DogChatVC : InputBarAccessoryViewDelegate {
     
 }
 
-
+// Mesaj ayarı
 extension DogChatVC :  MessagesDataSource ,MessagesLayoutDelegate, MessagesDisplayDelegate {
    
     

@@ -10,7 +10,7 @@ import Firebase
 import UserNotifications
 import SwiftUI
 
-class HomePageVC: UIViewController {
+class HomePageVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var accountButton: UIButton!
     @IBOutlet weak var searchBar: UISearchBar!
     let  alertLabel = UILabel(frame: CGRect(x: 0, y: 0, width: 1220, height: 35))
@@ -173,6 +173,10 @@ class HomePageVC: UIViewController {
         self.animalAdvertCollectionView.reloadData()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
+    
     
     func nilAdvertListDesign() {
 
@@ -193,7 +197,7 @@ class HomePageVC: UIViewController {
     
     
     
-    
+    // filtreleme işlemleri
     @IBAction func advertFilterButton(_ sender: Any) {
         
         

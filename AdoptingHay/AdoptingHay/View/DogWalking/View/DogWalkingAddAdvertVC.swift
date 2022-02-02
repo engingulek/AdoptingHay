@@ -8,7 +8,7 @@
 import UIKit
 import Firebase
 
-class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate,UITextFieldDelegate {
     @IBOutlet weak var addImageView: UIImageView!
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -65,7 +65,7 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
     }
     
     
-    //  this function will work when image tap
+    //  resim seçildiğinde çalışacak fonksiyon
     @objc func addImageAction() {
         imagepicker.delegate = self
         imagepicker.sourceType = .photoLibrary
@@ -73,14 +73,20 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
         
     }
     
-// Select image from photo library
+// Galeriden fotoğraf seçimi
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         addImageView.image = info[.originalImage] as? UIImage
         addImageView.layer.backgroundColor = UIColor.white.cgColor
         self.dismiss(animated: true, completion: nil)
     }
     
-    // Add Advert to databese action
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
+    
+    // Veritabanına ekleme işleminin yapılması
     @IBAction func addAdvert(_ sender: Any) {
         let defaultimage = UIImage(systemName: "plus")
         if nameTextField.text == "" || ageTextField.text == "" || kindsTextField.text == "" || ownerNote.text == "" || defaultimage == addImageView.image   {
@@ -137,6 +143,8 @@ class DogWalkingAddAdvert: UIViewController, UIImagePickerControllerDelegate & U
         }
         
     }
+    
+    
     
     
    

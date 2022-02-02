@@ -23,7 +23,7 @@ class Service {
     var messageList = [MessageModel]()
     var messageUserList = [MessageUserList]()
 
-    
+    // türlerin alınması
     func dowlandAnimalKindsFromFirestore(completion: @escaping ([AnimalKinds]?)->()) {
         let db = Firestore.firestore()
         db.collection("animalKinds").getDocuments { snapshot, error in
@@ -44,7 +44,7 @@ class Service {
     
     
     
-    
+    // ilanları alınması
     func dowlandAnimalAdvertFromFirestore(completion: @escaping ([AnimalAdvert]?)->()) {
         
         
@@ -166,7 +166,7 @@ class Service {
     
     
     
-    
+    // ilan ekleme
     func addAdvertToFirebase(uuid:String,advert:AddAdvert){
         let db = Firestore.firestore()
         let advertId = UUID()
@@ -212,7 +212,7 @@ class Service {
         
     }
     
-    
+    // favorilere ilan ekleme
     func addAdvertFavoriteToFirebase(advert:AnimalAdvert,sendUserName:String,getuserId:String){
         let db = Firestore.firestore()
         let docData : [String:Any] = [
@@ -254,14 +254,14 @@ class Service {
                             print("Noti hata") } }}} }}
     
     
-    
+    // güncelleme
     func updateMyAdvert(userId:String,advertId:String,updateData:[String:Any]) {
         let db = Firestore.firestore()
         db.collection("userList").document(userId).collection("advertList").document(advertId).updateData(updateData)
         db.collection("animalAdvert").document("\(advertId)").updateData(updateData)
         
     }
-    
+    // ilan kaldırma
     func removeMyAdvert(userId:String,advertId:String) {
         print("Aykut : \(userId) ---   \(advertId)")
         let db = Firestore.firestore()
@@ -297,7 +297,7 @@ class Service {
     
     
     
-    
+    // hastalık
     func dowlandAnimalAdvertSickBoolFromFirestore(kinds:String,completion: @escaping ([AnimalAdvert]?)->()) {
         
         let db = Firestore.firestore()
@@ -460,7 +460,7 @@ class Service {
     
     
     
-    
+    // yaş
     func dowlandAnimalAdvertAgeShortFromFirestore (kinds:String,shortType:Bool,completion: @escaping ([AnimalAdvert]?)->()) {
         
         let db = Firestore.firestore()
@@ -582,7 +582,7 @@ class Service {
     }
     
     
-    
+    // tür
     func dowlandAnimalAdvertKindsFilterFromFirestore(getAnimalKinds:String,ageShortType:String ,completion: @escaping ([AnimalAdvert]?)->()) {
         let db = Firestore.firestore()
         animalAdvertList = [AnimalAdvert]()
@@ -947,7 +947,7 @@ class Service {
     
     
     
-    
+    // arama kısmı
     func dowlandAnimalAdvertSearchBarTextFromFirestore(getSeacrhBarText:String, completion: @escaping ([AnimalAdvert]?)->()) {
         
         let db = Firestore.firestore()
@@ -1033,7 +1033,7 @@ class Service {
     }
     
     
-    
+    // kendi ilanlarını alma
     func dowloadMyAnimalAdvert(uuid:String, completion: @escaping ([MyAdvert]?)->()) {
         
         let db = Firestore.firestore()
@@ -1120,7 +1120,7 @@ class Service {
     
     
     
-    
+    // favori listem
     func dowloadFavoriteListAdvert(uuid:String, completion: @escaping ([FavoritList]?)->()) {
         
         let db = Firestore.firestore()
@@ -1203,7 +1203,7 @@ class Service {
         
     }
     
-    
+    // favoriden kaldırma
     func removeFavoriAdvert(advertId:String) {
         let db = Firestore.firestore()
         let userId = Auth.auth().currentUser?.uid
@@ -1215,7 +1215,7 @@ class Service {
             
         }
     }
-    
+    // tarih
     func dowlandAnimalAdvertDateShortFromFirestore (shortType:Bool,kinds:String,completion: @escaping ([AnimalAdvert]?)->()) {
         
         
@@ -1343,7 +1343,7 @@ class Service {
     }
     
     
-    
+    // bildirimler
     func dowloandNotiList(completion: @escaping ([Notification]?)->()) {
         let db = Firestore.firestore()
         
@@ -1403,7 +1403,7 @@ class Service {
    
     
     
-    
+    // bildirim si
     func removeNotiAnimalAdvert(notiId:String) {
         let db = Firestore.firestore()
         if let authUserId = Auth.auth().currentUser?.uid {
@@ -1413,7 +1413,7 @@ class Service {
      
     }
     
-    
+    // mesaj gönderme
     func sendMessage(sendUserId:String,sendUserName:String,sendMessage:String,getUserName:String) {
         
         let db = Firestore.firestore()
@@ -1539,7 +1539,7 @@ class Service {
         
     }
     
-    
+    // mesaj kişiler listesi
     func getAllMessageList(completion: @escaping ([MessageUserList]?)->()){
         
         let db = Firestore.firestore()
@@ -1557,7 +1557,7 @@ class Service {
                                      self.messageUserList.append(messageUser)
                                       completion(self.messageUserList)
                                 }}}} }}}
-    
+    // mesaj silme
     func deleteMessage(id:String){
         print("Mesaj id si :\(id)")
         let db = Firestore.firestore()
@@ -1568,7 +1568,7 @@ class Service {
     }
     
     
-  
+
     
 }
 

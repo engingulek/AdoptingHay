@@ -1,7 +1,7 @@
 import UIKit
 import Firebase
 import UserNotifications
-class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
+class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate, UITextFieldDelegate {
 
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var dogWalkingCollectionView: UICollectionView!
@@ -26,8 +26,8 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     private var sendRequestAccept : RequestAcceptViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        spinner.startAnimating()
-        spinner.isHidden = false
+   
+    
         UNUserNotificationCenter.current().delegate = self
         self.count = 5
         
@@ -67,7 +67,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
         
         
-        
+       
         
  
 
@@ -90,6 +90,13 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         }
      
     }
+    
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+            self.view.endEditing(true)
+        }
+    
+    
     
     
  func secondsToHoursMinutesSeconds(seconds:Int) -> (Int,Int,Int) {
@@ -125,8 +132,8 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
         if self.dogWalkingListViewModel != nil {
             self.dogWalkingListViewModel.dogWalkingAdvertList.removeAll()
-            self.spinner.isHidden = false
-            self.spinner.startAnimating()
+ 
+           
         }
         
         
@@ -188,7 +195,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
 //
 //} }} }}} } }
     
-    
+    // Sürenin eklendiği yer
     func getAllSendRequest()
     {
         DogWalkingService().getAcceptAdvert(collectionName: "sendAcceptAdvert") { request in
@@ -337,7 +344,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
         
     }
     
-    
+    //Gezdirme işlemini başlatma
     @objc func sendButtonAction() {
         let db = Firestore.firestore()
         if(timerCounting) {
@@ -468,7 +475,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     
     
-    
+    // Filtreleme işlemi
     @IBAction func dogWalkingAdvertFilter(_ sender: Any) {
         // Create Action Controller
         let actionController = UIAlertController(title: "Sıralama ve Filtreleme", message: "Uygu işlemei seçinniz", preferredStyle: .actionSheet)
@@ -482,9 +489,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                    
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogwalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
-                    self.spinner.stopAnimating()
-                    
-                    self.spinner.isHidden = true
+                  
                     self.filterButtonOutlet.isHidden = false
                     
                     
@@ -501,7 +506,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                   
                    
                     
-                    self.spinner.isHidden = true
+                   
                     
                     
                 }
@@ -515,9 +520,9 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                 if let dogWalkingAdvert = dogWalkingAdvert {
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
-                    self.spinner.stopAnimating()
+                   
                     
-                    self.spinner.isHidden = true
+                 
                 }
              
             }
@@ -531,9 +536,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                 if let dogWalkingAdvert = dogWalkingAdvert {
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
-                    self.spinner.stopAnimating()
-                    
-                    self.spinner.isHidden = true
+                   
                 }
              
             }
@@ -545,9 +548,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                 if let dogWalkingAdvert = dogWalkingAdvert {
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
-                    self.spinner.stopAnimating()
-                    
-                    self.spinner.isHidden = true
+                
                 }
                 
                 
@@ -560,9 +561,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
                 if let dogWalkingAdvert = dogWalkingAdvert {
                     self.dogWalkingListViewModel = DogWalkingListViewModel(dogWalkingAdvertList: dogWalkingAdvert)
                     self.dogWalkingCollectionView.reloadData()
-                    self.spinner.stopAnimating()
                     
-                    self.spinner.isHidden = true
                 }
                 
             }
@@ -598,7 +597,7 @@ class DogWalkingHomePage: UIViewController, UNUserNotificationCenterDelegate {
     
     // MARK : SERVICE CONNECT
     
-    /// Get alll walking advert
+    /// Bütün ilanların alınması
     func getAllAdvert() {
         DogWalkingService().geDogWalkingAdvert { dogWalkingAdvert in
             if let walkingAdvert = dogWalkingAdvert {
